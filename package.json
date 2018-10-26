@@ -1,0 +1,16 @@
+{
+  "name": "recurly-client-node",
+  "version": "1.0.0",
+  "description": "Recurly V3 node client",
+  "main": "lib/recurly.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "jsdoc": "^3.5.5",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.5"
+  }
+}
