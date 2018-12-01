@@ -8,14 +8,14 @@ by the `recurly-client-gen` project.
 ## Example
 
 ```js
-const recurly = require('./lib/recurly');
-const client = new recurly.Client(apiKey, `subdomain-${mySubdomain}`);
+const recurly = require('./lib/recurly')
+const client = new recurly.Client(apiKey, `subdomain-${mySubdomain}`)
 
 client.getAccount('code-benjamin')
   .then(account => console.log(account.id))
-  .catch(console.log);
+  .catch(console.log)
 
 client.createAccount({code: 'new-account-code'})
   .then(account => console.log(account.id))
-  .catch(console.log);
+  .catch(console.log)
 ```
