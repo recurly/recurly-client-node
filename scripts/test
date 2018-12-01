@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 echo "TODO test"
-#npm test
+npm test

@@ -1,12 +1,12 @@
 {
   "name": "recurly-client-node",
-  "version": "1.0.0",
+  "version": "3.0.0-alpha.1",
   "description": "Recurly V3 node client",
   "main": "lib/recurly.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/standard && echo \"TODO: lint passed but no test specified yet\""
   },
-  "author": "",
+  "author": "Benjamin Eckel <ben@recurly.com>",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
