@@ -10,6 +10,12 @@ by the `recurly-client-gen` project.
 ```js
 let recurly = require('./lib/recurly');
 let client = new recurly.Client(apiKey, `subdomain-${mySubdomain}`);
-client.getAccount('code-benjamin').then(account => console.log(account.id));
-client.createAccount({code: 'new-account-code'}).then(account => console.log(account.id));
+
+client.getAccount('code-benjamin')
+  .then(account => console.log(account.id))
+  .catch(console.log);
+
+client.createAccount({code: 'new-account-code'})
+  .then(account => console.log(account.id))
+  .catch(console.log);
 ```
