@@ -23,21 +23,49 @@ each `operation` that can be performed in the API as a method.
 To initialize a client, give it an API key and a subdomain:
 
 ```js
-
-
+// TODO: change this to the npm name
+const recurly = require('./lib/recurly')
+// You should store your api key somewhere safe
+// and not in plain text if possible
+const apiKey = 'myapikey'
+const subdomain = 'mysubdomain'
+const client = new recurly.Client(apiKey, `subdomain-${mySubdomain}`)
 ```
 
-## Example
+### Operations
+
+Operations are all `async` and they return promises. You can handle the promises
+directly or use await:
 
 ```js
-const recurly = require('./lib/recurly')
-const client = new recurly.Client(apiKey, `subdomain-${mySubdomain}`)
-
 client.getAccount('code-benjamin')
   .then(account => console.log(account.id))
-  .catch(console.log)
+  .catch(err => console.log(err.msg))
+```
 
-client.createAccount({code: 'new-account-code'})
+```js
+async myFunc () {
+  let account = await client.getAccount('code-benjamin')
+}
+```
+
+### Creating Resources
+
+For creating or updating resources, pass a json object to one of the create* or update* methods.
+Keep in mind that the api accepts snake-cased keys but this library expects camel-cased keys.
+We do the translation for you so this library can conform to js style standards.
+
+```js
+client.createAccount({
+    code: 'new-account-code',
+    firstName: 'Benjamin',
+    lastName: 'Du Monde'
+  })
   .then(account => console.log(account.id))
   .catch(console.log)
 ```
+
+### Pagination
+
+TODO: need to decide on an interface
+
