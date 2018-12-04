@@ -7,8 +7,8 @@ const pkg = require('../../package.json')
 const BaseClient = require('../../lib/recurly/BaseClient')
 
 class TestClient extends BaseClient {
-  apiVersion() {
-    return "v2020-01-01"
+  apiVersion () {
+    return 'v2020-01-01'
   }
 }
 
