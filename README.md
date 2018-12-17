@@ -67,5 +67,18 @@ client.createAccount({
 
 ### Pagination
 
-TODO: need to decide on an interface
+TODO: still need to decide on an interface. Also need to decide on error handling.
+Here is what we have for now:
 
+```js
+async function printUpdatedDecemberAccount(accounts) {
+  for await (const page of accounts.eachPage()) {
+    for (const account in page) {
+      console.log(account.id)
+    }
+  }
+}
+
+let accounts = client.listAccounts({beginTime: '2018-12-01T00:00:00Z', sort: 'updated_at'})
+printUpdatedDecemberAccount(accounts)
+```
