@@ -34,8 +34,8 @@ const client = new recurly.Client(apiKey, `subdomain-${mySubdomain}`)
 
 ### Operations
 
-Operations are all `async` and they return promises. You can handle the promises
-directly or use await:
+All operations are `async` and return promises (except the `list*` methods which return `Pager`s).
+You can handle the promises directly with `then` and `catch` or use await:
 
 ```js
 client.getAccount('code-benjamin')
@@ -45,7 +45,11 @@ client.getAccount('code-benjamin')
 
 ```js
 async myFunc () {
-  let account = await client.getAccount('code-benjamin')
+  try {
+    let account = await client.getAccount('code-benjamin')
+  } catch (err) {
+    // handle err from client
+  }
 }
 ```
 
@@ -67,18 +71,43 @@ client.createAccount({
 
 ### Pagination
 
-TODO: still need to decide on an interface. Also need to decide on error handling.
-Here is what we have for now:
+All `list*` methods on the client return a `Pager`. They
+are not `async` because they are lazy and do not make any
+network requests until they are iterated over. There are
+two methods on `Pager` that return async iterators `each` and `eachPage`:
+
+* `each` will give you an iterator over each item that matches your query.
+* `eachPage` will give you an iterator over each page that is returned. The result is an array of resources.
+
+TODO: Need to fully test and document error handling
 
 ```js
-async function printUpdatedDecemberAccount(accounts) {
-  for await (const page of accounts.eachPage()) {
-    for (const account in page) {
-      console.log(account.id)
+async function eachAccount (accounts) {
+  try {
+    for await (const acct of accounts.each()) {
+      console.log(acct.id)
     }
+  } catch (err) {
+    // err is bubbled up from recurly client
   }
 }
 
-let accounts = client.listAccounts({beginTime: '2018-12-01T00:00:00Z', sort: 'updated_at'})
-printUpdatedDecemberAccount(accounts)
+async function eachPageOfAccounts (accounts) {
+  try {
+    for await (const page of accounts.eachPage()) {
+      page.forEach(acct => console.log(acct.id))
+    }
+  } catch (err) {
+    // err is bubbled up from recurly client
+  }
+}
+
+let accounts = client.listAccounts({
+    beginTime: '2018-12-01T00:00:00Z',
+    sort: 'updated_at'
+  })
+
+eachAccount(accounts)
+// or 
+eachPageOfAccounts(accounts)
 ```
