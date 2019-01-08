@@ -19,7 +19,7 @@ describe('BaseClient', () => {
     it('Should set the internal state and headers', () => {
       assert.equal(client.siteId, 'subdomain-mysubdomain')
       assert.equal(client.httpOptions.headers['Authorization'], 'Basic bXlhcGlrZXk6')
-      assert.equal(client.httpOptions.headers['User-Agent'], `Recurly/${pkg.name}:${pkg.version}`)
+      assert.equal(client.httpOptions.headers['User-Agent'], `Recurly/${pkg.version}; ${pkg.name}`)
       assert.equal(client.httpOptions.headers['Accept'], 'application/vnd.recurly.v2020-01-01')
     })
   })
