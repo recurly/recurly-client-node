@@ -47,9 +47,9 @@ To initialize a client, give it an API key and a subdomain:
 const recurly = require('recurly')
 // You should store your api key somewhere safe
 // and not in plain text if possible
-const apiKey = 'myapikey'
-const subdomain = 'mysubdomain'
-const client = new recurly.Client(apiKey, `subdomain-${mySubdomain}`)
+const myApiKey = '<myapikey>'
+const mySubdomain = '<mysubdomain>'
+const client = new recurly.Client(myApiKey, `subdomain-${mySubdomain}`)
 ```
 
 ### Operations
