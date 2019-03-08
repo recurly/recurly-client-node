@@ -1,9 +1,7 @@
 # Recurly
 
-*Warning: If you find this repo and want to use it, please slack DM Ben first. It's still under development.*
-
-This library is the node client to the v3, aka API next, aka PAPI, version of Recurly's API. Parts of this gem are generated
-by the `recurly-client-gen` project.
+This repository contains the node client for Recurly's V3 API (or "partner api").
+It's currently Beta software and is not yet an official release. Documentation for the HTTP API can be found [here](https://partner-docs.recurly.com/).
 
 ## Getting Started
 
