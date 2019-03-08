@@ -9,11 +9,34 @@ by the `recurly-client-gen` project.
 
 ### Documentation
 
-TODO: This library uses jsdoc but it's not published anywhere yet.
+This library uses [documentation](http://documentation.js.org/) to generate jsdocs, but it's not published anywhere yet.
+To view documentation locally run:
+
+```
+./scripts/build && open docs/index.html
+```
+
+To view the HTTP API documentation along with the node example code, see [https://partner-docs.recurly.com/](https://partner-docs.recurly.com/).
 
 ### Installing
 
-TODO: This library is an npm package but is not published anywhere yet.
+This library is published on npm under the name `recurly`.
+
+We recommend manually inserting the dependency into the `dependencies` section of your `package.json`:
+
+```
+{
+  // ...
+  "recurly" : "3.0.0.beta.1"
+  // ...
+}
+```
+
+
+Install via the command line:
+```
+npm install recurly@3.0.0.beta.1 --save-prod
+```
 
 ### Creating a client
 
@@ -23,8 +46,7 @@ each `operation` that can be performed in the API as a method.
 To initialize a client, give it an API key and a subdomain:
 
 ```js
-// TODO: change this to the npm name
-const recurly = require('./lib/recurly')
+const recurly = require('recurly')
 // You should store your api key somewhere safe
 // and not in plain text if possible
 const apiKey = 'myapikey'
