@@ -1,0 +1,19 @@
+{
+  "name": "recurly-client-node",
+  "version": "3.0.0-alpha.1",
+  "description": "Recurly V3 node client",
+  "main": "lib/recurly.js",
+  "scripts": {
+    "test": "./node_modules/.bin/standard && ./node_modules/mocha/bin/mocha"
+  },
+  "author": "Benjamin Eckel <ben@recurly.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "acorn": "^6.0.0",
+    "documentation": "^9.1.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.3.0",
+    "standard": "^12.0.1"
+  }
+}
