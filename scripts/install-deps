@@ -20,4 +20,6 @@ if ! hash node 2>/dev/null; then
   fi
 else
   echo "✓ Found node"
+
+npm install
 fi
