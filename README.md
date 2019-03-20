@@ -10,6 +10,8 @@ It's currently Beta software and is not yet an official release. Documentation f
 
 ### Documentation
 
+Docs and example code can be found here: [https://recurly.github.io/recurly-client-node](https://recurly.github.io/recurly-client-node).
+Reference docs for the underlying V3 JSON API can be found here: [https://partner-docs.recurly.com](https://partner-docs.recurly.com).
 
 ### Installing
 
