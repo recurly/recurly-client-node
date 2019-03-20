@@ -1,0 +1,630 @@
+{
+  "type": "File",
+  "start": 0,
+  "end": 2683,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 36,
+      "column": 0
+    }
+  },
+  "program": {
+    "type": "Program",
+    "start": 0,
+    "end": 2683,
+    "loc": {
+      "start": {
+        "line": 1,
+        "column": 0
+      },
+      "end": {
+        "line": 36,
+        "column": 0
+      }
+    },
+    "sourceType": "module",
+    "body": [
+      {
+        "type": "ClassDeclaration",
+        "start": 2646,
+        "end": 2659,
+        "loc": {
+          "start": {
+            "line": 33,
+            "column": 0
+          },
+          "end": {
+            "line": 33,
+            "column": 13
+          }
+        },
+        "id": {
+          "type": "Identifier",
+          "start": 2652,
+          "end": 2656,
+          "loc": {
+            "start": {
+              "line": 33,
+              "column": 6
+            },
+            "end": {
+              "line": 33,
+              "column": 10
+            },
+            "identifierName": "Plan"
+          },
+          "name": "Plan",
+          "leadingComments": null
+        },
+        "superClass": null,
+        "body": {
+          "type": "ClassBody",
+          "start": 2657,
+          "end": 2659,
+          "loc": {
+            "start": {
+              "line": 33,
+              "column": 11
+            },
+            "end": {
+              "line": 33,
+              "column": 13
+            }
+          },
+          "body": []
+        },
+        "leadingComments": [
+          {
+            "type": "CommentBlock",
+            "value": "*\n * Plan\n * @typedef {Object} Plan\n * @prop {string} accountingCode - Accounting code for invoice line items for the plan. If no value is provided, it defaults to plan's code.\n * @prop {boolean} autoRenew - Subscriptions will automatically inherit this value once they are active. If `auto_renew` is `true`, then a subscription will automatically renew its term at renewal. If `auto_renew` is `false`, then a subscription will expire at the end of its term. `auto_renew` can be overridden on the subscription record itself.\n * @prop {string} code - Unique code to identify the plan. This is used in Hosted Payment Page URLs and in the invoice exports.\n * @prop {datetime} createdAt - Created at\n * @prop {Array.<PlanPricing>} currencies - Pricing\n * @prop {datetime} deletedAt - Deleted at\n * @prop {string} description - Optional description, not displayed.\n * @prop {Object} hostedPages - Hosted pages settings\n * @prop {string} id - Plan ID\n * @prop {number} intervalLength - Length of the plan's billing interval in `interval_unit`.\n * @prop {string} intervalUnit - Unit for the plan's billing interval.\n * @prop {string} name - This name describes your plan and will appear on the Hosted Payment Page and the subscriber's invoice.\n * @prop {string} setupFeeAccountingCode - Accounting code for invoice line items for the plan's setup fee. If no value is provided, it defaults to plan's accounting code.\n * @prop {string} state - The current state of the plan.\n * @prop {string} taxCode - Optional field for EU VAT merchants and Avalara AvaTax Pro merchants. If you are using Recurly's EU VAT feature, you can use values of 'unknown', 'physical', or 'digital'. If you have your own AvaTax account configured, you can use Avalara tax codes to assign custom tax rules.\n * @prop {boolean} taxExempt - `true` exempts tax on the plan, `false` applies tax on the plan.\n * @prop {number} totalBillingCycles - Automatically terminate subscriptions after a defined number of billing cycles. Number of billing cycles before the plan automatically stops renewing, defaults to `null` for continuous, automatic renewal.\n * @prop {number} trialLength - Length of plan's trial period in `trial_units`. `0` means `no trial`.\n * @prop {string} trialUnit - Units for the plan's trial period.\n * @prop {datetime} updatedAt - Last updated at\n ",
+            "start": 313,
+            "end": 2645,
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 0
+              },
+              "end": {
+                "line": 32,
+                "column": 3
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ExpressionStatement",
+        "start": 2661,
+        "end": 2682,
+        "loc": {
+          "start": {
+            "line": 35,
+            "column": 0
+          },
+          "end": {
+            "line": 35,
+            "column": 21
+          }
+        },
+        "expression": {
+          "type": "AssignmentExpression",
+          "start": 2661,
+          "end": 2682,
+          "loc": {
+            "start": {
+              "line": 35,
+              "column": 0
+            },
+            "end": {
+              "line": 35,
+              "column": 21
+            }
+          },
+          "operator": "=",
+          "left": {
+            "type": "MemberExpression",
+            "start": 2661,
+            "end": 2675,
+            "loc": {
+              "start": {
+                "line": 35,
+                "column": 0
+              },
+              "end": {
+                "line": 35,
+                "column": 14
+              }
+            },
+            "object": {
+              "type": "Identifier",
+              "start": 2661,
+              "end": 2667,
+              "loc": {
+                "start": {
+                  "line": 35,
+                  "column": 0
+                },
+                "end": {
+                  "line": 35,
+                  "column": 6
+                },
+                "identifierName": "module"
+              },
+              "name": "module"
+            },
+            "property": {
+              "type": "Identifier",
+              "start": 2668,
+              "end": 2675,
+              "loc": {
+                "start": {
+                  "line": 35,
+                  "column": 7
+                },
+                "end": {
+                  "line": 35,
+                  "column": 14
+                },
+                "identifierName": "exports"
+              },
+              "name": "exports"
+            },
+            "computed": false
+          },
+          "right": {
+            "type": "Identifier",
+            "start": 2678,
+            "end": 2682,
+            "loc": {
+              "start": {
+                "line": 35,
+                "column": 17
+              },
+              "end": {
+                "line": 35,
+                "column": 21
+              },
+              "identifierName": "Plan"
+            },
+            "name": "Plan"
+          }
+        }
+      }
+    ],
+    "directives": [
+      {
+        "type": "Directive",
+        "start": 299,
+        "end": 311,
+        "loc": {
+          "start": {
+            "line": 7,
+            "column": 0
+          },
+          "end": {
+            "line": 7,
+            "column": 12
+          }
+        },
+        "value": {
+          "type": "DirectiveLiteral",
+          "start": 299,
+          "end": 311,
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 0
+            },
+            "end": {
+              "line": 7,
+              "column": 12
+            }
+          },
+          "value": "use strict",
+          "extra": {
+            "raw": "'use strict'",
+            "rawValue": "use strict"
+          },
+          "leadingComments": null,
+          "trailingComments": null
+        },
+        "leadingComments": [
+          {
+            "type": "CommentBlock",
+            "value": "*\n * This file is automatically created by Recurly's OpenAPI generation process\n * and thus any edits you make by hand will be lost. If you wish to make a\n * change to this file, please create a Github issue explaining the changes you\n * need and we will usher them to the appropriate places.\n ",
+            "start": 0,
+            "end": 298,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 6,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": [
+          {
+            "type": "CommentBlock",
+            "value": "*\n * Plan\n * @typedef {Object} Plan\n * @prop {string} accountingCode - Accounting code for invoice line items for the plan. If no value is provided, it defaults to plan's code.\n * @prop {boolean} autoRenew - Subscriptions will automatically inherit this value once they are active. If `auto_renew` is `true`, then a subscription will automatically renew its term at renewal. If `auto_renew` is `false`, then a subscription will expire at the end of its term. `auto_renew` can be overridden on the subscription record itself.\n * @prop {string} code - Unique code to identify the plan. This is used in Hosted Payment Page URLs and in the invoice exports.\n * @prop {datetime} createdAt - Created at\n * @prop {Array.<PlanPricing>} currencies - Pricing\n * @prop {datetime} deletedAt - Deleted at\n * @prop {string} description - Optional description, not displayed.\n * @prop {Object} hostedPages - Hosted pages settings\n * @prop {string} id - Plan ID\n * @prop {number} intervalLength - Length of the plan's billing interval in `interval_unit`.\n * @prop {string} intervalUnit - Unit for the plan's billing interval.\n * @prop {string} name - This name describes your plan and will appear on the Hosted Payment Page and the subscriber's invoice.\n * @prop {string} setupFeeAccountingCode - Accounting code for invoice line items for the plan's setup fee. If no value is provided, it defaults to plan's accounting code.\n * @prop {string} state - The current state of the plan.\n * @prop {string} taxCode - Optional field for EU VAT merchants and Avalara AvaTax Pro merchants. If you are using Recurly's EU VAT feature, you can use values of 'unknown', 'physical', or 'digital'. If you have your own AvaTax account configured, you can use Avalara tax codes to assign custom tax rules.\n * @prop {boolean} taxExempt - `true` exempts tax on the plan, `false` applies tax on the plan.\n * @prop {number} totalBillingCycles - Automatically terminate subscriptions after a defined number of billing cycles. Number of billing cycles before the plan automatically stops renewing, defaults to `null` for continuous, automatic renewal.\n * @prop {number} trialLength - Length of plan's trial period in `trial_units`. `0` means `no trial`.\n * @prop {string} trialUnit - Units for the plan's trial period.\n * @prop {datetime} updatedAt - Last updated at\n ",
+            "start": 313,
+            "end": 2645,
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 0
+              },
+              "end": {
+                "line": 32,
+                "column": 3
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "comments": [
+    {
+      "type": "CommentBlock",
+      "value": "*\n * This file is automatically created by Recurly's OpenAPI generation process\n * and thus any edits you make by hand will be lost. If you wish to make a\n * change to this file, please create a Github issue explaining the changes you\n * need and we will usher them to the appropriate places.\n ",
+      "start": 0,
+      "end": 298,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Plan\n * @typedef {Object} Plan\n * @prop {string} accountingCode - Accounting code for invoice line items for the plan. If no value is provided, it defaults to plan's code.\n * @prop {boolean} autoRenew - Subscriptions will automatically inherit this value once they are active. If `auto_renew` is `true`, then a subscription will automatically renew its term at renewal. If `auto_renew` is `false`, then a subscription will expire at the end of its term. `auto_renew` can be overridden on the subscription record itself.\n * @prop {string} code - Unique code to identify the plan. This is used in Hosted Payment Page URLs and in the invoice exports.\n * @prop {datetime} createdAt - Created at\n * @prop {Array.<PlanPricing>} currencies - Pricing\n * @prop {datetime} deletedAt - Deleted at\n * @prop {string} description - Optional description, not displayed.\n * @prop {Object} hostedPages - Hosted pages settings\n * @prop {string} id - Plan ID\n * @prop {number} intervalLength - Length of the plan's billing interval in `interval_unit`.\n * @prop {string} intervalUnit - Unit for the plan's billing interval.\n * @prop {string} name - This name describes your plan and will appear on the Hosted Payment Page and the subscriber's invoice.\n * @prop {string} setupFeeAccountingCode - Accounting code for invoice line items for the plan's setup fee. If no value is provided, it defaults to plan's accounting code.\n * @prop {string} state - The current state of the plan.\n * @prop {string} taxCode - Optional field for EU VAT merchants and Avalara AvaTax Pro merchants. If you are using Recurly's EU VAT feature, you can use values of 'unknown', 'physical', or 'digital'. If you have your own AvaTax account configured, you can use Avalara tax codes to assign custom tax rules.\n * @prop {boolean} taxExempt - `true` exempts tax on the plan, `false` applies tax on the plan.\n * @prop {number} totalBillingCycles - Automatically terminate subscriptions after a defined number of billing cycles. Number of billing cycles before the plan automatically stops renewing, defaults to `null` for continuous, automatic renewal.\n * @prop {number} trialLength - Length of plan's trial period in `trial_units`. `0` means `no trial`.\n * @prop {string} trialUnit - Units for the plan's trial period.\n * @prop {datetime} updatedAt - Last updated at\n ",
+      "start": 313,
+      "end": 2645,
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 0
+        },
+        "end": {
+          "line": 32,
+          "column": 3
+        }
+      }
+    }
+  ],
+  "tokens": [
+    {
+      "type": "CommentBlock",
+      "value": "*\n * This file is automatically created by Recurly's OpenAPI generation process\n * and thus any edits you make by hand will be lost. If you wish to make a\n * change to this file, please create a Github issue explaining the changes you\n * need and we will usher them to the appropriate places.\n ",
+      "start": 0,
+      "end": 298,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "string",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "use strict",
+      "start": 299,
+      "end": 311,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 12
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Plan\n * @typedef {Object} Plan\n * @prop {string} accountingCode - Accounting code for invoice line items for the plan. If no value is provided, it defaults to plan's code.\n * @prop {boolean} autoRenew - Subscriptions will automatically inherit this value once they are active. If `auto_renew` is `true`, then a subscription will automatically renew its term at renewal. If `auto_renew` is `false`, then a subscription will expire at the end of its term. `auto_renew` can be overridden on the subscription record itself.\n * @prop {string} code - Unique code to identify the plan. This is used in Hosted Payment Page URLs and in the invoice exports.\n * @prop {datetime} createdAt - Created at\n * @prop {Array.<PlanPricing>} currencies - Pricing\n * @prop {datetime} deletedAt - Deleted at\n * @prop {string} description - Optional description, not displayed.\n * @prop {Object} hostedPages - Hosted pages settings\n * @prop {string} id - Plan ID\n * @prop {number} intervalLength - Length of the plan's billing interval in `interval_unit`.\n * @prop {string} intervalUnit - Unit for the plan's billing interval.\n * @prop {string} name - This name describes your plan and will appear on the Hosted Payment Page and the subscriber's invoice.\n * @prop {string} setupFeeAccountingCode - Accounting code for invoice line items for the plan's setup fee. If no value is provided, it defaults to plan's accounting code.\n * @prop {string} state - The current state of the plan.\n * @prop {string} taxCode - Optional field for EU VAT merchants and Avalara AvaTax Pro merchants. If you are using Recurly's EU VAT feature, you can use values of 'unknown', 'physical', or 'digital'. If you have your own AvaTax account configured, you can use Avalara tax codes to assign custom tax rules.\n * @prop {boolean} taxExempt - `true` exempts tax on the plan, `false` applies tax on the plan.\n * @prop {number} totalBillingCycles - Automatically terminate subscriptions after a defined number of billing cycles. Number of billing cycles before the plan automatically stops renewing, defaults to `null` for continuous, automatic renewal.\n * @prop {number} trialLength - Length of plan's trial period in `trial_units`. `0` means `no trial`.\n * @prop {string} trialUnit - Units for the plan's trial period.\n * @prop {datetime} updatedAt - Last updated at\n ",
+      "start": 313,
+      "end": 2645,
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 0
+        },
+        "end": {
+          "line": 32,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "class",
+        "keyword": "class",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "class",
+      "start": 2646,
+      "end": 2651,
+      "loc": {
+        "start": {
+          "line": 33,
+          "column": 0
+        },
+        "end": {
+          "line": 33,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "Plan",
+      "start": 2652,
+      "end": 2656,
+      "loc": {
+        "start": {
+          "line": 33,
+          "column": 6
+        },
+        "end": {
+          "line": 33,
+          "column": 10
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "{",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 2657,
+      "end": 2658,
+      "loc": {
+        "start": {
+          "line": 33,
+          "column": 11
+        },
+        "end": {
+          "line": 33,
+          "column": 12
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "}",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 2658,
+      "end": 2659,
+      "loc": {
+        "start": {
+          "line": 33,
+          "column": 12
+        },
+        "end": {
+          "line": 33,
+          "column": 13
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "module",
+      "start": 2661,
+      "end": 2667,
+      "loc": {
+        "start": {
+          "line": 35,
+          "column": 0
+        },
+        "end": {
+          "line": 35,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ".",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 2667,
+      "end": 2668,
+      "loc": {
+        "start": {
+          "line": 35,
+          "column": 6
+        },
+        "end": {
+          "line": 35,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "exports",
+      "start": 2668,
+      "end": 2675,
+      "loc": {
+        "start": {
+          "line": 35,
+          "column": 7
+        },
+        "end": {
+          "line": 35,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "=",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": true,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "=",
+      "start": 2676,
+      "end": 2677,
+      "loc": {
+        "start": {
+          "line": 35,
+          "column": 15
+        },
+        "end": {
+          "line": 35,
+          "column": 16
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "Plan",
+      "start": 2678,
+      "end": 2682,
+      "loc": {
+        "start": {
+          "line": 35,
+          "column": 17
+        },
+        "end": {
+          "line": 35,
+          "column": 21
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "eof",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 2683,
+      "end": 2683,
+      "loc": {
+        "start": {
+          "line": 36,
+          "column": 0
+        },
+        "end": {
+          "line": 36,
+          "column": 0
+        }
+      }
+    }
+  ]
+}

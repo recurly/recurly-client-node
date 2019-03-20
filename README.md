@@ -10,14 +10,6 @@ It's currently Beta software and is not yet an official release. Documentation f
 
 ### Documentation
 
-This library uses [documentation](http://documentation.js.org/) to generate jsdocs, but it's not published anywhere yet.
-To view documentation locally run:
-
-```
-./scripts/build && open docs/index.html
-```
-
-To view the HTTP API documentation along with the node example code, see [https://partner-docs.recurly.com/](https://partner-docs.recurly.com/).
 
 ### Installing
 

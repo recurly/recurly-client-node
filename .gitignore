@@ -1,5 +1,3 @@
 node_modules/
-docs/
 coverage/
 .nyc_output/
-console.js
