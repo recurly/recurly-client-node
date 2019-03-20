@@ -1,0 +1,630 @@
+{
+  "type": "File",
+  "start": 0,
+  "end": 4135,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 51,
+      "column": 0
+    }
+  },
+  "program": {
+    "type": "Program",
+    "start": 0,
+    "end": 4135,
+    "loc": {
+      "start": {
+        "line": 1,
+        "column": 0
+      },
+      "end": {
+        "line": 51,
+        "column": 0
+      }
+    },
+    "sourceType": "module",
+    "body": [
+      {
+        "type": "ClassDeclaration",
+        "start": 4084,
+        "end": 4104,
+        "loc": {
+          "start": {
+            "line": 48,
+            "column": 0
+          },
+          "end": {
+            "line": 48,
+            "column": 20
+          }
+        },
+        "id": {
+          "type": "Identifier",
+          "start": 4090,
+          "end": 4101,
+          "loc": {
+            "start": {
+              "line": 48,
+              "column": 6
+            },
+            "end": {
+              "line": 48,
+              "column": 17
+            },
+            "identifierName": "Transaction"
+          },
+          "name": "Transaction",
+          "leadingComments": null
+        },
+        "superClass": null,
+        "body": {
+          "type": "ClassBody",
+          "start": 4102,
+          "end": 4104,
+          "loc": {
+            "start": {
+              "line": 48,
+              "column": 18
+            },
+            "end": {
+              "line": 48,
+              "column": 20
+            }
+          },
+          "body": []
+        },
+        "leadingComments": [
+          {
+            "type": "CommentBlock",
+            "value": "*\n * Transaction\n * @typedef {Object} Transaction\n * @prop {AccountMini} account\n * @prop {number} amount - Total transaction amount sent to the payment gateway.\n * @prop {string} avsCheck - When processed, result from checking the overall AVS on the transaction.\n * @prop {Address} billingAddress\n * @prop {datetime} collectedAt - Collected at, or if not collected yet, the time the transaction was created.\n * @prop {string} collectionMethod - The method by which the payment was collected.\n * @prop {datetime} createdAt - Created at\n * @prop {string} currency - 3-letter ISO 4217 currency code.\n * @prop {string} customerMessage - For declined (`success=false`) transactions, the message displayed to the customer.\n * @prop {string} customerMessageLocale - Language code for the message\n * @prop {string} cvvCheck - When processed, result from checking the CVV/CVC value on the transaction.\n * @prop {string} gatewayApprovalCode - Transaction approval code from the payment gateway.\n * @prop {string} gatewayMessage - Transaction message from the payment gateway.\n * @prop {string} gatewayReference - Transaction reference number from the payment gateway.\n * @prop {string} gatewayResponseCode - For declined transactions (`success=false`), this field lists the gateway error code.\n * @prop {number} gatewayResponseTime - Time, in seconds, for gateway to process the transaction.\n * @prop {Object} gatewayResponseValues - The values in this field will vary from gateway to gateway.\n * @prop {string} id - Transaction ID\n * @prop {InvoiceMini} invoice\n * @prop {string} ipAddressCountry - IP address's country\n * @prop {string} ipAddressV4 - IP address provided when the billing information was collected:  - When the customer enters billing information into the Recurly.JS or Hosted Payment Pages, Recurly records the IP address. - When the merchant enters billing information using the API, the merchant may provide an IP address. - When the merchant enters billing information using the UI, no IP address is recorded.\n * @prop {string} origin - Describes how the transaction was triggered.\n * @prop {string} originalTransactionId - If this transaction is a refund (`type=refund`), this will be the ID of the original transaction on the invoice being refunded.\n * @prop {Object} paymentGateway\n * @prop {Object} paymentMethod - Payment method (TODO: this overlaps with BillingInfo’s payment_method but only documents credit cards)\n * @prop {boolean} refunded - Indicates if part or all of this transaction was refunded.\n * @prop {string} status - The current transaction status. Note that the status may change, e.g. a `pending` transaction may become `declined` or `success` may later become `void`.\n * @prop {string} statusCode - Status code\n * @prop {string} statusMessage - For declined (`success=false`) transactions, the message displayed to the merchant.\n * @prop {Array.<string>} subscriptionIds - If the transaction is charging or refunding for one or more subscriptions, these are their IDs.\n * @prop {boolean} success - Did this transaction complete successfully?\n * @prop {string} type - - `authorization` – verifies billing information and places a hold on money in the customer's account. - `capture` – captures funds held by an authorization and completes a purchase. - `purchase` – combines the authorization and capture in one transaction. - `refund` – returns all or a portion of the money collected in a previous transaction to the customer. - `verify` – a $0 or $1 transaction used to verify billing information which is immediately voided.\n * @prop {string} uuid - The UUID is useful for matching data with the CSV exports and building URLs into Recurly's UI.\n * @prop {datetime} voidedAt - Voided at\n * @prop {InvoiceMini} voidedByInvoice\n ",
+            "start": 313,
+            "end": 4083,
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 0
+              },
+              "end": {
+                "line": 47,
+                "column": 3
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ExpressionStatement",
+        "start": 4106,
+        "end": 4134,
+        "loc": {
+          "start": {
+            "line": 50,
+            "column": 0
+          },
+          "end": {
+            "line": 50,
+            "column": 28
+          }
+        },
+        "expression": {
+          "type": "AssignmentExpression",
+          "start": 4106,
+          "end": 4134,
+          "loc": {
+            "start": {
+              "line": 50,
+              "column": 0
+            },
+            "end": {
+              "line": 50,
+              "column": 28
+            }
+          },
+          "operator": "=",
+          "left": {
+            "type": "MemberExpression",
+            "start": 4106,
+            "end": 4120,
+            "loc": {
+              "start": {
+                "line": 50,
+                "column": 0
+              },
+              "end": {
+                "line": 50,
+                "column": 14
+              }
+            },
+            "object": {
+              "type": "Identifier",
+              "start": 4106,
+              "end": 4112,
+              "loc": {
+                "start": {
+                  "line": 50,
+                  "column": 0
+                },
+                "end": {
+                  "line": 50,
+                  "column": 6
+                },
+                "identifierName": "module"
+              },
+              "name": "module"
+            },
+            "property": {
+              "type": "Identifier",
+              "start": 4113,
+              "end": 4120,
+              "loc": {
+                "start": {
+                  "line": 50,
+                  "column": 7
+                },
+                "end": {
+                  "line": 50,
+                  "column": 14
+                },
+                "identifierName": "exports"
+              },
+              "name": "exports"
+            },
+            "computed": false
+          },
+          "right": {
+            "type": "Identifier",
+            "start": 4123,
+            "end": 4134,
+            "loc": {
+              "start": {
+                "line": 50,
+                "column": 17
+              },
+              "end": {
+                "line": 50,
+                "column": 28
+              },
+              "identifierName": "Transaction"
+            },
+            "name": "Transaction"
+          }
+        }
+      }
+    ],
+    "directives": [
+      {
+        "type": "Directive",
+        "start": 299,
+        "end": 311,
+        "loc": {
+          "start": {
+            "line": 7,
+            "column": 0
+          },
+          "end": {
+            "line": 7,
+            "column": 12
+          }
+        },
+        "value": {
+          "type": "DirectiveLiteral",
+          "start": 299,
+          "end": 311,
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 0
+            },
+            "end": {
+              "line": 7,
+              "column": 12
+            }
+          },
+          "value": "use strict",
+          "extra": {
+            "raw": "'use strict'",
+            "rawValue": "use strict"
+          },
+          "leadingComments": null,
+          "trailingComments": null
+        },
+        "leadingComments": [
+          {
+            "type": "CommentBlock",
+            "value": "*\n * This file is automatically created by Recurly's OpenAPI generation process\n * and thus any edits you make by hand will be lost. If you wish to make a\n * change to this file, please create a Github issue explaining the changes you\n * need and we will usher them to the appropriate places.\n ",
+            "start": 0,
+            "end": 298,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 6,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": [
+          {
+            "type": "CommentBlock",
+            "value": "*\n * Transaction\n * @typedef {Object} Transaction\n * @prop {AccountMini} account\n * @prop {number} amount - Total transaction amount sent to the payment gateway.\n * @prop {string} avsCheck - When processed, result from checking the overall AVS on the transaction.\n * @prop {Address} billingAddress\n * @prop {datetime} collectedAt - Collected at, or if not collected yet, the time the transaction was created.\n * @prop {string} collectionMethod - The method by which the payment was collected.\n * @prop {datetime} createdAt - Created at\n * @prop {string} currency - 3-letter ISO 4217 currency code.\n * @prop {string} customerMessage - For declined (`success=false`) transactions, the message displayed to the customer.\n * @prop {string} customerMessageLocale - Language code for the message\n * @prop {string} cvvCheck - When processed, result from checking the CVV/CVC value on the transaction.\n * @prop {string} gatewayApprovalCode - Transaction approval code from the payment gateway.\n * @prop {string} gatewayMessage - Transaction message from the payment gateway.\n * @prop {string} gatewayReference - Transaction reference number from the payment gateway.\n * @prop {string} gatewayResponseCode - For declined transactions (`success=false`), this field lists the gateway error code.\n * @prop {number} gatewayResponseTime - Time, in seconds, for gateway to process the transaction.\n * @prop {Object} gatewayResponseValues - The values in this field will vary from gateway to gateway.\n * @prop {string} id - Transaction ID\n * @prop {InvoiceMini} invoice\n * @prop {string} ipAddressCountry - IP address's country\n * @prop {string} ipAddressV4 - IP address provided when the billing information was collected:  - When the customer enters billing information into the Recurly.JS or Hosted Payment Pages, Recurly records the IP address. - When the merchant enters billing information using the API, the merchant may provide an IP address. - When the merchant enters billing information using the UI, no IP address is recorded.\n * @prop {string} origin - Describes how the transaction was triggered.\n * @prop {string} originalTransactionId - If this transaction is a refund (`type=refund`), this will be the ID of the original transaction on the invoice being refunded.\n * @prop {Object} paymentGateway\n * @prop {Object} paymentMethod - Payment method (TODO: this overlaps with BillingInfo’s payment_method but only documents credit cards)\n * @prop {boolean} refunded - Indicates if part or all of this transaction was refunded.\n * @prop {string} status - The current transaction status. Note that the status may change, e.g. a `pending` transaction may become `declined` or `success` may later become `void`.\n * @prop {string} statusCode - Status code\n * @prop {string} statusMessage - For declined (`success=false`) transactions, the message displayed to the merchant.\n * @prop {Array.<string>} subscriptionIds - If the transaction is charging or refunding for one or more subscriptions, these are their IDs.\n * @prop {boolean} success - Did this transaction complete successfully?\n * @prop {string} type - - `authorization` – verifies billing information and places a hold on money in the customer's account. - `capture` – captures funds held by an authorization and completes a purchase. - `purchase` – combines the authorization and capture in one transaction. - `refund` – returns all or a portion of the money collected in a previous transaction to the customer. - `verify` – a $0 or $1 transaction used to verify billing information which is immediately voided.\n * @prop {string} uuid - The UUID is useful for matching data with the CSV exports and building URLs into Recurly's UI.\n * @prop {datetime} voidedAt - Voided at\n * @prop {InvoiceMini} voidedByInvoice\n ",
+            "start": 313,
+            "end": 4083,
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 0
+              },
+              "end": {
+                "line": 47,
+                "column": 3
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "comments": [
+    {
+      "type": "CommentBlock",
+      "value": "*\n * This file is automatically created by Recurly's OpenAPI generation process\n * and thus any edits you make by hand will be lost. If you wish to make a\n * change to this file, please create a Github issue explaining the changes you\n * need and we will usher them to the appropriate places.\n ",
+      "start": 0,
+      "end": 298,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Transaction\n * @typedef {Object} Transaction\n * @prop {AccountMini} account\n * @prop {number} amount - Total transaction amount sent to the payment gateway.\n * @prop {string} avsCheck - When processed, result from checking the overall AVS on the transaction.\n * @prop {Address} billingAddress\n * @prop {datetime} collectedAt - Collected at, or if not collected yet, the time the transaction was created.\n * @prop {string} collectionMethod - The method by which the payment was collected.\n * @prop {datetime} createdAt - Created at\n * @prop {string} currency - 3-letter ISO 4217 currency code.\n * @prop {string} customerMessage - For declined (`success=false`) transactions, the message displayed to the customer.\n * @prop {string} customerMessageLocale - Language code for the message\n * @prop {string} cvvCheck - When processed, result from checking the CVV/CVC value on the transaction.\n * @prop {string} gatewayApprovalCode - Transaction approval code from the payment gateway.\n * @prop {string} gatewayMessage - Transaction message from the payment gateway.\n * @prop {string} gatewayReference - Transaction reference number from the payment gateway.\n * @prop {string} gatewayResponseCode - For declined transactions (`success=false`), this field lists the gateway error code.\n * @prop {number} gatewayResponseTime - Time, in seconds, for gateway to process the transaction.\n * @prop {Object} gatewayResponseValues - The values in this field will vary from gateway to gateway.\n * @prop {string} id - Transaction ID\n * @prop {InvoiceMini} invoice\n * @prop {string} ipAddressCountry - IP address's country\n * @prop {string} ipAddressV4 - IP address provided when the billing information was collected:  - When the customer enters billing information into the Recurly.JS or Hosted Payment Pages, Recurly records the IP address. - When the merchant enters billing information using the API, the merchant may provide an IP address. - When the merchant enters billing information using the UI, no IP address is recorded.\n * @prop {string} origin - Describes how the transaction was triggered.\n * @prop {string} originalTransactionId - If this transaction is a refund (`type=refund`), this will be the ID of the original transaction on the invoice being refunded.\n * @prop {Object} paymentGateway\n * @prop {Object} paymentMethod - Payment method (TODO: this overlaps with BillingInfo’s payment_method but only documents credit cards)\n * @prop {boolean} refunded - Indicates if part or all of this transaction was refunded.\n * @prop {string} status - The current transaction status. Note that the status may change, e.g. a `pending` transaction may become `declined` or `success` may later become `void`.\n * @prop {string} statusCode - Status code\n * @prop {string} statusMessage - For declined (`success=false`) transactions, the message displayed to the merchant.\n * @prop {Array.<string>} subscriptionIds - If the transaction is charging or refunding for one or more subscriptions, these are their IDs.\n * @prop {boolean} success - Did this transaction complete successfully?\n * @prop {string} type - - `authorization` – verifies billing information and places a hold on money in the customer's account. - `capture` – captures funds held by an authorization and completes a purchase. - `purchase` – combines the authorization and capture in one transaction. - `refund` – returns all or a portion of the money collected in a previous transaction to the customer. - `verify` – a $0 or $1 transaction used to verify billing information which is immediately voided.\n * @prop {string} uuid - The UUID is useful for matching data with the CSV exports and building URLs into Recurly's UI.\n * @prop {datetime} voidedAt - Voided at\n * @prop {InvoiceMini} voidedByInvoice\n ",
+      "start": 313,
+      "end": 4083,
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 0
+        },
+        "end": {
+          "line": 47,
+          "column": 3
+        }
+      }
+    }
+  ],
+  "tokens": [
+    {
+      "type": "CommentBlock",
+      "value": "*\n * This file is automatically created by Recurly's OpenAPI generation process\n * and thus any edits you make by hand will be lost. If you wish to make a\n * change to this file, please create a Github issue explaining the changes you\n * need and we will usher them to the appropriate places.\n ",
+      "start": 0,
+      "end": 298,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "string",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "use strict",
+      "start": 299,
+      "end": 311,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 12
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Transaction\n * @typedef {Object} Transaction\n * @prop {AccountMini} account\n * @prop {number} amount - Total transaction amount sent to the payment gateway.\n * @prop {string} avsCheck - When processed, result from checking the overall AVS on the transaction.\n * @prop {Address} billingAddress\n * @prop {datetime} collectedAt - Collected at, or if not collected yet, the time the transaction was created.\n * @prop {string} collectionMethod - The method by which the payment was collected.\n * @prop {datetime} createdAt - Created at\n * @prop {string} currency - 3-letter ISO 4217 currency code.\n * @prop {string} customerMessage - For declined (`success=false`) transactions, the message displayed to the customer.\n * @prop {string} customerMessageLocale - Language code for the message\n * @prop {string} cvvCheck - When processed, result from checking the CVV/CVC value on the transaction.\n * @prop {string} gatewayApprovalCode - Transaction approval code from the payment gateway.\n * @prop {string} gatewayMessage - Transaction message from the payment gateway.\n * @prop {string} gatewayReference - Transaction reference number from the payment gateway.\n * @prop {string} gatewayResponseCode - For declined transactions (`success=false`), this field lists the gateway error code.\n * @prop {number} gatewayResponseTime - Time, in seconds, for gateway to process the transaction.\n * @prop {Object} gatewayResponseValues - The values in this field will vary from gateway to gateway.\n * @prop {string} id - Transaction ID\n * @prop {InvoiceMini} invoice\n * @prop {string} ipAddressCountry - IP address's country\n * @prop {string} ipAddressV4 - IP address provided when the billing information was collected:  - When the customer enters billing information into the Recurly.JS or Hosted Payment Pages, Recurly records the IP address. - When the merchant enters billing information using the API, the merchant may provide an IP address. - When the merchant enters billing information using the UI, no IP address is recorded.\n * @prop {string} origin - Describes how the transaction was triggered.\n * @prop {string} originalTransactionId - If this transaction is a refund (`type=refund`), this will be the ID of the original transaction on the invoice being refunded.\n * @prop {Object} paymentGateway\n * @prop {Object} paymentMethod - Payment method (TODO: this overlaps with BillingInfo’s payment_method but only documents credit cards)\n * @prop {boolean} refunded - Indicates if part or all of this transaction was refunded.\n * @prop {string} status - The current transaction status. Note that the status may change, e.g. a `pending` transaction may become `declined` or `success` may later become `void`.\n * @prop {string} statusCode - Status code\n * @prop {string} statusMessage - For declined (`success=false`) transactions, the message displayed to the merchant.\n * @prop {Array.<string>} subscriptionIds - If the transaction is charging or refunding for one or more subscriptions, these are their IDs.\n * @prop {boolean} success - Did this transaction complete successfully?\n * @prop {string} type - - `authorization` – verifies billing information and places a hold on money in the customer's account. - `capture` – captures funds held by an authorization and completes a purchase. - `purchase` – combines the authorization and capture in one transaction. - `refund` – returns all or a portion of the money collected in a previous transaction to the customer. - `verify` – a $0 or $1 transaction used to verify billing information which is immediately voided.\n * @prop {string} uuid - The UUID is useful for matching data with the CSV exports and building URLs into Recurly's UI.\n * @prop {datetime} voidedAt - Voided at\n * @prop {InvoiceMini} voidedByInvoice\n ",
+      "start": 313,
+      "end": 4083,
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 0
+        },
+        "end": {
+          "line": 47,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "class",
+        "keyword": "class",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "class",
+      "start": 4084,
+      "end": 4089,
+      "loc": {
+        "start": {
+          "line": 48,
+          "column": 0
+        },
+        "end": {
+          "line": 48,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "Transaction",
+      "start": 4090,
+      "end": 4101,
+      "loc": {
+        "start": {
+          "line": 48,
+          "column": 6
+        },
+        "end": {
+          "line": 48,
+          "column": 17
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "{",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 4102,
+      "end": 4103,
+      "loc": {
+        "start": {
+          "line": 48,
+          "column": 18
+        },
+        "end": {
+          "line": 48,
+          "column": 19
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "}",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 4103,
+      "end": 4104,
+      "loc": {
+        "start": {
+          "line": 48,
+          "column": 19
+        },
+        "end": {
+          "line": 48,
+          "column": 20
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "module",
+      "start": 4106,
+      "end": 4112,
+      "loc": {
+        "start": {
+          "line": 50,
+          "column": 0
+        },
+        "end": {
+          "line": 50,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ".",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 4112,
+      "end": 4113,
+      "loc": {
+        "start": {
+          "line": 50,
+          "column": 6
+        },
+        "end": {
+          "line": 50,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "exports",
+      "start": 4113,
+      "end": 4120,
+      "loc": {
+        "start": {
+          "line": 50,
+          "column": 7
+        },
+        "end": {
+          "line": 50,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "=",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": true,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "=",
+      "start": 4121,
+      "end": 4122,
+      "loc": {
+        "start": {
+          "line": 50,
+          "column": 15
+        },
+        "end": {
+          "line": 50,
+          "column": 16
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "Transaction",
+      "start": 4123,
+      "end": 4134,
+      "loc": {
+        "start": {
+          "line": 50,
+          "column": 17
+        },
+        "end": {
+          "line": 50,
+          "column": 28
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "eof",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 4135,
+      "end": 4135,
+      "loc": {
+        "start": {
+          "line": 51,
+          "column": 0
+        },
+        "end": {
+          "line": 51,
+          "column": 0
+        }
+      }
+    }
+  ]
+}

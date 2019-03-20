@@ -1,0 +1,630 @@
+{
+  "type": "File",
+  "start": 0,
+  "end": 3442,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 41,
+      "column": 0
+    }
+  },
+  "program": {
+    "type": "Program",
+    "start": 0,
+    "end": 3442,
+    "loc": {
+      "start": {
+        "line": 1,
+        "column": 0
+      },
+      "end": {
+        "line": 41,
+        "column": 0
+      }
+    },
+    "sourceType": "module",
+    "body": [
+      {
+        "type": "ClassDeclaration",
+        "start": 3401,
+        "end": 3416,
+        "loc": {
+          "start": {
+            "line": 38,
+            "column": 0
+          },
+          "end": {
+            "line": 38,
+            "column": 15
+          }
+        },
+        "id": {
+          "type": "Identifier",
+          "start": 3407,
+          "end": 3413,
+          "loc": {
+            "start": {
+              "line": 38,
+              "column": 6
+            },
+            "end": {
+              "line": 38,
+              "column": 12
+            },
+            "identifierName": "Coupon"
+          },
+          "name": "Coupon",
+          "leadingComments": null
+        },
+        "superClass": null,
+        "body": {
+          "type": "ClassBody",
+          "start": 3414,
+          "end": 3416,
+          "loc": {
+            "start": {
+              "line": 38,
+              "column": 13
+            },
+            "end": {
+              "line": 38,
+              "column": 15
+            }
+          },
+          "body": []
+        },
+        "leadingComments": [
+          {
+            "type": "CommentBlock",
+            "value": "*\n * Coupon\n * @typedef {Object} Coupon\n * @prop {boolean} appliesToAllPlans - The coupon is valid for all plans if true. If false then `plans` and `plans_names` will list the applicable plans.\n * @prop {boolean} appliesToNonPlanCharges - The coupon is valid for one-time, non-plan charges if true.\n * @prop {string} code - The code the customer enters to redeem the coupon.\n * @prop {string} couponType - Whether the coupon is \"single_code\" or \"bulk\". Bulk coupons will require a `unique_code_template` and will generate unique codes through the `/generate` endpoint.\n * @prop {datetime} createdAt - Created at\n * @prop {CouponDiscount} discount\n * @prop {string} duration - - \"single_use\" coupons applies to the first invoice only. - \"temporal\" coupons will apply to invoices for the duration determined by the `temporal_unit` and `temporal_amount` attributes.\n * @prop {datetime} expiredAt - The date and time the coupon was expired early or reached its `max_redemptions`.\n * @prop {number} freeTrialAmount - Sets the duration of time the `free_trial_unit` is for.\n * @prop {string} freeTrialUnit - Description of the unit of time the coupon is for. Used with `free_trial_amount` to determine the duration of time the coupon is for.\n * @prop {string} hostedPageDescription - This description will show up when a customer redeems a coupon on your Hosted Payment Pages, or if you choose to show the description on your own checkout page.\n * @prop {string} id - Coupon ID\n * @prop {string} invoiceDescription - Description of the coupon on the invoice.\n * @prop {number} maxRedemptions - A maximum number of redemptions for the coupon. The coupon will expire when it hits its maximum redemptions.\n * @prop {number} maxRedemptionsPerAccount - Redemptions per account is the number of times a specific account can redeem the coupon. Set redemptions per account to `1` if you want to keep customers from gaming the system and getting more than one discount from the coupon campaign.\n * @prop {string} name - The internal name for the coupon.\n * @prop {Array.<PlanMini>} plans - Plans\n * @prop {Array.<string>} plansNames - TODO\n * @prop {datetime} redeemBy - The date and time the coupon will expire and can no longer be redeemed. Time is always 11:59:59, the end-of-day Pacific time.\n * @prop {string} redemptionResource - Whether the discount is for all eligible charges on the account, or only a specific subscription.\n * @prop {string} state - Indicates if the coupon is redeemable, and if it is not, why.\n * @prop {number} temporalAmount - If `duration` is \"temporal\" than `temporal_amount` is an integer which is multiplied by `temporal_unit` to define the duration that the coupon will be applied to invoices for.\n * @prop {string} temporalUnit - If `duration` is \"temporal\" than `temporal_unit` is multiplied by `temporal_amount` to define the duration that the coupon will be applied to invoices for.\n * @prop {number} uniqueCouponCodesCount - When this number reaches `max_redemptions` the coupon will no longer be redeemable.\n * @prop {datetime} updatedAt - Last updated at\n ",
+            "start": 313,
+            "end": 3400,
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 0
+              },
+              "end": {
+                "line": 37,
+                "column": 3
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ExpressionStatement",
+        "start": 3418,
+        "end": 3441,
+        "loc": {
+          "start": {
+            "line": 40,
+            "column": 0
+          },
+          "end": {
+            "line": 40,
+            "column": 23
+          }
+        },
+        "expression": {
+          "type": "AssignmentExpression",
+          "start": 3418,
+          "end": 3441,
+          "loc": {
+            "start": {
+              "line": 40,
+              "column": 0
+            },
+            "end": {
+              "line": 40,
+              "column": 23
+            }
+          },
+          "operator": "=",
+          "left": {
+            "type": "MemberExpression",
+            "start": 3418,
+            "end": 3432,
+            "loc": {
+              "start": {
+                "line": 40,
+                "column": 0
+              },
+              "end": {
+                "line": 40,
+                "column": 14
+              }
+            },
+            "object": {
+              "type": "Identifier",
+              "start": 3418,
+              "end": 3424,
+              "loc": {
+                "start": {
+                  "line": 40,
+                  "column": 0
+                },
+                "end": {
+                  "line": 40,
+                  "column": 6
+                },
+                "identifierName": "module"
+              },
+              "name": "module"
+            },
+            "property": {
+              "type": "Identifier",
+              "start": 3425,
+              "end": 3432,
+              "loc": {
+                "start": {
+                  "line": 40,
+                  "column": 7
+                },
+                "end": {
+                  "line": 40,
+                  "column": 14
+                },
+                "identifierName": "exports"
+              },
+              "name": "exports"
+            },
+            "computed": false
+          },
+          "right": {
+            "type": "Identifier",
+            "start": 3435,
+            "end": 3441,
+            "loc": {
+              "start": {
+                "line": 40,
+                "column": 17
+              },
+              "end": {
+                "line": 40,
+                "column": 23
+              },
+              "identifierName": "Coupon"
+            },
+            "name": "Coupon"
+          }
+        }
+      }
+    ],
+    "directives": [
+      {
+        "type": "Directive",
+        "start": 299,
+        "end": 311,
+        "loc": {
+          "start": {
+            "line": 7,
+            "column": 0
+          },
+          "end": {
+            "line": 7,
+            "column": 12
+          }
+        },
+        "value": {
+          "type": "DirectiveLiteral",
+          "start": 299,
+          "end": 311,
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 0
+            },
+            "end": {
+              "line": 7,
+              "column": 12
+            }
+          },
+          "value": "use strict",
+          "extra": {
+            "raw": "'use strict'",
+            "rawValue": "use strict"
+          },
+          "leadingComments": null,
+          "trailingComments": null
+        },
+        "leadingComments": [
+          {
+            "type": "CommentBlock",
+            "value": "*\n * This file is automatically created by Recurly's OpenAPI generation process\n * and thus any edits you make by hand will be lost. If you wish to make a\n * change to this file, please create a Github issue explaining the changes you\n * need and we will usher them to the appropriate places.\n ",
+            "start": 0,
+            "end": 298,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 6,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": [
+          {
+            "type": "CommentBlock",
+            "value": "*\n * Coupon\n * @typedef {Object} Coupon\n * @prop {boolean} appliesToAllPlans - The coupon is valid for all plans if true. If false then `plans` and `plans_names` will list the applicable plans.\n * @prop {boolean} appliesToNonPlanCharges - The coupon is valid for one-time, non-plan charges if true.\n * @prop {string} code - The code the customer enters to redeem the coupon.\n * @prop {string} couponType - Whether the coupon is \"single_code\" or \"bulk\". Bulk coupons will require a `unique_code_template` and will generate unique codes through the `/generate` endpoint.\n * @prop {datetime} createdAt - Created at\n * @prop {CouponDiscount} discount\n * @prop {string} duration - - \"single_use\" coupons applies to the first invoice only. - \"temporal\" coupons will apply to invoices for the duration determined by the `temporal_unit` and `temporal_amount` attributes.\n * @prop {datetime} expiredAt - The date and time the coupon was expired early or reached its `max_redemptions`.\n * @prop {number} freeTrialAmount - Sets the duration of time the `free_trial_unit` is for.\n * @prop {string} freeTrialUnit - Description of the unit of time the coupon is for. Used with `free_trial_amount` to determine the duration of time the coupon is for.\n * @prop {string} hostedPageDescription - This description will show up when a customer redeems a coupon on your Hosted Payment Pages, or if you choose to show the description on your own checkout page.\n * @prop {string} id - Coupon ID\n * @prop {string} invoiceDescription - Description of the coupon on the invoice.\n * @prop {number} maxRedemptions - A maximum number of redemptions for the coupon. The coupon will expire when it hits its maximum redemptions.\n * @prop {number} maxRedemptionsPerAccount - Redemptions per account is the number of times a specific account can redeem the coupon. Set redemptions per account to `1` if you want to keep customers from gaming the system and getting more than one discount from the coupon campaign.\n * @prop {string} name - The internal name for the coupon.\n * @prop {Array.<PlanMini>} plans - Plans\n * @prop {Array.<string>} plansNames - TODO\n * @prop {datetime} redeemBy - The date and time the coupon will expire and can no longer be redeemed. Time is always 11:59:59, the end-of-day Pacific time.\n * @prop {string} redemptionResource - Whether the discount is for all eligible charges on the account, or only a specific subscription.\n * @prop {string} state - Indicates if the coupon is redeemable, and if it is not, why.\n * @prop {number} temporalAmount - If `duration` is \"temporal\" than `temporal_amount` is an integer which is multiplied by `temporal_unit` to define the duration that the coupon will be applied to invoices for.\n * @prop {string} temporalUnit - If `duration` is \"temporal\" than `temporal_unit` is multiplied by `temporal_amount` to define the duration that the coupon will be applied to invoices for.\n * @prop {number} uniqueCouponCodesCount - When this number reaches `max_redemptions` the coupon will no longer be redeemable.\n * @prop {datetime} updatedAt - Last updated at\n ",
+            "start": 313,
+            "end": 3400,
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 0
+              },
+              "end": {
+                "line": 37,
+                "column": 3
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "comments": [
+    {
+      "type": "CommentBlock",
+      "value": "*\n * This file is automatically created by Recurly's OpenAPI generation process\n * and thus any edits you make by hand will be lost. If you wish to make a\n * change to this file, please create a Github issue explaining the changes you\n * need and we will usher them to the appropriate places.\n ",
+      "start": 0,
+      "end": 298,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Coupon\n * @typedef {Object} Coupon\n * @prop {boolean} appliesToAllPlans - The coupon is valid for all plans if true. If false then `plans` and `plans_names` will list the applicable plans.\n * @prop {boolean} appliesToNonPlanCharges - The coupon is valid for one-time, non-plan charges if true.\n * @prop {string} code - The code the customer enters to redeem the coupon.\n * @prop {string} couponType - Whether the coupon is \"single_code\" or \"bulk\". Bulk coupons will require a `unique_code_template` and will generate unique codes through the `/generate` endpoint.\n * @prop {datetime} createdAt - Created at\n * @prop {CouponDiscount} discount\n * @prop {string} duration - - \"single_use\" coupons applies to the first invoice only. - \"temporal\" coupons will apply to invoices for the duration determined by the `temporal_unit` and `temporal_amount` attributes.\n * @prop {datetime} expiredAt - The date and time the coupon was expired early or reached its `max_redemptions`.\n * @prop {number} freeTrialAmount - Sets the duration of time the `free_trial_unit` is for.\n * @prop {string} freeTrialUnit - Description of the unit of time the coupon is for. Used with `free_trial_amount` to determine the duration of time the coupon is for.\n * @prop {string} hostedPageDescription - This description will show up when a customer redeems a coupon on your Hosted Payment Pages, or if you choose to show the description on your own checkout page.\n * @prop {string} id - Coupon ID\n * @prop {string} invoiceDescription - Description of the coupon on the invoice.\n * @prop {number} maxRedemptions - A maximum number of redemptions for the coupon. The coupon will expire when it hits its maximum redemptions.\n * @prop {number} maxRedemptionsPerAccount - Redemptions per account is the number of times a specific account can redeem the coupon. Set redemptions per account to `1` if you want to keep customers from gaming the system and getting more than one discount from the coupon campaign.\n * @prop {string} name - The internal name for the coupon.\n * @prop {Array.<PlanMini>} plans - Plans\n * @prop {Array.<string>} plansNames - TODO\n * @prop {datetime} redeemBy - The date and time the coupon will expire and can no longer be redeemed. Time is always 11:59:59, the end-of-day Pacific time.\n * @prop {string} redemptionResource - Whether the discount is for all eligible charges on the account, or only a specific subscription.\n * @prop {string} state - Indicates if the coupon is redeemable, and if it is not, why.\n * @prop {number} temporalAmount - If `duration` is \"temporal\" than `temporal_amount` is an integer which is multiplied by `temporal_unit` to define the duration that the coupon will be applied to invoices for.\n * @prop {string} temporalUnit - If `duration` is \"temporal\" than `temporal_unit` is multiplied by `temporal_amount` to define the duration that the coupon will be applied to invoices for.\n * @prop {number} uniqueCouponCodesCount - When this number reaches `max_redemptions` the coupon will no longer be redeemable.\n * @prop {datetime} updatedAt - Last updated at\n ",
+      "start": 313,
+      "end": 3400,
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 0
+        },
+        "end": {
+          "line": 37,
+          "column": 3
+        }
+      }
+    }
+  ],
+  "tokens": [
+    {
+      "type": "CommentBlock",
+      "value": "*\n * This file is automatically created by Recurly's OpenAPI generation process\n * and thus any edits you make by hand will be lost. If you wish to make a\n * change to this file, please create a Github issue explaining the changes you\n * need and we will usher them to the appropriate places.\n ",
+      "start": 0,
+      "end": 298,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "string",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "use strict",
+      "start": 299,
+      "end": 311,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 12
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Coupon\n * @typedef {Object} Coupon\n * @prop {boolean} appliesToAllPlans - The coupon is valid for all plans if true. If false then `plans` and `plans_names` will list the applicable plans.\n * @prop {boolean} appliesToNonPlanCharges - The coupon is valid for one-time, non-plan charges if true.\n * @prop {string} code - The code the customer enters to redeem the coupon.\n * @prop {string} couponType - Whether the coupon is \"single_code\" or \"bulk\". Bulk coupons will require a `unique_code_template` and will generate unique codes through the `/generate` endpoint.\n * @prop {datetime} createdAt - Created at\n * @prop {CouponDiscount} discount\n * @prop {string} duration - - \"single_use\" coupons applies to the first invoice only. - \"temporal\" coupons will apply to invoices for the duration determined by the `temporal_unit` and `temporal_amount` attributes.\n * @prop {datetime} expiredAt - The date and time the coupon was expired early or reached its `max_redemptions`.\n * @prop {number} freeTrialAmount - Sets the duration of time the `free_trial_unit` is for.\n * @prop {string} freeTrialUnit - Description of the unit of time the coupon is for. Used with `free_trial_amount` to determine the duration of time the coupon is for.\n * @prop {string} hostedPageDescription - This description will show up when a customer redeems a coupon on your Hosted Payment Pages, or if you choose to show the description on your own checkout page.\n * @prop {string} id - Coupon ID\n * @prop {string} invoiceDescription - Description of the coupon on the invoice.\n * @prop {number} maxRedemptions - A maximum number of redemptions for the coupon. The coupon will expire when it hits its maximum redemptions.\n * @prop {number} maxRedemptionsPerAccount - Redemptions per account is the number of times a specific account can redeem the coupon. Set redemptions per account to `1` if you want to keep customers from gaming the system and getting more than one discount from the coupon campaign.\n * @prop {string} name - The internal name for the coupon.\n * @prop {Array.<PlanMini>} plans - Plans\n * @prop {Array.<string>} plansNames - TODO\n * @prop {datetime} redeemBy - The date and time the coupon will expire and can no longer be redeemed. Time is always 11:59:59, the end-of-day Pacific time.\n * @prop {string} redemptionResource - Whether the discount is for all eligible charges on the account, or only a specific subscription.\n * @prop {string} state - Indicates if the coupon is redeemable, and if it is not, why.\n * @prop {number} temporalAmount - If `duration` is \"temporal\" than `temporal_amount` is an integer which is multiplied by `temporal_unit` to define the duration that the coupon will be applied to invoices for.\n * @prop {string} temporalUnit - If `duration` is \"temporal\" than `temporal_unit` is multiplied by `temporal_amount` to define the duration that the coupon will be applied to invoices for.\n * @prop {number} uniqueCouponCodesCount - When this number reaches `max_redemptions` the coupon will no longer be redeemable.\n * @prop {datetime} updatedAt - Last updated at\n ",
+      "start": 313,
+      "end": 3400,
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 0
+        },
+        "end": {
+          "line": 37,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "class",
+        "keyword": "class",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "class",
+      "start": 3401,
+      "end": 3406,
+      "loc": {
+        "start": {
+          "line": 38,
+          "column": 0
+        },
+        "end": {
+          "line": 38,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "Coupon",
+      "start": 3407,
+      "end": 3413,
+      "loc": {
+        "start": {
+          "line": 38,
+          "column": 6
+        },
+        "end": {
+          "line": 38,
+          "column": 12
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "{",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 3414,
+      "end": 3415,
+      "loc": {
+        "start": {
+          "line": 38,
+          "column": 13
+        },
+        "end": {
+          "line": 38,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "}",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 3415,
+      "end": 3416,
+      "loc": {
+        "start": {
+          "line": 38,
+          "column": 14
+        },
+        "end": {
+          "line": 38,
+          "column": 15
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "module",
+      "start": 3418,
+      "end": 3424,
+      "loc": {
+        "start": {
+          "line": 40,
+          "column": 0
+        },
+        "end": {
+          "line": 40,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ".",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 3424,
+      "end": 3425,
+      "loc": {
+        "start": {
+          "line": 40,
+          "column": 6
+        },
+        "end": {
+          "line": 40,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "exports",
+      "start": 3425,
+      "end": 3432,
+      "loc": {
+        "start": {
+          "line": 40,
+          "column": 7
+        },
+        "end": {
+          "line": 40,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "=",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": true,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "=",
+      "start": 3433,
+      "end": 3434,
+      "loc": {
+        "start": {
+          "line": 40,
+          "column": 15
+        },
+        "end": {
+          "line": 40,
+          "column": 16
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "Coupon",
+      "start": 3435,
+      "end": 3441,
+      "loc": {
+        "start": {
+          "line": 40,
+          "column": 17
+        },
+        "end": {
+          "line": 40,
+          "column": 23
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "eof",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 3442,
+      "end": 3442,
+      "loc": {
+        "start": {
+          "line": 41,
+          "column": 0
+        },
+        "end": {
+          "line": 41,
+          "column": 0
+        }
+      }
+    }
+  ]
+}

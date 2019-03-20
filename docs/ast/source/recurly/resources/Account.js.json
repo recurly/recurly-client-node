@@ -1,0 +1,630 @@
+{
+  "type": "File",
+  "start": 0,
+  "end": 2830,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 39,
+      "column": 0
+    }
+  },
+  "program": {
+    "type": "Program",
+    "start": 0,
+    "end": 2830,
+    "loc": {
+      "start": {
+        "line": 1,
+        "column": 0
+      },
+      "end": {
+        "line": 39,
+        "column": 0
+      }
+    },
+    "sourceType": "module",
+    "body": [
+      {
+        "type": "ClassDeclaration",
+        "start": 2787,
+        "end": 2803,
+        "loc": {
+          "start": {
+            "line": 36,
+            "column": 0
+          },
+          "end": {
+            "line": 36,
+            "column": 16
+          }
+        },
+        "id": {
+          "type": "Identifier",
+          "start": 2793,
+          "end": 2800,
+          "loc": {
+            "start": {
+              "line": 36,
+              "column": 6
+            },
+            "end": {
+              "line": 36,
+              "column": 13
+            },
+            "identifierName": "Account"
+          },
+          "name": "Account",
+          "leadingComments": null
+        },
+        "superClass": null,
+        "body": {
+          "type": "ClassBody",
+          "start": 2801,
+          "end": 2803,
+          "loc": {
+            "start": {
+              "line": 36,
+              "column": 14
+            },
+            "end": {
+              "line": 36,
+              "column": 16
+            }
+          },
+          "body": []
+        },
+        "leadingComments": [
+          {
+            "type": "CommentBlock",
+            "value": "*\n * Account\n * @typedef {Object} Account\n * @prop {Address} address\n * @prop {string} billTo - An enumerable describing the billing behavior of the account, specifically whether the account is self-paying or will rely on the parent account to pay.\n * @prop {BillingInfo} billingInfo\n * @prop {string} ccEmails - Additional email address that should receive account correspondence. These should be separated only by commas. These CC emails will receive all emails that the `email` field also receives.\n * @prop {string} code - The unique identifier of the account. This cannot be changed once the account is created.\n * @prop {string} company\n * @prop {datetime} createdAt - When the account was created.\n * @prop {Array.<CustomField>} customFields\n * @prop {datetime} deletedAt - If present, when the account was last marked inactive.\n * @prop {string} email - The email address used for communicating with this customer. The customer will also use this email address to log into your hosted account management pages. This value does not need to be unique.\n * @prop {string} exemptionCertificate - The tax exemption certificate number for the account. If the merchant has an integration for the Vertex tax provider, this optional value will be sent in any tax calculation requests for the account.\n * @prop {string} firstName\n * @prop {string} hostedLoginToken - The unique token for automatically logging the account in to the hosted management pages. You may automatically log the user into their hosted management pages by directing the user to: `https://{subdomain}.recurly.com/account/{hosted_login_token}`.\n * @prop {string} id\n * @prop {string} lastName\n * @prop {string} parentAccountId - The UUID of the parent account associated with this account.\n * @prop {string} preferredLocale - Used to determine the language and locale of emails sent on behalf of the merchant to the customer.\n * @prop {Array.<ShippingAddress>} shippingAddresses - The shipping addresses on the account.\n * @prop {string} state - Accounts can be either active or inactive.\n * @prop {boolean} taxExempt - The tax status of the account. `true` exempts tax on the account, `false` applies tax on the account.\n * @prop {datetime} updatedAt - When the account was last changed.\n * @prop {string} username - A secondary value for the account.\n * @prop {string} vatNumber - The VAT number of the account (to avoid having the VAT applied). This is only used for manually collected invoices.\n ",
+            "start": 313,
+            "end": 2786,
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 0
+              },
+              "end": {
+                "line": 35,
+                "column": 3
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ExpressionStatement",
+        "start": 2805,
+        "end": 2829,
+        "loc": {
+          "start": {
+            "line": 38,
+            "column": 0
+          },
+          "end": {
+            "line": 38,
+            "column": 24
+          }
+        },
+        "expression": {
+          "type": "AssignmentExpression",
+          "start": 2805,
+          "end": 2829,
+          "loc": {
+            "start": {
+              "line": 38,
+              "column": 0
+            },
+            "end": {
+              "line": 38,
+              "column": 24
+            }
+          },
+          "operator": "=",
+          "left": {
+            "type": "MemberExpression",
+            "start": 2805,
+            "end": 2819,
+            "loc": {
+              "start": {
+                "line": 38,
+                "column": 0
+              },
+              "end": {
+                "line": 38,
+                "column": 14
+              }
+            },
+            "object": {
+              "type": "Identifier",
+              "start": 2805,
+              "end": 2811,
+              "loc": {
+                "start": {
+                  "line": 38,
+                  "column": 0
+                },
+                "end": {
+                  "line": 38,
+                  "column": 6
+                },
+                "identifierName": "module"
+              },
+              "name": "module"
+            },
+            "property": {
+              "type": "Identifier",
+              "start": 2812,
+              "end": 2819,
+              "loc": {
+                "start": {
+                  "line": 38,
+                  "column": 7
+                },
+                "end": {
+                  "line": 38,
+                  "column": 14
+                },
+                "identifierName": "exports"
+              },
+              "name": "exports"
+            },
+            "computed": false
+          },
+          "right": {
+            "type": "Identifier",
+            "start": 2822,
+            "end": 2829,
+            "loc": {
+              "start": {
+                "line": 38,
+                "column": 17
+              },
+              "end": {
+                "line": 38,
+                "column": 24
+              },
+              "identifierName": "Account"
+            },
+            "name": "Account"
+          }
+        }
+      }
+    ],
+    "directives": [
+      {
+        "type": "Directive",
+        "start": 299,
+        "end": 311,
+        "loc": {
+          "start": {
+            "line": 7,
+            "column": 0
+          },
+          "end": {
+            "line": 7,
+            "column": 12
+          }
+        },
+        "value": {
+          "type": "DirectiveLiteral",
+          "start": 299,
+          "end": 311,
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 0
+            },
+            "end": {
+              "line": 7,
+              "column": 12
+            }
+          },
+          "value": "use strict",
+          "extra": {
+            "raw": "'use strict'",
+            "rawValue": "use strict"
+          },
+          "leadingComments": null,
+          "trailingComments": null
+        },
+        "leadingComments": [
+          {
+            "type": "CommentBlock",
+            "value": "*\n * This file is automatically created by Recurly's OpenAPI generation process\n * and thus any edits you make by hand will be lost. If you wish to make a\n * change to this file, please create a Github issue explaining the changes you\n * need and we will usher them to the appropriate places.\n ",
+            "start": 0,
+            "end": 298,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 6,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": [
+          {
+            "type": "CommentBlock",
+            "value": "*\n * Account\n * @typedef {Object} Account\n * @prop {Address} address\n * @prop {string} billTo - An enumerable describing the billing behavior of the account, specifically whether the account is self-paying or will rely on the parent account to pay.\n * @prop {BillingInfo} billingInfo\n * @prop {string} ccEmails - Additional email address that should receive account correspondence. These should be separated only by commas. These CC emails will receive all emails that the `email` field also receives.\n * @prop {string} code - The unique identifier of the account. This cannot be changed once the account is created.\n * @prop {string} company\n * @prop {datetime} createdAt - When the account was created.\n * @prop {Array.<CustomField>} customFields\n * @prop {datetime} deletedAt - If present, when the account was last marked inactive.\n * @prop {string} email - The email address used for communicating with this customer. The customer will also use this email address to log into your hosted account management pages. This value does not need to be unique.\n * @prop {string} exemptionCertificate - The tax exemption certificate number for the account. If the merchant has an integration for the Vertex tax provider, this optional value will be sent in any tax calculation requests for the account.\n * @prop {string} firstName\n * @prop {string} hostedLoginToken - The unique token for automatically logging the account in to the hosted management pages. You may automatically log the user into their hosted management pages by directing the user to: `https://{subdomain}.recurly.com/account/{hosted_login_token}`.\n * @prop {string} id\n * @prop {string} lastName\n * @prop {string} parentAccountId - The UUID of the parent account associated with this account.\n * @prop {string} preferredLocale - Used to determine the language and locale of emails sent on behalf of the merchant to the customer.\n * @prop {Array.<ShippingAddress>} shippingAddresses - The shipping addresses on the account.\n * @prop {string} state - Accounts can be either active or inactive.\n * @prop {boolean} taxExempt - The tax status of the account. `true` exempts tax on the account, `false` applies tax on the account.\n * @prop {datetime} updatedAt - When the account was last changed.\n * @prop {string} username - A secondary value for the account.\n * @prop {string} vatNumber - The VAT number of the account (to avoid having the VAT applied). This is only used for manually collected invoices.\n ",
+            "start": 313,
+            "end": 2786,
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 0
+              },
+              "end": {
+                "line": 35,
+                "column": 3
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "comments": [
+    {
+      "type": "CommentBlock",
+      "value": "*\n * This file is automatically created by Recurly's OpenAPI generation process\n * and thus any edits you make by hand will be lost. If you wish to make a\n * change to this file, please create a Github issue explaining the changes you\n * need and we will usher them to the appropriate places.\n ",
+      "start": 0,
+      "end": 298,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Account\n * @typedef {Object} Account\n * @prop {Address} address\n * @prop {string} billTo - An enumerable describing the billing behavior of the account, specifically whether the account is self-paying or will rely on the parent account to pay.\n * @prop {BillingInfo} billingInfo\n * @prop {string} ccEmails - Additional email address that should receive account correspondence. These should be separated only by commas. These CC emails will receive all emails that the `email` field also receives.\n * @prop {string} code - The unique identifier of the account. This cannot be changed once the account is created.\n * @prop {string} company\n * @prop {datetime} createdAt - When the account was created.\n * @prop {Array.<CustomField>} customFields\n * @prop {datetime} deletedAt - If present, when the account was last marked inactive.\n * @prop {string} email - The email address used for communicating with this customer. The customer will also use this email address to log into your hosted account management pages. This value does not need to be unique.\n * @prop {string} exemptionCertificate - The tax exemption certificate number for the account. If the merchant has an integration for the Vertex tax provider, this optional value will be sent in any tax calculation requests for the account.\n * @prop {string} firstName\n * @prop {string} hostedLoginToken - The unique token for automatically logging the account in to the hosted management pages. You may automatically log the user into their hosted management pages by directing the user to: `https://{subdomain}.recurly.com/account/{hosted_login_token}`.\n * @prop {string} id\n * @prop {string} lastName\n * @prop {string} parentAccountId - The UUID of the parent account associated with this account.\n * @prop {string} preferredLocale - Used to determine the language and locale of emails sent on behalf of the merchant to the customer.\n * @prop {Array.<ShippingAddress>} shippingAddresses - The shipping addresses on the account.\n * @prop {string} state - Accounts can be either active or inactive.\n * @prop {boolean} taxExempt - The tax status of the account. `true` exempts tax on the account, `false` applies tax on the account.\n * @prop {datetime} updatedAt - When the account was last changed.\n * @prop {string} username - A secondary value for the account.\n * @prop {string} vatNumber - The VAT number of the account (to avoid having the VAT applied). This is only used for manually collected invoices.\n ",
+      "start": 313,
+      "end": 2786,
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 0
+        },
+        "end": {
+          "line": 35,
+          "column": 3
+        }
+      }
+    }
+  ],
+  "tokens": [
+    {
+      "type": "CommentBlock",
+      "value": "*\n * This file is automatically created by Recurly's OpenAPI generation process\n * and thus any edits you make by hand will be lost. If you wish to make a\n * change to this file, please create a Github issue explaining the changes you\n * need and we will usher them to the appropriate places.\n ",
+      "start": 0,
+      "end": 298,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "string",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "use strict",
+      "start": 299,
+      "end": 311,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 12
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Account\n * @typedef {Object} Account\n * @prop {Address} address\n * @prop {string} billTo - An enumerable describing the billing behavior of the account, specifically whether the account is self-paying or will rely on the parent account to pay.\n * @prop {BillingInfo} billingInfo\n * @prop {string} ccEmails - Additional email address that should receive account correspondence. These should be separated only by commas. These CC emails will receive all emails that the `email` field also receives.\n * @prop {string} code - The unique identifier of the account. This cannot be changed once the account is created.\n * @prop {string} company\n * @prop {datetime} createdAt - When the account was created.\n * @prop {Array.<CustomField>} customFields\n * @prop {datetime} deletedAt - If present, when the account was last marked inactive.\n * @prop {string} email - The email address used for communicating with this customer. The customer will also use this email address to log into your hosted account management pages. This value does not need to be unique.\n * @prop {string} exemptionCertificate - The tax exemption certificate number for the account. If the merchant has an integration for the Vertex tax provider, this optional value will be sent in any tax calculation requests for the account.\n * @prop {string} firstName\n * @prop {string} hostedLoginToken - The unique token for automatically logging the account in to the hosted management pages. You may automatically log the user into their hosted management pages by directing the user to: `https://{subdomain}.recurly.com/account/{hosted_login_token}`.\n * @prop {string} id\n * @prop {string} lastName\n * @prop {string} parentAccountId - The UUID of the parent account associated with this account.\n * @prop {string} preferredLocale - Used to determine the language and locale of emails sent on behalf of the merchant to the customer.\n * @prop {Array.<ShippingAddress>} shippingAddresses - The shipping addresses on the account.\n * @prop {string} state - Accounts can be either active or inactive.\n * @prop {boolean} taxExempt - The tax status of the account. `true` exempts tax on the account, `false` applies tax on the account.\n * @prop {datetime} updatedAt - When the account was last changed.\n * @prop {string} username - A secondary value for the account.\n * @prop {string} vatNumber - The VAT number of the account (to avoid having the VAT applied). This is only used for manually collected invoices.\n ",
+      "start": 313,
+      "end": 2786,
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 0
+        },
+        "end": {
+          "line": 35,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "class",
+        "keyword": "class",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "class",
+      "start": 2787,
+      "end": 2792,
+      "loc": {
+        "start": {
+          "line": 36,
+          "column": 0
+        },
+        "end": {
+          "line": 36,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "Account",
+      "start": 2793,
+      "end": 2800,
+      "loc": {
+        "start": {
+          "line": 36,
+          "column": 6
+        },
+        "end": {
+          "line": 36,
+          "column": 13
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "{",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 2801,
+      "end": 2802,
+      "loc": {
+        "start": {
+          "line": 36,
+          "column": 14
+        },
+        "end": {
+          "line": 36,
+          "column": 15
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "}",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 2802,
+      "end": 2803,
+      "loc": {
+        "start": {
+          "line": 36,
+          "column": 15
+        },
+        "end": {
+          "line": 36,
+          "column": 16
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "module",
+      "start": 2805,
+      "end": 2811,
+      "loc": {
+        "start": {
+          "line": 38,
+          "column": 0
+        },
+        "end": {
+          "line": 38,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ".",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 2811,
+      "end": 2812,
+      "loc": {
+        "start": {
+          "line": 38,
+          "column": 6
+        },
+        "end": {
+          "line": 38,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "exports",
+      "start": 2812,
+      "end": 2819,
+      "loc": {
+        "start": {
+          "line": 38,
+          "column": 7
+        },
+        "end": {
+          "line": 38,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "=",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": true,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "=",
+      "start": 2820,
+      "end": 2821,
+      "loc": {
+        "start": {
+          "line": 38,
+          "column": 15
+        },
+        "end": {
+          "line": 38,
+          "column": 16
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "Account",
+      "start": 2822,
+      "end": 2829,
+      "loc": {
+        "start": {
+          "line": 38,
+          "column": 17
+        },
+        "end": {
+          "line": 38,
+          "column": 24
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "eof",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 2830,
+      "end": 2830,
+      "loc": {
+        "start": {
+          "line": 39,
+          "column": 0
+        },
+        "end": {
+          "line": 39,
+          "column": 0
+        }
+      }
+    }
+  ]
+}
