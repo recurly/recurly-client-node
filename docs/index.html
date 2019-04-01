@@ -909,9 +909,11 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> sites = client.listSites()
 
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> site <span class="hljs-keyword">of</span> sites.each()) {
-  <span class="hljs-built_in">console</span>.log(site.subdomain)
-}</pre>
+  <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> site <span class="hljs-keyword">of</span> sites.each()) {
+    <span class="hljs-built_in">console</span>.log(site.subdomain)
+  }
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -1177,9 +1179,11 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> accounts = client.listAccounts()
 
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> account <span class="hljs-keyword">of</span> accounts.each()) {
-  <span class="hljs-built_in">console</span>.log(account.code)
-}</pre>
+  <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> account <span class="hljs-keyword">of</span> accounts.each()) {
+    <span class="hljs-built_in">console</span>.log(account.code)
+  }
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -1257,30 +1261,32 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> accountCreate = {
-    <span class="hljs-attr">code</span>: accountCode,
-    <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Benjamin'</span>,
-    <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Du Monde'</span>,
-    <span class="hljs-attr">address</span>: {
-      <span class="hljs-attr">street1</span>: <span class="hljs-string">'900 Camp St'</span>,
-      <span class="hljs-attr">city</span>: <span class="hljs-string">'New Orleans'</span>,
-      <span class="hljs-attr">region</span>: <span class="hljs-string">'LA'</span>,
-      <span class="hljs-attr">postal_code</span>: <span class="hljs-string">'70115'</span>,
-      <span class="hljs-attr">country</span>: <span class="hljs-string">'US'</span>
+    <span class="hljs-keyword">const</span> accountCreate = {
+      <span class="hljs-attr">code</span>: accountCode,
+      <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Benjamin'</span>,
+      <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Du Monde'</span>,
+      <span class="hljs-attr">address</span>: {
+        <span class="hljs-attr">street1</span>: <span class="hljs-string">'900 Camp St'</span>,
+        <span class="hljs-attr">city</span>: <span class="hljs-string">'New Orleans'</span>,
+        <span class="hljs-attr">region</span>: <span class="hljs-string">'LA'</span>,
+        <span class="hljs-attr">postal_code</span>: <span class="hljs-string">'70115'</span>,
+        <span class="hljs-attr">country</span>: <span class="hljs-string">'US'</span>
+      }
     }
+    <span class="hljs-keyword">const</span> account = <span class="hljs-keyword">await</span> client.createAccount(accountCreate)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created Account: '</span>, account.code)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-keyword">const</span> account = <span class="hljs-keyword">await</span> client.createAccount(accountCreate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created Account: '</span>, account.code)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -1362,18 +1368,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> account = <span class="hljs-keyword">await</span> client.getAccount(accountId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched account: '</span>, account.code)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-keyword">const</span> account = <span class="hljs-keyword">await</span> client.getAccount(accountId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched account: '</span>, account.code)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -1464,22 +1472,24 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> accountUpdate = {
-    <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Aaron'</span>,
-    <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Du Monde'</span>
+    <span class="hljs-keyword">const</span> accountUpdate = {
+      <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Aaron'</span>,
+      <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Du Monde'</span>
+    }
+    <span class="hljs-keyword">const</span> account = <span class="hljs-keyword">await</span> client.updateAccount(accountId, accountUpdate)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Updated account: '</span>, account)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-keyword">const</span> account = <span class="hljs-keyword">await</span> client.updateAccount(accountId, accountUpdate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Updated account: '</span>, account)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -1561,18 +1571,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> account = <span class="hljs-keyword">await</span> client.deactivateAccount(accountId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Deleted account: '</span>, account.code)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not-found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-keyword">const</span> account = <span class="hljs-keyword">await</span> client.deactivateAccount(accountId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Deleted account: '</span>, account.code)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not-found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -1654,18 +1666,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> acquisition = <span class="hljs-keyword">await</span> client.getAccountAcquisition(accountId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched account acquisition: '</span>, acquisition.id)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-keyword">const</span> acquisition = <span class="hljs-keyword">await</span> client.getAccountAcquisition(accountId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched account acquisition: '</span>, acquisition.id)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -1756,23 +1770,25 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> acquisitionUpdate = {
-    <span class="hljs-attr">campaign</span>: <span class="hljs-string">"superbowl-LV-campaign"</span>,
-    <span class="hljs-attr">channel</span>: <span class="hljs-string">"social_media"</span>,
-    <span class="hljs-attr">subchannel</span>: <span class="hljs-string">"twitter"</span>
+    <span class="hljs-keyword">const</span> acquisitionUpdate = {
+      <span class="hljs-attr">campaign</span>: <span class="hljs-string">"superbowl-LV-campaign"</span>,
+      <span class="hljs-attr">channel</span>: <span class="hljs-string">"social_media"</span>,
+      <span class="hljs-attr">subchannel</span>: <span class="hljs-string">"twitter"</span>
+    }
+    <span class="hljs-keyword">const</span> accountAcquisition = <span class="hljs-keyword">await</span> client.updateAccountAcquisition(accountId, acquisitionUpdate)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Edited Account Acquisition: '</span>, accountAcquisition)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-keyword">const</span> accountAcquisition = <span class="hljs-keyword">await</span> client.updateAccountAcquisition(accountId, acquisitionUpdate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Edited Account Acquisition: '</span>, accountAcquisition)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -1854,18 +1870,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">await</span> client.removeAccountAcquisition(accountId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Removed account acquisition from account: '</span>, accountId)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-keyword">await</span> client.removeAccountAcquisition(accountId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Removed account acquisition from account: '</span>, accountId)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -1947,18 +1965,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> account = <span class="hljs-keyword">await</span> client.reactivateAccount(accountId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Reactivated account: '</span>, account.code)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-keyword">const</span> account = <span class="hljs-keyword">await</span> client.reactivateAccount(accountId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Reactivated account: '</span>, account.code)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -2040,18 +2060,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> balance = <span class="hljs-keyword">await</span> client.getAccountBalance(accountId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched account balance: '</span>, balance.balances)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-keyword">const</span> balance = <span class="hljs-keyword">await</span> client.getAccountBalance(accountId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched account balance: '</span>, balance.balances)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -2133,18 +2155,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> billingInfo = <span class="hljs-keyword">await</span> client.getBillingInfo(accountId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched Billing Info: '</span>, billingInfo.id)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-keyword">const</span> billingInfo = <span class="hljs-keyword">await</span> client.getBillingInfo(accountId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched Billing Info: '</span>, billingInfo.id)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -2235,22 +2259,24 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> billingInfoUpdate = {
-    <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Aaron'</span>,
-    <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Du Monde'</span>,
+    <span class="hljs-keyword">const</span> billingInfoUpdate = {
+      <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Aaron'</span>,
+      <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Du Monde'</span>,
+    }
+    <span class="hljs-keyword">const</span> billingInfo = <span class="hljs-keyword">await</span> client.updateBillingInfo(accountId, billingInfoUpdate)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Updated billing info: '</span>, billingInfo.id)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-keyword">const</span> billingInfo = <span class="hljs-keyword">await</span> client.updateBillingInfo(accountId, billingInfoUpdate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Updated billing info: '</span>, billingInfo.id)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -2332,18 +2358,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  client.removeBillingInfo(accountId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Removed billing info from account: '</span>, accountId)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    client.removeBillingInfo(accountId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Removed billing info from account: '</span>, accountId)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -2594,18 +2622,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> redemption = <span class="hljs-keyword">await</span> client.getActiveCouponRedemption(accountId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched coupon redemption: '</span>, redemption.id)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-keyword">const</span> redemption = <span class="hljs-keyword">await</span> client.getActiveCouponRedemption(accountId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched coupon redemption: '</span>, redemption.id)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -2938,9 +2968,11 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> payments = client.listAccountCreditPayments(accountId)
 
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> payment <span class="hljs-keyword">of</span> payments.each()) {
-  <span class="hljs-built_in">console</span>.log(payment.uuid)
-}</pre>
+  <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> payment <span class="hljs-keyword">of</span> payments.each()) {
+    <span class="hljs-built_in">console</span>.log(payment.uuid)
+  }
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -3233,24 +3265,26 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">let</span> invoiceCreate = {
-    <span class="hljs-attr">currency</span>: <span class="hljs-string">'USD'</span>,
-    <span class="hljs-attr">collection_method</span>: <span class="hljs-string">'automatic'</span>
+    <span class="hljs-keyword">let</span> invoiceCreate = {
+      <span class="hljs-attr">currency</span>: <span class="hljs-string">'USD'</span>,
+      <span class="hljs-attr">collection_method</span>: <span class="hljs-string">'automatic'</span>
+    }
+    <span class="hljs-keyword">let</span> invoiceCollection = <span class="hljs-keyword">await</span> client.createInvoice(accountId, invoiceCreate)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created Invoice'</span>)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Charge Invoice: '</span>, invoiceCollection.chargeInvoice)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Credit Invoices: '</span>, invoiceCollection.creditInvoices)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-keyword">let</span> invoiceCollection = <span class="hljs-keyword">await</span> client.createInvoice(accountId, invoiceCreate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created Invoice'</span>)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Charge Invoice: '</span>, invoiceCollection.chargeInvoice)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Credit Invoices: '</span>, invoiceCollection.creditInvoices)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -3341,23 +3375,25 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> collection = <span class="hljs-keyword">await</span> client.previewInvoice(accountId, {
-    <span class="hljs-attr">currency</span>: <span class="hljs-string">"USD"</span>,
-    <span class="hljs-attr">collection_method</span>: <span class="hljs-string">"automatic"</span>
-  })
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Previewed invoice due at <span class="hljs-subst">${collection.chargeInvoice.dueAt}</span>`</span>)
-  <span class="hljs-built_in">console</span>.log(collection.chargeInvoice)
-  <span class="hljs-built_in">console</span>.log(collection.creditInvoices)
-} <span class="hljs-keyword">catch</span>(err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    <span class="hljs-keyword">const</span> collection = <span class="hljs-keyword">await</span> client.previewInvoice(accountId, {
+      <span class="hljs-attr">currency</span>: <span class="hljs-string">"USD"</span>,
+      <span class="hljs-attr">collection_method</span>: <span class="hljs-string">"automatic"</span>
+    })
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Previewed invoice due at <span class="hljs-subst">${collection.chargeInvoice.dueAt}</span>`</span>)
+    <span class="hljs-built_in">console</span>.log(collection.chargeInvoice)
+    <span class="hljs-built_in">console</span>.log(collection.creditInvoices)
+  } <span class="hljs-keyword">catch</span>(err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -3662,23 +3698,25 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">let</span> lineItemReq = {
-    <span class="hljs-attr">currency</span>: <span class="hljs-string">'USD'</span>,
-    <span class="hljs-attr">unit_amount</span>: <span class="hljs-number">1000</span>,
-    <span class="hljs-attr">type</span>: <span class="hljs-string">'charge'</span> <span class="hljs-comment">// choose "credit" for a credit</span>
+    <span class="hljs-keyword">let</span> lineItemReq = {
+      <span class="hljs-attr">currency</span>: <span class="hljs-string">'USD'</span>,
+      <span class="hljs-attr">unit_amount</span>: <span class="hljs-number">1000</span>,
+      <span class="hljs-attr">type</span>: <span class="hljs-string">'charge'</span> <span class="hljs-comment">// choose "credit" for a credit</span>
+    }
+    <span class="hljs-keyword">let</span> lineItem = <span class="hljs-keyword">await</span> client.createLineItem(accountId, lineItemReq)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created Line Item: '</span>, lineItem.uuid)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-keyword">let</span> lineItem = <span class="hljs-keyword">await</span> client.createLineItem(accountId, lineItemReq)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created Line Item: '</span>, lineItem.uuid)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -3808,9 +3846,11 @@ returned at once you can sort the records yourself.</li>
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> notes = client.listAccountNotes(accountId)
 
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> note <span class="hljs-keyword">of</span> notes.each()) {
-  <span class="hljs-built_in">console</span>.log(note.message)
-}</pre>
+  <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> note <span class="hljs-keyword">of</span> notes.each()) {
+    <span class="hljs-built_in">console</span>.log(note.message)
+  }
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -3901,19 +3941,21 @@ returned at once you can sort the records yourself.</li>
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-built_in">console</span>.log(accountId)
-  <span class="hljs-keyword">const</span> note = <span class="hljs-keyword">await</span> client.getAccountNote(accountId, accountNoteId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched account note: '</span>, note.message)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-built_in">console</span>.log(accountId)
+    <span class="hljs-keyword">const</span> note = <span class="hljs-keyword">await</span> client.getAccountNote(accountId, accountNoteId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched account note: '</span>, note.message)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -4108,9 +4150,11 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> addresses = client.listShippingAddresses(accountId)
 
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> address <span class="hljs-keyword">of</span> addresses.each()) {
-  <span class="hljs-built_in">console</span>.log(address.street1)
-}</pre>
+  <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> address <span class="hljs-keyword">of</span> addresses.each()) {
+    <span class="hljs-built_in">console</span>.log(address.street1)
+  }
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -4201,27 +4245,29 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> shippingAddressCreate = {
-    <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Aaron'</span>,
-    <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Du Monde'</span>,
-    <span class="hljs-attr">street1</span>: <span class="hljs-string">'900 Camp St.'</span>,
-    <span class="hljs-attr">city</span>: <span class="hljs-string">'New Orleans'</span>,
-    <span class="hljs-attr">region</span>: <span class="hljs-string">'LA'</span>,
-    <span class="hljs-attr">postal_code</span>: <span class="hljs-string">'70115'</span>,
-    <span class="hljs-attr">country</span>: <span class="hljs-string">'US'</span>
+    <span class="hljs-keyword">const</span> shippingAddressCreate = {
+      <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Aaron'</span>,
+      <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Du Monde'</span>,
+      <span class="hljs-attr">street1</span>: <span class="hljs-string">'900 Camp St.'</span>,
+      <span class="hljs-attr">city</span>: <span class="hljs-string">'New Orleans'</span>,
+      <span class="hljs-attr">region</span>: <span class="hljs-string">'LA'</span>,
+      <span class="hljs-attr">postal_code</span>: <span class="hljs-string">'70115'</span>,
+      <span class="hljs-attr">country</span>: <span class="hljs-string">'US'</span>
+    }
+    <span class="hljs-keyword">const</span> address = <span class="hljs-keyword">await</span> client.createShippingAddress(accountId, shippingAddressCreate)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created shipping address: '</span>, address.street1)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-keyword">const</span> address = <span class="hljs-keyword">await</span> client.createShippingAddress(accountId, shippingAddressCreate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created shipping address: '</span>, address.street1)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -4312,18 +4358,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> address = <span class="hljs-keyword">await</span> client.getShippingAddress(accountId, shippingAddressId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched shipping address: '</span>, address.street1)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-keyword">const</span> address = <span class="hljs-keyword">await</span> client.getShippingAddress(accountId, shippingAddressId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched shipping address: '</span>, address.street1)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -4423,22 +4471,24 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> shadUpdate = {
-    <span class="hljs-attr">first_name</span>: <span class="hljs-string">"Benjamin"</span>,
-    <span class="hljs-attr">last_name</span>: <span class="hljs-string">"Du Monde"</span>
+    <span class="hljs-keyword">const</span> shadUpdate = {
+      <span class="hljs-attr">first_name</span>: <span class="hljs-string">"Benjamin"</span>,
+      <span class="hljs-attr">last_name</span>: <span class="hljs-string">"Du Monde"</span>
+    }
+    <span class="hljs-keyword">const</span> address = <span class="hljs-keyword">await</span> client.updateShippingAddress(accountId, shippingAddressId, shadUpdate)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Updated shipping address: '</span>, address.street1)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-keyword">const</span> address = <span class="hljs-keyword">await</span> client.updateShippingAddress(accountId, shippingAddressId, shadUpdate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Updated shipping address: '</span>, address.street1)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -4529,18 +4579,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">await</span> client.removeShippingAddress(accountId, shippingAddress.id)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Removed shipping address: '</span>, shippingAddress.street1)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-keyword">await</span> client.removeShippingAddress(accountId, shippingAddress.id)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Removed shipping address: '</span>, shippingAddress.street1)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -5522,9 +5574,11 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> coupons = client.listCoupons()
 
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> coupon <span class="hljs-keyword">of</span> coupons.each()) {
-  <span class="hljs-built_in">console</span>.log(coupon.code)
-}</pre>
+  <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> coupon <span class="hljs-keyword">of</span> coupons.each()) {
+    <span class="hljs-built_in">console</span>.log(coupon.code)
+  }
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -5677,18 +5731,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> coupon = <span class="hljs-keyword">await</span> client.getCoupon(couponId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched coupon: '</span>, coupon.code)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-keyword">const</span> coupon = <span class="hljs-keyword">await</span> client.getCoupon(couponId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched coupon: '</span>, coupon.code)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -6120,9 +6176,11 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> payments = client.listCreditPayments()
 
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> payment <span class="hljs-keyword">of</span> payments.each()) {
-  <span class="hljs-built_in">console</span>.log(payment.uuid)
-}</pre>
+  <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> payment <span class="hljs-keyword">of</span> payments.each()) {
+    <span class="hljs-built_in">console</span>.log(payment.uuid)
+  }
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -6379,9 +6437,11 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> definitions = client.listCustomFieldDefinitions()
 
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> definition <span class="hljs-keyword">of</span> definitions.each()) {
-  <span class="hljs-built_in">console</span>.log(definition.displayName)
-}</pre>
+  <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> definition <span class="hljs-keyword">of</span> definitions.each()) {
+    <span class="hljs-built_in">console</span>.log(definition.displayName)
+  }
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -6459,18 +6519,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> definition = <span class="hljs-keyword">await</span> client.getCustomFieldDefinition(definitionId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched custom field definition: '</span>, definition.displayName)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-keyword">const</span> definition = <span class="hljs-keyword">await</span> client.getCustomFieldDefinition(definitionId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched custom field definition: '</span>, definition.displayName)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -6667,9 +6729,11 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> invoices = client.listInvoices()
 
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> invoice <span class="hljs-keyword">of</span> invoices.each()) {
-  <span class="hljs-built_in">console</span>.log(invoice.number)
-}</pre>
+  <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> invoice <span class="hljs-keyword">of</span> invoices.each()) {
+    <span class="hljs-built_in">console</span>.log(invoice.number)
+  }
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -6751,18 +6815,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.getInvoice(invoiceId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched Invoice: '</span>, invoice.number)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.getInvoice(invoiceId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched Invoice: '</span>, invoice.number)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -6853,23 +6919,25 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> invoiceUpdate = {
-    <span class="hljs-attr">customer_notes</span>: <span class="hljs-string">"New notes"</span>,
-    <span class="hljs-attr">terms_and_conditions</span>: <span class="hljs-string">"New terms and conditions"</span>
+    <span class="hljs-keyword">const</span> invoiceUpdate = {
+      <span class="hljs-attr">customer_notes</span>: <span class="hljs-string">"New notes"</span>,
+      <span class="hljs-attr">terms_and_conditions</span>: <span class="hljs-string">"New terms and conditions"</span>
+    }
+
+    <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.putInvoice(invoiceId, invoiceUpdate)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Edited invoice: '</span>, invoice.number)
+  } <span class="hljs-keyword">catch</span>(err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
 
-  <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.putInvoice(invoiceId, invoiceUpdate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Edited invoice: '</span>, invoice.number)
-} <span class="hljs-keyword">catch</span>(err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -6951,18 +7019,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.collectInvoice(invoiceId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Collected invoice: '</span>, invoice.number)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.collectInvoice(invoiceId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Collected invoice: '</span>, invoice.number)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -7044,18 +7114,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.failInvoice(invoiceId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed invoice: '</span>, invoice.number)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.failInvoice(invoiceId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed invoice: '</span>, invoice.number)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -7137,18 +7209,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.markInvoiceSuccessful(invoiceId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Marked invoice #<span class="hljs-subst">${invoice.number}</span> successful`</span>)
-} <span class="hljs-keyword">catch</span>(err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.markInvoiceSuccessful(invoiceId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Marked invoice #<span class="hljs-subst">${invoice.number}</span> successful`</span>)
+  } <span class="hljs-keyword">catch</span>(err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -7230,18 +7304,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.reopenInvoice(invoiceId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Reopened invoice: '</span>, invoice.number)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.reopenInvoice(invoiceId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Reopened invoice: '</span>, invoice.number)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -7716,9 +7792,11 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> invoices = client.listRelatedInvoices(invoiceId)
 
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> invoice <span class="hljs-keyword">of</span> invoices.each()) {
-  <span class="hljs-built_in">console</span>.log(invoice.number)
-}</pre>
+  <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> invoice <span class="hljs-keyword">of</span> invoices.each()) {
+    <span class="hljs-built_in">console</span>.log(invoice.number)
+  }
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -7809,24 +7887,26 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> invoiceRefund = {
-    <span class="hljs-attr">credit_customer_notes</span>: <span class="hljs-string">"Notes on credits"</span>,
-    <span class="hljs-attr">type</span>: <span class="hljs-string">"amount"</span>, <span class="hljs-comment">// could also be "line_items"</span>
-    amount: <span class="hljs-number">100</span>
+    <span class="hljs-keyword">const</span> invoiceRefund = {
+      <span class="hljs-attr">credit_customer_notes</span>: <span class="hljs-string">"Notes on credits"</span>,
+      <span class="hljs-attr">type</span>: <span class="hljs-string">"amount"</span>, <span class="hljs-comment">// could also be "line_items"</span>
+      amount: <span class="hljs-number">100</span>
+    }
+
+    <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.refundInvoice(invoiceId, invoiceRefund)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Refunded invoice: '</span>, invoice.number)
+  } <span class="hljs-keyword">catch</span>(err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
 
-  <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.refundInvoice(invoiceId, invoiceRefund)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Refunded invoice: '</span>, invoice.number)
-} <span class="hljs-keyword">catch</span>(err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -8035,9 +8115,11 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> lineItems = client.listLineItems()
 
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> item <span class="hljs-keyword">of</span> lineItems.each()) {
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Item <span class="hljs-subst">${item.id}</span> for <span class="hljs-subst">${item.amount}</span>`</span>)
-}</pre>
+  <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> item <span class="hljs-keyword">of</span> lineItems.each()) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Item <span class="hljs-subst">${item.id}</span> for <span class="hljs-subst">${item.amount}</span>`</span>)
+  }
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -8115,18 +8197,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> lineItem = <span class="hljs-keyword">await</span> client.getLineItem(lineItemId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched line item: '</span>, lineItem.uuid)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-keyword">const</span> lineItem = <span class="hljs-keyword">await</span> client.getLineItem(lineItemId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched line item: '</span>, lineItem.uuid)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -8204,18 +8288,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">await</span> client.removeLineItem(lineItemId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Removed line item: '</span>, lineItemId)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-keyword">await</span> client.removeLineItem(lineItemId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Removed line item: '</span>, lineItemId)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -8406,9 +8492,11 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> plans = client.listPlans()
 
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> plan <span class="hljs-keyword">of</span> plans.each()) {
-  <span class="hljs-built_in">console</span>.log(plan.code)
-}</pre>
+  <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> plan <span class="hljs-keyword">of</span> plans.each()) {
+    <span class="hljs-built_in">console</span>.log(plan.code)
+  }
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -8486,28 +8574,30 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> planCreate = {
-    <span class="hljs-attr">name</span>: <span class="hljs-string">'Monthly Coffee Subscription'</span>,
-    <span class="hljs-attr">code</span>: planCode,
-    <span class="hljs-attr">currencies</span>: [
-      {
-        <span class="hljs-attr">currency</span>: <span class="hljs-string">'USD'</span>,
-        <span class="hljs-attr">unit_amount</span>: <span class="hljs-number">10000</span>
-      }
-    ]
+    <span class="hljs-keyword">const</span> planCreate = {
+      <span class="hljs-attr">name</span>: <span class="hljs-string">'Monthly Coffee Subscription'</span>,
+      <span class="hljs-attr">code</span>: planCode,
+      <span class="hljs-attr">currencies</span>: [
+        {
+          <span class="hljs-attr">currency</span>: <span class="hljs-string">'USD'</span>,
+          <span class="hljs-attr">unit_amount</span>: <span class="hljs-number">10000</span>
+        }
+      ]
+    }
+    <span class="hljs-keyword">const</span> plan = <span class="hljs-keyword">await</span> client.createPlan(planCreate)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created Plan: '</span>, plan.code)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-keyword">const</span> plan = <span class="hljs-keyword">await</span> client.createPlan(planCreate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created Plan: '</span>, plan.code)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -8589,18 +8679,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> plan = <span class="hljs-keyword">await</span> client.getPlan(planId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched plan: '</span>, plan.code)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-keyword">const</span> plan = <span class="hljs-keyword">await</span> client.getPlan(planId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched plan: '</span>, plan.code)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -8691,21 +8783,23 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> planUpdate = {
-    <span class="hljs-attr">name</span>: <span class="hljs-string">'New monthly coffee subscription'</span>
+    <span class="hljs-keyword">const</span> planUpdate = {
+      <span class="hljs-attr">name</span>: <span class="hljs-string">'New monthly coffee subscription'</span>
+    }
+    <span class="hljs-keyword">const</span> plan = <span class="hljs-keyword">await</span> client.updatePlan(planId, planUpdate)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Updated plan: '</span>, plan.code)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-keyword">const</span> plan = <span class="hljs-keyword">await</span> client.updatePlan(planId, planUpdate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Updated plan: '</span>, plan.code)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -8787,18 +8881,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> plan = <span class="hljs-keyword">await</span> client.removePlan(planId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Removed plan: '</span>, plan.code)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-keyword">const</span> plan = <span class="hljs-keyword">await</span> client.removePlan(planId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Removed plan: '</span>, plan.code)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -9805,9 +9901,11 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> subscriptions = client.listSubscriptions()
 
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> subscription <span class="hljs-keyword">of</span> subscriptions.each()) {
-  <span class="hljs-built_in">console</span>.log(subscription.uuid)
-}</pre>
+  <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> subscription <span class="hljs-keyword">of</span> subscriptions.each()) {
+    <span class="hljs-built_in">console</span>.log(subscription.uuid)
+  }
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -9885,25 +9983,27 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">let</span> subscriptionReq = {
-    <span class="hljs-attr">plan_code</span>: planCode,
-    <span class="hljs-attr">currency</span>: <span class="hljs-string">`USD`</span>,
-    <span class="hljs-attr">account</span>: {
-      <span class="hljs-attr">code</span>: accountCode
+    <span class="hljs-keyword">let</span> subscriptionReq = {
+      <span class="hljs-attr">plan_code</span>: planCode,
+      <span class="hljs-attr">currency</span>: <span class="hljs-string">`USD`</span>,
+      <span class="hljs-attr">account</span>: {
+        <span class="hljs-attr">code</span>: accountCode
+      }
     }
+    <span class="hljs-keyword">let</span> sub = <span class="hljs-keyword">await</span> client.createSubscription(subscriptionReq)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created subscription: '</span>, sub.uuid)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-keyword">let</span> sub = <span class="hljs-keyword">await</span> client.createSubscription(subscriptionReq)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created subscription: '</span>, sub.uuid)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -9985,18 +10085,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> subscription = <span class="hljs-keyword">await</span> client.getSubscription(subscriptionId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched subscription: '</span>, subscription.uuid)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-keyword">const</span> subscription = <span class="hljs-keyword">await</span> client.getSubscription(subscriptionId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched subscription: '</span>, subscription.uuid)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -10087,22 +10189,24 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> update = {
-    <span class="hljs-attr">terms_and_conditions</span>: <span class="hljs-string">"Some new terms and conditions"</span>,
-    <span class="hljs-attr">customer_notes</span>: <span class="hljs-string">"Some new customer notes"</span>
+    <span class="hljs-keyword">const</span> update = {
+      <span class="hljs-attr">terms_and_conditions</span>: <span class="hljs-string">"Some new terms and conditions"</span>,
+      <span class="hljs-attr">customer_notes</span>: <span class="hljs-string">"Some new customer notes"</span>
+    }
+    <span class="hljs-keyword">const</span> subscription = <span class="hljs-keyword">await</span> client.modifySubscription(subscriptionId, update)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Modified subscription: '</span>, subscription.uuid)
+  } <span class="hljs-keyword">catch</span>(err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-keyword">const</span> subscription = <span class="hljs-keyword">await</span> client.modifySubscription(subscriptionId, update)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Modified subscription: '</span>, subscription.uuid)
-} <span class="hljs-keyword">catch</span>(err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -10232,18 +10336,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> subscription = <span class="hljs-keyword">await</span> client.terminateSubscription(subscriptionId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Terminated subscription: '</span>, subscription.uuid)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    <span class="hljs-keyword">const</span> subscription = <span class="hljs-keyword">await</span> client.terminateSubscription(subscriptionId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Terminated subscription: '</span>, subscription.uuid)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -10325,18 +10431,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">let</span> expiredSub = <span class="hljs-keyword">await</span> client.cancelSubscription(subscriptionId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Canceled Subscription: '</span>, expiredSub.uuid)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    <span class="hljs-keyword">let</span> expiredSub = <span class="hljs-keyword">await</span> client.cancelSubscription(subscriptionId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Canceled Subscription: '</span>, expiredSub.uuid)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -10418,18 +10526,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> subscription = <span class="hljs-keyword">await</span> client.reactivateSubscription(subscriptionId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Reactivated subscription: '</span>, subscription.uuid)
-} <span class="hljs-keyword">catch</span>(err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    <span class="hljs-keyword">const</span> subscription = <span class="hljs-keyword">await</span> client.reactivateSubscription(subscriptionId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Reactivated subscription: '</span>, subscription.uuid)
+  } <span class="hljs-keyword">catch</span>(err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -10670,18 +10780,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> change = <span class="hljs-keyword">await</span> client.getSubscriptionChange(subscriptionId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched subscription change: '</span>, change.id)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-keyword">const</span> change = <span class="hljs-keyword">await</span> client.getSubscriptionChange(subscriptionId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched subscription change: '</span>, change.id)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -10772,23 +10884,25 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> subscriptionChangeCreate = {
-    <span class="hljs-attr">plan_code</span>: newPlanCode,
-    <span class="hljs-attr">timeframe</span>: <span class="hljs-string">'now'</span>
+    <span class="hljs-keyword">const</span> subscriptionChangeCreate = {
+      <span class="hljs-attr">plan_code</span>: newPlanCode,
+      <span class="hljs-attr">timeframe</span>: <span class="hljs-string">'now'</span>
+    }
+
+    <span class="hljs-keyword">const</span> change = <span class="hljs-keyword">await</span> client.createSubscriptionChange(subscriptionId, subscriptionChangeCreate)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created subscription change: '</span>, change.id)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
+      <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+      <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
 
-  <span class="hljs-keyword">const</span> change = <span class="hljs-keyword">await</span> client.createSubscriptionChange(subscriptionId, subscriptionChangeCreate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created subscription change: '</span>, change.id)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'validation'</span>) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -10870,18 +10984,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">await</span> client.removeSubscriptionChange(subscriptionId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Removed subscription change: '</span>, subscriptionId)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-keyword">await</span> client.removeSubscriptionChange(subscriptionId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Removed subscription change: '</span>, subscriptionId)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -11672,9 +11788,11 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> transactions = client.listTransactions()
 
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> transaction <span class="hljs-keyword">of</span> transactions.each()) {
-  <span class="hljs-built_in">console</span>.log(transaction.uuid)
-}</pre>
+  <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> transaction <span class="hljs-keyword">of</span> transactions.each()) {
+    <span class="hljs-built_in">console</span>.log(transaction.uuid)
+  }
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
@@ -11756,18 +11874,20 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> transaction = <span class="hljs-keyword">await</span> client.getTransaction(transactionId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched transaction: '</span>, transaction.uuid)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    <span class="hljs-keyword">const</span> transaction = <span class="hljs-keyword">await</span> client.getTransaction(transactionId)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched transaction: '</span>, transaction.uuid)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
+      <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+      <span class="hljs-comment">// just return null</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
+    }
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-keyword">throw</span> err
   }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</pre>
+
+<span class="hljs-comment">// END_EXAMPLE</span></pre>
     
   
 
