@@ -30,7 +30,7 @@ We recommend manually inserting the dependency into the `dependencies` section o
 
 Install via the command line:
 ```
-npm install recurly@3.0.0-beta.1 --save-prod
+npm install recurly@3.0.0-beta.2 --save-prod
 ```
 
 ### Creating a client
