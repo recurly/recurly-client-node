@@ -22,7 +22,7 @@ We recommend manually inserting the dependency into the `dependencies` section o
 ```
 {
   // ...
-  "recurly" : "3.0.0-beta.1"
+  "recurly" : "3.0.0-beta.2"
   // ...
 }
 ```
