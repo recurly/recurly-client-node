@@ -1,7 +1,7 @@
 /* globals describe, it */
 
+require('../test_helper')
 const assert = require('assert').strict
-
 const ApiError = require('../../lib/recurly/ApiError')
 
 describe('ApiError', () => {
