@@ -40,13 +40,13 @@ describe('schemas', () => {
       it('Should thrown an error with unknown property', () => {
         const schema = new Schema(MyResource)
         const statement = () => schema.cast({ myString: 'My String', unknown: 'Unknown' })
-        assert.throws(statement, { name: 'Error', message: /could not find/ })
+        assert.throws(statement, { name: 'Error', message: 'MyResource could not find schema property for value pair: unknown => \'Unknown\'' })
       })
 
       it('Should thrown an error with an invalid property', () => {
         const schema = new Schema(MyResource)
         const statement = () => schema.cast({ mySubResource: 'My String' })
-        assert.throws(statement, { name: 'Error', message: /could not map/ })
+        assert.throws(statement, { name: 'Error', message: 'MyResource could not map value pair mySubResource => \'My String\' to schema type ResourceProperty { type: [Function: MySubResource] }' })
       })
     })
   })
