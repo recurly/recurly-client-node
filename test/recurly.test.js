@@ -1,11 +1,8 @@
 /* globals describe, it */
 
 const assert = require('assert').strict
-
 const recurly = require('../lib/recurly')
-
 const Client = require('../lib/recurly/Client')
-
 const Account = require('../lib/recurly/resources/Account')
 
 describe('recurly', () => {

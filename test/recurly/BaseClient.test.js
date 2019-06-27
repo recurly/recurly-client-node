@@ -1,9 +1,8 @@
 /* globals describe, it */
 
+require('../test_helper')
 const assert = require('assert').strict
-
 const pkg = require('../../package.json')
-
 const BaseClient = require('../../lib/recurly/BaseClient')
 
 class TestClient extends BaseClient {
