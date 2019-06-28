@@ -594,6 +594,18 @@
                         #reactivateUniqueCouponCode
                       </a></li>
                       
+                      <li><a
+                        href='#clientcreatepurchase'
+                        class='regular pre-open'>
+                        #createPurchase
+                      </a></li>
+                      
+                      <li><a
+                        href='#clientpreviewpurchase'
+                        class='regular pre-open'>
+                        #previewPurchase
+                      </a></li>
+                      
                     </ul>
                   
                   
@@ -917,7 +929,7 @@ prevent some records from being returned.
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> sites = client.listSites()
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> sites = client.listSites({ <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
 
 <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> site <span class="hljs-keyword">of</span> sites.each()) {
   <span class="hljs-built_in">console</span>.log(site.subdomain)
@@ -1185,7 +1197,7 @@ prevent some records from being returned.
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> accounts = client.listAccounts()
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> accounts = client.listAccounts({ <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
 
 <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> account <span class="hljs-keyword">of</span> accounts.each()) {
   <span class="hljs-built_in">console</span>.log(account.code)
@@ -1269,13 +1281,13 @@ prevent some records from being returned.
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
   <span class="hljs-keyword">const</span> accountCreate = {
     <span class="hljs-attr">code</span>: accountCode,
-    <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Benjamin'</span>,
-    <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Du Monde'</span>,
+    <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Benjamin'</span>,
+    <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Du Monde'</span>,
     <span class="hljs-attr">address</span>: {
       <span class="hljs-attr">street1</span>: <span class="hljs-string">'900 Camp St'</span>,
       <span class="hljs-attr">city</span>: <span class="hljs-string">'New Orleans'</span>,
       <span class="hljs-attr">region</span>: <span class="hljs-string">'LA'</span>,
-      <span class="hljs-attr">postal_code</span>: <span class="hljs-string">'70115'</span>,
+      <span class="hljs-attr">postalCode</span>: <span class="hljs-string">'70115'</span>,
       <span class="hljs-attr">country</span>: <span class="hljs-string">'US'</span>
     }
   }
@@ -1477,8 +1489,8 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
   <span class="hljs-keyword">const</span> accountUpdate = {
-    <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Aaron'</span>,
-    <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Du Monde'</span>
+    <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Aaron'</span>,
+    <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Du Monde'</span>
   }
   <span class="hljs-keyword">const</span> account = <span class="hljs-keyword">await</span> client.updateAccount(accountId, accountUpdate)
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Updated account: '</span>, account)
@@ -2254,8 +2266,8 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
   <span class="hljs-keyword">const</span> billingInfoUpdate = {
-    <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Aaron'</span>,
-    <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Du Monde'</span>,
+    <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Aaron'</span>,
+    <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Du Monde'</span>,
   }
   <span class="hljs-keyword">const</span> billingInfo = <span class="hljs-keyword">await</span> client.updateBillingInfo(accountId, billingInfoUpdate)
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Updated billing info: '</span>, billingInfo.id)
@@ -2957,7 +2969,7 @@ prevent some records from being returned.
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> payments = client.listAccountCreditPayments(accountId)
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> payments = client.listAccountCreditPayments(accountId, { <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
 
 <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> payment <span class="hljs-keyword">of</span> payments.each()) {
   <span class="hljs-built_in">console</span>.log(payment.uuid)
@@ -3256,7 +3268,7 @@ prevent some records from being returned.
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
   <span class="hljs-keyword">let</span> invoiceCreate = {
     <span class="hljs-attr">currency</span>: <span class="hljs-string">'USD'</span>,
-    <span class="hljs-attr">collection_method</span>: <span class="hljs-string">'automatic'</span>
+    <span class="hljs-attr">collectionMethod</span>: <span class="hljs-string">'automatic'</span>
   }
   <span class="hljs-keyword">let</span> invoiceCollection = <span class="hljs-keyword">await</span> client.createInvoice(accountId, invoiceCreate)
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created Invoice'</span>)
@@ -3365,7 +3377,7 @@ prevent some records from being returned.
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
   <span class="hljs-keyword">const</span> collection = <span class="hljs-keyword">await</span> client.previewInvoice(accountId, {
     <span class="hljs-attr">currency</span>: <span class="hljs-string">"USD"</span>,
-    <span class="hljs-attr">collection_method</span>: <span class="hljs-string">"automatic"</span>
+    <span class="hljs-attr">collectionMethod</span>: <span class="hljs-string">"automatic"</span>
   })
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Previewed invoice due at <span class="hljs-subst">${collection.chargeInvoice.dueAt}</span>`</span>)
   <span class="hljs-built_in">console</span>.log(collection.chargeInvoice)
@@ -3688,7 +3700,7 @@ prevent some records from being returned.
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
   <span class="hljs-keyword">let</span> lineItemReq = {
     <span class="hljs-attr">currency</span>: <span class="hljs-string">'USD'</span>,
-    <span class="hljs-attr">unit_amount</span>: <span class="hljs-number">1000</span>,
+    <span class="hljs-attr">unitAmount</span>: <span class="hljs-number">1000</span>,
     <span class="hljs-attr">type</span>: <span class="hljs-string">'charge'</span> <span class="hljs-comment">// choose "credit" for a credit</span>
   }
   <span class="hljs-keyword">let</span> lineItem = <span class="hljs-keyword">await</span> client.createLineItem(accountId, lineItemReq)
@@ -3831,7 +3843,7 @@ returned at once you can sort the records yourself.</li>
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> notes = client.listAccountNotes(accountId)
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> notes = client.listAccountNotes(accountId, { <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
 
 <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> note <span class="hljs-keyword">of</span> notes.each()) {
   <span class="hljs-built_in">console</span>.log(note.message)
@@ -4132,7 +4144,7 @@ prevent some records from being returned.
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> addresses = client.listShippingAddresses(accountId)
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> addresses = client.listShippingAddresses(accountId, { <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
 
 <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> address <span class="hljs-keyword">of</span> addresses.each()) {
   <span class="hljs-built_in">console</span>.log(address.street1)
@@ -4228,12 +4240,12 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
   <span class="hljs-keyword">const</span> shippingAddressCreate = {
-    <span class="hljs-attr">first_name</span>: <span class="hljs-string">'Aaron'</span>,
-    <span class="hljs-attr">last_name</span>: <span class="hljs-string">'Du Monde'</span>,
+    <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Aaron'</span>,
+    <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Du Monde'</span>,
     <span class="hljs-attr">street1</span>: <span class="hljs-string">'900 Camp St.'</span>,
     <span class="hljs-attr">city</span>: <span class="hljs-string">'New Orleans'</span>,
     <span class="hljs-attr">region</span>: <span class="hljs-string">'LA'</span>,
-    <span class="hljs-attr">postal_code</span>: <span class="hljs-string">'70115'</span>,
+    <span class="hljs-attr">postalCode</span>: <span class="hljs-string">'70115'</span>,
     <span class="hljs-attr">country</span>: <span class="hljs-string">'US'</span>
   }
   <span class="hljs-keyword">const</span> address = <span class="hljs-keyword">await</span> client.createShippingAddress(accountId, shippingAddressCreate)
@@ -4452,8 +4464,8 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
   <span class="hljs-keyword">const</span> shadUpdate = {
-    <span class="hljs-attr">first_name</span>: <span class="hljs-string">"Benjamin"</span>,
-    <span class="hljs-attr">last_name</span>: <span class="hljs-string">"Du Monde"</span>
+    <span class="hljs-attr">firstName</span>: <span class="hljs-string">"Benjamin"</span>,
+    <span class="hljs-attr">lastName</span>: <span class="hljs-string">"Du Monde"</span>
   }
   <span class="hljs-keyword">const</span> address = <span class="hljs-keyword">await</span> client.updateShippingAddress(accountId, shippingAddressId, shadUpdate)
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Updated shipping address: '</span>, address.street1)
@@ -5550,7 +5562,7 @@ prevent some records from being returned.
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> coupons = client.listCoupons()
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> coupons = client.listCoupons({ <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
 
 <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> coupon <span class="hljs-keyword">of</span> coupons.each()) {
   <span class="hljs-built_in">console</span>.log(coupon.code)
@@ -6149,7 +6161,7 @@ prevent some records from being returned.
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> payments = client.listCreditPayments()
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> payments = client.listCreditPayments({ <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
 
 <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> payment <span class="hljs-keyword">of</span> payments.each()) {
   <span class="hljs-built_in">console</span>.log(payment.uuid)
@@ -6408,7 +6420,7 @@ prevent some records from being returned.
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> definitions = client.listCustomFieldDefinitions()
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> definitions = client.listCustomFieldDefinitions({ <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
 
 <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> definition <span class="hljs-keyword">of</span> definitions.each()) {
   <span class="hljs-built_in">console</span>.log(definition.displayName)
@@ -6697,7 +6709,7 @@ prevent some records from being returned.
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> invoices = client.listInvoices()
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> invoices = client.listInvoices({ <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
 
 <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> invoice <span class="hljs-keyword">of</span> invoices.each()) {
   <span class="hljs-built_in">console</span>.log(invoice.number)
@@ -6887,8 +6899,8 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
   <span class="hljs-keyword">const</span> invoiceUpdate = {
-    <span class="hljs-attr">customer_notes</span>: <span class="hljs-string">"New notes"</span>,
-    <span class="hljs-attr">terms_and_conditions</span>: <span class="hljs-string">"New terms and conditions"</span>
+    <span class="hljs-attr">customerNotes</span>: <span class="hljs-string">"New notes"</span>,
+    <span class="hljs-attr">termsAndConditions</span>: <span class="hljs-string">"New terms and conditions"</span>
   }
 
   <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.putInvoice(invoiceId, invoiceUpdate)
@@ -7307,7 +7319,7 @@ prevent some records from being returned.
 
   
 
-  <p>List a invoice's line items</p>
+  <p>List an invoice's line items</p>
 <p>API docs: <a href="https://partner-docs.recurly.com/v2018-08-09#operation/list_invoice_line_items">https://partner-docs.recurly.com/v2018-08-09#operation/list_invoice_line_items</a></p>
 
  
@@ -7754,7 +7766,7 @@ prevent some records from being returned.
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> invoices = client.listRelatedInvoices(invoiceId)
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> invoices = client.listRelatedInvoices(invoiceId, { <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
 
 <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> invoice <span class="hljs-keyword">of</span> invoices.each()) {
   <span class="hljs-built_in">console</span>.log(invoice.number)
@@ -7850,7 +7862,7 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
   <span class="hljs-keyword">const</span> invoiceRefund = {
-    <span class="hljs-attr">credit_customer_notes</span>: <span class="hljs-string">"Notes on credits"</span>,
+    <span class="hljs-attr">creditCustomerNotes</span>: <span class="hljs-string">"Notes on credits"</span>,
     <span class="hljs-attr">type</span>: <span class="hljs-string">"amount"</span>, <span class="hljs-comment">// could also be "line_items"</span>
     amount: <span class="hljs-number">100</span>
   }
@@ -8075,7 +8087,7 @@ prevent some records from being returned.
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> lineItems = client.listLineItems()
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> lineItems = client.listLineItems({ <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
 
 <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> item <span class="hljs-keyword">of</span> lineItems.each()) {
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Item <span class="hljs-subst">${item.id}</span> for <span class="hljs-subst">${item.amount}</span>`</span>)
@@ -8448,7 +8460,7 @@ prevent some records from being returned.
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> plans = client.listPlans()
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> plans = client.listPlans({ <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
 
 <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> plan <span class="hljs-keyword">of</span> plans.each()) {
   <span class="hljs-built_in">console</span>.log(plan.code)
@@ -8536,7 +8548,7 @@ prevent some records from being returned.
     <span class="hljs-attr">currencies</span>: [
       {
         <span class="hljs-attr">currency</span>: <span class="hljs-string">'USD'</span>,
-        <span class="hljs-attr">unit_amount</span>: <span class="hljs-number">10000</span>
+        <span class="hljs-attr">unitAmount</span>: <span class="hljs-number">10000</span>
       }
     ]
   }
@@ -9851,7 +9863,7 @@ prevent some records from being returned.
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> subscriptions = client.listSubscriptions()
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> subscriptions = client.listSubscriptions({ <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
 
 <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> subscription <span class="hljs-keyword">of</span> subscriptions.each()) {
   <span class="hljs-built_in">console</span>.log(subscription.uuid)
@@ -9934,7 +9946,7 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
   <span class="hljs-keyword">let</span> subscriptionReq = {
-    <span class="hljs-attr">plan_code</span>: planCode,
+    <span class="hljs-attr">planCode</span>: planCode,
     <span class="hljs-attr">currency</span>: <span class="hljs-string">`USD`</span>,
     <span class="hljs-attr">account</span>: {
       <span class="hljs-attr">code</span>: accountCode
@@ -10138,8 +10150,8 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
   <span class="hljs-keyword">const</span> update = {
-    <span class="hljs-attr">terms_and_conditions</span>: <span class="hljs-string">"Some new terms and conditions"</span>,
-    <span class="hljs-attr">customer_notes</span>: <span class="hljs-string">"Some new customer notes"</span>
+    <span class="hljs-attr">termsAndConditions</span>: <span class="hljs-string">"Some new terms and conditions"</span>,
+    <span class="hljs-attr">customerNotes</span>: <span class="hljs-string">"Some new customer notes"</span>
   }
   <span class="hljs-keyword">const</span> subscription = <span class="hljs-keyword">await</span> client.modifySubscription(subscriptionId, update)
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Modified subscription: '</span>, subscription.uuid)
@@ -10830,7 +10842,7 @@ prevent some records from being returned.
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
   <span class="hljs-keyword">const</span> subscriptionChangeCreate = {
-    <span class="hljs-attr">plan_code</span>: newPlanCode,
+    <span class="hljs-attr">planCode</span>: newPlanCode,
     <span class="hljs-attr">timeframe</span>: <span class="hljs-string">'now'</span>
   }
 
@@ -11729,7 +11741,7 @@ prevent some records from being returned.
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> transactions = client.listTransactions()
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> transactions = client.listTransactions({ <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
 
 <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> transaction <span class="hljs-keyword">of</span> transactions.each()) {
   <span class="hljs-built_in">console</span>.log(transaction.uuid)
@@ -12054,6 +12066,216 @@ prevent some records from being returned.
 
   
 
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='clientcreatepurchase'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>createPurchase(body)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Create a new purchase</p>
+<p>API docs: <a href="https://partner-docs.recurly.com/v2018-08-09#operation/create_purchase">https://partner-docs.recurly.com/v2018-08-09#operation/create_purchase</a></p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>createPurchase(body: PurchaseCreate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;InvoiceCollection></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>body</span> <code class='quiet'>(PurchaseCreate)</code>
+	    The object representing the JSON request to send to the server. It should conform to the schema of {PurchaseCreate}
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;InvoiceCollection></code>:
+        Returns the new invoices
+
+      
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
+  <span class="hljs-keyword">let</span> purchaseReq = {
+    <span class="hljs-attr">currency</span>: <span class="hljs-string">'USD'</span>,
+    <span class="hljs-attr">account</span>: {
+      <span class="hljs-attr">code</span>: accountCode,
+      <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Benjamin'</span>,
+      <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Du Monde'</span>,
+      <span class="hljs-attr">billingInfo</span>: {
+        <span class="hljs-attr">tokenId</span>: rjsTokenId
+      }
+    },
+    <span class="hljs-attr">subscriptions</span>: [
+      { <span class="hljs-attr">planCode</span>: planCode },
+    ]
+  }
+  <span class="hljs-keyword">let</span> invoiceCollection = <span class="hljs-keyword">await</span> client.createPurchase(purchaseReq)
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created Charge Invoice: '</span>, invoiceCollection.chargeInvoice)
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created Credit Invoices: '</span>, invoiceCollection.creditInvoices)
+} <span class="hljs-keyword">catch</span> (err) {
+  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
+    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
+  }
+}</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='clientpreviewpurchase'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>previewPurchase(body)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Preview a new purchase</p>
+<p>API docs: <a href="https://partner-docs.recurly.com/v2018-08-09#operation/preview_purchase">https://partner-docs.recurly.com/v2018-08-09#operation/preview_purchase</a></p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>previewPurchase(body: PurchaseCreate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;InvoiceCollection></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>body</span> <code class='quiet'>(PurchaseCreate)</code>
+	    The object representing the JSON request to send to the server. It should conform to the schema of {PurchaseCreate}
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;InvoiceCollection></code>:
+        Returns preview of the new invoices
+
+      
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
+  <span class="hljs-keyword">let</span> purchaseReq = {
+    <span class="hljs-attr">currency</span>: <span class="hljs-string">'USD'</span>,
+    <span class="hljs-attr">account</span>: {
+      <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Benjamin'</span>,
+      <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Du Monde'</span>,
+      <span class="hljs-attr">code</span>: accountCode,
+      <span class="hljs-attr">billingInfo</span>: {
+        <span class="hljs-attr">tokenId</span>: rjsTokenId
+      }
+    },
+    <span class="hljs-attr">subscriptions</span>: [
+      { <span class="hljs-attr">planCode</span>: planCode },
+    ]
+  }
+  <span class="hljs-keyword">let</span> invoiceCollection = <span class="hljs-keyword">await</span> client.previewPurchase(purchaseReq)
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Preview Charge Invoice: '</span>, invoiceCollection.chargeInvoice)
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Preview Credit Invoices: '</span>, invoiceCollection.creditInvoices)
+} <span class="hljs-keyword">catch</span> (err) {
+  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
+    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
+  }
+}</pre>
+    
   
 
   
