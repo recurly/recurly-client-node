@@ -63,6 +63,11 @@ describe('Caster', () => {
         mySubResource: {
           myString: 'My Sub Attribute'
         },
+        myStringArray: [
+          'My String 1',
+          'My String 2'
+        ],
+        myEmptyArray: [],
         mySubResourceList: [
           {
             myString: 'My Sub Attribute'
@@ -70,7 +75,10 @@ describe('Caster', () => {
           {
             myString: 'My Sub Attribute'
           }
-        ]
+        ],
+        myNull: null,
+        myUndefined: undefined,
+        myDateTime: new Date(Date.UTC(2022, 1, 1, 0, 0, 0))
       })
 
       const expected = {
@@ -78,6 +86,10 @@ describe('Caster', () => {
         my_sub_resource: {
           my_string: 'My Sub Attribute'
         },
+        my_string_array: [
+          'My String 1', 'My String 2'
+        ],
+        my_empty_array: [],
         my_sub_resource_list: [
           {
             my_string: 'My Sub Attribute'
@@ -85,7 +97,10 @@ describe('Caster', () => {
           {
             my_string: 'My Sub Attribute'
           }
-        ]
+        ],
+        my_null: null,
+        my_undefined: null,
+        my_date_time: '2022-02-01T00:00:00.000Z'
       }
 
       assert.deepEqual(casted, expected)
