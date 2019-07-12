@@ -1,7 +1,7 @@
 # Recurly
 
 Warning:
-This library is not meant to be used with the V2 API. If you are attempting to build an integration with V2, please see [https://dev.recurly.com/](https://dev.recurly.com/).
+This library does not use the V2 API. If you are attempting to build an integration with V2, please see [https://dev.recurly.com/](https://dev.recurly.com/).
 
 This repository contains the node client for Recurly's V3 API (or "partner api").
 It's currently Beta software and is not yet an official release. Documentation for the HTTP API can be found [here](https://partner-docs.recurly.com/).
@@ -22,7 +22,7 @@ We recommend manually inserting the dependency into the `dependencies` section o
 ```
 {
   // ...
-  "recurly" : "3.0.0-beta.3"
+  "recurly" : "3.0.0-beta.4"
   // ...
 }
 ```
@@ -30,7 +30,7 @@ We recommend manually inserting the dependency into the `dependencies` section o
 
 Install via the command line:
 ```
-npm install recurly@3.0.0-beta.3 --save-prod
+npm install recurly@3.0.0-beta.4 --save-prod
 ```
 
 ### Creating a client
