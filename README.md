@@ -128,3 +128,7 @@ eachAccount(accounts)
 // or 
 eachPageOfAccounts(accounts)
 ```
+
+### Contributing
+
+Please see our [Contributing Guide](CONTRIBUTING.md).
