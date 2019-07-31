@@ -119,7 +119,7 @@ async function eachPageOfAccounts (accounts) {
   }
 }
 
-let accounts = client.listAccounts({
+const accounts = client.listAccounts({
     beginTime: '2018-12-01T00:00:00Z',
     sort: 'updated_at'
   })
@@ -127,6 +127,49 @@ let accounts = client.listAccounts({
 eachAccount(accounts)
 // or 
 eachPageOfAccounts(accounts)
+```
+
+#### Efficiently Fetch the First or Last Resource
+
+The Pager class implements a `first` method which allows you to fetch just the first or last resource from the server.
+On top of being a convenient abstraction, this is implemented efficiently by only asking the server for the 1 item you want.
+
+```js
+const accounts = client.listAccounts({
+    beginTime: '2018-12-01T00:00:00Z',
+    subscriber: true,
+    order: 'desc'
+  })
+
+const firstAccount = await accounts.first()
+```
+
+If you want to fetch the last account in this scenario, invert the order from `desc` to `asc`
+
+```js
+const accounts = client.listAccounts({
+    beginTime: '2018-12-01T00:00:00Z',
+    subscriber: true,
+    order: 'asc'
+  })
+
+const lastAccount = await accounts.first()
+```
+
+#### Counting Resources
+
+The Pager class implements a `count` method which allows you to count the resources the pager would return.
+It does so by calling the endpoint with `HEAD` and parsing and returning the `Recurly-Total-Records` header. This
+method respects any filtering parameters you apply to the pager, but the sorting parameters will have no effect.
+
+```js
+const accounts = client.listAccounts({
+    beginTime: '2018-12-01T00:00:00Z',
+    subscriber: true
+  })
+
+const count = await accounts.count()
+// => 573
 ```
 
 ### Contributing
