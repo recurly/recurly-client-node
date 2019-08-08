@@ -172,6 +172,46 @@ const count = await accounts.count()
 // => 573
 ```
 
+### HTTP Metadata
+
+Sometimes you might want to get some additional information about the underlying HTTP request and response. Instead of
+returning this information directly and forcing the programmer to unwrap it, we inject this metadata into the top level
+resource that was returned. You can access the response by calling `getResponse()` on any Resource.
+
+**Warning**: Do not log or render whole requests or responses as they may contain PII or sensitive data.
+
+
+```js
+const account = await client.getAccount("code-benjamin")
+const response = account.getResponse()
+response.rateLimitRemaining // 1985
+response.requestId // "0av50sm5l2n2gkf88ehg"
+response.request.path // "/sites/subdomain-mysite/accounts/code-benjamin"
+response.request.body // null
+```
+
+This also works on Empty responses:
+
+```js
+const result = await client.removeLineItem("a959576b2b10b012")
+const response = result.getResponse()
+```
+
+And it can be captured on exceptions through the ApiError object:
+
+```js
+try {
+  const account = await client.getAccount(account_id)
+} catch (err) {
+  if (err instanceof recurly.errors.NotFoundError) {
+    // You can also get the Response here
+    const response = err.getResponse()
+  } else {
+    console.log('Unknown Error: ', err)
+  }
+}
+```
+
 ### Contributing
 
 Please see our [Contributing Guide](CONTRIBUTING.md).

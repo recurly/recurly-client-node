@@ -680,6 +680,16 @@
               
                 
                 <li><a
+                  href='#empty'
+                  class="">
+                  Empty
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#'
                   class="">
                   
@@ -1590,6 +1600,26 @@
               
                 
                 <li><a
+                  href='#transactionerror'
+                  class="">
+                  TransactionError
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#'
+                  class="">
+                  
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#transactionpaymentgateway'
                   class="">
                   TransactionPaymentGateway
@@ -2250,7 +2280,7 @@ prevent some records from being returned.
                 <tr>
   <td class='break-word'><span class='code bold'>params.subscriber</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
   </td>
-  <td class='break-word'><span>Filter accounts accounts with or without a subscription in the 
+  <td class='break-word'><span>Filter accounts with or without a subscription in the 
 <code>active</code>
 ,
 
@@ -2927,7 +2957,7 @@ prevent some records from being returned.
   <p>Remove an account's acquisition data</p>
 <p>API docs: <a href="https://partner-docs.recurly.com/v2018-08-09#operation/remove_account_acquisition">https://partner-docs.recurly.com/v2018-08-09#operation/remove_account_acquisition</a></p>
 
-    <div class='pre p1 fill-light mt0'>removeAccountAcquisition(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
+    <div class='pre p1 fill-light mt0'>removeAccountAcquisition(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;Empty></div>
   
   
 
@@ -2963,7 +2993,7 @@ prevent some records from being returned.
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></code>:
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;Empty></code>:
         Acquisition data was succesfully deleted.
 
       
@@ -3404,7 +3434,7 @@ prevent some records from being returned.
   <p>Remove an account's billing information</p>
 <p>API docs: <a href="https://partner-docs.recurly.com/v2018-08-09#operation/remove_billing_info">https://partner-docs.recurly.com/v2018-08-09#operation/remove_billing_info</a></p>
 
-    <div class='pre p1 fill-light mt0'>removeBillingInfo(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
+    <div class='pre p1 fill-light mt0'>removeBillingInfo(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;Empty></div>
   
   
 
@@ -3440,7 +3470,7 @@ prevent some records from being returned.
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></code>:
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;Empty></code>:
         Billing information deleted
 
       
@@ -5585,7 +5615,7 @@ prevent some records from being returned.
   <p>Remove an account's shipping address</p>
 <p>API docs: <a href="https://partner-docs.recurly.com/v2018-08-09#operation/remove_shipping_address">https://partner-docs.recurly.com/v2018-08-09#operation/remove_shipping_address</a></p>
 
-    <div class='pre p1 fill-light mt0'>removeShippingAddress(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, shippingAddressId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
+    <div class='pre p1 fill-light mt0'>removeShippingAddress(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, shippingAddressId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;Empty></div>
   
   
 
@@ -5630,7 +5660,7 @@ prevent some records from being returned.
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></code>:
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;Empty></code>:
         Shipping address deleted.
 
       
@@ -6235,7 +6265,7 @@ prevent some records from being returned.
                 <tr>
   <td class='break-word'><span class='code bold'>params.subscriber</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
   </td>
-  <td class='break-word'><span>Filter accounts accounts with or without a subscription in the 
+  <td class='break-word'><span>Filter accounts with or without a subscription in the 
 <code>active</code>
 ,
 
@@ -9260,7 +9290,7 @@ prevent some records from being returned.
   <p>Delete an uninvoiced line item</p>
 <p>API docs: <a href="https://partner-docs.recurly.com/v2018-08-09#operation/remove_line_item">https://partner-docs.recurly.com/v2018-08-09#operation/remove_line_item</a></p>
 
-    <div class='pre p1 fill-light mt0'>removeLineItem(lineItemId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
+    <div class='pre p1 fill-light mt0'>removeLineItem(lineItemId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;Empty></div>
   
   
 
@@ -9292,7 +9322,7 @@ prevent some records from being returned.
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></code>:
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;Empty></code>:
         Line item deleted.
 
       
@@ -9306,7 +9336,8 @@ prevent some records from being returned.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">await</span> client.removeLineItem(lineItemId)
+  <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> client.removeLineItem(lineItemId + <span class="hljs-string">"asdasd"</span>)
+  <span class="hljs-keyword">const</span> response = result.getResponse()
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Removed line item: '</span>, lineItemId)
 } <span class="hljs-keyword">catch</span> (err) {
   <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
@@ -11913,7 +11944,7 @@ prevent some records from being returned.
   <p>Delete the pending subscription change</p>
 <p>API docs: <a href="https://partner-docs.recurly.com/v2018-08-09#operation/remove_subscription_change">https://partner-docs.recurly.com/v2018-08-09#operation/remove_subscription_change</a></p>
 
-    <div class='pre p1 fill-light mt0'>removeSubscriptionChange(subscriptionId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
+    <div class='pre p1 fill-light mt0'>removeSubscriptionChange(subscriptionId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;Empty></div>
   
   
 
@@ -11949,7 +11980,7 @@ prevent some records from being returned.
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></code>:
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;Empty></code>:
         Subscription change was deleted.
 
       
@@ -13609,6 +13640,61 @@ of this class type</p>
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='empty'>
+      Empty
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>A special resource for an empty response</p>
+
+    <div class='pre p1 fill-light mt0'>Empty</div>
+  
+  
+    <p>
+      Extends
+      
+        Resource
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id=''>
       
     </h3>
@@ -13984,9 +14070,8 @@ need and we will usher them to the appropriate places.</p>
         </div>
       
         <div class='space-bottom0'>
-          <span class='code bold'>cost</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
-          : Account balance
-
+          <span class='code bold'>cost</span> <code class='quiet'>(<a href="#accountacquisitioncost">AccountAcquisitionCost</a>)</code>
+          
           
         </div>
       
@@ -15471,7 +15556,7 @@ need and we will usher them to the appropriate places.</p>
         </div>
       
         <div class='space-bottom0'>
-          <span class='code bold'>fraud</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+          <span class='code bold'>fraud</span> <code class='quiet'>(<a href="#fraudinfo">FraudInfo</a>)</code>
           : Most recent fraud result.
 
           
@@ -15490,7 +15575,7 @@ need and we will usher them to the appropriate places.</p>
         </div>
       
         <div class='space-bottom0'>
-          <span class='code bold'>paymentMethod</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+          <span class='code bold'>paymentMethod</span> <code class='quiet'>(<a href="#billinginfopaymentmethod">BillingInfoPaymentMethod</a>)</code>
           
           
         </div>
@@ -15503,7 +15588,7 @@ need and we will usher them to the appropriate places.</p>
         </div>
       
         <div class='space-bottom0'>
-          <span class='code bold'>updatedBy</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+          <span class='code bold'>updatedBy</span> <code class='quiet'>(<a href="#billinginfoupdatedby">BillingInfoUpdatedBy</a>)</code>
           
           
         </div>
@@ -16231,7 +16316,7 @@ need and we will usher them to the appropriate places.</p>
         </div>
       
         <div class='space-bottom0'>
-          <span class='code bold'>trial</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+          <span class='code bold'>trial</span> <code class='quiet'>(<a href="#coupondiscounttrial">CouponDiscountTrial</a>)</code>
           : This is only present when 
 <code>type=free_trial</code>
 .
@@ -17723,7 +17808,7 @@ need and we will usher them to the appropriate places.</p>
         </div>
       
         <div class='space-bottom0'>
-          <span class='code bold'>transactionError</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+          <span class='code bold'>transactionError</span> <code class='quiet'>(<a href="#transactionerror">TransactionError</a>)</code>
           : This is only included on errors with 
 <code>type=transaction</code>
 .
@@ -21533,15 +21618,14 @@ need and we will usher them to the appropriate places.</p>
         </div>
       
         <div class='space-bottom0'>
-          <span class='code bold'>paymentGateway</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+          <span class='code bold'>paymentGateway</span> <code class='quiet'>(<a href="#transactionpaymentgateway">TransactionPaymentGateway</a>)</code>
           
           
         </div>
       
         <div class='space-bottom0'>
-          <span class='code bold'>paymentMethod</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
-          : Payment method (TODO: this overlaps with BillingInfo’s payment_method but only documents credit cards)
-
+          <span class='code bold'>paymentMethod</span> <code class='quiet'>(<a href="#transactionpaymentmethod">TransactionPaymentMethod</a>)</code>
+          
           
         </div>
       
@@ -21623,6 +21707,150 @@ need and we will usher them to the appropriate places.</p>
         <div class='space-bottom0'>
           <span class='code bold'>voidedByInvoice</span> <code class='quiet'>(<a href="#invoicemini">InvoiceMini</a>)</code>
           
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id=''>
+      
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This file is automatically created by Recurly's OpenAPI generation process
+and thus any edits you make by hand will be lost. If you wish to make a
+change to this file, please create a Github issue explaining the changes you
+need and we will usher them to the appropriate places.</p>
+
+    <div class='pre p1 fill-light mt0'></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='transactionerror'>
+      TransactionError
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>TransactionError</p>
+
+    <div class='pre p1 fill-light mt0'>TransactionError</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>category</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          : Category
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>code</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          : Code
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>merchantAdvice</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          : Merchant message
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>message</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          : Customer message
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>transactionId</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          : Transaction ID
+
           
         </div>
       

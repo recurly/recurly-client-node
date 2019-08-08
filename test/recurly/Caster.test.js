@@ -4,12 +4,13 @@ require('../test_helper')
 const assert = require('assert').strict
 const caster = require('../../lib/recurly/Caster')
 const resources = require('../../lib/recurly/resources')
+const Empty = resources.Empty
 
 describe('Caster', () => {
   describe('#castResponse', () => {
-    it('Should return null for undefined or null arguments', () => {
-      assert.equal(caster.castResponse(null), null)
-      assert.equal(caster.castResponse(undefined), null)
+    it('Should return Empty for undefined or null arguments', () => {
+      assert(caster.castResponse(null) instanceof Empty)
+      assert(caster.castResponse(undefined) instanceof Empty)
     })
 
     it('Should cast an Account', () => {
