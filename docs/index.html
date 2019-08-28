@@ -650,6 +650,18 @@
                         #each
                       </a></li>
                       
+                      <li><a
+                        href='#pagercount'
+                        class='regular pre-open'>
+                        #count
+                      </a></li>
+                      
+                      <li><a
+                        href='#pagerfirst'
+                        class='regular pre-open'>
+                        #first
+                      </a></li>
+                      
                     </ul>
                   
                   
@@ -2278,7 +2290,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.subscriber</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.subscriber</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
   </td>
   <td class='break-word'><span>Filter accounts with or without a subscription in the 
 <code>active</code>
@@ -6263,7 +6275,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.subscriber</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.subscriber</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
   </td>
   <td class='break-word'><span>Filter accounts with or without a subscription in the 
 <code>active</code>
@@ -13493,6 +13505,118 @@ prevent some records from being returned.
 
   
 
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='pagercount'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>count()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Count the number of resources that match this Pager's filters</p>
+
+    <div class='pre p1 fill-light mt0'>count(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></code>:
+        The count of resources
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='pagerfirst'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>first()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Return only the first item. This is efficient because it tells
+the server to only return 1 item. You can also use this method
+to get the last resource by inverting the <code>order</code> parameter.</p>
+
+    <div class='pre p1 fill-light mt0'>first(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        The first resource in the list
+
+      
+    
   
 
   
