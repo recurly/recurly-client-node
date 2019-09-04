@@ -212,6 +212,48 @@ try {
 }
 ```
 
+### Webhooks
+
+Recurly can send webhooks to any publicly accessible server. When an event in Recurly triggers
+a webhook (e.g., an account is opened), Recurly will attempt to send this notification to the
+endpoint(s) you specify.  You can specify up to 10 endpoints through the application. All
+notifications will be sent to all configured endpoints for your site.
+
+See our [product docs](https://docs.recurly.com/docs/webhooks) to learn more about webhooks
+and see our [dev docs](https://dev.recurly.com/page/webhooks) to learn about what payloads
+are available.
+
+Although our API is now JSON, our webhook payloads are still formatted as XML for the time being.
+This library is not yet responsible for handling webhooks. If you do need webhooks, we recommend using a simple
+XML to Plain Object parser such as [xml2js](https://github.com/Leonidas-from-XIV/node-xml2js).
+
+
+```js
+const parseString = require('xml2js').parseString
+
+const xml = `
+    <?xml version="1.0" encoding="UTF-8"?>
+    <new_account_notification>
+      <account>
+        <account_code>1</account_code>
+        <username nil="true"></username>
+        <email>verena@example.com</email>
+        <first_name>Verena</first_name>
+        <last_name>Example</last_name>
+        <company_name nil="true"></company_name>
+      </account>
+    </new_account_notification>
+`;
+
+parseString(xml, function (err, result) {
+  const code = result.new_account_notification.account[0].account_code[0];
+  console.log("New account created with code: ", code);
+})
+```
+
+You can do this without dependencies, but you'll need to heed warnings about security concerns.
+Read more about the security implications of parsing untrusted XML in [this OWASP cheatsheet](https://cheatsheetseries.owasp.org/cheatsheets/XML_Security_Cheat_Sheet.html).
+
 ### Contributing
 
 Please see our [Contributing Guide](CONTRIBUTING.md).
