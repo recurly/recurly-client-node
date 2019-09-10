@@ -61,7 +61,7 @@ client.getAccount('code-benjamin')
 ```
 
 ```js
-async myFunc () {
+async function myFunc () {
   try {
     let account = await client.getAccount('code-benjamin')
   } catch (err) {
