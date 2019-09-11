@@ -22,7 +22,7 @@ We recommend manually inserting the dependency into the `dependencies` section o
 ```
 {
   // ...
-  "recurly" : "3.0.0-beta.3"
+  "recurly" : "3.0.0-beta.4"
   // ...
 }
 ```
@@ -30,7 +30,7 @@ We recommend manually inserting the dependency into the `dependencies` section o
 
 Install via the command line:
 ```
-npm install recurly@3.0.0-beta.3 --save-prod
+npm install recurly@3.0.0-beta.4 --save-prod
 ```
 
 ### Creating a client
