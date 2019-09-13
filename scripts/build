@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 npm install
 ./node_modules/.bin/documentation build lib/**  --format html --output docs

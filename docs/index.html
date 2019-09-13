@@ -2100,7 +2100,7 @@ prevent some records from being returned.
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>getSite()</span>
+            <span class='code strong strong truncate'>getSite(siteId)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -2111,7 +2111,7 @@ prevent some records from being returned.
   <p>Fetch a site</p>
 <p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/get_site">https://developers.recurly.com/api/v2018-08-09#operation/get_site</a></p>
 
-    <div class='pre p1 fill-light mt0'>getSite(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#site">Site</a>></div>
+    <div class='pre p1 fill-light mt0'>getSite(siteId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#site">Site</a>></div>
   
   
 
@@ -2122,6 +2122,24 @@ prevent some records from being returned.
   
   
 
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>siteId</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    Site ID or subdomain (use prefix: 
+<code>subdomain-</code>
+, e.g. 
+<code>subdomain-recurly</code>
+).
+
+          </div>
+          
+        </div>
+      
+    </div>
   
 
   
