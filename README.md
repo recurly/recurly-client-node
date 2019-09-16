@@ -95,8 +95,6 @@ two methods on `Pager` that return async iterators `each` and `eachPage`:
 * `each` will give you an iterator over each item that matches your query.
 * `eachPage` will give you an iterator over each page that is returned. The result is an array of resources.
 
-TODO: Need to fully test and document error handling
-
 ```js
 async function eachAccount (accounts) {
   try {
