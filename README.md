@@ -171,6 +171,37 @@ const count = await accounts.count()
 // => 573
 ```
 
+### Error Handling
+
+This library currently throws 1 primary class of exceptions, recurly.ApiError.
+The ApiError comes in a few flavors which help you determine what to do next. To see a full list, view the [api_errors module](lib/recurly/api_errors.js).
+
+```js
+try {
+  const expiredSub = await client.terminateSubscription(subId, { refund: 'full' })
+} catch (err) {
+  if (err) {
+    if (err.getResponse()) {
+      const requstId = err.getResponse().requestId
+      console.log("Request Id useful for support: ", requestId)
+    }
+
+    if (err instanceof recurly.errors.ValidationError) {
+      // If the request was not valid, you may want to tell your user
+      // why. You can find the invalid params and reasons in err.params
+      console.log('Failed validation', err.params)
+    // } else if (err instanceof recurly.errors.NotFoundError) {
+    //   console.log('Failed validation', err.params)
+    } else if (err instanceof recurly.ApiError) {
+       console.log('generic api error', err)
+    } else {
+      // If we don't know what to do with the err, we should
+      // probably re-raise and let our web framework and logger handle it
+      console.log('Unknown Error: ', err)
+    }
+  }
+}
+```
 ### HTTP Metadata
 
 Sometimes you might want to get some additional information about the underlying HTTP request and response. Instead of
