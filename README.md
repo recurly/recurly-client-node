@@ -38,7 +38,7 @@ npm install recurly@3.0.0-beta.4 --save-prod
 A client object represents a connection to the Recurly API. The client implements
 each `operation` that can be performed in the API as a method.
 
-To initialize a client, you only need an API key:
+To initialize a client, you only need an API key which can be obtained on the [API Credentials Page](https://app.recurly.com/go/integrations/api_keys).
 
 ```js
 const recurly = require('recurly')
