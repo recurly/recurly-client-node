@@ -11,12 +11,11 @@ class TestClient extends BaseClient {
   }
 }
 
-const client = new TestClient('myapikey', 'subdomain-mysubdomain')
+const client = new TestClient('myapikey')
 
 describe('BaseClient', () => {
   describe('#constructor', () => {
     it('Should set the internal state and headers', () => {
-      assert.equal(client.siteId, 'subdomain-mysubdomain')
       assert.equal(client._getDefaultOptions().headers['Authorization'], 'Basic bXlhcGlrZXk6')
       assert.equal(client._getDefaultOptions().headers['User-Agent'], `Recurly/${pkg.version}; node`)
       assert.equal(client._getDefaultOptions().headers['Accept'], 'application/vnd.recurly.v2020-01-01')
