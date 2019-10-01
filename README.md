@@ -1,17 +1,16 @@
 # Recurly
 
-Warning:
-This library does not use the V2 API. If you are attempting to build an integration with V2, please see [https://dev.recurly.com/](https://dev.recurly.com/).
+This library houses the official node library for Recurly's V3 API.
 
-This repository contains the node client for Recurly's V3 API.
-It's currently Beta software and is not yet an official release. Documentation for the HTTP API can be found [here](https://developers.recurly.com/api/v2019-10-01/).
+> *Warning*:
+> This library does not use the V2 API. Recurly does not provide an official node client for the V2 API.
 
 ## Getting Started
 
 ### Documentation
 
 Docs and example code can be found here: [https://recurly.github.io/recurly-client-node](https://recurly.github.io/recurly-client-node).
-Reference docs for the underlying V3 JSON API can be found [here](https://developers.recurly.com/api/v2019-10-01/).
+Reference docs for the underlying V3 JSON API can be found [on our Developer Portal](https://developers.recurly.com/api/v2019-10-10/).
 
 ### Installing
 
