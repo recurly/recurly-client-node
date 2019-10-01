@@ -10,7 +10,7 @@ This library houses the official node library for Recurly's V3 API.
 ### Documentation
 
 Docs and example code can be found here: [https://recurly.github.io/recurly-client-node](https://recurly.github.io/recurly-client-node).
-Reference docs for the underlying V3 JSON API can be found [on our Developer Portal](https://developers.recurly.com/api/v2019-10-10/).
+Documentation for the HTTP API and example code can be found [on our Developer Portal](https://developers.recurly.com/api/v2019-10-10/).
 
 ### Installing
 
