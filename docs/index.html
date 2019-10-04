@@ -371,6 +371,12 @@
                       </a></li>
                       
                       <li><a
+                        href='#clientvoidinvoice'
+                        class='regular pre-open'>
+                        #voidInvoice
+                      </a></li>
+                      
+                      <li><a
                         href='#clientlistinvoicelineitems'
                         class='regular pre-open'>
                         #listInvoiceLineItems
@@ -482,6 +488,18 @@
                         href='#clientgetaddon'
                         class='regular pre-open'>
                         #getAddOn
+                      </a></li>
+                      
+                      <li><a
+                        href='#clientlistshippingmethods'
+                        class='regular pre-open'>
+                        #listShippingMethods
+                      </a></li>
+                      
+                      <li><a
+                        href='#clientgetshippingmethod'
+                        class='regular pre-open'>
+                        #getShippingMethod
                       </a></li>
                       
                       <li><a
@@ -1492,6 +1510,46 @@
               
                 
                 <li><a
+                  href='#shippingmethod'
+                  class="">
+                  ShippingMethod
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#'
+                  class="">
+                  
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#shippingmethodmini'
+                  class="">
+                  ShippingMethodMini
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#'
+                  class="">
+                  
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#site'
                   class="">
                   Site
@@ -1555,6 +1613,26 @@
                   href='#subscriptionchange'
                   class="">
                   SubscriptionChange
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#'
+                  class="">
+                  
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#subscriptionshipping'
+                  class="">
+                  SubscriptionShipping
                   
                 </a>
                 
@@ -1927,7 +2005,7 @@ need and we will usher them to the appropriate places.</p>
   
 
   <p>List sites</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_sites">https://developers.recurly.com/api/v2018-08-09#operation/list_sites</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_sites">https://developers.recurly.com/api/v2019-10-10#operation/list_sites</a></p>
 
     <div class='pre p1 fill-light mt0'>listSites(params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#site">Site</a>></div>
   
@@ -1966,7 +2044,7 @@ need and we will usher them to the appropriate places.</p>
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -2078,7 +2156,7 @@ prevent some records from being returned.
   
 
   <p>Fetch a site</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/get_site">https://developers.recurly.com/api/v2018-08-09#operation/get_site</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_site">https://developers.recurly.com/api/v2019-10-10#operation/get_site</a></p>
 
     <div class='pre p1 fill-light mt0'>getSite(siteId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#site">Site</a>></div>
   
@@ -2152,7 +2230,7 @@ prevent some records from being returned.
   
 
   <p>List a site's accounts</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_accounts">https://developers.recurly.com/api/v2018-08-09#operation/list_accounts</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_accounts">https://developers.recurly.com/api/v2019-10-10#operation/list_accounts</a></p>
 
     <div class='pre p1 fill-light mt0'>listAccounts(params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#account">Account</a>></div>
   
@@ -2191,7 +2269,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -2245,7 +2323,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -2261,7 +2339,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -2277,9 +2355,22 @@ prevent some records from being returned.
 
               
                 <tr>
+  <td class='break-word'><span class='code bold'>params.email</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  </td>
+  <td class='break-word'><span>Filter for accounts with this exact email address. A blank value will return accounts with both 
+<code>null</code>
+ and 
+<code>""</code>
+ email addresses. Note that multiple accounts can share one email address.
+</span></td>
+</tr>
+
+
+              
+                <tr>
   <td class='break-word'><span class='code bold'>params.subscriber</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
   </td>
-  <td class='break-word'><span>Filter accounts with or without a subscription in the 
+  <td class='break-word'><span>Filter for accounts with or without a subscription in the 
 <code>active</code>
 ,
 
@@ -2362,7 +2453,7 @@ prevent some records from being returned.
   
 
   <p>Create an account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/create_account">https://developers.recurly.com/api/v2018-08-09#operation/create_account</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_account">https://developers.recurly.com/api/v2019-10-10#operation/create_account</a></p>
 
     <div class='pre p1 fill-light mt0'>createAccount(body: AccountCreate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#account">Account</a>></div>
   
@@ -2463,7 +2554,7 @@ prevent some records from being returned.
   
 
   <p>Fetch an account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/get_account">https://developers.recurly.com/api/v2018-08-09#operation/get_account</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_account">https://developers.recurly.com/api/v2019-10-10#operation/get_account</a></p>
 
     <div class='pre p1 fill-light mt0'>getAccount(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#account">Account</a>></div>
   
@@ -2556,7 +2647,7 @@ prevent some records from being returned.
   
 
   <p>Modify an account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/update_account">https://developers.recurly.com/api/v2018-08-09#operation/update_account</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/update_account">https://developers.recurly.com/api/v2019-10-10#operation/update_account</a></p>
 
     <div class='pre p1 fill-light mt0'>updateAccount(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, body: AccountUpdate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#account">Account</a>></div>
   
@@ -2662,7 +2753,7 @@ prevent some records from being returned.
   
 
   <p>Deactivate an account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/deactivate_account">https://developers.recurly.com/api/v2018-08-09#operation/deactivate_account</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/deactivate_account">https://developers.recurly.com/api/v2019-10-10#operation/deactivate_account</a></p>
 
     <div class='pre p1 fill-light mt0'>deactivateAccount(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#account">Account</a>></div>
   
@@ -2754,7 +2845,7 @@ prevent some records from being returned.
   
 
   <p>Fetch an account's acquisition data</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/get_account_acquisition">https://developers.recurly.com/api/v2018-08-09#operation/get_account_acquisition</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_account_acquisition">https://developers.recurly.com/api/v2019-10-10#operation/get_account_acquisition</a></p>
 
     <div class='pre p1 fill-light mt0'>getAccountAcquisition(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#accountacquisition">AccountAcquisition</a>></div>
   
@@ -2847,7 +2938,7 @@ prevent some records from being returned.
   
 
   <p>Update an account's acquisition data</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/update_account_acquisition">https://developers.recurly.com/api/v2018-08-09#operation/update_account_acquisition</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/update_account_acquisition">https://developers.recurly.com/api/v2019-10-10#operation/update_account_acquisition</a></p>
 
     <div class='pre p1 fill-light mt0'>updateAccountAcquisition(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, body: AccountAcquisitionUpdatable): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#accountacquisition">AccountAcquisition</a>></div>
   
@@ -2954,7 +3045,7 @@ prevent some records from being returned.
   
 
   <p>Remove an account's acquisition data</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/remove_account_acquisition">https://developers.recurly.com/api/v2018-08-09#operation/remove_account_acquisition</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/remove_account_acquisition">https://developers.recurly.com/api/v2019-10-10#operation/remove_account_acquisition</a></p>
 
     <div class='pre p1 fill-light mt0'>removeAccountAcquisition(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;Empty></div>
   
@@ -3047,7 +3138,7 @@ prevent some records from being returned.
   
 
   <p>Reactivate an inactive account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/reactivate_account">https://developers.recurly.com/api/v2018-08-09#operation/reactivate_account</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/reactivate_account">https://developers.recurly.com/api/v2019-10-10#operation/reactivate_account</a></p>
 
     <div class='pre p1 fill-light mt0'>reactivateAccount(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#account">Account</a>></div>
   
@@ -3139,7 +3230,7 @@ prevent some records from being returned.
   
 
   <p>Fetch an account's balance and past due status</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/get_account_balance">https://developers.recurly.com/api/v2018-08-09#operation/get_account_balance</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_account_balance">https://developers.recurly.com/api/v2019-10-10#operation/get_account_balance</a></p>
 
     <div class='pre p1 fill-light mt0'>getAccountBalance(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#accountbalance">AccountBalance</a>></div>
   
@@ -3232,7 +3323,7 @@ prevent some records from being returned.
   
 
   <p>Fetch an account's billing information</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/get_billing_info">https://developers.recurly.com/api/v2018-08-09#operation/get_billing_info</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_billing_info">https://developers.recurly.com/api/v2019-10-10#operation/get_billing_info</a></p>
 
     <div class='pre p1 fill-light mt0'>getBillingInfo(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#billinginfo">BillingInfo</a>></div>
   
@@ -3325,7 +3416,7 @@ prevent some records from being returned.
   
 
   <p>Set an account's billing information</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/update_billing_info">https://developers.recurly.com/api/v2018-08-09#operation/update_billing_info</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/update_billing_info">https://developers.recurly.com/api/v2019-10-10#operation/update_billing_info</a></p>
 
     <div class='pre p1 fill-light mt0'>updateBillingInfo(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, body: BillingInfoCreate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#billinginfo">BillingInfo</a>></div>
   
@@ -3431,7 +3522,7 @@ prevent some records from being returned.
   
 
   <p>Remove an account's billing information</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/remove_billing_info">https://developers.recurly.com/api/v2018-08-09#operation/remove_billing_info</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/remove_billing_info">https://developers.recurly.com/api/v2019-10-10#operation/remove_billing_info</a></p>
 
     <div class='pre p1 fill-light mt0'>removeBillingInfo(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;Empty></div>
   
@@ -3524,7 +3615,7 @@ prevent some records from being returned.
   
 
   <p>Show the coupon redemptions for an account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_account_coupon_redemptions">https://developers.recurly.com/api/v2018-08-09#operation/list_account_coupon_redemptions</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_account_coupon_redemptions">https://developers.recurly.com/api/v2019-10-10#operation/list_account_coupon_redemptions</a></p>
 
     <div class='pre p1 fill-light mt0'>listAccountCouponRedemptions(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#couponredemption">CouponRedemption</a>></div>
   
@@ -3576,7 +3667,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -3612,7 +3703,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -3628,7 +3719,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -3692,7 +3783,7 @@ prevent some records from being returned.
   
 
   <p>Show the coupon redemption that is active on an account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/get_active_coupon_redemption">https://developers.recurly.com/api/v2018-08-09#operation/get_active_coupon_redemption</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_active_coupon_redemption">https://developers.recurly.com/api/v2019-10-10#operation/get_active_coupon_redemption</a></p>
 
     <div class='pre p1 fill-light mt0'>getActiveCouponRedemption(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#couponredemption">CouponRedemption</a>></div>
   
@@ -3785,7 +3876,7 @@ prevent some records from being returned.
   
 
   <p>Generate an active coupon redemption on an account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/create_coupon_redemption">https://developers.recurly.com/api/v2018-08-09#operation/create_coupon_redemption</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_coupon_redemption">https://developers.recurly.com/api/v2019-10-10#operation/create_coupon_redemption</a></p>
 
     <div class='pre p1 fill-light mt0'>createCouponRedemption(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, body: CouponRedemptionCreate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#couponredemption">CouponRedemption</a>></div>
   
@@ -3868,7 +3959,7 @@ prevent some records from being returned.
   
 
   <p>Delete the active coupon redemption from an account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/remove_coupon_redemption">https://developers.recurly.com/api/v2018-08-09#operation/remove_coupon_redemption</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/remove_coupon_redemption">https://developers.recurly.com/api/v2019-10-10#operation/remove_coupon_redemption</a></p>
 
     <div class='pre p1 fill-light mt0'>removeCouponRedemption(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#couponredemption">CouponRedemption</a>></div>
   
@@ -3942,7 +4033,7 @@ prevent some records from being returned.
   
 
   <p>List an account's credit payments</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_account_credit_payments">https://developers.recurly.com/api/v2018-08-09#operation/list_account_credit_payments</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_account_credit_payments">https://developers.recurly.com/api/v2019-10-10#operation/list_account_credit_payments</a></p>
 
     <div class='pre p1 fill-light mt0'>listAccountCreditPayments(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#creditpayment">CreditPayment</a>></div>
   
@@ -4027,7 +4118,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -4043,7 +4134,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -4117,7 +4208,7 @@ prevent some records from being returned.
   
 
   <p>List an account's invoices</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_account_invoices">https://developers.recurly.com/api/v2018-08-09#operation/list_account_invoices</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_account_invoices">https://developers.recurly.com/api/v2019-10-10#operation/list_account_invoices</a></p>
 
     <div class='pre p1 fill-light mt0'>listAccountInvoices(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#invoice">Invoice</a>></div>
   
@@ -4169,7 +4260,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -4223,7 +4314,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -4239,7 +4330,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -4318,7 +4409,7 @@ prevent some records from being returned.
   
 
   <p>Create an invoice for pending line items</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/create_invoice">https://developers.recurly.com/api/v2018-08-09#operation/create_invoice</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_invoice">https://developers.recurly.com/api/v2019-10-10#operation/create_invoice</a></p>
 
     <div class='pre p1 fill-light mt0'>createInvoice(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, body: InvoiceCreate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#invoicecollection">InvoiceCollection</a>></div>
   
@@ -4426,7 +4517,7 @@ prevent some records from being returned.
   
 
   <p>Preview new invoice for pending line items</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/preview_invoice">https://developers.recurly.com/api/v2018-08-09#operation/preview_invoice</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/preview_invoice">https://developers.recurly.com/api/v2019-10-10#operation/preview_invoice</a></p>
 
     <div class='pre p1 fill-light mt0'>previewInvoice(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, body: InvoiceCreate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#invoicecollection">InvoiceCollection</a>></div>
   
@@ -4534,7 +4625,7 @@ prevent some records from being returned.
   
 
   <p>List an account's line items</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_account_line_items">https://developers.recurly.com/api/v2018-08-09#operation/list_account_line_items</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_account_line_items">https://developers.recurly.com/api/v2019-10-10#operation/list_account_line_items</a></p>
 
     <div class='pre p1 fill-light mt0'>listAccountLineItems(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#lineitem">LineItem</a>></div>
   
@@ -4586,7 +4677,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -4640,7 +4731,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -4656,7 +4747,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -4747,7 +4838,7 @@ prevent some records from being returned.
   
 
   <p>Create a new line item for the account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/create_line_item">https://developers.recurly.com/api/v2018-08-09#operation/create_line_item</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_line_item">https://developers.recurly.com/api/v2019-10-10#operation/create_line_item</a></p>
 
     <div class='pre p1 fill-light mt0'>createLineItem(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, body: LineItemCreate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#lineitem">LineItem</a>></div>
   
@@ -4854,7 +4945,7 @@ prevent some records from being returned.
   
 
   <p>Fetch a list of an account's notes</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_account_notes">https://developers.recurly.com/api/v2018-08-09#operation/list_account_notes</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_account_notes">https://developers.recurly.com/api/v2019-10-10#operation/list_account_notes</a></p>
 
     <div class='pre p1 fill-light mt0'>listAccountNotes(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#accountnote">AccountNote</a>></div>
   
@@ -4906,7 +4997,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -4985,7 +5076,7 @@ returned at once you can sort the records yourself.</li>
   
 
   <p>Fetch an account note</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/get_account_note">https://developers.recurly.com/api/v2018-08-09#operation/get_account_note</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_account_note">https://developers.recurly.com/api/v2019-10-10#operation/get_account_note</a></p>
 
     <div class='pre p1 fill-light mt0'>getAccountNote(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, accountNoteId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#accountnote">AccountNote</a>></div>
   
@@ -5088,7 +5179,7 @@ returned at once you can sort the records yourself.</li>
   
 
   <p>Fetch a list of an account's shipping addresses</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_shipping_addresses">https://developers.recurly.com/api/v2018-08-09#operation/list_shipping_addresses</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_shipping_addresses">https://developers.recurly.com/api/v2019-10-10#operation/list_shipping_addresses</a></p>
 
     <div class='pre p1 fill-light mt0'>listShippingAddresses(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#shippingaddress">ShippingAddress</a>></div>
   
@@ -5140,7 +5231,7 @@ returned at once you can sort the records yourself.</li>
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -5194,7 +5285,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -5210,7 +5301,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -5284,7 +5375,7 @@ prevent some records from being returned.
   
 
   <p>Create a new shipping address for the account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/create_shipping_address">https://developers.recurly.com/api/v2018-08-09#operation/create_shipping_address</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_shipping_address">https://developers.recurly.com/api/v2019-10-10#operation/create_shipping_address</a></p>
 
     <div class='pre p1 fill-light mt0'>createShippingAddress(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, body: ShippingAddressCreate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#shippingaddress">ShippingAddress</a>></div>
   
@@ -5395,7 +5486,7 @@ prevent some records from being returned.
   
 
   <p>Fetch an account's shipping address</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/get_shipping_address">https://developers.recurly.com/api/v2018-08-09#operation/get_shipping_address</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_shipping_address">https://developers.recurly.com/api/v2019-10-10#operation/get_shipping_address</a></p>
 
     <div class='pre p1 fill-light mt0'>getShippingAddress(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, shippingAddressId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#shippingaddress">ShippingAddress</a>></div>
   
@@ -5497,7 +5588,7 @@ prevent some records from being returned.
   
 
   <p>Update an account's shipping address</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/update_shipping_address">https://developers.recurly.com/api/v2018-08-09#operation/update_shipping_address</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/update_shipping_address">https://developers.recurly.com/api/v2019-10-10#operation/update_shipping_address</a></p>
 
     <div class='pre p1 fill-light mt0'>updateShippingAddress(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, shippingAddressId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, body: ShippingAddressUpdate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#shippingaddress">ShippingAddress</a>></div>
   
@@ -5612,7 +5703,7 @@ prevent some records from being returned.
   
 
   <p>Remove an account's shipping address</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/remove_shipping_address">https://developers.recurly.com/api/v2018-08-09#operation/remove_shipping_address</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/remove_shipping_address">https://developers.recurly.com/api/v2019-10-10#operation/remove_shipping_address</a></p>
 
     <div class='pre p1 fill-light mt0'>removeShippingAddress(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, shippingAddressId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;Empty></div>
   
@@ -5714,7 +5805,7 @@ prevent some records from being returned.
   
 
   <p>List an account's subscriptions</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_account_subscriptions">https://developers.recurly.com/api/v2018-08-09#operation/list_account_subscriptions</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_account_subscriptions">https://developers.recurly.com/api/v2019-10-10#operation/list_account_subscriptions</a></p>
 
     <div class='pre p1 fill-light mt0'>listAccountSubscriptions(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#subscription">Subscription</a>></div>
   
@@ -5766,7 +5857,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -5820,7 +5911,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -5836,7 +5927,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -5914,7 +6005,7 @@ prevent some records from being returned.
   
 
   <p>List an account's transactions</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_account_transactions">https://developers.recurly.com/api/v2018-08-09#operation/list_account_transactions</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_account_transactions">https://developers.recurly.com/api/v2019-10-10#operation/list_account_transactions</a></p>
 
     <div class='pre p1 fill-light mt0'>listAccountTransactions(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#transaction">Transaction</a>></div>
   
@@ -5966,7 +6057,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -6020,7 +6111,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -6036,7 +6127,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -6124,7 +6215,7 @@ prevent some records from being returned.
   
 
   <p>List an account's child accounts</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_child_accounts">https://developers.recurly.com/api/v2018-08-09#operation/list_child_accounts</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_child_accounts">https://developers.recurly.com/api/v2019-10-10#operation/list_child_accounts</a></p>
 
     <div class='pre p1 fill-light mt0'>listChildAccounts(accountId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#account">Account</a>></div>
   
@@ -6176,7 +6267,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -6230,7 +6321,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -6246,7 +6337,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -6262,9 +6353,22 @@ prevent some records from being returned.
 
               
                 <tr>
+  <td class='break-word'><span class='code bold'>params.email</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  </td>
+  <td class='break-word'><span>Filter for accounts with this exact email address. A blank value will return accounts with both 
+<code>null</code>
+ and 
+<code>""</code>
+ email addresses. Note that multiple accounts can share one email address.
+</span></td>
+</tr>
+
+
+              
+                <tr>
   <td class='break-word'><span class='code bold'>params.subscriber</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
   </td>
-  <td class='break-word'><span>Filter accounts with or without a subscription in the 
+  <td class='break-word'><span>Filter for accounts with or without a subscription in the 
 <code>active</code>
 ,
 
@@ -6337,7 +6441,7 @@ prevent some records from being returned.
   
 
   <p>List a site's account acquisition data</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_account_acquisition">https://developers.recurly.com/api/v2018-08-09#operation/list_account_acquisition</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_account_acquisition">https://developers.recurly.com/api/v2019-10-10#operation/list_account_acquisition</a></p>
 
     <div class='pre p1 fill-light mt0'>listAccountAcquisition(params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#accountacquisition">AccountAcquisition</a>></div>
   
@@ -6376,7 +6480,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -6430,7 +6534,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -6446,7 +6550,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -6510,7 +6614,7 @@ prevent some records from being returned.
   
 
   <p>List a site's coupons</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_coupons">https://developers.recurly.com/api/v2018-08-09#operation/list_coupons</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_coupons">https://developers.recurly.com/api/v2019-10-10#operation/list_coupons</a></p>
 
     <div class='pre p1 fill-light mt0'>listCoupons(params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#coupon">Coupon</a>></div>
   
@@ -6549,7 +6653,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -6603,7 +6707,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -6619,7 +6723,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -6693,7 +6797,7 @@ prevent some records from being returned.
   
 
   <p>Create a new coupon</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/create_coupon">https://developers.recurly.com/api/v2018-08-09#operation/create_coupon</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_coupon">https://developers.recurly.com/api/v2019-10-10#operation/create_coupon</a></p>
 
     <div class='pre p1 fill-light mt0'>createCoupon(body: CouponCreate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#coupon">Coupon</a>></div>
   
@@ -6763,7 +6867,7 @@ prevent some records from being returned.
   
 
   <p>Fetch a coupon</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/get_coupon">https://developers.recurly.com/api/v2018-08-09#operation/get_coupon</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_coupon">https://developers.recurly.com/api/v2019-10-10#operation/get_coupon</a></p>
 
     <div class='pre p1 fill-light mt0'>getCoupon(couponId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#coupon">Coupon</a>></div>
   
@@ -6856,7 +6960,7 @@ prevent some records from being returned.
   
 
   <p>Update an active coupon</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/update_coupon">https://developers.recurly.com/api/v2018-08-09#operation/update_coupon</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/update_coupon">https://developers.recurly.com/api/v2019-10-10#operation/update_coupon</a></p>
 
     <div class='pre p1 fill-light mt0'>updateCoupon(couponId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, body: CouponUpdate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#coupon">Coupon</a>></div>
   
@@ -6939,7 +7043,7 @@ prevent some records from being returned.
   
 
   <p>List unique coupon codes associated with a bulk coupon</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_unique_coupon_codes">https://developers.recurly.com/api/v2018-08-09#operation/list_unique_coupon_codes</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_unique_coupon_codes">https://developers.recurly.com/api/v2019-10-10#operation/list_unique_coupon_codes</a></p>
 
     <div class='pre p1 fill-light mt0'>listUniqueCouponCodes(couponId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#uniquecouponcode">UniqueCouponCode</a>></div>
   
@@ -6991,7 +7095,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -7045,7 +7149,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -7061,7 +7165,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -7125,7 +7229,7 @@ prevent some records from being returned.
   
 
   <p>List a site's credit payments</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_credit_payments">https://developers.recurly.com/api/v2018-08-09#operation/list_credit_payments</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_credit_payments">https://developers.recurly.com/api/v2019-10-10#operation/list_credit_payments</a></p>
 
     <div class='pre p1 fill-light mt0'>listCreditPayments(params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#creditpayment">CreditPayment</a>></div>
   
@@ -7197,7 +7301,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -7213,7 +7317,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -7287,7 +7391,7 @@ prevent some records from being returned.
   
 
   <p>Fetch a credit payment</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/get_credit_payment">https://developers.recurly.com/api/v2018-08-09#operation/get_credit_payment</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_credit_payment">https://developers.recurly.com/api/v2019-10-10#operation/get_credit_payment</a></p>
 
     <div class='pre p1 fill-light mt0'>getCreditPayment(creditPaymentId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#creditpayment">CreditPayment</a>></div>
   
@@ -7361,7 +7465,7 @@ prevent some records from being returned.
   
 
   <p>List a site's custom field definitions</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_custom_field_definitions">https://developers.recurly.com/api/v2018-08-09#operation/list_custom_field_definitions</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_custom_field_definitions">https://developers.recurly.com/api/v2019-10-10#operation/list_custom_field_definitions</a></p>
 
     <div class='pre p1 fill-light mt0'>listCustomFieldDefinitions(params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#customfielddefinition">CustomFieldDefinition</a>></div>
   
@@ -7400,7 +7504,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -7454,7 +7558,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -7470,7 +7574,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -7544,7 +7648,7 @@ prevent some records from being returned.
   
 
   <p>Fetch an custom field definition</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/get_custom_field_definition">https://developers.recurly.com/api/v2018-08-09#operation/get_custom_field_definition</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_custom_field_definition">https://developers.recurly.com/api/v2019-10-10#operation/get_custom_field_definition</a></p>
 
     <div class='pre p1 fill-light mt0'>getCustomFieldDefinition(customFieldDefinitionId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#customfielddefinition">CustomFieldDefinition</a>></div>
   
@@ -7633,7 +7737,7 @@ prevent some records from being returned.
   
 
   <p>List a site's invoices</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_invoices">https://developers.recurly.com/api/v2018-08-09#operation/list_invoices</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_invoices">https://developers.recurly.com/api/v2019-10-10#operation/list_invoices</a></p>
 
     <div class='pre p1 fill-light mt0'>listInvoices(params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#invoice">Invoice</a>></div>
   
@@ -7672,7 +7776,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -7726,7 +7830,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -7742,7 +7846,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -7831,7 +7935,7 @@ prevent some records from being returned.
   
 
   <p>Fetch an invoice</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/get_invoice">https://developers.recurly.com/api/v2018-08-09#operation/get_invoice</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_invoice">https://developers.recurly.com/api/v2019-10-10#operation/get_invoice</a></p>
 
     <div class='pre p1 fill-light mt0'>getInvoice(invoiceId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#invoice">Invoice</a>></div>
   
@@ -7924,7 +8028,7 @@ prevent some records from being returned.
   
 
   <p>Update an invoice</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/put_invoice">https://developers.recurly.com/api/v2018-08-09#operation/put_invoice</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/put_invoice">https://developers.recurly.com/api/v2019-10-10#operation/put_invoice</a></p>
 
     <div class='pre p1 fill-light mt0'>putInvoice(invoiceId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, body: InvoiceUpdatable): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#invoice">Invoice</a>></div>
   
@@ -8032,7 +8136,7 @@ prevent some records from being returned.
   
 
   <p>Collect a pending or past due, automatic invoice</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/collect_invoice">https://developers.recurly.com/api/v2018-08-09#operation/collect_invoice</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/collect_invoice">https://developers.recurly.com/api/v2019-10-10#operation/collect_invoice</a></p>
 
     <div class='pre p1 fill-light mt0'>collectInvoice(invoiceId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#invoice">Invoice</a>></div>
   
@@ -8125,7 +8229,7 @@ prevent some records from being returned.
   
 
   <p>Mark an open invoice as failed</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/fail_invoice">https://developers.recurly.com/api/v2018-08-09#operation/fail_invoice</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/fail_invoice">https://developers.recurly.com/api/v2019-10-10#operation/fail_invoice</a></p>
 
     <div class='pre p1 fill-light mt0'>failInvoice(invoiceId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#invoice">Invoice</a>></div>
   
@@ -8218,7 +8322,7 @@ prevent some records from being returned.
   
 
   <p>Mark an open invoice as successful</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/mark_invoice_successful">https://developers.recurly.com/api/v2018-08-09#operation/mark_invoice_successful</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/mark_invoice_successful">https://developers.recurly.com/api/v2019-10-10#operation/mark_invoice_successful</a></p>
 
     <div class='pre p1 fill-light mt0'>markInvoiceSuccessful(invoiceId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#invoice">Invoice</a>></div>
   
@@ -8312,7 +8416,7 @@ prevent some records from being returned.
   
 
   <p>Reopen a closed, manual invoice</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/reopen_invoice">https://developers.recurly.com/api/v2018-08-09#operation/reopen_invoice</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/reopen_invoice">https://developers.recurly.com/api/v2019-10-10#operation/reopen_invoice</a></p>
 
     <div class='pre p1 fill-light mt0'>reopenInvoice(invoiceId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#invoice">Invoice</a>></div>
   
@@ -8392,6 +8496,80 @@ prevent some records from being returned.
       </div>
     </div>
   
+    <div class='border-bottom' id='clientvoidinvoice'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>voidInvoice(invoiceId)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Void a credit invoice.</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/void_invoice">https://developers.recurly.com/api/v2019-10-10#operation/void_invoice</a></p>
+
+    <div class='pre p1 fill-light mt0'>voidInvoice(invoiceId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#invoice">Invoice</a>></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>invoiceId</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    Invoice ID or number (use prefix: 
+<code>number-</code>
+, e.g. 
+<code>number-1000</code>
+).
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#invoice">Invoice</a>></code>:
+        The updated invoice.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
     <div class='border-bottom' id='clientlistinvoicelineitems'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
@@ -8405,7 +8583,7 @@ prevent some records from being returned.
   
 
   <p>List an invoice's line items</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_invoice_line_items">https://developers.recurly.com/api/v2018-08-09#operation/list_invoice_line_items</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_invoice_line_items">https://developers.recurly.com/api/v2019-10-10#operation/list_invoice_line_items</a></p>
 
     <div class='pre p1 fill-light mt0'>listInvoiceLineItems(invoiceId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#lineitem">LineItem</a>></div>
   
@@ -8457,7 +8635,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -8511,7 +8689,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -8527,7 +8705,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -8618,7 +8796,7 @@ prevent some records from being returned.
   
 
   <p>Show the coupon redemptions applied to an invoice</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_invoice_coupon_redemptions">https://developers.recurly.com/api/v2018-08-09#operation/list_invoice_coupon_redemptions</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_invoice_coupon_redemptions">https://developers.recurly.com/api/v2019-10-10#operation/list_invoice_coupon_redemptions</a></p>
 
     <div class='pre p1 fill-light mt0'>listInvoiceCouponRedemptions(invoiceId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#couponredemption">CouponRedemption</a>></div>
   
@@ -8670,7 +8848,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -8706,7 +8884,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -8722,7 +8900,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -8786,7 +8964,7 @@ prevent some records from being returned.
   
 
   <p>List an invoice's related credit or charge invoices</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_related_invoices">https://developers.recurly.com/api/v2018-08-09#operation/list_related_invoices</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_related_invoices">https://developers.recurly.com/api/v2019-10-10#operation/list_related_invoices</a></p>
 
     <div class='pre p1 fill-light mt0'>listRelatedInvoices(invoiceId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, params: any): <a href="#pager">Pager</a>&#x3C;<a href="#invoice">Invoice</a>></div>
   
@@ -8879,7 +9057,7 @@ prevent some records from being returned.
   
 
   <p>Refund an invoice</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/refund_invoice">https://developers.recurly.com/api/v2018-08-09#operation/refund_invoice</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/refund_invoice">https://developers.recurly.com/api/v2019-10-10#operation/refund_invoice</a></p>
 
     <div class='pre p1 fill-light mt0'>refundInvoice(invoiceId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, body: InvoiceRefund): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#invoice">Invoice</a>></div>
   
@@ -8988,7 +9166,7 @@ prevent some records from being returned.
   
 
   <p>List a site's line items</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_line_items">https://developers.recurly.com/api/v2018-08-09#operation/list_line_items</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_line_items">https://developers.recurly.com/api/v2019-10-10#operation/list_line_items</a></p>
 
     <div class='pre p1 fill-light mt0'>listLineItems(params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#lineitem">LineItem</a>></div>
   
@@ -9027,7 +9205,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -9081,7 +9259,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -9097,7 +9275,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -9198,7 +9376,7 @@ prevent some records from being returned.
   
 
   <p>Fetch a line item</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/get_line_item">https://developers.recurly.com/api/v2018-08-09#operation/get_line_item</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_line_item">https://developers.recurly.com/api/v2019-10-10#operation/get_line_item</a></p>
 
     <div class='pre p1 fill-light mt0'>getLineItem(lineItemId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#lineitem">LineItem</a>></div>
   
@@ -9287,7 +9465,7 @@ prevent some records from being returned.
   
 
   <p>Delete an uninvoiced line item</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/remove_line_item">https://developers.recurly.com/api/v2018-08-09#operation/remove_line_item</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/remove_line_item">https://developers.recurly.com/api/v2019-10-10#operation/remove_line_item</a></p>
 
     <div class='pre p1 fill-light mt0'>removeLineItem(lineItemId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;Empty></div>
   
@@ -9376,7 +9554,7 @@ prevent some records from being returned.
   
 
   <p>List a site's plans</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_plans">https://developers.recurly.com/api/v2018-08-09#operation/list_plans</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_plans">https://developers.recurly.com/api/v2019-10-10#operation/list_plans</a></p>
 
     <div class='pre p1 fill-light mt0'>listPlans(params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#plan">Plan</a>></div>
   
@@ -9415,7 +9593,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -9469,7 +9647,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -9485,7 +9663,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -9568,7 +9746,7 @@ prevent some records from being returned.
   
 
   <p>Create a plan</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/create_plan">https://developers.recurly.com/api/v2018-08-09#operation/create_plan</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_plan">https://developers.recurly.com/api/v2019-10-10#operation/create_plan</a></p>
 
     <div class='pre p1 fill-light mt0'>createPlan(body: PlanCreate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#plan">Plan</a>></div>
   
@@ -9667,7 +9845,7 @@ prevent some records from being returned.
   
 
   <p>Fetch a plan</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/get_plan">https://developers.recurly.com/api/v2018-08-09#operation/get_plan</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_plan">https://developers.recurly.com/api/v2019-10-10#operation/get_plan</a></p>
 
     <div class='pre p1 fill-light mt0'>getPlan(planId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#plan">Plan</a>></div>
   
@@ -9760,7 +9938,7 @@ prevent some records from being returned.
   
 
   <p>Update a plan</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/update_plan">https://developers.recurly.com/api/v2018-08-09#operation/update_plan</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/update_plan">https://developers.recurly.com/api/v2019-10-10#operation/update_plan</a></p>
 
     <div class='pre p1 fill-light mt0'>updatePlan(planId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, body: PlanUpdate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#plan">Plan</a>></div>
   
@@ -9865,7 +10043,7 @@ prevent some records from being returned.
   
 
   <p>Remove a plan</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/remove_plan">https://developers.recurly.com/api/v2018-08-09#operation/remove_plan</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/remove_plan">https://developers.recurly.com/api/v2019-10-10#operation/remove_plan</a></p>
 
     <div class='pre p1 fill-light mt0'>removePlan(planId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#plan">Plan</a>></div>
   
@@ -9958,7 +10136,7 @@ prevent some records from being returned.
   
 
   <p>List a plan's add-ons</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_plan_add_ons">https://developers.recurly.com/api/v2018-08-09#operation/list_plan_add_ons</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_plan_add_ons">https://developers.recurly.com/api/v2019-10-10#operation/list_plan_add_ons</a></p>
 
     <div class='pre p1 fill-light mt0'>listPlanAddOns(planId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#addon">AddOn</a>></div>
   
@@ -10010,7 +10188,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -10064,7 +10242,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -10080,7 +10258,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -10153,7 +10331,7 @@ prevent some records from being returned.
   
 
   <p>Create an add-on</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/create_plan_add_on">https://developers.recurly.com/api/v2018-08-09#operation/create_plan_add_on</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_plan_add_on">https://developers.recurly.com/api/v2019-10-10#operation/create_plan_add_on</a></p>
 
     <div class='pre p1 fill-light mt0'>createPlanAddOn(planId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, body: AddOnCreate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#addon">AddOn</a>></div>
   
@@ -10236,7 +10414,7 @@ prevent some records from being returned.
   
 
   <p>Fetch a plan's add-on</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/get_plan_add_on">https://developers.recurly.com/api/v2018-08-09#operation/get_plan_add_on</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_plan_add_on">https://developers.recurly.com/api/v2019-10-10#operation/get_plan_add_on</a></p>
 
     <div class='pre p1 fill-light mt0'>getPlanAddOn(planId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, addOnId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#addon">AddOn</a>></div>
   
@@ -10323,7 +10501,7 @@ prevent some records from being returned.
   
 
   <p>Update an add-on</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/update_plan_add_on">https://developers.recurly.com/api/v2018-08-09#operation/update_plan_add_on</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/update_plan_add_on">https://developers.recurly.com/api/v2019-10-10#operation/update_plan_add_on</a></p>
 
     <div class='pre p1 fill-light mt0'>updatePlanAddOn(planId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, addOnId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, body: AddOnUpdate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#addon">AddOn</a>></div>
   
@@ -10419,7 +10597,7 @@ prevent some records from being returned.
   
 
   <p>Remove an add-on</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/remove_plan_add_on">https://developers.recurly.com/api/v2018-08-09#operation/remove_plan_add_on</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/remove_plan_add_on">https://developers.recurly.com/api/v2019-10-10#operation/remove_plan_add_on</a></p>
 
     <div class='pre p1 fill-light mt0'>removePlanAddOn(planId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, addOnId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#addon">AddOn</a>></div>
   
@@ -10506,7 +10684,7 @@ prevent some records from being returned.
   
 
   <p>List a site's add-ons</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_add_ons">https://developers.recurly.com/api/v2018-08-09#operation/list_add_ons</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_add_ons">https://developers.recurly.com/api/v2019-10-10#operation/list_add_ons</a></p>
 
     <div class='pre p1 fill-light mt0'>listAddOns(params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#addon">AddOn</a>></div>
   
@@ -10545,7 +10723,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -10599,7 +10777,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -10615,7 +10793,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -10688,7 +10866,7 @@ prevent some records from being returned.
   
 
   <p>Fetch an add-on</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/get_add_on">https://developers.recurly.com/api/v2018-08-09#operation/get_add_on</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_add_on">https://developers.recurly.com/api/v2019-10-10#operation/get_add_on</a></p>
 
     <div class='pre p1 fill-light mt0'>getAddOn(addOnId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#addon">AddOn</a>></div>
   
@@ -10749,11 +10927,11 @@ prevent some records from being returned.
       </div>
     </div>
   
-    <div class='border-bottom' id='clientlistsubscriptions'>
+    <div class='border-bottom' id='clientlistshippingmethods'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>listSubscriptions(params)</span>
+            <span class='code strong strong truncate'>listShippingMethods(params)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -10761,10 +10939,10 @@ prevent some records from being returned.
 
   
 
-  <p>List a site's subscriptions</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_subscriptions">https://developers.recurly.com/api/v2018-08-09#operation/list_subscriptions</a></p>
+  <p>List a site's shipping methods</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_shipping_methods">https://developers.recurly.com/api/v2019-10-10#operation/list_shipping_methods</a></p>
 
-    <div class='pre p1 fill-light mt0'>listSubscriptions(params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#subscription">Subscription</a>></div>
+    <div class='pre p1 fill-light mt0'>listShippingMethods(params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#shippingmethod">ShippingMethod</a>></div>
   
   
 
@@ -10801,7 +10979,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -10855,7 +11033,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -10871,7 +11049,254 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
+  </td>
+  <td class='break-word'><span>Filter by end_time when 
+<code>sort=created_at</code>
+ or 
+<code>sort=updated_at</code>
+.
+
+<strong>Note:</strong>
+ this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#pager">Pager</a>&#x3C;<a href="#shippingmethod">ShippingMethod</a>></code>:
+        A list of the site's shipping methods.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='clientgetshippingmethod'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getShippingMethod(id)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Fetch a shipping method</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_shipping_method">https://developers.recurly.com/api/v2019-10-10#operation/get_shipping_method</a></p>
+
+    <div class='pre p1 fill-light mt0'>getShippingMethod(id: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#shippingmethod">ShippingMethod</a>></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    Shipping Method ID or code (use prefix: 
+<code>code-</code>
+, e.g. 
+<code>code-usps_2-day</code>
+).
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#shippingmethod">ShippingMethod</a>></code>:
+        A shipping_method.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='clientlistsubscriptions'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>listSubscriptions(params)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>List a site's subscriptions</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_subscriptions">https://developers.recurly.com/api/v2019-10-10#operation/list_subscriptions</a></p>
+
+    <div class='pre p1 fill-light mt0'>listSubscriptions(params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#subscription">Subscription</a>></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>params</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+            = <code>{}</code>)</code>
+	    The optional url parameters for this request.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
+  </td>
+  <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
+commas as separators, e.g. 
+<code>ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6</code>
+.
+<p>  <strong>Important notes:</strong></p>
+<ul>
+<li>The <code>ids</code> parameter cannot be used with any other ordering or filtering
+parameters (<code>limit</code>, <code>order</code>, <code>sort</code>, <code>begin_time</code>, <code>end_time</code>, etc)</li>
+<li>Invalid or unknown IDs will be ignored, so you should check that the
+results correspond to your request.</li>
+<li>Records are returned in an arbitrary order. Since results are all
+returned at once you can sort the records yourself.</li>
+</ul>
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.limit</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
+  </td>
+  <td class='break-word'><span>Limit number of records 1-200.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.order</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  </td>
+  <td class='break-word'><span>Sort order.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.sort</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  </td>
+  <td class='break-word'><span>Sort field. You 
+<em>really</em>
+ only want to sort by 
+<code>updated_at</code>
+ in ascending
+order. In descending order updated records will move behind the cursor and could
+prevent some records from being returned.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
+  </td>
+  <td class='break-word'><span>Filter by begin_time when 
+<code>sort=created_at</code>
+ or 
+<code>sort=updated_at</code>
+.
+
+<strong>Note:</strong>
+ this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -10959,7 +11384,7 @@ prevent some records from being returned.
   
 
   <p>Create a new subscription</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/create_subscription">https://developers.recurly.com/api/v2018-08-09#operation/create_subscription</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_subscription">https://developers.recurly.com/api/v2019-10-10#operation/create_subscription</a></p>
 
     <div class='pre p1 fill-light mt0'>createSubscription(body: SubscriptionCreate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#subscription">Subscription</a>></div>
   
@@ -11055,7 +11480,7 @@ prevent some records from being returned.
   
 
   <p>Fetch a subscription</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/get_subscription">https://developers.recurly.com/api/v2018-08-09#operation/get_subscription</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_subscription">https://developers.recurly.com/api/v2019-10-10#operation/get_subscription</a></p>
 
     <div class='pre p1 fill-light mt0'>getSubscription(subscriptionId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#subscription">Subscription</a>></div>
   
@@ -11148,7 +11573,7 @@ prevent some records from being returned.
   
 
   <p>Modify a subscription</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/modify_subscription">https://developers.recurly.com/api/v2018-08-09#operation/modify_subscription</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/modify_subscription">https://developers.recurly.com/api/v2019-10-10#operation/modify_subscription</a></p>
 
     <div class='pre p1 fill-light mt0'>modifySubscription(subscriptionId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, body: SubscriptionUpdate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#subscription">Subscription</a>></div>
   
@@ -11255,7 +11680,7 @@ prevent some records from being returned.
   
 
   <p>Terminate a subscription</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/terminate_subscription">https://developers.recurly.com/api/v2018-08-09#operation/terminate_subscription</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/terminate_subscription">https://developers.recurly.com/api/v2019-10-10#operation/terminate_subscription</a></p>
 
     <div class='pre p1 fill-light mt0'>terminateSubscription(subscriptionId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#subscription">Subscription</a>></div>
   
@@ -11396,7 +11821,7 @@ prevent some records from being returned.
   
 
   <p>Cancel a subscription</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/cancel_subscription">https://developers.recurly.com/api/v2018-08-09#operation/cancel_subscription</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/cancel_subscription">https://developers.recurly.com/api/v2019-10-10#operation/cancel_subscription</a></p>
 
     <div class='pre p1 fill-light mt0'>cancelSubscription(subscriptionId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#subscription">Subscription</a>></div>
   
@@ -11489,7 +11914,7 @@ prevent some records from being returned.
   
 
   <p>Reactivate a canceled subscription</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/reactivate_subscription">https://developers.recurly.com/api/v2018-08-09#operation/reactivate_subscription</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/reactivate_subscription">https://developers.recurly.com/api/v2019-10-10#operation/reactivate_subscription</a></p>
 
     <div class='pre p1 fill-light mt0'>reactivateSubscription(subscriptionId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#subscription">Subscription</a>></div>
   
@@ -11583,7 +12008,7 @@ prevent some records from being returned.
   
 
   <p>Pause subscription</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/pause_subscription">https://developers.recurly.com/api/v2018-08-09#operation/pause_subscription</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/pause_subscription">https://developers.recurly.com/api/v2019-10-10#operation/pause_subscription</a></p>
 
     <div class='pre p1 fill-light mt0'>pauseSubscription(subscriptionId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, body: SubscriptionPause): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#subscription">Subscription</a>></div>
   
@@ -11666,7 +12091,7 @@ prevent some records from being returned.
   
 
   <p>Resume subscription</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/resume_subscription">https://developers.recurly.com/api/v2018-08-09#operation/resume_subscription</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/resume_subscription">https://developers.recurly.com/api/v2019-10-10#operation/resume_subscription</a></p>
 
     <div class='pre p1 fill-light mt0'>resumeSubscription(subscriptionId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#subscription">Subscription</a>></div>
   
@@ -11740,7 +12165,7 @@ prevent some records from being returned.
   
 
   <p>Fetch a subscription's pending change</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/get_subscription_change">https://developers.recurly.com/api/v2018-08-09#operation/get_subscription_change</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_subscription_change">https://developers.recurly.com/api/v2019-10-10#operation/get_subscription_change</a></p>
 
     <div class='pre p1 fill-light mt0'>getSubscriptionChange(subscriptionId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#subscriptionchange">SubscriptionChange</a>></div>
   
@@ -11833,7 +12258,7 @@ prevent some records from being returned.
   
 
   <p>Create a new subscription change</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/create_subscription_change">https://developers.recurly.com/api/v2018-08-09#operation/create_subscription_change</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_subscription_change">https://developers.recurly.com/api/v2019-10-10#operation/create_subscription_change</a></p>
 
     <div class='pre p1 fill-light mt0'>createSubscriptionChange(subscriptionId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, body: SubscriptionChangeCreate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#subscriptionchange">SubscriptionChange</a>></div>
   
@@ -11940,7 +12365,7 @@ prevent some records from being returned.
   
 
   <p>Delete the pending subscription change</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/remove_subscription_change">https://developers.recurly.com/api/v2018-08-09#operation/remove_subscription_change</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/remove_subscription_change">https://developers.recurly.com/api/v2019-10-10#operation/remove_subscription_change</a></p>
 
     <div class='pre p1 fill-light mt0'>removeSubscriptionChange(subscriptionId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;Empty></div>
   
@@ -12033,7 +12458,7 @@ prevent some records from being returned.
   
 
   <p>List a subscription's invoices</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_subscription_invoices">https://developers.recurly.com/api/v2018-08-09#operation/list_subscription_invoices</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_subscription_invoices">https://developers.recurly.com/api/v2019-10-10#operation/list_subscription_invoices</a></p>
 
     <div class='pre p1 fill-light mt0'>listSubscriptionInvoices(subscriptionId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#invoice">Invoice</a>></div>
   
@@ -12085,7 +12510,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -12139,7 +12564,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -12155,7 +12580,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -12234,7 +12659,7 @@ prevent some records from being returned.
   
 
   <p>List a subscription's line items</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_subscription_line_items">https://developers.recurly.com/api/v2018-08-09#operation/list_subscription_line_items</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_subscription_line_items">https://developers.recurly.com/api/v2019-10-10#operation/list_subscription_line_items</a></p>
 
     <div class='pre p1 fill-light mt0'>listSubscriptionLineItems(subscriptionId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#lineitem">LineItem</a>></div>
   
@@ -12286,7 +12711,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -12340,7 +12765,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -12356,7 +12781,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -12447,7 +12872,7 @@ prevent some records from being returned.
   
 
   <p>Show the coupon redemptions for a subscription</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_subscription_coupon_redemptions">https://developers.recurly.com/api/v2018-08-09#operation/list_subscription_coupon_redemptions</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_subscription_coupon_redemptions">https://developers.recurly.com/api/v2019-10-10#operation/list_subscription_coupon_redemptions</a></p>
 
     <div class='pre p1 fill-light mt0'>listSubscriptionCouponRedemptions(subscriptionId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#couponredemption">CouponRedemption</a>></div>
   
@@ -12499,7 +12924,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -12535,7 +12960,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -12551,7 +12976,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -12615,7 +13040,7 @@ prevent some records from being returned.
   
 
   <p>List a site's transactions</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/list_transactions">https://developers.recurly.com/api/v2018-08-09#operation/list_transactions</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_transactions">https://developers.recurly.com/api/v2019-10-10#operation/list_transactions</a></p>
 
     <div class='pre p1 fill-light mt0'>listTransactions(params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="#pager">Pager</a>&#x3C;<a href="#transaction">Transaction</a>></div>
   
@@ -12654,7 +13079,7 @@ prevent some records from being returned.
             <tbody class='mt1'>
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>
+  <td class='break-word'><span class='code bold'>params.ids</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>
   </td>
   <td class='break-word'><span>Filter results by their IDs. Up to 200 IDs can be passed at once using
 commas as separators, e.g. 
@@ -12708,7 +13133,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.beginTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by begin_time when 
 <code>sort=created_at</code>
@@ -12724,7 +13149,7 @@ prevent some records from being returned.
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  <td class='break-word'><span class='code bold'>params.endTime</span> <code class='quiet'>datetime</code>
   </td>
   <td class='break-word'><span>Filter by end_time when 
 <code>sort=created_at</code>
@@ -12822,7 +13247,7 @@ prevent some records from being returned.
   
 
   <p>Fetch a transaction</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/get_transaction">https://developers.recurly.com/api/v2018-08-09#operation/get_transaction</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_transaction">https://developers.recurly.com/api/v2019-10-10#operation/get_transaction</a></p>
 
     <div class='pre p1 fill-light mt0'>getTransaction(transactionId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#transaction">Transaction</a>></div>
   
@@ -12915,7 +13340,7 @@ prevent some records from being returned.
   
 
   <p>Fetch a unique coupon code</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/get_unique_coupon_code">https://developers.recurly.com/api/v2018-08-09#operation/get_unique_coupon_code</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_unique_coupon_code">https://developers.recurly.com/api/v2019-10-10#operation/get_unique_coupon_code</a></p>
 
     <div class='pre p1 fill-light mt0'>getUniqueCouponCode(uniqueCouponCodeId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#uniquecouponcode">UniqueCouponCode</a>></div>
   
@@ -12989,7 +13414,7 @@ prevent some records from being returned.
   
 
   <p>Deactivate a unique coupon code</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/deactivate_unique_coupon_code">https://developers.recurly.com/api/v2018-08-09#operation/deactivate_unique_coupon_code</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/deactivate_unique_coupon_code">https://developers.recurly.com/api/v2019-10-10#operation/deactivate_unique_coupon_code</a></p>
 
     <div class='pre p1 fill-light mt0'>deactivateUniqueCouponCode(uniqueCouponCodeId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#uniquecouponcode">UniqueCouponCode</a>></div>
   
@@ -13063,7 +13488,7 @@ prevent some records from being returned.
   
 
   <p>Restore a unique coupon code</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/reactivate_unique_coupon_code">https://developers.recurly.com/api/v2018-08-09#operation/reactivate_unique_coupon_code</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/reactivate_unique_coupon_code">https://developers.recurly.com/api/v2019-10-10#operation/reactivate_unique_coupon_code</a></p>
 
     <div class='pre p1 fill-light mt0'>reactivateUniqueCouponCode(uniqueCouponCodeId: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#uniquecouponcode">UniqueCouponCode</a>></div>
   
@@ -13137,7 +13562,7 @@ prevent some records from being returned.
   
 
   <p>Create a new purchase</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/create_purchase">https://developers.recurly.com/api/v2018-08-09#operation/create_purchase</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_purchase">https://developers.recurly.com/api/v2019-10-10#operation/create_purchase</a></p>
 
     <div class='pre p1 fill-light mt0'>createPurchase(body: PurchaseCreate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#invoicecollection">InvoiceCollection</a>></div>
   
@@ -13241,7 +13666,7 @@ prevent some records from being returned.
   
 
   <p>Preview a new purchase</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2018-08-09#operation/preview_purchase">https://developers.recurly.com/api/v2018-08-09#operation/preview_purchase</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/preview_purchase">https://developers.recurly.com/api/v2019-10-10#operation/preview_purchase</a></p>
 
     <div class='pre p1 fill-light mt0'>previewPurchase(body: PurchaseCreate): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#invoicecollection">InvoiceCollection</a>></div>
   
@@ -15071,16 +15496,12 @@ need and we will usher them to the appropriate places.</p>
       
         <div class='space-bottom0'>
           <span class='code bold'>taxCode</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-          : Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature 
-<code>P0000000</code>
- is 
-<code>physical</code>
-, 
-<code>D0000000</code>
- is 
-<code>digital</code>
-, and an empty string is 
+          : Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use 
 <code>unknown</code>
+, 
+<code>physical</code>
+, or 
+<code>digital</code>
 .
 
           
@@ -16078,6 +16499,17 @@ need and we will usher them to the appropriate places.</p>
         </div>
       
         <div class='space-bottom0'>
+          <span class='code bold'>plans</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#planmini">PlanMini</a>>)</code>
+          : A list of plans for which this coupon applies. This will be 
+<code>null</code>
+ if 
+<code>applies_to_all_plans=true</code>
+.
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
           <span class='code bold'>plansNames</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>)</code>
           : TODO
 
@@ -16844,7 +17276,7 @@ need and we will usher them to the appropriate places.</p>
         </div>
       
         <div class='space-bottom0'>
-          <span class='code bold'>discounted</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          <span class='code bold'>discounted</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
           : The amount that was discounted upon the application of the coupon, formatted with the currency.
 
           
@@ -17001,7 +17433,7 @@ need and we will usher them to the appropriate places.</p>
         </div>
       
         <div class='space-bottom0'>
-          <span class='code bold'>discounted</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          <span class='code bold'>discounted</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
           : The amount that was discounted upon the application of the coupon, formatted with the currency.
 
           
@@ -18166,6 +18598,12 @@ need and we will usher them to the appropriate places.</p>
         </div>
       
         <div class='space-bottom0'>
+          <span class='code bold'>shippingAddress</span> <code class='quiet'>(<a href="#shippingaddress">ShippingAddress</a>)</code>
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
           <span class='code bold'>state</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
           : Invoice state
 
@@ -19032,16 +19470,12 @@ need and we will usher them to the appropriate places.</p>
       
         <div class='space-bottom0'>
           <span class='code bold'>taxCode</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-          : Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature 
-<code>P0000000</code>
- is 
-<code>physical</code>
-, 
-<code>D0000000</code>
- is 
-<code>digital</code>
-, and an empty string is 
+          : Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use 
 <code>unknown</code>
+, 
+<code>physical</code>
+, or 
+<code>digital</code>
 .
 
           
@@ -19395,6 +19829,13 @@ need and we will usher them to the appropriate places.</p>
           
         </div>
       
+        <div class='space-bottom0'>
+          <span class='code bold'>routingNumberBank</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          : The bank name of this routing number.
+
+          
+        </div>
+      
     </div>
   
 
@@ -19616,16 +20057,12 @@ need and we will usher them to the appropriate places.</p>
       
         <div class='space-bottom0'>
           <span class='code bold'>taxCode</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-          : Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature 
-<code>P0000000</code>
- is 
-<code>physical</code>
-, 
-<code>D0000000</code>
- is 
-<code>digital</code>
-, and an empty string is 
+          : Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use 
 <code>unknown</code>
+, 
+<code>physical</code>
+, or 
+<code>digital</code>
 .
 
           
@@ -20504,6 +20941,308 @@ need and we will usher them to the appropriate places.</p>
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='shippingmethod'>
+      ShippingMethod
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>ShippingMethod</p>
+
+    <div class='pre p1 fill-light mt0'>ShippingMethod</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>code</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          : The internal name used identify the shipping method.
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>createdAt</span> <code class='quiet'>(datetime)</code>
+          : Created at
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>deletedAt</span> <code class='quiet'>(datetime)</code>
+          : Deleted at
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>id</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          : Shipping Method ID
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>name</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          : The name of the shipping method displayed to customers.
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>taxCode</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          : Used by Avalara, Vertex, and Recurly’s built-in tax feature. The tax code values are specific to each tax system. If you are using Recurly’s built-in taxes the values are:  - 
+<code>FR</code>
+ – Common Carrier FOB Destination - 
+<code>FR022000</code>
+ – Common Carrier FOB Origin - 
+<code>FR020400</code>
+ – Non Common Carrier FOB Destination - 
+<code>FR020500</code>
+ – Non Common Carrier FOB Origin - 
+<code>FR010100</code>
+ – Delivery by Company Vehicle Before Passage of Title - 
+<code>FR010200</code>
+ – Delivery by Company Vehicle After Passage of Title - 
+<code>NT</code>
+ – Non-Taxable
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>updatedAt</span> <code class='quiet'>(datetime)</code>
+          : Last updated at
+
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id=''>
+      
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This file is automatically created by Recurly's OpenAPI generation process
+and thus any edits you make by hand will be lost. If you wish to make a
+change to this file, please create a Github issue explaining the changes you
+need and we will usher them to the appropriate places.</p>
+
+    <div class='pre p1 fill-light mt0'></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='shippingmethodmini'>
+      ShippingMethodMini
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>ShippingMethodMini</p>
+
+    <div class='pre p1 fill-light mt0'>ShippingMethodMini</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>code</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          : The internal name used identify the shipping method.
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>id</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          : Shipping Method ID
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>name</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          : The name of the shipping method displayed to customers.
+
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id=''>
+      
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This file is automatically created by Recurly's OpenAPI generation process
+and thus any edits you make by hand will be lost. If you wish to make a
+change to this file, please create a Github issue explaining the changes you
+need and we will usher them to the appropriate places.</p>
+
+    <div class='pre p1 fill-light mt0'></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='site'>
       Site
     </h3>
@@ -20922,7 +21661,7 @@ need and we will usher them to the appropriate places.</p>
         </div>
       
         <div class='space-bottom0'>
-          <span class='code bold'>shippingAddress</span> <code class='quiet'>(<a href="#shippingaddress">ShippingAddress</a>)</code>
+          <span class='code bold'>shipping</span> <code class='quiet'>(<a href="#subscriptionshipping">SubscriptionShipping</a>)</code>
           
           
         </div>
@@ -21325,6 +22064,12 @@ need and we will usher them to the appropriate places.</p>
         </div>
       
         <div class='space-bottom0'>
+          <span class='code bold'>shipping</span> <code class='quiet'>(<a href="#subscriptionshipping">SubscriptionShipping</a>)</code>
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
           <span class='code bold'>subscriptionId</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
           : The ID of the subscription that is going to be changed.
 
@@ -21342,6 +22087,134 @@ need and we will usher them to the appropriate places.</p>
           <span class='code bold'>updatedAt</span> <code class='quiet'>(datetime)</code>
           : Updated at
 
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id=''>
+      
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This file is automatically created by Recurly's OpenAPI generation process
+and thus any edits you make by hand will be lost. If you wish to make a
+change to this file, please create a Github issue explaining the changes you
+need and we will usher them to the appropriate places.</p>
+
+    <div class='pre p1 fill-light mt0'></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='subscriptionshipping'>
+      SubscriptionShipping
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>SubscriptionShipping</p>
+
+    <div class='pre p1 fill-light mt0'>SubscriptionShipping</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>address</span> <code class='quiet'>(<a href="#shippingaddress">ShippingAddress</a>)</code>
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>amount</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+          : Subscription's shipping cost
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>method</span> <code class='quiet'>(<a href="#shippingmethodmini">ShippingMethodMini</a>)</code>
+          
           
         </div>
       
