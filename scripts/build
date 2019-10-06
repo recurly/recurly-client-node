@@ -2,4 +2,7 @@
 set -e
 
 npm install
-./node_modules/.bin/documentation build lib/**  --format html --output docs
+./node_modules/.bin/documentation build lib/**  --format html --output docs --theme node_modules/documentation-theme-light --config documentation.yml
+# append custom css to doc build's css
+cat doc/custom.css >> docs/assets/style.css
+cat doc/custom.css >> docs/assets/styles.min.css
