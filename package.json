@@ -1,6 +1,6 @@
 {
   "name": "recurly",
-  "version": "3.0.0-beta.5",
+  "version": "3.0.0",
   "description": "Recurly V3 node client",
   "main": "lib/recurly.js",
   "scripts": {

@@ -2,20 +2,20 @@
 
 This library is published on npm under the name `recurly`.
 
-We recommend manually inserting and scoping the dependency into the `dependencies` section of your `package.json`:
+We recommend installing via the command line:
+
+```
+npm install recurly --save-prod
+```
+
+Or manually insert the dependency into the `dependencies` section of your `package.json`:
 
 ```
 {
   // ...
-  "recurly" : "3.0.0-beta.5"
+  "recurly" : "^3.0.0"
   // ...
 }
-```
-
-Or install via the command line:
-
-```
-npm install recurly@3.0.0-beta.5 --save-prod
 ```
 
 ## Creating a client
