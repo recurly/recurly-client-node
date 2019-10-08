@@ -61,13 +61,25 @@ Keep in mind that the api accepts snake-cased keys but this library expects came
 We do the translation for you so this library can conform to js style standards.
 
 ```js
-client.createAccount({
+
+try {
+  const acctReq = {
     code: 'new-account-code',
     firstName: 'Benjamin',
     lastName: 'Du Monde'
-  })
-  .then(account => console.log(account.id))
-  .catch(console.log)
+  }
+  const account = await client.createAccount(acctReq)
+} catch (err) {
+  if (err && err instanceof recurly.errors.ValidationError) {
+    // If the request was not valid, you may want to tell your user
+    // why. You can find the invalid params and reasons in err.params
+    console.log('Failed validation', err.params)
+  } else {
+    // If we don't know what to do with the err, we should
+    // probably re-raise and let our web framework and logger handle it
+    console.log('Unknown Error: ', err)
+  }
+}
 ```
 
 ## Pagination
