@@ -1993,13 +1993,24 @@ You can handle the promises directly with <code>then</code> and <code>catch</cod
 <p>For creating or updating resources, pass a json object to one of the create<em> or update</em> methods.
 Keep in mind that the api accepts snake-cased keys but this library expects camel-cased keys.
 We do the translation for you so this library can conform to js style standards.</p>
-<pre class='hljs'>client.createAccount({
+<pre class='hljs'><span class="hljs-keyword">try</span> {
+  <span class="hljs-keyword">const</span> acctReq = {
     <span class="hljs-attr">code</span>: <span class="hljs-string">'new-account-code'</span>,
     <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Benjamin'</span>,
     <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Du Monde'</span>
-  })
-  .then(<span class="hljs-function"><span class="hljs-params">account</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(account.id))
-  .catch(<span class="hljs-built_in">console</span>.log)</pre>
+  }
+  <span class="hljs-keyword">const</span> account = <span class="hljs-keyword">await</span> client.createAccount(acctReq)
+} <span class="hljs-keyword">catch</span> (err) {
+  <span class="hljs-keyword">if</span> (err &amp;&amp; err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
+    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
+    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
+  }
+}</pre>
 <h2>Pagination</h2>
 <p>All <code>list*</code> methods on the client return a <code>Pager</code>. They
 are not <code>async</code> because they are lazy and do not make any
