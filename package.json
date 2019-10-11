@@ -3,6 +3,7 @@
   "version": "3.0.0",
   "description": "Recurly V3 node client",
   "main": "lib/recurly.js",
+  "types": "lib/recurly.d.ts",
   "scripts": {
     "test": "./scripts/test"
   },
@@ -15,6 +16,7 @@
     "documentation-theme-light": "^1.1.0",
     "mocha": "^5.2.0",
     "nyc": "^14.1.1",
-    "standard": "^12.0.1"
+    "standard": "^12.0.1",
+    "typescript": "^3.6.4"
   }
 }
