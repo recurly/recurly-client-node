@@ -3,6 +3,7 @@ const Resource = require('../lib/recurly/Resource')
 class MyResource extends Resource {
   static getSchema () {
     return {
+      id: String,
       myString: String,
       myInt: Number,
       myFloat: Number,
