@@ -6,7 +6,11 @@
   "scripts": {
     "test": "./scripts/test"
   },
-  "author": "Benjamin Eckel <ben@recurly.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/recurly/recurly-client-node.git"
+  },
+  "author": "DX Team <dx@recurly.com>",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
