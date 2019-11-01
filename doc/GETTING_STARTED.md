@@ -1,4 +1,4 @@
-## Installing
+### Installing
 
 This library is published on npm under the name `recurly`.
 
@@ -18,7 +18,7 @@ Or manually insert the dependency into the `dependencies` section of your `packa
 }
 ```
 
-## Creating a client
+### Creating a client
 
 A client object represents a connection to the Recurly API. The client implements
 each `operation` that can be performed in the API as a method.
@@ -33,7 +33,7 @@ const myApiKey = '<myapikey>'
 const client = new recurly.Client(myApiKey)
 ```
 
-## Operations
+### Operations
 
 All operations are `async` and return promises (except the `list*` methods which return `Pager`s).
 You can handle the promises directly with `then` and `catch` or use await:
@@ -54,7 +54,7 @@ async function myFunc () {
 }
 ```
 
-## Creating Resources
+### Creating Resources
 
 For creating or updating resources, pass a json object to one of the create* or update* methods.
 Keep in mind that the api accepts snake-cased keys but this library expects camel-cased keys.
@@ -82,7 +82,7 @@ try {
 }
 ```
 
-## Pagination
+### Pagination
 
 All `list*` methods on the client return a `Pager`. They
 are not `async` because they are lazy and do not make any
@@ -166,7 +166,8 @@ const count = await accounts.count()
 // => 573
 ```
 
-## Error Handling
+
+### Error Handling
 
 This library currently throws 1 primary class of exceptions, recurly.ApiError.
 The ApiError comes in a few flavors which help you determine what to do next. To see a full list, view the [api_errors module](lib/recurly/api_errors.js).
@@ -197,7 +198,7 @@ try {
   }
 }
 ```
-## HTTP Metadata
+### HTTP Metadata
 
 Sometimes you might want to get some additional information about the underlying HTTP request and response. Instead of
 returning this information directly and forcing the programmer to unwrap it, we inject this metadata into the top level
@@ -237,7 +238,7 @@ try {
 }
 ```
 
-## Webhooks
+### Webhooks
 
 Recurly can send webhooks to any publicly accessible server. When an event in Recurly triggers
 a webhook (e.g., an account is opened), Recurly will attempt to send this notification to the

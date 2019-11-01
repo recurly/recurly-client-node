@@ -1955,7 +1955,7 @@
     </h2>
 
     
-      <h2>Installing</h2>
+      <h3>Installing</h3>
 <p>This library is published on npm under the name <code>recurly</code>.</p>
 <p>We recommend installing via the command line:</p>
 <pre><code>npm install recurly --save-prod
@@ -1967,7 +1967,7 @@
   // ...
 }
 </code></pre>
-<h2>Creating a client</h2>
+<h3>Creating a client</h3>
 <p>A client object represents a connection to the Recurly API. The client implements
 each <code>operation</code> that can be performed in the API as a method.</p>
 <p>To initialize a client, you only need an API key which can be obtained on the <a href="https://app.recurly.com/go/integrations/api_keys">API Credentials Page</a>.</p>
@@ -1976,7 +1976,7 @@ each <code>operation</code> that can be performed in the API as a method.</p>
 <span class="hljs-comment">// and not in plain text if possible</span>
 <span class="hljs-keyword">const</span> myApiKey = <span class="hljs-string">'&lt;myapikey&gt;'</span>
 <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> recurly.Client(myApiKey)</pre>
-<h2>Operations</h2>
+<h3>Operations</h3>
 <p>All operations are <code>async</code> and return promises (except the <code>list*</code> methods which return <code>Pager</code>s).
 You can handle the promises directly with <code>then</code> and <code>catch</code> or use await:</p>
 <pre class='hljs'>client.getAccount(<span class="hljs-string">'code-benjamin'</span>)
@@ -1989,7 +1989,7 @@ You can handle the promises directly with <code>then</code> and <code>catch</cod
     <span class="hljs-comment">// handle err from client</span>
   }
 }</pre>
-<h2>Creating Resources</h2>
+<h3>Creating Resources</h3>
 <p>For creating or updating resources, pass a json object to one of the create<em> or update</em> methods.
 Keep in mind that the api accepts snake-cased keys but this library expects camel-cased keys.
 We do the translation for you so this library can conform to js style standards.</p>
@@ -2011,7 +2011,7 @@ We do the translation for you so this library can conform to js style standards.
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
   }
 }</pre>
-<h2>Pagination</h2>
+<h3>Pagination</h3>
 <p>All <code>list*</code> methods on the client return a <code>Pager</code>. They
 are not <code>async</code> because they are lazy and do not make any
 network requests until they are iterated over. There are
@@ -2077,7 +2077,7 @@ method respects any filtering parameters you apply to the pager, but the sorting
 
 <span class="hljs-keyword">const</span> count = <span class="hljs-keyword">await</span> accounts.count()
 <span class="hljs-comment">// =&gt; 573</span></pre>
-<h2>Error Handling</h2>
+<h3>Error Handling</h3>
 <p>This library currently throws 1 primary class of exceptions, recurly.ApiError.
 The ApiError comes in a few flavors which help you determine what to do next. To see a full list, view the <a href="lib/recurly/api_errors.js">api_errors module</a>.</p>
 <pre class='hljs'><span class="hljs-keyword">try</span> {
@@ -2104,7 +2104,7 @@ The ApiError comes in a few flavors which help you determine what to do next. To
     }
   }
 }</pre>
-<h2>HTTP Metadata</h2>
+<h3>HTTP Metadata</h3>
 <p>Sometimes you might want to get some additional information about the underlying HTTP request and response. Instead of
 returning this information directly and forcing the programmer to unwrap it, we inject this metadata into the top level
 resource that was returned. You can access the response by calling <code>getResponse()</code> on any Resource.</p>
@@ -2129,7 +2129,7 @@ response.request.body <span class="hljs-comment">// null</span></pre>
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
   }
 }</pre>
-<h2>Webhooks</h2>
+<h3>Webhooks</h3>
 <p>Recurly can send webhooks to any publicly accessible server. When an event in Recurly triggers
 a webhook (e.g., an account is opened), Recurly will attempt to send this notification to the
 endpoint(s) you specify.  You can specify up to 10 endpoints through the application. All
