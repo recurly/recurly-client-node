@@ -38,7 +38,7 @@ describe('Http', () => {
         const resp = Response.build(mockHttpResponse(), bodyChunks, req)
         assert.equal(resp.request, req)
         assert.equal(resp.status, 200)
-        assert.deepEqual(resp.body, { id: 'myid', object: 'my_resource' })
+        assert.deepEqual(JSON.parse(resp.body), { id: 'myid', object: 'my_resource' })
         assert.equal(resp.requestId, 'requestid')
         assert.equal(resp.rateLimit, 2000)
         assert.equal(resp.rateLimitRemaining, 1999)

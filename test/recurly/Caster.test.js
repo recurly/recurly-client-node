@@ -7,26 +7,26 @@ const resources = require('../../lib/recurly/resources')
 const Empty = resources.Empty
 
 describe('Caster', () => {
-  describe('#castResponse', () => {
+  describe('#castJsonResponse', () => {
     it('Should return Empty for undefined or null arguments', () => {
-      assert(caster.castResponse(null) instanceof Empty)
-      assert(caster.castResponse(undefined) instanceof Empty)
+      assert(caster.castJsonResponse(null) instanceof Empty)
+      assert(caster.castJsonResponse(undefined) instanceof Empty)
     })
 
     it('Should cast an Account', () => {
-      const account = caster.castResponse({
+      const account = caster.castJsonResponse(JSON.stringify({
         object: 'account',
         address: {
           city: 'New Orleans'
         }
-      })
+      }))
 
       assert(account instanceof resources.Account)
       assert(account.address instanceof resources.Address)
     })
 
     it('Should cast a Page of data', () => {
-      const page = caster.castResponse({
+      const page = caster.castJsonResponse(JSON.stringify({
         object: 'list',
         has_more: true,
         next: '/accounts',
@@ -46,7 +46,7 @@ describe('Caster', () => {
             }
           }
         ]
-      })
+      }))
 
       assert(page instanceof resources.List)
       assert.equal(page.constructor.name, 'Page')

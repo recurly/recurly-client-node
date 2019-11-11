@@ -40,7 +40,7 @@ describe('BaseClient', () => {
       client.mock((resp, options) => {
         if (options.path === '/resources/myid') {
           resp.status = 200
-          resp.body = { id: 'myid', object: 'my_resource' }
+          resp.body = JSON.stringify({ id: 'myid', object: 'my_resource' })
         } else {
           resp.status = 404
           resp.body = { error: { type: 'not_found' } }
