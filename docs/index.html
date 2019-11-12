@@ -315,6 +315,42 @@
 							</a>
 							
 							<a
+									href='#clientlistitems'
+									class='button-indent regular block'>
+								<code>#listItems</code>
+							</a>
+							
+							<a
+									href='#clientcreateitem'
+									class='button-indent regular block'>
+								<code>#createItem</code>
+							</a>
+							
+							<a
+									href='#clientgetitem'
+									class='button-indent regular block'>
+								<code>#getItem</code>
+							</a>
+							
+							<a
+									href='#clientupdateitem'
+									class='button-indent regular block'>
+								<code>#updateItem</code>
+							</a>
+							
+							<a
+									href='#clientdeactivateitem'
+									class='button-indent regular block'>
+								<code>#deactivateItem</code>
+							</a>
+							
+							<a
+									href='#clientreactivateitem'
+									class='button-indent regular block'>
+								<code>#reactivateItem</code>
+							</a>
+							
+							<a
 									href='#clientlistinvoices'
 									class='button-indent regular block'>
 								<code>#listInvoices</code>
@@ -937,28 +973,6 @@
 						
 						
 						<a
-								href='#addonpricing'
-								class="regular block">
-							<code>AddOnPricing</code>
-							
-						</a>
-						
-						
-						
-						
-						
-						<a
-								href='#'
-								class="regular block">
-							<code></code>
-							
-						</a>
-						
-						
-						
-						
-						
-						<a
 								href='#address'
 								class="regular block">
 							<code>Address</code>
@@ -1399,6 +1413,28 @@
 						
 						
 						<a
+								href='#item'
+								class="regular block">
+							<code>Item</code>
+							
+						</a>
+						
+						
+						
+						
+						
+						<a
+								href='#'
+								class="regular block">
+							<code></code>
+							
+						</a>
+						
+						
+						
+						
+						
+						<a
 								href='#lineitem'
 								class="regular block">
 							<code>LineItem</code>
@@ -1534,6 +1570,28 @@
 								href='#planpricing'
 								class="regular block">
 							<code>PlanPricing</code>
+							
+						</a>
+						
+						
+						
+						
+						
+						<a
+								href='#'
+								class="regular block">
+							<code></code>
+							
+						</a>
+						
+						
+						
+						
+						
+						<a
+								href='#pricing'
+								class="regular block">
+							<code>Pricing</code>
 							
 						</a>
 						
@@ -2255,7 +2313,7 @@ Read more about the security implications of parsing untrusted XML in <a href="h
 	</h3>
 
 	<p>List sites</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_sites">https://developers.recurly.com/api/v2019-10-10#operation/list_sites</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_sites">https://developers.recurly.com/api/v2999-01-01#operation/list_sites</a></p>
 
 	
 
@@ -2373,16 +2431,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">const</span> sites = client.listSites({ <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
-
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> site <span class="hljs-keyword">of</span> sites.each()) {
-  <span class="hljs-built_in">console</span>.log(site.subdomain)
-}</code></pre>
-	
-	
 
 	
 
@@ -2411,7 +2459,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Fetch a site</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_site">https://developers.recurly.com/api/v2019-10-10#operation/get_site</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_site">https://developers.recurly.com/api/v2999-01-01#operation/get_site</a></p>
 
 	
 
@@ -2436,11 +2484,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Site ID or subdomain (use prefix: 
+			<td class='col-6'>Site ID or subdomain. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For subdomain use prefix 
 <code>subdomain-</code>
 , e.g. 
 <code>subdomain-recurly</code>
-).
+.
 </td>
 		</tr>
 		
@@ -2492,7 +2542,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List a site's accounts</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_accounts">https://developers.recurly.com/api/v2019-10-10#operation/list_accounts</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_accounts">https://developers.recurly.com/api/v2999-01-01#operation/list_accounts</a></p>
 
 	
 
@@ -2697,16 +2747,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">const</span> accounts = client.listAccounts({ <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
-
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> account <span class="hljs-keyword">of</span> accounts.each()) {
-  <span class="hljs-built_in">console</span>.log(account.code)
-}</code></pre>
-	
-	
 
 	
 
@@ -2735,7 +2775,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Create an account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_account">https://developers.recurly.com/api/v2019-10-10#operation/create_account</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/create_account">https://developers.recurly.com/api/v2999-01-01#operation/create_account</a></p>
 
 	
 
@@ -2784,37 +2824,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> accountCreate = {
-    <span class="hljs-attr">code</span>: accountCode,
-    <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Benjamin'</span>,
-    <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Du Monde'</span>,
-    <span class="hljs-attr">address</span>: {
-      <span class="hljs-attr">street1</span>: <span class="hljs-string">'900 Camp St'</span>,
-      <span class="hljs-attr">city</span>: <span class="hljs-string">'New Orleans'</span>,
-      <span class="hljs-attr">region</span>: <span class="hljs-string">'LA'</span>,
-      <span class="hljs-attr">postalCode</span>: <span class="hljs-string">'70115'</span>,
-      <span class="hljs-attr">country</span>: <span class="hljs-string">'US'</span>
-    }
-  }
-  <span class="hljs-keyword">const</span> account = <span class="hljs-keyword">await</span> client.createAccount(accountCreate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created Account: '</span>, account.code)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -2843,7 +2852,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Fetch an account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_account">https://developers.recurly.com/api/v2019-10-10#operation/get_account</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_account">https://developers.recurly.com/api/v2999-01-01#operation/get_account</a></p>
 
 	
 
@@ -2868,11 +2877,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -2895,25 +2906,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> account = <span class="hljs-keyword">await</span> client.getAccount(accountId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched account: '</span>, account.code)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -2943,7 +2935,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Modify an account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/update_account">https://developers.recurly.com/api/v2019-10-10#operation/update_account</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/update_account">https://developers.recurly.com/api/v2999-01-01#operation/update_account</a></p>
 
 	
 
@@ -2968,11 +2960,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -3007,29 +3001,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> accountUpdate = {
-    <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Aaron'</span>,
-    <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Du Monde'</span>
-  }
-  <span class="hljs-keyword">const</span> account = <span class="hljs-keyword">await</span> client.updateAccount(accountId, accountUpdate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Updated account: '</span>, account)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -3058,7 +3029,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Deactivate an account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/deactivate_account">https://developers.recurly.com/api/v2019-10-10#operation/deactivate_account</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/deactivate_account">https://developers.recurly.com/api/v2999-01-01#operation/deactivate_account</a></p>
 
 	
 
@@ -3083,11 +3054,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -3110,24 +3083,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> account = <span class="hljs-keyword">await</span> client.deactivateAccount(accountId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Deleted account: '</span>, account.code)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not-found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</code></pre>
-	
 	
 
 	
@@ -3157,7 +3112,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Fetch an account's acquisition data</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_account_acquisition">https://developers.recurly.com/api/v2019-10-10#operation/get_account_acquisition</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_account_acquisition">https://developers.recurly.com/api/v2999-01-01#operation/get_account_acquisition</a></p>
 
 	
 
@@ -3182,11 +3137,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -3209,25 +3166,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> acquisition = <span class="hljs-keyword">await</span> client.getAccountAcquisition(accountId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched account acquisition: '</span>, acquisition.id)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -3257,7 +3195,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Update an account's acquisition data</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/update_account_acquisition">https://developers.recurly.com/api/v2019-10-10#operation/update_account_acquisition</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/update_account_acquisition">https://developers.recurly.com/api/v2999-01-01#operation/update_account_acquisition</a></p>
 
 	
 
@@ -3282,11 +3220,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -3321,30 +3261,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> acquisitionUpdate = {
-    <span class="hljs-attr">campaign</span>: <span class="hljs-string">"big-event-campaign"</span>,
-    <span class="hljs-attr">channel</span>: <span class="hljs-string">"social_media"</span>,
-    <span class="hljs-attr">subchannel</span>: <span class="hljs-string">"twitter"</span>
-  }
-  <span class="hljs-keyword">const</span> accountAcquisition = <span class="hljs-keyword">await</span> client.updateAccountAcquisition(accountId, acquisitionUpdate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Edited Account Acquisition: '</span>, accountAcquisition)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -3373,7 +3289,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Remove an account's acquisition data</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/remove_account_acquisition">https://developers.recurly.com/api/v2019-10-10#operation/remove_account_acquisition</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/remove_account_acquisition">https://developers.recurly.com/api/v2999-01-01#operation/remove_account_acquisition</a></p>
 
 	
 
@@ -3398,11 +3314,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -3425,25 +3343,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">await</span> client.removeAccountAcquisition(accountId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Removed account acquisition from account: '</span>, accountId)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -3473,7 +3372,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Reactivate an inactive account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/reactivate_account">https://developers.recurly.com/api/v2019-10-10#operation/reactivate_account</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/reactivate_account">https://developers.recurly.com/api/v2999-01-01#operation/reactivate_account</a></p>
 
 	
 
@@ -3498,11 +3397,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -3525,24 +3426,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> account = <span class="hljs-keyword">await</span> client.reactivateAccount(accountId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Reactivated account: '</span>, account.code)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err.type === <span class="hljs-string">'not_found'</span>) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  }
-  <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-  <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-  <span class="hljs-keyword">throw</span> err
-}</code></pre>
-	
 	
 
 	
@@ -3572,7 +3455,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Fetch an account's balance and past due status</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_account_balance">https://developers.recurly.com/api/v2019-10-10#operation/get_account_balance</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_account_balance">https://developers.recurly.com/api/v2999-01-01#operation/get_account_balance</a></p>
 
 	
 
@@ -3597,11 +3480,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -3624,25 +3509,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> balance = <span class="hljs-keyword">await</span> client.getAccountBalance(accountId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched account balance: '</span>, balance.balances)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -3672,7 +3538,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Fetch an account's billing information</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_billing_info">https://developers.recurly.com/api/v2019-10-10#operation/get_billing_info</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_billing_info">https://developers.recurly.com/api/v2999-01-01#operation/get_billing_info</a></p>
 
 	
 
@@ -3697,11 +3563,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -3724,25 +3592,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> billingInfo = <span class="hljs-keyword">await</span> client.getBillingInfo(accountId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched Billing Info: '</span>, billingInfo.id)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -3772,7 +3621,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Set an account's billing information</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/update_billing_info">https://developers.recurly.com/api/v2019-10-10#operation/update_billing_info</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/update_billing_info">https://developers.recurly.com/api/v2999-01-01#operation/update_billing_info</a></p>
 
 	
 
@@ -3797,11 +3646,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -3836,29 +3687,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> billingInfoUpdate = {
-    <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Aaron'</span>,
-    <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Du Monde'</span>,
-  }
-  <span class="hljs-keyword">const</span> billingInfo = <span class="hljs-keyword">await</span> client.updateBillingInfo(accountId, billingInfoUpdate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Updated billing info: '</span>, billingInfo.id)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -3887,7 +3715,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Remove an account's billing information</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/remove_billing_info">https://developers.recurly.com/api/v2019-10-10#operation/remove_billing_info</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/remove_billing_info">https://developers.recurly.com/api/v2999-01-01#operation/remove_billing_info</a></p>
 
 	
 
@@ -3912,11 +3740,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -3939,25 +3769,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  client.removeBillingInfo(accountId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Removed billing info from account: '</span>, accountId)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -3987,7 +3798,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Show the coupon redemptions for an account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_account_coupon_redemptions">https://developers.recurly.com/api/v2019-10-10#operation/list_account_coupon_redemptions</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_account_coupon_redemptions">https://developers.recurly.com/api/v2999-01-01#operation/list_account_coupon_redemptions</a></p>
 
 	
 
@@ -4012,11 +3823,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -4162,7 +3975,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Show the coupon redemption that is active on an account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_active_coupon_redemption">https://developers.recurly.com/api/v2019-10-10#operation/get_active_coupon_redemption</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_active_coupon_redemption">https://developers.recurly.com/api/v2999-01-01#operation/get_active_coupon_redemption</a></p>
 
 	
 
@@ -4187,11 +4000,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -4214,25 +4029,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> redemption = <span class="hljs-keyword">await</span> client.getActiveCouponRedemption(accountId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched coupon redemption: '</span>, redemption.id)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -4262,7 +4058,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Generate an active coupon redemption on an account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_coupon_redemption">https://developers.recurly.com/api/v2019-10-10#operation/create_coupon_redemption</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/create_coupon_redemption">https://developers.recurly.com/api/v2999-01-01#operation/create_coupon_redemption</a></p>
 
 	
 
@@ -4287,11 +4083,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -4354,7 +4152,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Delete the active coupon redemption from an account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/remove_coupon_redemption">https://developers.recurly.com/api/v2019-10-10#operation/remove_coupon_redemption</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/remove_coupon_redemption">https://developers.recurly.com/api/v2999-01-01#operation/remove_coupon_redemption</a></p>
 
 	
 
@@ -4379,11 +4177,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -4435,7 +4235,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List an account's credit payments</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_account_credit_payments">https://developers.recurly.com/api/v2019-10-10#operation/list_account_credit_payments</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_account_credit_payments">https://developers.recurly.com/api/v2999-01-01#operation/list_account_credit_payments</a></p>
 
 	
 
@@ -4460,11 +4260,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -4582,16 +4384,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">const</span> payments = client.listAccountCreditPayments(accountId, { <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
-
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> payment <span class="hljs-keyword">of</span> payments.each()) {
-  <span class="hljs-built_in">console</span>.log(payment.uuid)
-}</code></pre>
-	
-	
 
 	
 
@@ -4620,7 +4412,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List an account's invoices</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_account_invoices">https://developers.recurly.com/api/v2019-10-10#operation/list_account_invoices</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_account_invoices">https://developers.recurly.com/api/v2999-01-01#operation/list_account_invoices</a></p>
 
 	
 
@@ -4645,11 +4437,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -4837,7 +4631,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Create an invoice for pending line items</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_invoice">https://developers.recurly.com/api/v2019-10-10#operation/create_invoice</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/create_invoice">https://developers.recurly.com/api/v2999-01-01#operation/create_invoice</a></p>
 
 	
 
@@ -4862,11 +4656,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -4901,31 +4697,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">let</span> invoiceCreate = {
-    <span class="hljs-attr">currency</span>: <span class="hljs-string">'USD'</span>,
-    <span class="hljs-attr">collectionMethod</span>: <span class="hljs-string">'automatic'</span>
-  }
-  <span class="hljs-keyword">let</span> invoiceCollection = <span class="hljs-keyword">await</span> client.createInvoice(accountId, invoiceCreate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created Invoice'</span>)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Charge Invoice: '</span>, invoiceCollection.chargeInvoice)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Credit Invoices: '</span>, invoiceCollection.creditInvoices)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -4954,7 +4725,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Preview new invoice for pending line items</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/preview_invoice">https://developers.recurly.com/api/v2019-10-10#operation/preview_invoice</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/preview_invoice">https://developers.recurly.com/api/v2999-01-01#operation/preview_invoice</a></p>
 
 	
 
@@ -4979,11 +4750,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -5018,31 +4791,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> collection = <span class="hljs-keyword">await</span> client.previewInvoice(accountId, {
-    <span class="hljs-attr">currency</span>: <span class="hljs-string">"USD"</span>,
-    <span class="hljs-attr">collectionMethod</span>: <span class="hljs-string">"automatic"</span>
-  })
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Previewed invoice due at <span class="hljs-subst">${collection.chargeInvoice.dueAt}</span>`</span>)
-  <span class="hljs-built_in">console</span>.log(collection.chargeInvoice)
-  <span class="hljs-built_in">console</span>.log(collection.creditInvoices)
-} <span class="hljs-keyword">catch</span>(err) {
-
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -5071,7 +4819,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List an account's line items</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_account_line_items">https://developers.recurly.com/api/v2019-10-10#operation/list_account_line_items</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_account_line_items">https://developers.recurly.com/api/v2999-01-01#operation/list_account_line_items</a></p>
 
 	
 
@@ -5096,11 +4844,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -5306,7 +5056,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Create a new line item for the account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_line_item">https://developers.recurly.com/api/v2019-10-10#operation/create_line_item</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/create_line_item">https://developers.recurly.com/api/v2999-01-01#operation/create_line_item</a></p>
 
 	
 
@@ -5331,11 +5081,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -5370,30 +5122,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">let</span> lineItemReq = {
-    <span class="hljs-attr">currency</span>: <span class="hljs-string">'USD'</span>,
-    <span class="hljs-attr">unitAmount</span>: <span class="hljs-number">1000</span>,
-    <span class="hljs-attr">type</span>: <span class="hljs-string">'charge'</span> <span class="hljs-comment">// choose "credit" for a credit</span>
-  }
-  <span class="hljs-keyword">let</span> lineItem = <span class="hljs-keyword">await</span> client.createLineItem(accountId, lineItemReq)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created Line Item: '</span>, lineItem.uuid)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -5422,7 +5150,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Fetch a list of an account's notes</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_account_notes">https://developers.recurly.com/api/v2019-10-10#operation/list_account_notes</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_account_notes">https://developers.recurly.com/api/v2999-01-01#operation/list_account_notes</a></p>
 
 	
 
@@ -5447,11 +5175,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -5513,16 +5243,6 @@ returned at once you can sort the records yourself.</li>
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">const</span> notes = client.listAccountNotes(accountId, { <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
-
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> note <span class="hljs-keyword">of</span> notes.each()) {
-  <span class="hljs-built_in">console</span>.log(note.message)
-}</code></pre>
-	
-	
 
 	
 
@@ -5551,7 +5271,7 @@ returned at once you can sort the records yourself.</li>
 	</h3>
 
 	<p>Fetch an account note</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_account_note">https://developers.recurly.com/api/v2019-10-10#operation/get_account_note</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_account_note">https://developers.recurly.com/api/v2999-01-01#operation/get_account_note</a></p>
 
 	
 
@@ -5576,11 +5296,13 @@ returned at once you can sort the records yourself.</li>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -5615,26 +5337,6 @@ returned at once you can sort the records yourself.</li>
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-built_in">console</span>.log(accountId)
-  <span class="hljs-keyword">const</span> note = <span class="hljs-keyword">await</span> client.getAccountNote(accountId, accountNoteId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched account note: '</span>, note.message)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -5663,7 +5365,7 @@ returned at once you can sort the records yourself.</li>
 	</h3>
 
 	<p>Fetch a list of an account's shipping addresses</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_shipping_addresses">https://developers.recurly.com/api/v2019-10-10#operation/list_shipping_addresses</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_shipping_addresses">https://developers.recurly.com/api/v2999-01-01#operation/list_shipping_addresses</a></p>
 
 	
 
@@ -5688,11 +5390,13 @@ returned at once you can sort the records yourself.</li>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -5834,16 +5538,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">const</span> addresses = client.listShippingAddresses(accountId, { <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
-
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> address <span class="hljs-keyword">of</span> addresses.each()) {
-  <span class="hljs-built_in">console</span>.log(address.street1)
-}</code></pre>
-	
-	
 
 	
 
@@ -5872,7 +5566,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Create a new shipping address for the account</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_shipping_address">https://developers.recurly.com/api/v2019-10-10#operation/create_shipping_address</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/create_shipping_address">https://developers.recurly.com/api/v2999-01-01#operation/create_shipping_address</a></p>
 
 	
 
@@ -5897,11 +5591,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -5936,34 +5632,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> shippingAddressCreate = {
-    <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Aaron'</span>,
-    <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Du Monde'</span>,
-    <span class="hljs-attr">street1</span>: <span class="hljs-string">'900 Camp St.'</span>,
-    <span class="hljs-attr">city</span>: <span class="hljs-string">'New Orleans'</span>,
-    <span class="hljs-attr">region</span>: <span class="hljs-string">'LA'</span>,
-    <span class="hljs-attr">postalCode</span>: <span class="hljs-string">'70115'</span>,
-    <span class="hljs-attr">country</span>: <span class="hljs-string">'US'</span>
-  }
-  <span class="hljs-keyword">const</span> address = <span class="hljs-keyword">await</span> client.createShippingAddress(accountId, shippingAddressCreate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created shipping address: '</span>, address.street1)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -5992,7 +5660,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Fetch an account's shipping address</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_shipping_address">https://developers.recurly.com/api/v2019-10-10#operation/get_shipping_address</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_shipping_address">https://developers.recurly.com/api/v2999-01-01#operation/get_shipping_address</a></p>
 
 	
 
@@ -6017,11 +5685,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -6056,25 +5726,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> address = <span class="hljs-keyword">await</span> client.getShippingAddress(accountId, shippingAddressId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched shipping address: '</span>, address.street1)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -6103,7 +5754,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Update an account's shipping address</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/update_shipping_address">https://developers.recurly.com/api/v2019-10-10#operation/update_shipping_address</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/update_shipping_address">https://developers.recurly.com/api/v2999-01-01#operation/update_shipping_address</a></p>
 
 	
 
@@ -6128,11 +5779,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -6178,29 +5831,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> shadUpdate = {
-    <span class="hljs-attr">firstName</span>: <span class="hljs-string">"Benjamin"</span>,
-    <span class="hljs-attr">lastName</span>: <span class="hljs-string">"Du Monde"</span>
-  }
-  <span class="hljs-keyword">const</span> address = <span class="hljs-keyword">await</span> client.updateShippingAddress(accountId, shippingAddressId, shadUpdate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Updated shipping address: '</span>, address.street1)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -6229,7 +5859,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Remove an account's shipping address</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/remove_shipping_address">https://developers.recurly.com/api/v2019-10-10#operation/remove_shipping_address</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/remove_shipping_address">https://developers.recurly.com/api/v2999-01-01#operation/remove_shipping_address</a></p>
 
 	
 
@@ -6254,11 +5884,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -6293,25 +5925,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">await</span> client.removeShippingAddress(accountId, shippingAddress.id)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Removed shipping address: '</span>, shippingAddress.street1)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -6340,7 +5953,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List an account's subscriptions</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_account_subscriptions">https://developers.recurly.com/api/v2019-10-10#operation/list_account_subscriptions</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_account_subscriptions">https://developers.recurly.com/api/v2999-01-01#operation/list_account_subscriptions</a></p>
 
 	
 
@@ -6365,11 +5978,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -6556,7 +6171,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List an account's transactions</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_account_transactions">https://developers.recurly.com/api/v2019-10-10#operation/list_account_transactions</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_account_transactions">https://developers.recurly.com/api/v2999-01-01#operation/list_account_transactions</a></p>
 
 	
 
@@ -6581,11 +6196,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -6785,7 +6402,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List an account's child accounts</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_child_accounts">https://developers.recurly.com/api/v2019-10-10#operation/list_child_accounts</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_child_accounts">https://developers.recurly.com/api/v2999-01-01#operation/list_child_accounts</a></p>
 
 	
 
@@ -6810,11 +6427,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Account ID or code (use prefix: 
+			<td class='col-6'>Account ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-bob</code>
-).
+.
 </td>
 		</tr>
 		
@@ -7033,7 +6652,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List a site's account acquisition data</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_account_acquisition">https://developers.recurly.com/api/v2019-10-10#operation/list_account_acquisition</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_account_acquisition">https://developers.recurly.com/api/v2999-01-01#operation/list_account_acquisition</a></p>
 
 	
 
@@ -7217,7 +6836,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List a site's coupons</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_coupons">https://developers.recurly.com/api/v2019-10-10#operation/list_coupons</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_coupons">https://developers.recurly.com/api/v2999-01-01#operation/list_coupons</a></p>
 
 	
 
@@ -7373,16 +6992,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">const</span> coupons = client.listCoupons({ <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
-
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> coupon <span class="hljs-keyword">of</span> coupons.each()) {
-  <span class="hljs-built_in">console</span>.log(coupon.code)
-}</code></pre>
-	
-	
 
 	
 
@@ -7411,7 +7020,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Create a new coupon</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_coupon">https://developers.recurly.com/api/v2019-10-10#operation/create_coupon</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/create_coupon">https://developers.recurly.com/api/v2999-01-01#operation/create_coupon</a></p>
 
 	
 
@@ -7488,7 +7097,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Fetch a coupon</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_coupon">https://developers.recurly.com/api/v2019-10-10#operation/get_coupon</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_coupon">https://developers.recurly.com/api/v2999-01-01#operation/get_coupon</a></p>
 
 	
 
@@ -7513,11 +7122,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Coupon ID or code (use prefix: 
+			<td class='col-6'>Coupon ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-10off</code>
-).
+.
 </td>
 		</tr>
 		
@@ -7540,25 +7151,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> coupon = <span class="hljs-keyword">await</span> client.getCoupon(couponId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched coupon: '</span>, coupon.code)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -7588,7 +7180,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Update an active coupon</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/update_coupon">https://developers.recurly.com/api/v2019-10-10#operation/update_coupon</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/update_coupon">https://developers.recurly.com/api/v2999-01-01#operation/update_coupon</a></p>
 
 	
 
@@ -7613,11 +7205,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Coupon ID or code (use prefix: 
+			<td class='col-6'>Coupon ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-10off</code>
-).
+.
 </td>
 		</tr>
 		
@@ -7680,7 +7274,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List unique coupon codes associated with a bulk coupon</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_unique_coupon_codes">https://developers.recurly.com/api/v2019-10-10#operation/list_unique_coupon_codes</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_unique_coupon_codes">https://developers.recurly.com/api/v2999-01-01#operation/list_unique_coupon_codes</a></p>
 
 	
 
@@ -7705,11 +7299,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Coupon ID or code (use prefix: 
+			<td class='col-6'>Coupon ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-10off</code>
-).
+.
 </td>
 		</tr>
 		
@@ -7879,7 +7475,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List a site's credit payments</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_credit_payments">https://developers.recurly.com/api/v2019-10-10#operation/list_credit_payments</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_credit_payments">https://developers.recurly.com/api/v2999-01-01#operation/list_credit_payments</a></p>
 
 	
 
@@ -8011,16 +7607,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">const</span> payments = client.listCreditPayments({ <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
-
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> payment <span class="hljs-keyword">of</span> payments.each()) {
-  <span class="hljs-built_in">console</span>.log(payment.uuid)
-}</code></pre>
-	
-	
 
 	
 
@@ -8049,7 +7635,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Fetch a credit payment</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_credit_payment">https://developers.recurly.com/api/v2019-10-10#operation/get_credit_payment</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_credit_payment">https://developers.recurly.com/api/v2999-01-01#operation/get_credit_payment</a></p>
 
 	
 
@@ -8074,11 +7660,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Credit Payment ID or UUID (use prefix: 
+			<td class='col-6'>Credit Payment ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -8130,7 +7718,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List a site's custom field definitions</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_custom_field_definitions">https://developers.recurly.com/api/v2019-10-10#operation/list_custom_field_definitions</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_custom_field_definitions">https://developers.recurly.com/api/v2999-01-01#operation/list_custom_field_definitions</a></p>
 
 	
 
@@ -8265,6 +7853,18 @@ prevent some records from being returned.
 
 
 		
+		<tr>
+  <td class='col-2 strong'>params.relatedType</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+    
+  </td>
+  <td class='col-8'>Filter by related type.
+</td>
+</tr>
+
+
+		
 		
 		
 	</table>
@@ -8285,16 +7885,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">const</span> definitions = client.listCustomFieldDefinitions({ <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
-
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> definition <span class="hljs-keyword">of</span> definitions.each()) {
-  <span class="hljs-built_in">console</span>.log(definition.displayName)
-}</code></pre>
-	
 	
 
 	
@@ -8324,7 +7914,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Fetch an custom field definition</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_custom_field_definition">https://developers.recurly.com/api/v2019-10-10#operation/get_custom_field_definition</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_custom_field_definition">https://developers.recurly.com/api/v2999-01-01#operation/get_custom_field_definition</a></p>
 
 	
 
@@ -8373,24 +7963,621 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='clientlistitems'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#clientlistitems'>
+			<code>
+				listItems
+				<span class='gray'>(params)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>List a site's items</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_items">https://developers.recurly.com/api/v2999-01-01#operation/list_items</a></p>
+
+	
+
 	
 	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> definition = <span class="hljs-keyword">await</span> client.getCustomFieldDefinition(definitionId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched custom field definition: '</span>, definition.displayName)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
 	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>params</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+				
+				= <code>{}</code>
+			</td>
+			<td class='col-6'>The optional url parameters for this request.
+</td>
+		</tr>
+		
+		
+		<tr>
+  <td class='col-2 strong'>params.ids</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>
+    
+  </td>
+  <td class='col-8'>Filter results by their IDs. Up to 200 IDs can be passed at once using
+commas as separators, e.g. 
+<code>ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6</code>
+.
+<p>  <strong>Important notes:</strong></p>
+<ul>
+<li>The <code>ids</code> parameter cannot be used with any other ordering or filtering
+parameters (<code>limit</code>, <code>order</code>, <code>sort</code>, <code>begin_time</code>, <code>end_time</code>, etc)</li>
+<li>Invalid or unknown IDs will be ignored, so you should check that the
+results correspond to your request.</li>
+<li>Records are returned in an arbitrary order. Since results are all
+returned at once you can sort the records yourself.</li>
+</ul>
+</td>
+</tr>
+
+
+		
+		<tr>
+  <td class='col-2 strong'>params.limit</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+    
+  </td>
+  <td class='col-8'>Limit number of records 1-200.
+</td>
+</tr>
+
+
+		
+		<tr>
+  <td class='col-2 strong'>params.order</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+    
+  </td>
+  <td class='col-8'>Sort order.
+</td>
+</tr>
+
+
+		
+		<tr>
+  <td class='col-2 strong'>params.sort</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+    
+  </td>
+  <td class='col-8'>Sort field. You 
+<em>really</em>
+ only want to sort by 
+<code>updated_at</code>
+ in ascending
+order. In descending order updated records will move behind the cursor and could
+prevent some records from being returned.
+</td>
+</tr>
+
+
+		
+		<tr>
+  <td class='col-2 strong'>params.beginTime</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>
+    
+  </td>
+  <td class='col-8'>Filter by begin_time when 
+<code>sort=created_at</code>
+ or 
+<code>sort=updated_at</code>
+.
+
+<strong>Note:</strong>
+ this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
+</td>
+</tr>
+
+
+		
+		<tr>
+  <td class='col-2 strong'>params.endTime</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>
+    
+  </td>
+  <td class='col-8'>Filter by end_time when 
+<code>sort=created_at</code>
+ or 
+<code>sort=updated_at</code>
+.
+
+<strong>Note:</strong>
+ this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
+</td>
+</tr>
+
+
+		
+		<tr>
+  <td class='col-2 strong'>params.state</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+    
+  </td>
+  <td class='col-8'>Filter by state.
+</td>
+</tr>
+
+
+		
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="#pager">Pager</a>&#x3C;<a href="#item">Item</a>></code>
+	:
+	<span class='force-inline'>A list of the site's items.
+</span>
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='clientcreateitem'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#clientcreateitem'>
+			<code>
+				createItem
+				<span class='gray'>(body)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Create a new item</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/create_item">https://developers.recurly.com/api/v2999-01-01#operation/create_item</a></p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>body</code></td>
+			<td class='col-3 quiet'>
+				ItemCreate
+				
+			</td>
+			<td class='col-6'>The object representing the JSON request to send to the server. It should conform to the schema of {ItemCreate}
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#item">Item</a>></code>
+	:
+	<span class='force-inline'>A new item.
+</span>
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='clientgetitem'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#clientgetitem'>
+			<code>
+				getItem
+				<span class='gray'>(itemId)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Fetch an item</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_item">https://developers.recurly.com/api/v2999-01-01#operation/get_item</a></p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>itemId</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-6'>Item ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
+<code>code-</code>
+, e.g. 
+<code>code-red</code>
+.
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#item">Item</a>></code>
+	:
+	<span class='force-inline'>An item.
+</span>
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='clientupdateitem'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#clientupdateitem'>
+			<code>
+				updateItem
+				<span class='gray'>(itemId, body)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Update an active item</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/update_item">https://developers.recurly.com/api/v2999-01-01#operation/update_item</a></p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>itemId</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-6'>Item ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
+<code>code-</code>
+, e.g. 
+<code>code-red</code>
+.
+</td>
+		</tr>
+		
+		
+		<tr>
+			<td class='col-3 strong'><code>body</code></td>
+			<td class='col-3 quiet'>
+				ItemUpdate
+				
+			</td>
+			<td class='col-6'>The object representing the JSON request to send to the server. It should conform to the schema of {ItemUpdate}
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#item">Item</a>></code>
+	:
+	<span class='force-inline'>The updated item.
+</span>
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='clientdeactivateitem'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#clientdeactivateitem'>
+			<code>
+				deactivateItem
+				<span class='gray'>(itemId)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Deactivate an item</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/deactivate_item">https://developers.recurly.com/api/v2999-01-01#operation/deactivate_item</a></p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>itemId</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-6'>Item ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
+<code>code-</code>
+, e.g. 
+<code>code-red</code>
+.
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#item">Item</a>></code>
+	:
+	<span class='force-inline'>An item.
+</span>
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='clientreactivateitem'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#clientreactivateitem'>
+			<code>
+				reactivateItem
+				<span class='gray'>(itemId)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Reactivate an inactive item</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/reactivate_item">https://developers.recurly.com/api/v2999-01-01#operation/reactivate_item</a></p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>itemId</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-6'>Item ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
+<code>code-</code>
+, e.g. 
+<code>code-red</code>
+.
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#item">Item</a>></code>
+	:
+	<span class='force-inline'>An item.
+</span>
+	
+	
+	
+
+	
+
 	
 
 	
@@ -8420,7 +8607,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List a site's invoices</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_invoices">https://developers.recurly.com/api/v2019-10-10#operation/list_invoices</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_invoices">https://developers.recurly.com/api/v2999-01-01#operation/list_invoices</a></p>
 
 	
 
@@ -8594,16 +8781,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">const</span> invoices = client.listInvoices({ <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
-
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> invoice <span class="hljs-keyword">of</span> invoices.each()) {
-  <span class="hljs-built_in">console</span>.log(invoice.number)
-}</code></pre>
-	
-	
 
 	
 
@@ -8632,7 +8809,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Fetch an invoice</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_invoice">https://developers.recurly.com/api/v2019-10-10#operation/get_invoice</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_invoice">https://developers.recurly.com/api/v2999-01-01#operation/get_invoice</a></p>
 
 	
 
@@ -8657,11 +8834,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
@@ -8684,25 +8863,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.getInvoice(invoiceId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched Invoice: '</span>, invoice.number)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -8732,7 +8892,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Update an invoice</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/put_invoice">https://developers.recurly.com/api/v2019-10-10#operation/put_invoice</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/put_invoice">https://developers.recurly.com/api/v2999-01-01#operation/put_invoice</a></p>
 
 	
 
@@ -8757,11 +8917,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
@@ -8796,31 +8958,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> invoiceUpdate = {
-    <span class="hljs-attr">customerNotes</span>: <span class="hljs-string">"New notes"</span>,
-    <span class="hljs-attr">termsAndConditions</span>: <span class="hljs-string">"New terms and conditions"</span>
-  }
-
-  <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.putInvoice(invoiceId, invoiceUpdate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Edited invoice: '</span>, invoice.number)
-} <span class="hljs-keyword">catch</span>(err) {
-
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -8843,13 +8980,13 @@ prevent some records from being returned.
 		<a class='black' href='#clientcollectinvoice'>
 			<code>
 				collectInvoice
-				<span class='gray'>(invoiceId, body)</span>
+				<span class='gray'>(invoiceId, params)</span>
 			</code>
 		</a>
 	</h3>
 
 	<p>Collect a pending or past due, automatic invoice</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/collect_invoice">https://developers.recurly.com/api/v2019-10-10#operation/collect_invoice</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/collect_invoice">https://developers.recurly.com/api/v2999-01-01#operation/collect_invoice</a></p>
 
 	
 
@@ -8874,24 +9011,41 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
 		
 		<tr>
-			<td class='col-3 strong'><code>body</code></td>
+			<td class='col-3 strong'><code>params</code></td>
 			<td class='col-3 quiet'>
-				InvoiceCollect
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
 				
+				= <code>{}</code>
 			</td>
-			<td class='col-6'>The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceCollect}
+			<td class='col-6'>The optional url parameters for this request.
 </td>
 		</tr>
+		
+		
+		<tr>
+  <td class='col-2 strong'>params.body</td>
+  <td class="col-2 quiet">
+    InvoiceCollect
+    
+  </td>
+  <td class='col-8'>The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceCollect}
+</td>
+</tr>
+
+
+		
 		
 		
 	</table>
@@ -8912,25 +9066,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.collectInvoice(invoiceId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Collected invoice: '</span>, invoice.number)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -8960,7 +9095,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Mark an open invoice as failed</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/fail_invoice">https://developers.recurly.com/api/v2019-10-10#operation/fail_invoice</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/fail_invoice">https://developers.recurly.com/api/v2999-01-01#operation/fail_invoice</a></p>
 
 	
 
@@ -8985,11 +9120,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
@@ -9012,25 +9149,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.failInvoice(invoiceId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed invoice: '</span>, invoice.number)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -9060,7 +9178,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Mark an open invoice as successful</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/mark_invoice_successful">https://developers.recurly.com/api/v2019-10-10#operation/mark_invoice_successful</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/mark_invoice_successful">https://developers.recurly.com/api/v2999-01-01#operation/mark_invoice_successful</a></p>
 
 	
 
@@ -9085,11 +9203,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
@@ -9112,26 +9232,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.markInvoiceSuccessful(invoiceId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Marked invoice #<span class="hljs-subst">${invoice.number}</span> successful`</span>)
-} <span class="hljs-keyword">catch</span>(err) {
-
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -9161,7 +9261,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Reopen a closed, manual invoice</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/reopen_invoice">https://developers.recurly.com/api/v2019-10-10#operation/reopen_invoice</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/reopen_invoice">https://developers.recurly.com/api/v2999-01-01#operation/reopen_invoice</a></p>
 
 	
 
@@ -9186,11 +9286,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
@@ -9213,25 +9315,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.reopenInvoice(invoiceId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Reopened invoice: '</span>, invoice.number)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -9261,7 +9344,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Void a credit invoice.</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/void_invoice">https://developers.recurly.com/api/v2019-10-10#operation/void_invoice</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/void_invoice">https://developers.recurly.com/api/v2999-01-01#operation/void_invoice</a></p>
 
 	
 
@@ -9286,11 +9369,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
@@ -9342,7 +9427,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List an invoice's line items</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_invoice_line_items">https://developers.recurly.com/api/v2019-10-10#operation/list_invoice_line_items</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_invoice_line_items">https://developers.recurly.com/api/v2999-01-01#operation/list_invoice_line_items</a></p>
 
 	
 
@@ -9367,11 +9452,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
@@ -9577,7 +9664,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Show the coupon redemptions applied to an invoice</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_invoice_coupon_redemptions">https://developers.recurly.com/api/v2019-10-10#operation/list_invoice_coupon_redemptions</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_invoice_coupon_redemptions">https://developers.recurly.com/api/v2999-01-01#operation/list_invoice_coupon_redemptions</a></p>
 
 	
 
@@ -9602,11 +9689,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
@@ -9752,7 +9841,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List an invoice's related credit or charge invoices</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_related_invoices">https://developers.recurly.com/api/v2019-10-10#operation/list_related_invoices</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_related_invoices">https://developers.recurly.com/api/v2999-01-01#operation/list_related_invoices</a></p>
 
 	
 
@@ -9777,11 +9866,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
@@ -9816,16 +9907,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">const</span> invoices = client.listRelatedInvoices(invoiceId, { <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
-
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> invoice <span class="hljs-keyword">of</span> invoices.each()) {
-  <span class="hljs-built_in">console</span>.log(invoice.number)
-}</code></pre>
-	
-	
 
 	
 
@@ -9854,7 +9935,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Refund an invoice</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/refund_invoice">https://developers.recurly.com/api/v2019-10-10#operation/refund_invoice</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/refund_invoice">https://developers.recurly.com/api/v2999-01-01#operation/refund_invoice</a></p>
 
 	
 
@@ -9879,11 +9960,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Invoice ID or number (use prefix: 
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
 <code>number-</code>
 , e.g. 
 <code>number-1000</code>
-).
+.
 </td>
 		</tr>
 		
@@ -9918,32 +10001,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> invoiceRefund = {
-    <span class="hljs-attr">creditCustomerNotes</span>: <span class="hljs-string">"Notes on credits"</span>,
-    <span class="hljs-attr">type</span>: <span class="hljs-string">"amount"</span>, <span class="hljs-comment">// could also be "line_items"</span>
-    amount: <span class="hljs-number">100</span>
-  }
-
-  <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.refundInvoice(invoiceId, invoiceRefund)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Refunded invoice: '</span>, invoice.number)
-} <span class="hljs-keyword">catch</span>(err) {
-
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -9972,7 +10029,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List a site's line items</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_line_items">https://developers.recurly.com/api/v2019-10-10#operation/list_line_items</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_line_items">https://developers.recurly.com/api/v2999-01-01#operation/list_line_items</a></p>
 
 	
 
@@ -10164,16 +10221,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">const</span> lineItems = client.listLineItems({ <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
-
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> item <span class="hljs-keyword">of</span> lineItems.each()) {
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Item <span class="hljs-subst">${item.id}</span> for <span class="hljs-subst">${item.amount}</span>`</span>)
-}</code></pre>
-	
-	
 
 	
 
@@ -10202,7 +10249,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Fetch a line item</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_line_item">https://developers.recurly.com/api/v2019-10-10#operation/get_line_item</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_line_item">https://developers.recurly.com/api/v2999-01-01#operation/get_line_item</a></p>
 
 	
 
@@ -10251,25 +10298,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> lineItem = <span class="hljs-keyword">await</span> client.getLineItem(lineItemId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched line item: '</span>, lineItem.uuid)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -10298,7 +10326,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Delete an uninvoiced line item</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/remove_line_item">https://developers.recurly.com/api/v2019-10-10#operation/remove_line_item</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/remove_line_item">https://developers.recurly.com/api/v2999-01-01#operation/remove_line_item</a></p>
 
 	
 
@@ -10347,25 +10375,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">await</span> client.removeLineItem(lineItemId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Removed line item: '</span>, lineItemId)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -10394,7 +10403,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List a site's plans</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_plans">https://developers.recurly.com/api/v2019-10-10#operation/list_plans</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_plans">https://developers.recurly.com/api/v2999-01-01#operation/list_plans</a></p>
 
 	
 
@@ -10562,16 +10571,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">const</span> plans = client.listPlans({ <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
-
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> plan <span class="hljs-keyword">of</span> plans.each()) {
-  <span class="hljs-built_in">console</span>.log(plan.code)
-}</code></pre>
-	
-	
 
 	
 
@@ -10600,7 +10599,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Create a plan</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_plan">https://developers.recurly.com/api/v2019-10-10#operation/create_plan</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/create_plan">https://developers.recurly.com/api/v2999-01-01#operation/create_plan</a></p>
 
 	
 
@@ -10649,35 +10648,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> planCreate = {
-    <span class="hljs-attr">name</span>: <span class="hljs-string">'Monthly Coffee Subscription'</span>,
-    <span class="hljs-attr">code</span>: planCode,
-    <span class="hljs-attr">currencies</span>: [
-      {
-        <span class="hljs-attr">currency</span>: <span class="hljs-string">'USD'</span>,
-        <span class="hljs-attr">unitAmount</span>: <span class="hljs-number">10000</span>
-      }
-    ]
-  }
-  <span class="hljs-keyword">const</span> plan = <span class="hljs-keyword">await</span> client.createPlan(planCreate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created Plan: '</span>, plan.code)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -10706,7 +10676,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Fetch a plan</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_plan">https://developers.recurly.com/api/v2019-10-10#operation/get_plan</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_plan">https://developers.recurly.com/api/v2999-01-01#operation/get_plan</a></p>
 
 	
 
@@ -10731,11 +10701,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Plan ID or code (use prefix: 
+			<td class='col-6'>Plan ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -10758,25 +10730,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> plan = <span class="hljs-keyword">await</span> client.getPlan(planId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched plan: '</span>, plan.code)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -10806,7 +10759,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Update a plan</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/update_plan">https://developers.recurly.com/api/v2019-10-10#operation/update_plan</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/update_plan">https://developers.recurly.com/api/v2999-01-01#operation/update_plan</a></p>
 
 	
 
@@ -10831,11 +10784,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Plan ID or code (use prefix: 
+			<td class='col-6'>Plan ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -10870,28 +10825,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> planUpdate = {
-    <span class="hljs-attr">name</span>: <span class="hljs-string">'New monthly coffee subscription'</span>
-  }
-  <span class="hljs-keyword">const</span> plan = <span class="hljs-keyword">await</span> client.updatePlan(planId, planUpdate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Updated plan: '</span>, plan.code)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -10920,7 +10853,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Remove a plan</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/remove_plan">https://developers.recurly.com/api/v2019-10-10#operation/remove_plan</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/remove_plan">https://developers.recurly.com/api/v2999-01-01#operation/remove_plan</a></p>
 
 	
 
@@ -10945,11 +10878,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Plan ID or code (use prefix: 
+			<td class='col-6'>Plan ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -10972,25 +10907,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> plan = <span class="hljs-keyword">await</span> client.removePlan(planId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Removed plan: '</span>, plan.code)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -11020,7 +10936,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List a plan's add-ons</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_plan_add_ons">https://developers.recurly.com/api/v2019-10-10#operation/list_plan_add_ons</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_plan_add_ons">https://developers.recurly.com/api/v2999-01-01#operation/list_plan_add_ons</a></p>
 
 	
 
@@ -11045,11 +10961,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Plan ID or code (use prefix: 
+			<td class='col-6'>Plan ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -11231,7 +11149,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Create an add-on</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_plan_add_on">https://developers.recurly.com/api/v2019-10-10#operation/create_plan_add_on</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/create_plan_add_on">https://developers.recurly.com/api/v2999-01-01#operation/create_plan_add_on</a></p>
 
 	
 
@@ -11256,11 +11174,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Plan ID or code (use prefix: 
+			<td class='col-6'>Plan ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -11323,7 +11243,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Fetch a plan's add-on</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_plan_add_on">https://developers.recurly.com/api/v2019-10-10#operation/get_plan_add_on</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_plan_add_on">https://developers.recurly.com/api/v2999-01-01#operation/get_plan_add_on</a></p>
 
 	
 
@@ -11348,11 +11268,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Plan ID or code (use prefix: 
+			<td class='col-6'>Plan ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -11363,11 +11285,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Add-on ID or code (use prefix: 
+			<td class='col-6'>Add-on ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -11419,7 +11343,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Update an add-on</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/update_plan_add_on">https://developers.recurly.com/api/v2019-10-10#operation/update_plan_add_on</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/update_plan_add_on">https://developers.recurly.com/api/v2999-01-01#operation/update_plan_add_on</a></p>
 
 	
 
@@ -11444,11 +11368,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Plan ID or code (use prefix: 
+			<td class='col-6'>Plan ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -11459,11 +11385,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Add-on ID or code (use prefix: 
+			<td class='col-6'>Add-on ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -11526,7 +11454,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Remove an add-on</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/remove_plan_add_on">https://developers.recurly.com/api/v2019-10-10#operation/remove_plan_add_on</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/remove_plan_add_on">https://developers.recurly.com/api/v2999-01-01#operation/remove_plan_add_on</a></p>
 
 	
 
@@ -11551,11 +11479,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Plan ID or code (use prefix: 
+			<td class='col-6'>Plan ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -11566,11 +11496,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Add-on ID or code (use prefix: 
+			<td class='col-6'>Add-on ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -11622,7 +11554,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List a site's add-ons</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_add_ons">https://developers.recurly.com/api/v2019-10-10#operation/list_add_ons</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_add_ons">https://developers.recurly.com/api/v2999-01-01#operation/list_add_ons</a></p>
 
 	
 
@@ -11818,7 +11750,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Fetch an add-on</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_add_on">https://developers.recurly.com/api/v2019-10-10#operation/get_add_on</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_add_on">https://developers.recurly.com/api/v2999-01-01#operation/get_add_on</a></p>
 
 	
 
@@ -11843,11 +11775,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Add-on ID or code (use prefix: 
+			<td class='col-6'>Add-on ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-gold</code>
-).
+.
 </td>
 		</tr>
 		
@@ -11899,7 +11833,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List a site's shipping methods</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_shipping_methods">https://developers.recurly.com/api/v2019-10-10#operation/list_shipping_methods</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_shipping_methods">https://developers.recurly.com/api/v2999-01-01#operation/list_shipping_methods</a></p>
 
 	
 
@@ -12083,7 +12017,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Fetch a shipping method</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_shipping_method">https://developers.recurly.com/api/v2019-10-10#operation/get_shipping_method</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_shipping_method">https://developers.recurly.com/api/v2999-01-01#operation/get_shipping_method</a></p>
 
 	
 
@@ -12108,11 +12042,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Shipping Method ID or code (use prefix: 
+			<td class='col-6'>Shipping Method ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-usps_2-day</code>
-).
+.
 </td>
 		</tr>
 		
@@ -12164,7 +12100,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List a site's subscriptions</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_subscriptions">https://developers.recurly.com/api/v2019-10-10#operation/list_subscriptions</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_subscriptions">https://developers.recurly.com/api/v2999-01-01#operation/list_subscriptions</a></p>
 
 	
 
@@ -12337,16 +12273,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">const</span> subscriptions = client.listSubscriptions({ <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
-
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> subscription <span class="hljs-keyword">of</span> subscriptions.each()) {
-  <span class="hljs-built_in">console</span>.log(subscription.uuid)
-}</code></pre>
-	
-	
 
 	
 
@@ -12375,7 +12301,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Create a new subscription</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_subscription">https://developers.recurly.com/api/v2019-10-10#operation/create_subscription</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/create_subscription">https://developers.recurly.com/api/v2999-01-01#operation/create_subscription</a></p>
 
 	
 
@@ -12424,32 +12350,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">let</span> subscriptionReq = {
-    <span class="hljs-attr">planCode</span>: planCode,
-    <span class="hljs-attr">currency</span>: <span class="hljs-string">`USD`</span>,
-    <span class="hljs-attr">account</span>: {
-      <span class="hljs-attr">code</span>: accountCode
-    }
-  }
-  <span class="hljs-keyword">let</span> sub = <span class="hljs-keyword">await</span> client.createSubscription(subscriptionReq)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created subscription: '</span>, sub.uuid)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -12478,7 +12378,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Fetch a subscription</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_subscription">https://developers.recurly.com/api/v2019-10-10#operation/get_subscription</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_subscription">https://developers.recurly.com/api/v2999-01-01#operation/get_subscription</a></p>
 
 	
 
@@ -12503,11 +12403,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -12530,25 +12432,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> subscription = <span class="hljs-keyword">await</span> client.getSubscription(subscriptionId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched subscription: '</span>, subscription.uuid)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -12578,7 +12461,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Modify a subscription</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/modify_subscription">https://developers.recurly.com/api/v2019-10-10#operation/modify_subscription</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/modify_subscription">https://developers.recurly.com/api/v2999-01-01#operation/modify_subscription</a></p>
 
 	
 
@@ -12603,11 +12486,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -12642,30 +12527,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> update = {
-    <span class="hljs-attr">termsAndConditions</span>: <span class="hljs-string">"Some new terms and conditions"</span>,
-    <span class="hljs-attr">customerNotes</span>: <span class="hljs-string">"Some new customer notes"</span>
-  }
-  <span class="hljs-keyword">const</span> subscription = <span class="hljs-keyword">await</span> client.modifySubscription(subscriptionId, update)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Modified subscription: '</span>, subscription.uuid)
-} <span class="hljs-keyword">catch</span>(err) {
-
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -12694,7 +12555,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Terminate a subscription</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/terminate_subscription">https://developers.recurly.com/api/v2019-10-10#operation/terminate_subscription</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/terminate_subscription">https://developers.recurly.com/api/v2999-01-01#operation/terminate_subscription</a></p>
 
 	
 
@@ -12719,11 +12580,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -12786,25 +12649,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> subscription = <span class="hljs-keyword">await</span> client.terminateSubscription(subscriptionId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Terminated subscription: '</span>, subscription.uuid)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -12827,13 +12671,13 @@ prevent some records from being returned.
 		<a class='black' href='#clientcancelsubscription'>
 			<code>
 				cancelSubscription
-				<span class='gray'>(subscriptionId)</span>
+				<span class='gray'>(subscriptionId, body)</span>
 			</code>
 		</a>
 	</h3>
 
 	<p>Cancel a subscription</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/cancel_subscription">https://developers.recurly.com/api/v2019-10-10#operation/cancel_subscription</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/cancel_subscription">https://developers.recurly.com/api/v2999-01-01#operation/cancel_subscription</a></p>
 
 	
 
@@ -12858,11 +12702,24 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
+</td>
+		</tr>
+		
+		
+		<tr>
+			<td class='col-3 strong'><code>body</code></td>
+			<td class='col-3 quiet'>
+				SubscriptionCancel
+				
+			</td>
+			<td class='col-6'>The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionCancel}
 </td>
 		</tr>
 		
@@ -12885,25 +12742,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">let</span> expiredSub = <span class="hljs-keyword">await</span> client.cancelSubscription(subscriptionId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Canceled Subscription: '</span>, expiredSub.uuid)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -12933,7 +12771,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Reactivate a canceled subscription</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/reactivate_subscription">https://developers.recurly.com/api/v2019-10-10#operation/reactivate_subscription</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/reactivate_subscription">https://developers.recurly.com/api/v2999-01-01#operation/reactivate_subscription</a></p>
 
 	
 
@@ -12958,11 +12796,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -12985,26 +12825,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> subscription = <span class="hljs-keyword">await</span> client.reactivateSubscription(subscriptionId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Reactivated subscription: '</span>, subscription.uuid)
-} <span class="hljs-keyword">catch</span>(err) {
-
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -13034,7 +12854,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Pause subscription</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/pause_subscription">https://developers.recurly.com/api/v2019-10-10#operation/pause_subscription</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/pause_subscription">https://developers.recurly.com/api/v2999-01-01#operation/pause_subscription</a></p>
 
 	
 
@@ -13059,11 +12879,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -13126,7 +12948,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Resume subscription</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/resume_subscription">https://developers.recurly.com/api/v2019-10-10#operation/resume_subscription</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/resume_subscription">https://developers.recurly.com/api/v2999-01-01#operation/resume_subscription</a></p>
 
 	
 
@@ -13151,11 +12973,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -13207,7 +13031,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Fetch a subscription's pending change</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_subscription_change">https://developers.recurly.com/api/v2019-10-10#operation/get_subscription_change</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_subscription_change">https://developers.recurly.com/api/v2999-01-01#operation/get_subscription_change</a></p>
 
 	
 
@@ -13232,11 +13056,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -13259,25 +13085,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> change = <span class="hljs-keyword">await</span> client.getSubscriptionChange(subscriptionId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched subscription change: '</span>, change.id)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -13307,7 +13114,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Create a new subscription change</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_subscription_change">https://developers.recurly.com/api/v2019-10-10#operation/create_subscription_change</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/create_subscription_change">https://developers.recurly.com/api/v2999-01-01#operation/create_subscription_change</a></p>
 
 	
 
@@ -13332,11 +13139,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -13371,30 +13180,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> subscriptionChangeCreate = {
-    <span class="hljs-attr">planCode</span>: newPlanCode,
-    <span class="hljs-attr">timeframe</span>: <span class="hljs-string">'now'</span>
-  }
-
-  <span class="hljs-keyword">const</span> change = <span class="hljs-keyword">await</span> client.createSubscriptionChange(subscriptionId, subscriptionChangeCreate)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created subscription change: '</span>, change.id)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -13423,7 +13208,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Delete the pending subscription change</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/remove_subscription_change">https://developers.recurly.com/api/v2019-10-10#operation/remove_subscription_change</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/remove_subscription_change">https://developers.recurly.com/api/v2999-01-01#operation/remove_subscription_change</a></p>
 
 	
 
@@ -13448,11 +13233,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -13475,25 +13262,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">await</span> client.removeSubscriptionChange(subscriptionId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Removed subscription change: '</span>, subscriptionId)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -13523,7 +13291,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List a subscription's invoices</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_subscription_invoices">https://developers.recurly.com/api/v2019-10-10#operation/list_subscription_invoices</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_subscription_invoices">https://developers.recurly.com/api/v2999-01-01#operation/list_subscription_invoices</a></p>
 
 	
 
@@ -13548,11 +13316,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -13740,7 +13510,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List a subscription's line items</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_subscription_line_items">https://developers.recurly.com/api/v2019-10-10#operation/list_subscription_line_items</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_subscription_line_items">https://developers.recurly.com/api/v2999-01-01#operation/list_subscription_line_items</a></p>
 
 	
 
@@ -13765,11 +13535,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -13975,7 +13747,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Show the coupon redemptions for a subscription</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_subscription_coupon_redemptions">https://developers.recurly.com/api/v2019-10-10#operation/list_subscription_coupon_redemptions</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_subscription_coupon_redemptions">https://developers.recurly.com/api/v2999-01-01#operation/list_subscription_coupon_redemptions</a></p>
 
 	
 
@@ -14000,11 +13772,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Subscription ID or UUID (use prefix: 
+			<td class='col-6'>Subscription ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -14150,7 +13924,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>List a site's transactions</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_transactions">https://developers.recurly.com/api/v2019-10-10#operation/list_transactions</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/list_transactions">https://developers.recurly.com/api/v2999-01-01#operation/list_transactions</a></p>
 
 	
 
@@ -14336,16 +14110,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">const</span> transactions = client.listTransactions({ <span class="hljs-attr">limit</span>: <span class="hljs-number">200</span> })
-
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> transaction <span class="hljs-keyword">of</span> transactions.each()) {
-  <span class="hljs-built_in">console</span>.log(transaction.uuid)
-}</code></pre>
-	
-	
 
 	
 
@@ -14374,7 +14138,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Fetch a transaction</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_transaction">https://developers.recurly.com/api/v2019-10-10#operation/get_transaction</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_transaction">https://developers.recurly.com/api/v2999-01-01#operation/get_transaction</a></p>
 
 	
 
@@ -14399,11 +14163,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Transaction ID or UUID (use prefix: 
+			<td class='col-6'>Transaction ID or UUID. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For UUID use prefix 
 <code>uuid-</code>
 , e.g. 
 <code>uuid-123457890</code>
-).
+.
 </td>
 		</tr>
 		
@@ -14426,25 +14192,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">const</span> transaction = <span class="hljs-keyword">await</span> client.getTransaction(transactionId)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched transaction: '</span>, transaction.uuid)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
-    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
-    <span class="hljs-comment">// just return null</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -14474,7 +14221,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Fetch a unique coupon code</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_unique_coupon_code">https://developers.recurly.com/api/v2019-10-10#operation/get_unique_coupon_code</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/get_unique_coupon_code">https://developers.recurly.com/api/v2999-01-01#operation/get_unique_coupon_code</a></p>
 
 	
 
@@ -14499,11 +14246,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Unique Coupon Code ID or code (use prefix: 
+			<td class='col-6'>Unique Coupon Code ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-abc-8dh2-def</code>
-).
+.
 </td>
 		</tr>
 		
@@ -14555,7 +14304,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Deactivate a unique coupon code</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/deactivate_unique_coupon_code">https://developers.recurly.com/api/v2019-10-10#operation/deactivate_unique_coupon_code</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/deactivate_unique_coupon_code">https://developers.recurly.com/api/v2999-01-01#operation/deactivate_unique_coupon_code</a></p>
 
 	
 
@@ -14580,11 +14329,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Unique Coupon Code ID or code (use prefix: 
+			<td class='col-6'>Unique Coupon Code ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-abc-8dh2-def</code>
-).
+.
 </td>
 		</tr>
 		
@@ -14636,7 +14387,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Restore a unique coupon code</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/reactivate_unique_coupon_code">https://developers.recurly.com/api/v2019-10-10#operation/reactivate_unique_coupon_code</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/reactivate_unique_coupon_code">https://developers.recurly.com/api/v2999-01-01#operation/reactivate_unique_coupon_code</a></p>
 
 	
 
@@ -14661,11 +14412,13 @@ prevent some records from being returned.
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-6'>Unique Coupon Code ID or code (use prefix: 
+			<td class='col-6'>Unique Coupon Code ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
 <code>code-</code>
 , e.g. 
 <code>code-abc-8dh2-def</code>
-).
+.
 </td>
 		</tr>
 		
@@ -14717,7 +14470,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Create a new purchase</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_purchase">https://developers.recurly.com/api/v2019-10-10#operation/create_purchase</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/create_purchase">https://developers.recurly.com/api/v2999-01-01#operation/create_purchase</a></p>
 
 	
 
@@ -14766,40 +14519,6 @@ prevent some records from being returned.
 	
 
 	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">let</span> purchaseReq = {
-    <span class="hljs-attr">currency</span>: <span class="hljs-string">'USD'</span>,
-    <span class="hljs-attr">account</span>: {
-      <span class="hljs-attr">code</span>: accountCode,
-      <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Benjamin'</span>,
-      <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Du Monde'</span>,
-      <span class="hljs-attr">billingInfo</span>: {
-        <span class="hljs-attr">tokenId</span>: rjsTokenId
-      }
-    },
-    <span class="hljs-attr">subscriptions</span>: [
-      { <span class="hljs-attr">planCode</span>: planCode },
-    ]
-  }
-  <span class="hljs-keyword">let</span> invoiceCollection = <span class="hljs-keyword">await</span> client.createPurchase(purchaseReq)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created Charge Invoice: '</span>, invoiceCollection.chargeInvoice)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Created Credit Invoices: '</span>, invoiceCollection.creditInvoices)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
-	
 
 	
 
@@ -14828,7 +14547,7 @@ prevent some records from being returned.
 	</h3>
 
 	<p>Preview a new purchase</p>
-<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/preview_purchase">https://developers.recurly.com/api/v2019-10-10#operation/preview_purchase</a></p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2999-01-01#operation/preview_purchase">https://developers.recurly.com/api/v2999-01-01#operation/preview_purchase</a></p>
 
 	
 
@@ -14876,40 +14595,6 @@ prevent some records from being returned.
 
 	
 
-	
-	<h4 class='caps quiet mb1 mt3'>Examples</h4>
-	
-	
-	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">let</span> purchaseReq = {
-    <span class="hljs-attr">currency</span>: <span class="hljs-string">'USD'</span>,
-    <span class="hljs-attr">account</span>: {
-      <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Benjamin'</span>,
-      <span class="hljs-attr">lastName</span>: <span class="hljs-string">'Du Monde'</span>,
-      <span class="hljs-attr">code</span>: accountCode,
-      <span class="hljs-attr">billingInfo</span>: {
-        <span class="hljs-attr">tokenId</span>: rjsTokenId
-      }
-    },
-    <span class="hljs-attr">subscriptions</span>: [
-      { <span class="hljs-attr">planCode</span>: planCode },
-    ]
-  }
-  <span class="hljs-keyword">let</span> invoiceCollection = <span class="hljs-keyword">await</span> client.previewPurchase(purchaseReq)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Preview Charge Invoice: '</span>, invoiceCollection.chargeInvoice)
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Preview Credit Invoices: '</span>, invoiceCollection.creditInvoices)
-} <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
-    <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
-    <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
-    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
-  }
-}</code></pre>
-	
 	
 
 	
@@ -17050,7 +16735,7 @@ need and we will usher them to the appropriate places.</p>
 		<tr>
 			<td class='col-2 strong'>currencies</td>
 			<td class='col-2 quiet'>
-				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#addonpricing">AddOnPricing</a>>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#pricing">Pricing</a>>
 				
 			</td>
 			<td class='col-8'>: Add-on pricing
@@ -17331,145 +17016,6 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'>: Describes your add-on and will appear in subscribers' invoices.
-</td>
-		</tr>
-
-		
-		
-	</table>
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-</section>
-
-				
-				
-				
-				<section id=''class='mt2 mb2 px3 py1 keyline-top'>
-
-	<div class='right py2'>
-		
-		
-	</div>
-
-	<h3 class='regular'>
-		<a class='black' href='#'>
-			<code>
-				
-				<span class='gray'>()</span>
-			</code>
-		</a>
-	</h3>
-
-	<p>This file is automatically created by Recurly's OpenAPI generation process
-and thus any edits you make by hand will be lost. If you wish to make a
-change to this file, please create a Github issue explaining the changes you
-need and we will usher them to the appropriate places.</p>
-
-	
-
-	
-	
-	
-	
-	
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-</section>
-
-				
-				
-				
-				<section id='addonpricing'class='mt2 mb2 px3 py1 keyline-top'>
-
-	<div class='right py2'>
-		
-		
-	</div>
-
-	<h3 class='regular'>
-		<a class='black' href='#addonpricing'>
-			<code>
-				AddOnPricing
-				<span class='gray'>()</span>
-			</code>
-		</a>
-	</h3>
-
-	<p>AddOnPricing</p>
-
-	
-	<p>
-		Type:
-		<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
-	</p>
-	
-
-	
-	
-	
-	
-	
-	
-
-	
-
-	
-	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
-		<thead class='fill-light'>
-		<th class='col-2 small caps quiet'>property</th>
-		<th class='col-2 small caps quiet'>type</th>
-		<th class='col-8 small caps quiet'>description</th>
-		</thead>
-		
-		<tr>
-			<td class='col-2 strong'>currency</td>
-			<td class='col-2 quiet'>
-				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-				
-			</td>
-			<td class='col-8'>: 3-letter ISO 4217 currency code.
-</td>
-		</tr>
-
-		
-		
-		<tr>
-			<td class='col-2 strong'>unitAmount</td>
-			<td class='col-2 quiet'>
-				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
-				
-			</td>
-			<td class='col-8'>: Unit price
 </td>
 		</tr>
 
@@ -21840,6 +21386,309 @@ need and we will usher them to the appropriate places.</p>
 				
 				
 				
+				<section id='item'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#item'>
+			<code>
+				Item
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Item</p>
+
+	
+	<p>
+		Type:
+		<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+	</p>
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-2 small caps quiet'>property</th>
+		<th class='col-2 small caps quiet'>type</th>
+		<th class='col-8 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-2 strong'>accountingCode</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Accounting code for invoice line items.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>code</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Unique code to identify the item.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>createdAt</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>
+				
+			</td>
+			<td class='col-8'>: Created at
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>currencies</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#pricing">Pricing</a>>
+				
+			</td>
+			<td class='col-8'>: Item Pricing
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>customFields</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#customfield">CustomField</a>>
+				
+			</td>
+			<td class='col-8'></td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>deletedAt</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>
+				
+			</td>
+			<td class='col-8'>: Deleted at
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>description</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Optional, description.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>externalSku</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Optional, stock keeping unit to link the item to other inventory systems.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>id</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Item ID
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>name</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: This name describes your item and will appear on the invoice when it's purchased on a one time basis.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>revenueScheduleType</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Revenue schedule type
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>state</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: The current state of the item.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>taxCode</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use 
+<code>unknown</code>
+, 
+<code>physical</code>
+, or 
+<code>digital</code>
+.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>taxExempt</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>
+				
+			</td>
+			<td class='col-8'>: <code>true</code>
+ exempts tax on the item, 
+<code>false</code>
+ applies tax on the item.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>updatedAt</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>
+				
+			</td>
+			<td class='col-8'>: Last updated at
+</td>
+		</tr>
+
+		
+		
+	</table>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+				
+				
+				
+				<section id=''class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#'>
+			<code>
+				
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>This file is automatically created by Recurly's OpenAPI generation process
+and thus any edits you make by hand will be lost. If you wish to make a
+change to this file, please create a Github issue explaining the changes you
+need and we will usher them to the appropriate places.</p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+				
+				
+				
 				<section id='lineitem'class='mt2 mb2 px3 py1 keyline-top'>
 
 	<div class='right py2'>
@@ -22064,6 +21913,32 @@ need and we will usher them to the appropriate places.</p>
 		
 		
 		<tr>
+			<td class='col-2 strong'>itemCode</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Unique code to identify an 
+<code>Item</code>
+.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>itemId</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Item ID
+</td>
+		</tr>
+
+		
+		
+		<tr>
 			<td class='col-2 strong'>legacyCategory</td>
 			<td class='col-2 quiet'>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
@@ -22141,7 +22016,9 @@ need and we will usher them to the appropriate places.</p>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-8'>: For plan related line items this will be the plan's code, for add-on related line items it will be the add-on's code.
+			<td class='col-8'>: For plan-related line items this will be the plan's code, for add-on related line items it will be the add-on's code. For item-related line itmes it will be the item's 
+<code>external_sku</code>
+.
 </td>
 		</tr>
 
@@ -22192,6 +22069,18 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'>: For refund charges, the quantity being refunded. For non-refund charges, the total quantity refunded (possibly over multiple refunds).
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>revenueScheduleType</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Revenue schedule type
 </td>
 		</tr>
 
@@ -23676,6 +23565,145 @@ need and we will usher them to the appropriate places.</p>
 				
 				
 				
+				<section id='pricing'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#pricing'>
+			<code>
+				Pricing
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Pricing</p>
+
+	
+	<p>
+		Type:
+		<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+	</p>
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-2 small caps quiet'>property</th>
+		<th class='col-2 small caps quiet'>type</th>
+		<th class='col-8 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-2 strong'>currency</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: 3-letter ISO 4217 currency code.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>unitAmount</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+				
+			</td>
+			<td class='col-8'>: Unit price
+</td>
+		</tr>
+
+		
+		
+	</table>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+				
+				
+				
+				<section id=''class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#'>
+			<code>
+				
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>This file is automatically created by Recurly's OpenAPI generation process
+and thus any edits you make by hand will be lost. If you wish to make a
+change to this file, please create a Github issue explaining the changes you
+need and we will usher them to the appropriate places.</p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+				
+				
+				
 				<section id='settings'class='mt2 mb2 px3 py1 keyline-top'>
 
 	<div class='right py2'>
@@ -25000,6 +25028,18 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'>: Expires at
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>gatewayCode</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: If present, this subscription's transactions will use the payment gateway with this code.
 </td>
 		</tr>
 
@@ -26383,7 +26423,7 @@ need and we will usher them to the appropriate places.</p>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-8'>: IP address provided when the billing information was collected:  - When the customer enters billing information into the Recurly.JS or Hosted Payment Pages, Recurly records the IP address. - When the merchant enters billing information using the API, the merchant may provide an IP address. - When the merchant enters billing information using the UI, no IP address is recorded.
+			<td class='col-8'>: IP address provided when the billing information was collected:  - When the customer enters billing information into the Recurly.js or Hosted Payment Pages, Recurly records the IP address. - When the merchant enters billing information using the API, the merchant may provide an IP address. - When the merchant enters billing information using the UI, no IP address is recorded.
 </td>
 		</tr>
 
@@ -26726,6 +26766,18 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'>: Customer message
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>threeDSecureActionTokenId</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Returned when 3-D Secure authentication is required for a transaction. Pass this value to Recurly.js so it can continue the challenge flow.
 </td>
 		</tr>
 
