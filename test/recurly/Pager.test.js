@@ -28,7 +28,7 @@ describe('Pager', () => {
       client.mock((resp, options) => {
         if (options.method === 'GET' && options.path === '/resources?limit=1') {
           resp.status = 200
-          resp.body = {
+          resp.body = JSON.stringify({
             object: 'list',
             has_more: false,
             next: null,
@@ -37,7 +37,7 @@ describe('Pager', () => {
               { id: '2', object: 'my_resource' },
               { id: '3', object: 'my_resource' }
             ]
-          }
+          })
         } else {
           resp.status = 404
           resp.body = { error: { type: 'not_found' } }
@@ -63,7 +63,7 @@ describe('Pager', () => {
           resp.recordCount = 9000
         } else {
           resp.status = 404
-          resp.body = { error: { type: 'not_found' } }
+          resp.body = JSON.stringify({ error: { type: 'not_found' } })
         }
         return Promise.resolve(resp)
       })
@@ -82,7 +82,7 @@ describe('Pager', () => {
       client.mock((resp, options) => {
         if (options.path === '/resources?state=active&limit=3') {
           resp.status = 200
-          resp.body = {
+          resp.body = JSON.stringify({
             object: 'list',
             has_more: true,
             next: '/resources?state=active&limit=3&cursor=1234567890',
@@ -91,10 +91,10 @@ describe('Pager', () => {
               { id: 1, object: 'my_resource' },
               { id: 2, object: 'my_resource' }
             ]
-          }
+          })
         } else if (options.path === '/resources?state=active&limit=3&cursor=1234567890') {
           resp.status = 200
-          resp.body = {
+          resp.body = JSON.stringify({
             object: 'list',
             has_more: false,
             next: '',
@@ -102,7 +102,7 @@ describe('Pager', () => {
               { id: 3, object: 'my_resource' },
               { id: 4, object: 'my_resource' }
             ]
-          }
+          })
         } else {
           resp.status = 404
           resp.body = { error: { type: 'not_found' } }

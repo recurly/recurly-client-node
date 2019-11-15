@@ -315,6 +315,42 @@
 							</a>
 							
 							<a
+									href='#clientlistitems'
+									class='button-indent regular block'>
+								<code>#listItems</code>
+							</a>
+							
+							<a
+									href='#clientcreateitem'
+									class='button-indent regular block'>
+								<code>#createItem</code>
+							</a>
+							
+							<a
+									href='#clientgetitem'
+									class='button-indent regular block'>
+								<code>#getItem</code>
+							</a>
+							
+							<a
+									href='#clientupdateitem'
+									class='button-indent regular block'>
+								<code>#updateItem</code>
+							</a>
+							
+							<a
+									href='#clientdeactivateitem'
+									class='button-indent regular block'>
+								<code>#deactivateItem</code>
+							</a>
+							
+							<a
+									href='#clientreactivateitem'
+									class='button-indent regular block'>
+								<code>#reactivateItem</code>
+							</a>
+							
+							<a
 									href='#clientlistinvoices'
 									class='button-indent regular block'>
 								<code>#listInvoices</code>
@@ -330,6 +366,12 @@
 									href='#clientputinvoice'
 									class='button-indent regular block'>
 								<code>#putInvoice</code>
+							</a>
+							
+							<a
+									href='#clientgetinvoicepdf'
+									class='button-indent regular block'>
+								<code>#getInvoicePdf</code>
 							</a>
 							
 							<a
@@ -1025,6 +1067,28 @@
 						
 						
 						<a
+								href='#binaryfile'
+								class="regular block">
+							<code>BinaryFile</code>
+							
+						</a>
+						
+						
+						
+						
+						
+						<a
+								href='#'
+								class="regular block">
+							<code></code>
+							
+						</a>
+						
+						
+						
+						
+						
+						<a
 								href='#coupon'
 								class="regular block">
 							<code>Coupon</code>
@@ -1399,6 +1463,28 @@
 						
 						
 						<a
+								href='#item'
+								class="regular block">
+							<code>Item</code>
+							
+						</a>
+						
+						
+						
+						
+						
+						<a
+								href='#'
+								class="regular block">
+							<code></code>
+							
+						</a>
+						
+						
+						
+						
+						
+						<a
 								href='#lineitem'
 								class="regular block">
 							<code>LineItem</code>
@@ -1534,6 +1620,28 @@
 								href='#planpricing'
 								class="regular block">
 							<code>PlanPricing</code>
+							
+						</a>
+						
+						
+						
+						
+						
+						<a
+								href='#'
+								class="regular block">
+							<code></code>
+							
+						</a>
+						
+						
+						
+						
+						
+						<a
+								href='#pricing'
+								class="regular block">
+							<code>Pricing</code>
 							
 						</a>
 						
@@ -8337,6 +8445,18 @@ prevent some records from being returned.
 
 
 		
+		<tr>
+  <td class='col-2 strong'>params.relatedType</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+    
+  </td>
+  <td class='col-8'>Filter by related type.
+</td>
+</tr>
+
+
+		
 		
 		
 	</table>
@@ -8463,6 +8583,622 @@ prevent some records from being returned.
   }
 }</code></pre>
 	
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='clientlistitems'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#clientlistitems'>
+			<code>
+				listItems
+				<span class='gray'>(params)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>List a site's items</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/list_items">https://developers.recurly.com/api/v2019-10-10#operation/list_items</a></p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>params</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+				
+				= <code>{}</code>
+			</td>
+			<td class='col-6'>The optional url parameters for this request.
+</td>
+		</tr>
+		
+		
+		<tr>
+  <td class='col-2 strong'>params.ids</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>
+    
+  </td>
+  <td class='col-8'>Filter results by their IDs. Up to 200 IDs can be passed at once using
+commas as separators, e.g. 
+<code>ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6</code>
+.
+<p>  <strong>Important notes:</strong></p>
+<ul>
+<li>The <code>ids</code> parameter cannot be used with any other ordering or filtering
+parameters (<code>limit</code>, <code>order</code>, <code>sort</code>, <code>begin_time</code>, <code>end_time</code>, etc)</li>
+<li>Invalid or unknown IDs will be ignored, so you should check that the
+results correspond to your request.</li>
+<li>Records are returned in an arbitrary order. Since results are all
+returned at once you can sort the records yourself.</li>
+</ul>
+</td>
+</tr>
+
+
+		
+		<tr>
+  <td class='col-2 strong'>params.limit</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+    
+  </td>
+  <td class='col-8'>Limit number of records 1-200.
+</td>
+</tr>
+
+
+		
+		<tr>
+  <td class='col-2 strong'>params.order</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+    
+  </td>
+  <td class='col-8'>Sort order.
+</td>
+</tr>
+
+
+		
+		<tr>
+  <td class='col-2 strong'>params.sort</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+    
+  </td>
+  <td class='col-8'>Sort field. You 
+<em>really</em>
+ only want to sort by 
+<code>updated_at</code>
+ in ascending
+order. In descending order updated records will move behind the cursor and could
+prevent some records from being returned.
+</td>
+</tr>
+
+
+		
+		<tr>
+  <td class='col-2 strong'>params.beginTime</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>
+    
+  </td>
+  <td class='col-8'>Filter by begin_time when 
+<code>sort=created_at</code>
+ or 
+<code>sort=updated_at</code>
+.
+
+<strong>Note:</strong>
+ this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
+</td>
+</tr>
+
+
+		
+		<tr>
+  <td class='col-2 strong'>params.endTime</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>
+    
+  </td>
+  <td class='col-8'>Filter by end_time when 
+<code>sort=created_at</code>
+ or 
+<code>sort=updated_at</code>
+.
+
+<strong>Note:</strong>
+ this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
+</td>
+</tr>
+
+
+		
+		<tr>
+  <td class='col-2 strong'>params.state</td>
+  <td class="col-2 quiet">
+    <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+    
+  </td>
+  <td class='col-8'>Filter by state.
+</td>
+</tr>
+
+
+		
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="#pager">Pager</a>&#x3C;<a href="#item">Item</a>></code>
+	:
+	<span class='force-inline'>A list of the site's items.
+</span>
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='clientcreateitem'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#clientcreateitem'>
+			<code>
+				createItem
+				<span class='gray'>(body)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Create a new item</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/create_item">https://developers.recurly.com/api/v2019-10-10#operation/create_item</a></p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>body</code></td>
+			<td class='col-3 quiet'>
+				ItemCreate
+				
+			</td>
+			<td class='col-6'>The object representing the JSON request to send to the server. It should conform to the schema of {ItemCreate}
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#item">Item</a>></code>
+	:
+	<span class='force-inline'>A new item.
+</span>
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='clientgetitem'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#clientgetitem'>
+			<code>
+				getItem
+				<span class='gray'>(itemId)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Fetch an item</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_item">https://developers.recurly.com/api/v2019-10-10#operation/get_item</a></p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>itemId</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-6'>Item ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
+<code>code-</code>
+, e.g. 
+<code>code-red</code>
+.
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#item">Item</a>></code>
+	:
+	<span class='force-inline'>An item.
+</span>
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='clientupdateitem'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#clientupdateitem'>
+			<code>
+				updateItem
+				<span class='gray'>(itemId, body)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Update an active item</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/update_item">https://developers.recurly.com/api/v2019-10-10#operation/update_item</a></p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>itemId</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-6'>Item ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
+<code>code-</code>
+, e.g. 
+<code>code-red</code>
+.
+</td>
+		</tr>
+		
+		
+		<tr>
+			<td class='col-3 strong'><code>body</code></td>
+			<td class='col-3 quiet'>
+				ItemUpdate
+				
+			</td>
+			<td class='col-6'>The object representing the JSON request to send to the server. It should conform to the schema of {ItemUpdate}
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#item">Item</a>></code>
+	:
+	<span class='force-inline'>The updated item.
+</span>
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='clientdeactivateitem'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#clientdeactivateitem'>
+			<code>
+				deactivateItem
+				<span class='gray'>(itemId)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Deactivate an item</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/deactivate_item">https://developers.recurly.com/api/v2019-10-10#operation/deactivate_item</a></p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>itemId</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-6'>Item ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
+<code>code-</code>
+, e.g. 
+<code>code-red</code>
+.
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#item">Item</a>></code>
+	:
+	<span class='force-inline'>An item.
+</span>
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='clientreactivateitem'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#clientreactivateitem'>
+			<code>
+				reactivateItem
+				<span class='gray'>(itemId)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Reactivate an inactive item</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/reactivate_item">https://developers.recurly.com/api/v2019-10-10#operation/reactivate_item</a></p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>itemId</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-6'>Item ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
+<code>code-</code>
+, e.g. 
+<code>code-red</code>
+.
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#item">Item</a>></code>
+	:
+	<span class='force-inline'>An item.
+</span>
+	
+	
+	
+
+	
+
 	
 
 	
@@ -8889,6 +9625,116 @@ prevent some records from being returned.
     <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
     <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
+    <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
+  }
+}</code></pre>
+	
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='clientgetinvoicepdf'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#clientgetinvoicepdf'>
+			<code>
+				getInvoicePdf
+				<span class='gray'>(invoiceId)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Fetch an invoice as a PDF</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/get_invoice_pdf">https://developers.recurly.com/api/v2019-10-10#operation/get_invoice_pdf</a></p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>invoiceId</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-6'>Invoice ID or number. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For number use prefix 
+<code>number-</code>
+, e.g. 
+<code>number-1000</code>
+.
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#binaryfile">BinaryFile</a>></code>
+	:
+	<span class='force-inline'>An invoice as a PDF.
+</span>
+	
+	
+	
+
+	
+
+	
+	<h4 class='caps quiet mb1 mt3'>Examples</h4>
+	
+	
+	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">try</span> {
+  <span class="hljs-keyword">const</span> invoice = <span class="hljs-keyword">await</span> client.getInvoicePdf(invoiceId)
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Fetched Invoice: '</span>, invoice)
+  <span class="hljs-keyword">const</span> filename = <span class="hljs-string">`<span class="hljs-subst">${downloadDirectory}</span>/nodeinvoice-<span class="hljs-subst">${invoiceId}</span>.pdf`</span>
+  <span class="hljs-keyword">await</span> fs.writeFile(filename, invoice.data, <span class="hljs-string">'binary'</span>, (err) =&gt; {
+    <span class="hljs-comment">// throws an error, you could also catch it here</span>
+    <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;
+
+    <span class="hljs-comment">// success case, the file was saved</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Saved Invoice PDF to'</span>, filename)
+  })
+} <span class="hljs-keyword">catch</span> (err) {
+  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
+    <span class="hljs-comment">// If the request was not found, you may want to alert the user or</span>
+    <span class="hljs-comment">// just return null</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Resource Not Found'</span>)
   } <span class="hljs-keyword">else</span> {
     <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
     <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
@@ -18367,6 +19213,132 @@ need and we will usher them to the appropriate places.</p>
 				
 				
 				
+				<section id='binaryfile'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#binaryfile'>
+			<code>
+				BinaryFile
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>BinaryFile</p>
+
+	
+	<p>
+		Type:
+		<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+	</p>
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-2 small caps quiet'>property</th>
+		<th class='col-2 small caps quiet'>type</th>
+		<th class='col-8 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-2 strong'>data</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'></td>
+		</tr>
+
+		
+		
+	</table>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+				
+				
+				
+				<section id=''class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#'>
+			<code>
+				
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>This file is automatically created by Recurly's OpenAPI generation process
+and thus any edits you make by hand will be lost. If you wish to make a
+change to this file, please create a Github issue explaining the changes you
+need and we will usher them to the appropriate places.</p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+				
+				
+				
 				<section id='coupon'class='mt2 mb2 px3 py1 keyline-top'>
 
 	<div class='right py2'>
@@ -22035,6 +23007,309 @@ need and we will usher them to the appropriate places.</p>
 				
 				
 				
+				<section id='item'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#item'>
+			<code>
+				Item
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Item</p>
+
+	
+	<p>
+		Type:
+		<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+	</p>
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-2 small caps quiet'>property</th>
+		<th class='col-2 small caps quiet'>type</th>
+		<th class='col-8 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-2 strong'>accountingCode</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Accounting code for invoice line items.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>code</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Unique code to identify the item.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>createdAt</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>
+				
+			</td>
+			<td class='col-8'>: Created at
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>currencies</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#pricing">Pricing</a>>
+				
+			</td>
+			<td class='col-8'>: Item Pricing
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>customFields</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#customfield">CustomField</a>>
+				
+			</td>
+			<td class='col-8'></td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>deletedAt</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>
+				
+			</td>
+			<td class='col-8'>: Deleted at
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>description</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Optional, description.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>externalSku</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Optional, stock keeping unit to link the item to other inventory systems.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>id</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Item ID
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>name</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: This name describes your item and will appear on the invoice when it's purchased on a one time basis.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>revenueScheduleType</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Revenue schedule type
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>state</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: The current state of the item.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>taxCode</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use 
+<code>unknown</code>
+, 
+<code>physical</code>
+, or 
+<code>digital</code>
+.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>taxExempt</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>
+				
+			</td>
+			<td class='col-8'>: <code>true</code>
+ exempts tax on the item, 
+<code>false</code>
+ applies tax on the item.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>updatedAt</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>
+				
+			</td>
+			<td class='col-8'>: Last updated at
+</td>
+		</tr>
+
+		
+		
+	</table>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+				
+				
+				
+				<section id=''class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#'>
+			<code>
+				
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>This file is automatically created by Recurly's OpenAPI generation process
+and thus any edits you make by hand will be lost. If you wish to make a
+change to this file, please create a Github issue explaining the changes you
+need and we will usher them to the appropriate places.</p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+				
+				
+				
 				<section id='lineitem'class='mt2 mb2 px3 py1 keyline-top'>
 
 	<div class='right py2'>
@@ -22259,6 +23534,30 @@ need and we will usher them to the appropriate places.</p>
 		
 		
 		<tr>
+			<td class='col-2 strong'>itemCode</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Unique code to identify an item, when the Catalog feature is enabled.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>itemId</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Available when the Catalog feature is enabled.
+</td>
+		</tr>
+
+		
+		
+		<tr>
 			<td class='col-2 strong'>legacyCategory</td>
 			<td class='col-2 quiet'>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
@@ -22336,7 +23635,9 @@ need and we will usher them to the appropriate places.</p>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-8'>: For plan related line items this will be the plan's code, for add-on related line items it will be the add-on's code.
+			<td class='col-8'>: For plan-related line items this will be the plan's code, for add-on related line items it will be the add-on's code. For item-related line itmes it will be the item's 
+<code>external_sku</code>
+.
 </td>
 		</tr>
 
@@ -22387,6 +23688,18 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'>: For refund charges, the quantity being refunded. For non-refund charges, the total quantity refunded (possibly over multiple refunds).
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>revenueScheduleType</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Revenue schedule type
 </td>
 		</tr>
 
@@ -23781,6 +25094,145 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'>: Amount of one-time setup fee automatically charged at the beginning of a subscription billing cycle. For subscription plans with a trial, the setup fee will be charged at the time of signup. Setup fees do not increase with the quantity of a subscription plan.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>unitAmount</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+				
+			</td>
+			<td class='col-8'>: Unit price
+</td>
+		</tr>
+
+		
+		
+	</table>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+				
+				
+				
+				<section id=''class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#'>
+			<code>
+				
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>This file is automatically created by Recurly's OpenAPI generation process
+and thus any edits you make by hand will be lost. If you wish to make a
+change to this file, please create a Github issue explaining the changes you
+need and we will usher them to the appropriate places.</p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+				
+				
+				
+				<section id='pricing'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#pricing'>
+			<code>
+				Pricing
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Pricing</p>
+
+	
+	<p>
+		Type:
+		<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+	</p>
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-2 small caps quiet'>property</th>
+		<th class='col-2 small caps quiet'>type</th>
+		<th class='col-8 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-2 strong'>currency</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: 3-letter ISO 4217 currency code.
 </td>
 		</tr>
 
