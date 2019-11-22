@@ -43,7 +43,7 @@ describe('BaseClient', () => {
           resp.body = JSON.stringify({ id: 'myid', object: 'my_resource' })
         } else {
           resp.status = 404
-          resp.body = { error: { type: 'not_found' } }
+          resp.body = JSON.stringify({ error: { type: 'not_found' } })
         }
         return Promise.resolve(resp)
       })
@@ -56,7 +56,7 @@ describe('BaseClient', () => {
           .then(resource => {
             assert(resource instanceof MyResource)
 
-            let options = sinon.match({
+            const options = sinon.match({
               method: 'GET',
               path: '/resources/myid'
             })
@@ -69,7 +69,7 @@ describe('BaseClient', () => {
           .catch(err => {
             assert(err instanceof recurly.errors.NotFoundError)
 
-            let options = sinon.match({
+            const options = sinon.match({
               method: 'GET',
               path: '/resources/idontexist'
             })
@@ -92,7 +92,7 @@ describe('BaseClient', () => {
         .catch(err => {
           assert(err instanceof recurly.errors.BadRequestError)
 
-          let options = sinon.match({
+          const options = sinon.match({
             method: 'HEAD',
             path: '/resources'
           })
@@ -111,7 +111,7 @@ describe('BaseClient', () => {
         .catch(err => {
           assert(err instanceof recurly.errors.UnauthorizedError)
 
-          let options = sinon.match({
+          const options = sinon.match({
             method: 'HEAD',
             path: '/resources'
           })
@@ -130,7 +130,7 @@ describe('BaseClient', () => {
         .catch(err => {
           assert(err instanceof recurly.errors.NotFoundError)
 
-          let options = sinon.match({
+          const options = sinon.match({
             method: 'HEAD',
             path: '/resources'
           })
@@ -149,7 +149,7 @@ describe('BaseClient', () => {
         .catch(err => {
           assert(err instanceof recurly.errors.ValidationError)
 
-          let options = sinon.match({
+          const options = sinon.match({
             method: 'HEAD',
             path: '/resources'
           })
@@ -168,7 +168,7 @@ describe('BaseClient', () => {
         .catch(err => {
           assert(err instanceof recurly.errors.InternalServerError)
 
-          let options = sinon.match({
+          const options = sinon.match({
             method: 'HEAD',
             path: '/resources'
           })
@@ -187,11 +187,65 @@ describe('BaseClient', () => {
         .catch(err => {
           assert(err instanceof recurly.ApiError)
 
-          let options = sinon.match({
+          const options = sinon.match({
             method: 'HEAD',
             path: '/resources'
           })
           assert(client.calledWith(options, null))
+        })
+    })
+  })
+
+  describe('with a response with a body', () => {
+    beforeEach(() => {
+      client.mock((resp, options) => {
+        if (options.path === '/resources/myid') {
+          resp.status = 200
+          resp.body = JSON.stringify({ id: 'myid', object: 'my_resource' })
+        } else {
+          resp.status = 422
+          resp.body = JSON.stringify({
+            error: {
+              type: 'transaction',
+              message: 'Your transaction was declined. Please use a different card or contact your bank.',
+              transaction_error: {
+                object: 'transaction_error',
+                transaction_id: 'ifn84nfofni4',
+                category: 'soft',
+                code: 'declined',
+                message: 'Your card was declined. In order to resolve the issue, you will need to contact your bank.',
+                merchant_advice: "The customer's bank has declined their card. The customer will need to contact their bank to learn the cause.",
+                three_d_secure_action_token_id: null
+              }
+            }
+          })
+        }
+        return Promise.resolve(resp)
+      })
+    })
+
+    it('Should throw a TransactionError resource', () => {
+      return client
+        .createResource({
+          account: {
+            code: 'ajof-4jf09nf-4joifn-fj4po',
+            billing_info: {
+              token_id: 'fake-token-id'
+            }
+          },
+          currency: 'USD',
+          plan_code: 'super_plan'
+        })
+        .catch(err => {
+          assert(err instanceof recurly.errors.TransactionError)
+
+          // Per the documentation here: https://recurly.github.io/recurly-client-node/#transactionerror
+          assert(err.category === 'soft')
+          assert(err.code === 'declined')
+          assert(err.merchantAdvice === 'The customer\'s bank has declined their card. The customer will need to contact their bank to learn the cause.')
+          assert(err.message === 'Your card was declined. In order to resolve the issue, you will need to contact your bank.')
+          assert(err.threeDSecureActionTokenId === null)
+          assert(err.transactionId === 'ifn84nfofni4')
         })
     })
   })
