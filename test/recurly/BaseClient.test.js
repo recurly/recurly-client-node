@@ -43,7 +43,7 @@ describe('BaseClient', () => {
           resp.body = JSON.stringify({ id: 'myid', object: 'my_resource' })
         } else {
           resp.status = 404
-          resp.body = { error: { type: 'not_found' } }
+          resp.body = JSON.stringify({ error: { type: 'not_found' } })
         }
         return Promise.resolve(resp)
       })
