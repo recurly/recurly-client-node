@@ -2069,12 +2069,18 @@
 <pre><code>npm install recurly --save-prod
 </code></pre>
 <p>Or manually insert the dependency into the <code>dependencies</code> section of your <code>package.json</code>:</p>
+<blockquote>
+<p><strong>Note</strong>: We do try to strictly follow <a href="https://semver.org/">SemVer</a> so locking to a major version should be safe.</p>
+</blockquote>
 <pre><code>{
   // ...
   "recurly" : "^3.2.0"
   // ...
 }
 </code></pre>
+<blockquote>
+<p><strong>Note</strong>: When upgrading, view the <a href="https://github.com/recurly/recurly-client-node/blob/master/CHANGELOG.md">CHANGELOG</a> to see what's changed.</p>
+</blockquote>
 <h3>Creating a client</h3>
 <p>A client object represents a connection to the Recurly API. The client implements
 each <code>operation</code> that can be performed in the API as a method.</p>
