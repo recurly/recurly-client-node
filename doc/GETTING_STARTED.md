@@ -10,6 +10,8 @@ npm install recurly --save-prod
 
 Or manually insert the dependency into the `dependencies` section of your `package.json`:
 
+> **Note**: We do try to strictly follow [SemVer](https://semver.org/) so locking to a major version should be safe.
+
 ```
 {
   // ...
@@ -17,6 +19,7 @@ Or manually insert the dependency into the `dependencies` section of your `packa
   // ...
 }
 ```
+> **Note**: When upgrading, view the [CHANGELOG](https://github.com/recurly/recurly-client-node/blob/master/CHANGELOG.md) to see what's changed.
 
 ### Creating a client
 
