@@ -41,6 +41,9 @@ describe('BaseClient', () => {
         if (options.path === '/resources/myid') {
           resp.status = 200
           resp.body = JSON.stringify({ id: 'myid', object: 'my_resource' })
+        } else if (options.path === '/resources' && options.method === 'POST') {
+          resp.status = 422
+          resp.body = JSON.stringify({ error: { type: 'transaction' } })
         } else {
           resp.status = 404
           resp.body = JSON.stringify({ error: { type: 'not_found' } })
@@ -75,6 +78,25 @@ describe('BaseClient', () => {
             })
             assert(client.calledWith(options, null))
           })
+      })
+    })
+
+    describe('#createResource', () => {
+      describe('When details are invalid', () => {
+        it('Should throw a TransactionError', () => {
+          const resp = client.createResource({ myString: 'test' })
+          return resp
+            .catch(err => {
+              assert(err instanceof recurly.errors.TransactionError)
+
+              let options = sinon.match({
+                method: 'POST',
+                path: '/resources'
+              })
+
+              assert(client.calledWith(options, { myString: 'test' }))
+            })
+        })
       })
     })
   })
