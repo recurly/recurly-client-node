@@ -1,12 +1,22 @@
 # Change Log
 
+## [3.2.1](https://github.com/recurly/recurly-client-node/tree/3.2.1) (2019-12-10)
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.2.0...3.2.1)
+
+**Implemented enhancements:**
+
+- Changelog generation and npm audit [\#68](https://github.com/recurly/recurly-client-node/pull/68) ([bhelx](https://github.com/bhelx))
+
+**Fixed bugs:**
+
+- Convert Array params to CSV strings [\#69](https://github.com/recurly/recurly-client-node/pull/69) ([douglasmiller](https://github.com/douglasmiller))
+
 ## [3.2.0](https://github.com/recurly/recurly-client-node/tree/3.2.0) (2019-12-03)
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.1.1...3.2.0)
 
 **Merged pull requests:**
 
 - Release 3.2.0 [\#66](https://github.com/recurly/recurly-client-node/pull/66) ([bhelx](https://github.com/bhelx))
-- Allow object attributes [\#65](https://github.com/recurly/recurly-client-node/pull/65) ([bhelx](https://github.com/bhelx))
 - Failure to parse transaction error [\#64](https://github.com/recurly/recurly-client-node/pull/64) ([bhelx](https://github.com/bhelx))
 
 ## [3.1.1](https://github.com/recurly/recurly-client-node/tree/3.1.1) (2019-11-22)
@@ -33,6 +43,7 @@
 
 **Merged pull requests:**
 
+- Allow object attributes [\#65](https://github.com/recurly/recurly-client-node/pull/65) ([bhelx](https://github.com/bhelx))
 - Release 3.1.0 [\#61](https://github.com/recurly/recurly-client-node/pull/61) ([bhelx](https://github.com/bhelx))
 - Pick error class for responses without bodies [\#54](https://github.com/recurly/recurly-client-node/pull/54) ([bhelx](https://github.com/bhelx))
 - Bump eslint-utils from 1.3.1 to 1.4.3 [\#52](https://github.com/recurly/recurly-client-node/pull/52) ([dependabot[bot]](https://github.com/apps/dependabot))
@@ -98,6 +109,7 @@
 
 - 3.0.0.beta.3 [\#18](https://github.com/recurly/recurly-client-node/pull/18) ([bhelx](https://github.com/bhelx))
 - Latest v2018-08-09 Changes [\#17](https://github.com/recurly/recurly-client-node/pull/17) ([bhelx](https://github.com/bhelx))
+- Casting and testing improvements [\#16](https://github.com/recurly/recurly-client-node/pull/16) ([bhelx](https://github.com/bhelx))
 - Bump test packages [\#15](https://github.com/recurly/recurly-client-node/pull/15) ([bhelx](https://github.com/bhelx))
 - No longer need dep scripts [\#14](https://github.com/recurly/recurly-client-node/pull/14) ([bhelx](https://github.com/bhelx))
 - Url Encode Items in interpolatePath [\#13](https://github.com/recurly/recurly-client-node/pull/13) ([bhelx](https://github.com/bhelx))
