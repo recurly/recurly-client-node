@@ -36,6 +36,11 @@ const myApiKey = '<myapikey>'
 const client = new recurly.Client(myApiKey)
 ```
 
+**Note**: to import using typescript:
+```ts
+import * as recurly from "recurly";
+```
+
 ### Operations
 
 All operations are `async` and return promises (except the `list*` methods which return `Pager`s).
