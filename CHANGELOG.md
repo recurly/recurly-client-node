@@ -1,5 +1,17 @@
 # Change Log
 
+## [3.3.0](https://github.com/recurly/recurly-client-node/tree/3.3.0) (2019-12-19)
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.2.1...3.3.0)
+
+**Implemented enhancements:**
+
+- Typescript types [\#29](https://github.com/recurly/recurly-client-node/issues/29)
+
+**Merged pull requests:**
+
+- Adding missing TransactionError test [\#70](https://github.com/recurly/recurly-client-node/pull/70) ([bhelx](https://github.com/bhelx))
+- Typescript definitions [\#48](https://github.com/recurly/recurly-client-node/pull/48) ([bhelx](https://github.com/bhelx))
+
 ## [3.2.1](https://github.com/recurly/recurly-client-node/tree/3.2.1) (2019-12-10)
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.2.0...3.2.1)
 
@@ -17,7 +29,7 @@
 **Merged pull requests:**
 
 - Release 3.2.0 [\#66](https://github.com/recurly/recurly-client-node/pull/66) ([bhelx](https://github.com/bhelx))
-- Failure to parse transaction error [\#64](https://github.com/recurly/recurly-client-node/pull/64) ([bhelx](https://github.com/bhelx))
+- Allow object attributes [\#65](https://github.com/recurly/recurly-client-node/pull/65) ([bhelx](https://github.com/bhelx))
 
 ## [3.1.1](https://github.com/recurly/recurly-client-node/tree/3.1.1) (2019-11-22)
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.1.0...3.1.1)
@@ -43,7 +55,6 @@
 
 **Merged pull requests:**
 
-- Allow object attributes [\#65](https://github.com/recurly/recurly-client-node/pull/65) ([bhelx](https://github.com/bhelx))
 - Release 3.1.0 [\#61](https://github.com/recurly/recurly-client-node/pull/61) ([bhelx](https://github.com/bhelx))
 - Pick error class for responses without bodies [\#54](https://github.com/recurly/recurly-client-node/pull/54) ([bhelx](https://github.com/bhelx))
 - Bump eslint-utils from 1.3.1 to 1.4.3 [\#52](https://github.com/recurly/recurly-client-node/pull/52) ([dependabot[bot]](https://github.com/apps/dependabot))
