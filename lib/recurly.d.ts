@@ -2087,8 +2087,8 @@ export interface Empty {
 export declare class Pager<T> {
   count(): number;
   first(): T;
-  each(): AsyncIterator<T>;
-  eachPage(): AsyncIterator<T>;
+  each(): AsyncIterable<T>;
+  eachPage(): AsyncIterable<T>;
 }
 
 export declare class Client {
