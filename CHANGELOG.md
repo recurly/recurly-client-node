@@ -1,5 +1,16 @@
 # Change Log
 
+## [3.3.1](https://github.com/recurly/recurly-client-node/tree/3.3.1) (2019-12-23)
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.3.0...3.3.1)
+
+**Fixed bugs:**
+
+- error TS2504: Type 'AsyncIterator\<Plan, any, undefined\>' must have a '\[Symbol.asyncIterator\]\(\)' method that returns an async iterator. [\#73](https://github.com/recurly/recurly-client-node/issues/73)
+
+**Merged pull requests:**
+
+- Release 3.3.0 [\#71](https://github.com/recurly/recurly-client-node/pull/71) ([bhelx](https://github.com/bhelx))
+
 ## [3.3.0](https://github.com/recurly/recurly-client-node/tree/3.3.0) (2019-12-19)
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.2.1...3.3.0)
 
@@ -9,6 +20,7 @@
 
 **Merged pull requests:**
 
+- Pager: Use AsyncIterable not AsyncIterator [\#74](https://github.com/recurly/recurly-client-node/pull/74) ([bhelx](https://github.com/bhelx))
 - Adding missing TransactionError test [\#70](https://github.com/recurly/recurly-client-node/pull/70) ([bhelx](https://github.com/bhelx))
 - Typescript definitions [\#48](https://github.com/recurly/recurly-client-node/pull/48) ([bhelx](https://github.com/bhelx))
 
@@ -30,6 +42,7 @@
 
 - Release 3.2.0 [\#66](https://github.com/recurly/recurly-client-node/pull/66) ([bhelx](https://github.com/bhelx))
 - Allow object attributes [\#65](https://github.com/recurly/recurly-client-node/pull/65) ([bhelx](https://github.com/bhelx))
+- Failure to parse transaction error [\#64](https://github.com/recurly/recurly-client-node/pull/64) ([bhelx](https://github.com/bhelx))
 
 ## [3.1.1](https://github.com/recurly/recurly-client-node/tree/3.1.1) (2019-11-22)
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.1.0...3.1.1)
