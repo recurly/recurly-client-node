@@ -2086,7 +2086,7 @@
 each <code>operation</code> that can be performed in the API as a method.</p>
 <p>To initialize a client, you only need an API key which can be obtained on the <a href="https://app.recurly.com/go/integrations/api_keys">API Credentials Page</a>.</p>
 <pre class='hljs'><span class="hljs-keyword">const</span> recurly = <span class="hljs-built_in">require</span>(<span class="hljs-string">'recurly'</span>)
-<span class="hljs-comment">// You should store your api key somewhere safe</span>
+<span class="hljs-comment">// You should store your API key somewhere safe</span>
 <span class="hljs-comment">// and not in plain text if possible</span>
 <span class="hljs-keyword">const</span> myApiKey = <span class="hljs-string">'&lt;myapikey&gt;'</span>
 <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> recurly.Client(myApiKey)</pre>
@@ -2106,9 +2106,10 @@ You can handle the promises directly with <code>then</code> and <code>catch</cod
   }
 }</pre>
 <h3>Creating Resources</h3>
-<p>For creating or updating resources, pass a json object to one of the create<em> or update</em> methods.
-Keep in mind that the api accepts snake-cased keys but this library expects camel-cased keys.
-We do the translation for you so this library can conform to js style standards.</p>
+<p>For creating or updating resources, pass a plain object to one of the create<em> or update</em> methods.</p>
+<blockquote>
+<p><strong>Note</strong>: Keep in mind that the API accepts snake-cased keys but this library expects camel-cased keys. We do the translation for you so this library can conform to js style standards.</p>
+</blockquote>
 <pre class='hljs'><span class="hljs-keyword">try</span> {
   <span class="hljs-keyword">const</span> acctReq = {
     <span class="hljs-attr">code</span>: <span class="hljs-string">'new-account-code'</span>,
@@ -2117,14 +2118,14 @@ We do the translation for you so this library can conform to js style standards.
   }
   <span class="hljs-keyword">const</span> account = <span class="hljs-keyword">await</span> client.createAccount(acctReq)
 } <span class="hljs-keyword">catch</span> (err) {
-  <span class="hljs-keyword">if</span> (err &amp;&amp; err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
+  <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
     <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
     <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation:'</span>, err.params)
   } <span class="hljs-keyword">else</span> {
     <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
     <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error:'</span>, err)
   }
 }</pre>
 <h3>Pagination</h3>
@@ -2202,21 +2203,21 @@ The ApiError comes in a few flavors which help you determine what to do next. To
   <span class="hljs-keyword">if</span> (err) {
     <span class="hljs-keyword">if</span> (err.getResponse()) {
       <span class="hljs-keyword">const</span> requstId = err.getResponse().requestId
-      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Request Id useful for support: "</span>, requestId)
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Request Id useful for support:'</span>, requestId)
     }
 
     <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.ValidationError) {
       <span class="hljs-comment">// If the request was not valid, you may want to tell your user</span>
       <span class="hljs-comment">// why. You can find the invalid params and reasons in err.params</span>
-      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation'</span>, err.params)
-    <span class="hljs-comment">// } else if (err instanceof recurly.errors.NotFoundError) {</span>
-    <span class="hljs-comment">//   console.log('Failed validation', err.params)</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Failed validation:'</span>, err.params)
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.errors.NotFoundError) {
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Subscription not found:'</span>, err)
     } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (err <span class="hljs-keyword">instanceof</span> recurly.ApiError) {
-       <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'generic api error'</span>, err)
+       <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'generic API error:'</span>, err)
     } <span class="hljs-keyword">else</span> {
       <span class="hljs-comment">// If we don't know what to do with the err, we should</span>
       <span class="hljs-comment">// probably re-raise and let our web framework and logger handle it</span>
-      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error:'</span>, err)
     }
   }
 }</pre>
@@ -2242,7 +2243,7 @@ response.request.body <span class="hljs-comment">// null</span></pre>
     <span class="hljs-comment">// You can also get the Response here</span>
     <span class="hljs-keyword">const</span> response = err.getResponse()
   } <span class="hljs-keyword">else</span> {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error: '</span>, err)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Unknown Error:'</span>, err)
   }
 }</pre>
 <h3>Webhooks</h3>
@@ -2274,7 +2275,7 @@ XML to Plain Object parser such as <a href="https://github.com/Leonidas-from-XIV
 
 parseString(xml, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, result</span>) </span>{
   <span class="hljs-keyword">const</span> code = result.new_account_notification.account[<span class="hljs-number">0</span>].account_code[<span class="hljs-number">0</span>];
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"New account created with code: "</span>, code);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'New account created with code:'</span>, code);
 })</pre>
 <p>You can do this without dependencies, but you'll need to heed warnings about security concerns.
 Read more about the security implications of parsing untrusted XML in <a href="https://cheatsheetseries.owasp.org/cheatsheets/XML_Security_Cheat_Sheet.html">this OWASP cheatsheet</a>.</p>
