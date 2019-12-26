@@ -30,7 +30,7 @@ To initialize a client, you only need an API key which can be obtained on the [A
 
 ```js
 const recurly = require('recurly')
-// You should store your api key somewhere safe
+// You should store your API key somewhere safe
 // and not in plain text if possible
 const myApiKey = '<myapikey>'
 const client = new recurly.Client(myApiKey)
@@ -64,9 +64,9 @@ async function myFunc () {
 
 ### Creating Resources
 
-For creating or updating resources, pass a json object to one of the create* or update* methods.
-Keep in mind that the api accepts snake-cased keys but this library expects camel-cased keys.
-We do the translation for you so this library can conform to js style standards.
+For creating or updating resources, pass a plain object to one of the create* or update* methods.
+
+> **Note**: Keep in mind that the API accepts snake-cased keys but this library expects camel-cased keys. We do the translation for you so this library can conform to js style standards.
 
 ```js
 
@@ -78,14 +78,14 @@ try {
   }
   const account = await client.createAccount(acctReq)
 } catch (err) {
-  if (err && err instanceof recurly.errors.ValidationError) {
+  if (err instanceof recurly.errors.ValidationError) {
     // If the request was not valid, you may want to tell your user
     // why. You can find the invalid params and reasons in err.params
-    console.log('Failed validation', err.params)
+    console.log('Failed validation:', err.params)
   } else {
     // If we don't know what to do with the err, we should
     // probably re-raise and let our web framework and logger handle it
-    console.log('Unknown Error: ', err)
+    console.log('Unknown Error:', err)
   }
 }
 ```
@@ -187,21 +187,21 @@ try {
   if (err) {
     if (err.getResponse()) {
       const requstId = err.getResponse().requestId
-      console.log("Request Id useful for support: ", requestId)
+      console.log('Request Id useful for support:', requestId)
     }
 
     if (err instanceof recurly.errors.ValidationError) {
       // If the request was not valid, you may want to tell your user
       // why. You can find the invalid params and reasons in err.params
-      console.log('Failed validation', err.params)
-    // } else if (err instanceof recurly.errors.NotFoundError) {
-    //   console.log('Failed validation', err.params)
+      console.log('Failed validation:', err.params)
+    } else if (err instanceof recurly.errors.NotFoundError) {
+      console.log('Subscription not found:', err)
     } else if (err instanceof recurly.ApiError) {
-       console.log('generic api error', err)
+       console.log('generic API error:', err)
     } else {
       // If we don't know what to do with the err, we should
       // probably re-raise and let our web framework and logger handle it
-      console.log('Unknown Error: ', err)
+      console.log('Unknown Error:', err)
     }
   }
 }
@@ -241,7 +241,7 @@ try {
     // You can also get the Response here
     const response = err.getResponse()
   } else {
-    console.log('Unknown Error: ', err)
+    console.log('Unknown Error:', err)
   }
 }
 ```
@@ -281,7 +281,7 @@ const xml = `
 
 parseString(xml, function (err, result) {
   const code = result.new_account_notification.account[0].account_code[0];
-  console.log("New account created with code: ", code);
+  console.log('New account created with code:', code);
 })
 ```
 
