@@ -5,17 +5,17 @@ set -e
 RELEASED_LOG="/tmp/node-pending-changes.md"
 THIS_VERSION=$(./scripts/bump --this-version)
 
-# push the tag
-git push origin $THIS_VERSION
-
-# publish to npm
-npm publish
-
 # Finally need to update the full changelog
 ./scripts/changelog
 git add CHANGELOG.md
 git commit -m "Update Changelog for Release $THIS_VERSION"
 git push origin master
+
+# publish to npm
+npm publish
+
+# create release
+hub release create -c -F $RELEASED_LOG $THIS_VERSION
 
 # Copy-pasteable messages for announcments
 echo "Npm: https://www.npmjs.com/package/recurly/v/$THIS_VERSION"
