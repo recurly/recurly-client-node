@@ -28,9 +28,9 @@ else
   git add . --all
   git commit -F $UNRELEASED_LOG
 
-  # push up this branch for PR
+  # Push up this branch for PR
   git push origin release-$NEXT_VERSION
 
-  # Create the tag (but don't push it yet, it's pushed in `scripts/release`)
-  git tag -F $UNRELEASED_LOG $NEXT_VERSION
+  # Create PR
+  hub pull-request -c -F $UNRELEASED_LOG
 fi
