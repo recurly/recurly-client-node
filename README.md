@@ -1,6 +1,6 @@
 # Recurly
 
-This library houses the official node library for Recurly's V3 API.
+This repository houses the official node library for Recurly's V3 API.
 
 ## Documentation
 
