@@ -131,6 +131,30 @@ export interface Account {
    */
   shippingAddresses: ShippingAddress[] | null;
   /**
+   * Indicates if the account has a subscription that is either active, canceled, future, or paused.
+   */
+  hasLiveSubscription: boolean | null;
+  /**
+   * Indicates if the account has an active subscription.
+   */
+  hasActiveSubscription: boolean | null;
+  /**
+   * Indicates if the account has a future subscription.
+   */
+  hasFutureSubscription: boolean | null;
+  /**
+   * Indicates if the account has a canceled subscription.
+   */
+  hasCanceledSubscription: boolean | null;
+  /**
+   * Indicates if the account has a paused subscription.
+   */
+  hasPausedSubscription: boolean | null;
+  /**
+   * Indicates if the account has a past due invoice.
+   */
+  hasPastDueInvoice: boolean | null;
+  /**
    * When the account was created.
    */
   createdAt: Date | null;
@@ -187,6 +211,9 @@ export interface Account {
   billTo: string | null;
   address: Address | null;
   billingInfo: BillingInfo | null;
+  /**
+   * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
+   */
   customFields: CustomField[] | null;
 
 }
@@ -292,6 +319,14 @@ export interface PaymentMethod {
    * Expiration year.
    */
   expYear: number | null;
+  /**
+   * A token used in place of a credit card in order to perform transactions.
+   */
+  gatewayToken: string | null;
+  /**
+   * An identifier for a specific payment gateway.
+   */
+  gatewayCode: string | null;
   /**
    * Billing Agreement identifier. Only present for Amazon or Paypal payment methods.
    */
@@ -404,6 +439,9 @@ export interface TransactionError {
 }
 
 export interface AccountAcquisition {
+  /**
+   * Account balance
+   */
   cost: AccountAcquisitionCost | null;
   /**
    * The channel through which the account was acquired.
@@ -422,6 +460,9 @@ export interface AccountAcquisition {
    * Object type
    */
   object: string | null;
+  /**
+   * Account mini details
+   */
   account: AccountMini | null;
   /**
    * When the account acquisition data was created.
@@ -473,6 +514,9 @@ export interface AccountBalance {
    * Object type
    */
   object: string | null;
+  /**
+   * Account mini details
+   */
   account: AccountMini | null;
   pastDue: boolean | null;
   balances: AccountBalanceAmount[] | null;
@@ -609,6 +653,9 @@ export interface Coupon {
    * Whether the discount is for all eligible charges on the account, or only a specific subscription.
    */
   redemptionResource: string | null;
+  /**
+   * Details of the discount a coupon applies. Will contain a `type` property and one of the following properties: `percent`, `fixed`, `trial`. 
+   */
   discount: CouponDiscount | null;
   /**
    * Whether the coupon is "single_code" or "bulk". Bulk coupons will require a `unique_code_template` and will generate unique codes through the `/generate` endpoint.
@@ -719,8 +766,17 @@ export interface CreditPayment {
    * The action for which the credit was created.
    */
   action: string | null;
+  /**
+   * Account mini details
+   */
   account: AccountMini | null;
+  /**
+   * Invoice mini details
+   */
   appliedToInvoice: InvoiceMini | null;
+  /**
+   * Invoice mini details
+   */
   originalInvoice: InvoiceMini | null;
   /**
    * 3-letter ISO 4217 currency code.
@@ -791,8 +847,17 @@ export interface Transaction {
    * If this transaction is a refund (`type=refund`), this will be the ID of the original transaction on the invoice being refunded.
    */
   originalTransactionId: string | null;
+  /**
+   * Account mini details
+   */
   account: AccountMini | null;
+  /**
+   * Invoice mini details
+   */
   invoice: InvoiceMini | null;
+  /**
+   * Invoice mini details
+   */
   voidedByInvoice: InvoiceMini | null;
   /**
    * If the transaction is charging or refunding for one or more subscriptions, these are their IDs.
@@ -936,6 +1001,9 @@ export interface Invoice {
    * Invoice state
    */
   state: string | null;
+  /**
+   * Account mini details
+   */
   account: AccountMini | null;
   /**
    * If the invoice is charging or refunding for one or more subscriptions, these are their IDs.
@@ -995,6 +1063,9 @@ export interface Invoice {
    * The outstanding balance remaining on this invoice.
    */
   balance: number | null;
+  /**
+   * Tax info
+   */
   taxInfo: TaxInfo | null;
   /**
    * VAT registration number for the customer on this invoice. This will come from the VAT Number field in the Billing Info or the Account Info depending on your tax settings and the invoice collection method.
@@ -1147,6 +1218,10 @@ export interface LineItem {
    */
   itemId: string | null;
   /**
+   * Optional Stock Keeping Unit assigned to an item, when the Catalog feature is enabled.
+   */
+  externalSku: string | null;
+  /**
    * Revenue schedule type
    */
   revenueScheduleType: string | null;
@@ -1158,6 +1233,9 @@ export interface LineItem {
    * Category to describe the role of a line item on a legacy invoice: - "charges" refers to charges being billed for on this invoice. - "credits" refers to refund or proration credits. This portion of the invoice can be considered a credit memo. - "applied_credits" refers to previous credits applied to this invoice. See their original_line_item_id to determine where the credit first originated. - "carryforwards" can be ignored. They exist to consume any remaining credit balance. A new credit with the same amount will be created and placed back on the account. 
    */
   legacyCategory: string | null;
+  /**
+   * Account mini details
+   */
   account: AccountMini | null;
   /**
    * If the line item is a charge or credit for a subscription, this is its ID.
@@ -1255,6 +1333,9 @@ export interface LineItem {
    * Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use `unknown`, `physical`, or `digital`.
    */
   taxCode: string | null;
+  /**
+   * Tax info
+   */
   taxInfo: TaxInfo | null;
   /**
    * When a line item has been prorated, this is the rate of the proration. Proration rates were made available for line items created after March 30, 2017. For line items created prior to that date, the proration rate will be `null`, even if the line item was prorated.
@@ -1346,17 +1427,29 @@ export interface Subscription {
    * The UUID is useful for matching data with the CSV exports and building URLs into Recurly's UI.
    */
   uuid: string | null;
+  /**
+   * Account mini details
+   */
   account: AccountMini | null;
+  /**
+   * Just the important parts.
+   */
   plan: PlanMini | null;
   /**
    * State
    */
   state: string | null;
+  /**
+   * Subscription shipping details
+   */
   shipping: SubscriptionShipping | null;
   /**
    * Coupon redemptions
    */
   couponRedemptions: CouponRedemptionMini[] | null;
+  /**
+   * Subscription Change
+   */
   pendingChange: SubscriptionChange | null;
   /**
    * Current billing period started at
@@ -1454,6 +1547,9 @@ export interface Subscription {
    * Expiration reason
    */
   expirationReason: string | null;
+  /**
+   * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
+   */
   customFields: CustomField[] | null;
   /**
    * Created at
@@ -1562,6 +1658,9 @@ export interface CouponMini {
    * Indicates if the coupon is redeemable, and if it is not, why.
    */
   state: string | null;
+  /**
+   * Details of the discount a coupon applies. Will contain a `type` property and one of the following properties: `percent`, `fixed`, `trial`. 
+   */
   discount: CouponDiscount | null;
   /**
    * Whether the coupon is "single_code" or "bulk". Bulk coupons will require a `unique_code_template` and will generate unique codes through the `/generate` endpoint.
@@ -1587,6 +1686,9 @@ export interface SubscriptionChange {
    * The ID of the subscription that is going to be changed.
    */
   subscriptionId: string | null;
+  /**
+   * Just the important parts.
+   */
   plan: PlanMini | null;
   /**
    * These add-ons will be used when the subscription renews.
@@ -1600,6 +1702,9 @@ export interface SubscriptionChange {
    * Subscription quantity
    */
   quantity: number | null;
+  /**
+   * Subscription shipping details
+   */
   shipping: SubscriptionShipping | null;
   /**
    * Activated at
@@ -1637,6 +1742,9 @@ export interface SubscriptionAddOn {
    * Subscription ID
    */
   subscriptionId: string | null;
+  /**
+   * Just the important parts.
+   */
   addOn: AddOnMini | null;
   /**
    * Add-on quantity
@@ -1810,6 +1918,9 @@ export interface Item {
    * `true` exempts tax on the item, `false` applies tax on the item.
    */
   taxExempt: boolean | null;
+  /**
+   * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
+   */
   customFields: CustomField[] | null;
   /**
    * Item Pricing
