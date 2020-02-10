@@ -16868,7 +16868,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#customfield">CustomField</a>>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
+</td>
 		</tr>
 
 		
@@ -16916,6 +16917,78 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'></td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>hasActiveSubscription</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>
+				
+			</td>
+			<td class='col-8'>: Indicates if the account has an active subscription.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>hasCanceledSubscription</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>
+				
+			</td>
+			<td class='col-8'>: Indicates if the account has a canceled subscription.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>hasFutureSubscription</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>
+				
+			</td>
+			<td class='col-8'>: Indicates if the account has a future subscription.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>hasLiveSubscription</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>
+				
+			</td>
+			<td class='col-8'>: Indicates if the account has a subscription that is either active, canceled, future, or paused.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>hasPastDueInvoice</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>
+				
+			</td>
+			<td class='col-8'>: Indicates if the account has a past due invoice.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>hasPausedSubscription</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>
+				
+			</td>
+			<td class='col-8'>: Indicates if the account has a paused subscription.
+</td>
 		</tr>
 
 		
@@ -17189,7 +17262,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#accountmini">AccountMini</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Account mini details
+</td>
 		</tr>
 
 		
@@ -17224,7 +17298,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#accountacquisitioncost">AccountAcquisitionCost</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Account balance
+</td>
 		</tr>
 
 		
@@ -17548,7 +17623,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#accountmini">AccountMini</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Account mini details
+</td>
 		</tr>
 
 		
@@ -19679,7 +19755,16 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#coupondiscount">CouponDiscount</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Details of the discount a coupon applies. Will contain a 
+<code>type</code>
+ property and one of the following properties: 
+<code>percent</code>
+, 
+<code>fixed</code>
+, 
+<code>trial</code>
+.
+</td>
 		</tr>
 
 		
@@ -20561,7 +20646,16 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#coupondiscount">CouponDiscount</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Details of the discount a coupon applies. Will contain a 
+<code>type</code>
+ property and one of the following properties: 
+<code>percent</code>
+, 
+<code>fixed</code>
+, 
+<code>trial</code>
+.
+</td>
 		</tr>
 
 		
@@ -21173,7 +21267,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#accountmini">AccountMini</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Account mini details
+</td>
 		</tr>
 
 		
@@ -21208,7 +21303,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#invoicemini">InvoiceMini</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Invoice mini details
+</td>
 		</tr>
 
 		
@@ -21281,7 +21377,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#invoicemini">InvoiceMini</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Invoice mini details
+</td>
 		</tr>
 
 		
@@ -22301,7 +22398,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#accountmini">AccountMini</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Account mini details
+</td>
 		</tr>
 
 		
@@ -22609,7 +22707,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#taxinfo">TaxInfo</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Tax info
+</td>
 		</tr>
 
 		
@@ -23439,7 +23538,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#customfield">CustomField</a>>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
+</td>
 		</tr>
 
 		
@@ -23706,7 +23806,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#accountmini">AccountMini</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Account mini details
+</td>
 		</tr>
 
 		
@@ -23840,6 +23941,18 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'>: If this date is provided, it indicates the end of a time range.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>externalSku</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Optional Stock Keeping Unit assigned to an item, when the Catalog feature is enabled.
 </td>
 		</tr>
 
@@ -24177,7 +24290,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#taxinfo">TaxInfo</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Tax info
+</td>
 		</tr>
 
 		
@@ -24589,6 +24703,30 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'>: Credit card number's first six digits.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>gatewayCode</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: An identifier for a specific payment gateway.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>gatewayToken</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: A token used in place of a credit card in order to perform transactions.
 </td>
 		</tr>
 
@@ -26883,7 +27021,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#accountmini">AccountMini</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Account mini details
+</td>
 		</tr>
 
 		
@@ -27066,7 +27205,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#customfield">CustomField</a>>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
+</td>
 		</tr>
 
 		
@@ -27161,7 +27301,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#subscriptionchange">SubscriptionChange</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Subscription Change
+</td>
 		</tr>
 
 		
@@ -27172,7 +27313,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#planmini">PlanMini</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Just the important parts.
+</td>
 		</tr>
 
 		
@@ -27249,7 +27391,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#subscriptionshipping">SubscriptionShipping</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Subscription shipping details
+</td>
 		</tr>
 
 		
@@ -27487,7 +27630,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#addonmini">AddOnMini</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Just the important parts.
+</td>
 		</tr>
 
 		
@@ -27795,7 +27939,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#planmini">PlanMini</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Just the important parts.
+</td>
 		</tr>
 
 		
@@ -27818,7 +27963,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#subscriptionshipping">SubscriptionShipping</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Subscription shipping details
+</td>
 		</tr>
 
 		
@@ -28292,7 +28438,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#accountmini">AccountMini</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Account mini details
+</td>
 		</tr>
 
 		
@@ -28510,7 +28657,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#invoicemini">InvoiceMini</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Invoice mini details
+</td>
 		</tr>
 
 		
@@ -28725,7 +28873,8 @@ need and we will usher them to the appropriate places.</p>
 				<a href="#invoicemini">InvoiceMini</a>
 				
 			</td>
-			<td class='col-8'></td>
+			<td class='col-8'>: Invoice mini details
+</td>
 		</tr>
 
 		
