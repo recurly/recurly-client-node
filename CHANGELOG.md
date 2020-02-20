@@ -9,6 +9,7 @@
 
 **Merged pull requests:**
 
+- Pager: Use AsyncIterable not AsyncIterator [\#74](https://github.com/recurly/recurly-client-node/pull/74) ([bhelx](https://github.com/bhelx))
 - Release 3.3.0 [\#71](https://github.com/recurly/recurly-client-node/pull/71) ([bhelx](https://github.com/bhelx))
 
 ## [3.3.0](https://github.com/recurly/recurly-client-node/tree/3.3.0) (2019-12-19)
@@ -20,7 +21,6 @@
 
 **Merged pull requests:**
 
-- Pager: Use AsyncIterable not AsyncIterator [\#74](https://github.com/recurly/recurly-client-node/pull/74) ([bhelx](https://github.com/bhelx))
 - Adding missing TransactionError test [\#70](https://github.com/recurly/recurly-client-node/pull/70) ([bhelx](https://github.com/bhelx))
 - Typescript definitions [\#48](https://github.com/recurly/recurly-client-node/pull/48) ([bhelx](https://github.com/bhelx))
 
@@ -135,7 +135,6 @@
 - Latest v2018-08-09 Changes [\#17](https://github.com/recurly/recurly-client-node/pull/17) ([bhelx](https://github.com/bhelx))
 - Casting and testing improvements [\#16](https://github.com/recurly/recurly-client-node/pull/16) ([bhelx](https://github.com/bhelx))
 - Bump test packages [\#15](https://github.com/recurly/recurly-client-node/pull/15) ([bhelx](https://github.com/bhelx))
-- No longer need dep scripts [\#14](https://github.com/recurly/recurly-client-node/pull/14) ([bhelx](https://github.com/bhelx))
 - Url Encode Items in interpolatePath [\#13](https://github.com/recurly/recurly-client-node/pull/13) ([bhelx](https://github.com/bhelx))
 - Fix user agent [\#12](https://github.com/recurly/recurly-client-node/pull/12) ([bhelx](https://github.com/bhelx))
 - Error hierarchy [\#11](https://github.com/recurly/recurly-client-node/pull/11) ([bhelx](https://github.com/bhelx))
