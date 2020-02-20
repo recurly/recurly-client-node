@@ -312,6 +312,10 @@ export interface PaymentMethod {
    */
   lastFour: string | null;
   /**
+   * The IBAN bank account's last two digits.
+   */
+  lastTwo: string | null;
+  /**
    * Expiration month.
    */
   expMonth: number | null;
@@ -1787,6 +1791,14 @@ export interface AddOnMini {
    */
   name: string | null;
   /**
+   * Item ID
+   */
+  itemId: string | null;
+  /**
+   * Optional, stock keeping unit to link the item to other inventory systems.
+   */
+  externalSku: string | null;
+  /**
    * Accounting code for invoice line items for this add-on. If no value is provided, it defaults to add-on's code.
    */
   accountingCode: string | null;
@@ -2124,9 +2136,21 @@ export interface AddOn {
    */
   defaultQuantity: number | null;
   /**
+   * Whether the add-on is optional for the customer to include in their purchase on the hosted payment page. If false, the add-on will be included when a subscription is created through the Recurly UI. However, the add-on will not be included when a subscription is created through the API.
+   */
+  optional: boolean | null;
+  /**
    * Add-on pricing
    */
   currencies: AddOnPricing[] | null;
+  /**
+   * Just the important parts.
+   */
+  item: ItemMini | null;
+  /**
+   * Optional, stock keeping unit to link the item to other inventory systems.
+   */
+  externalSku: string | null;
   /**
    * Created at
    */
@@ -2151,6 +2175,34 @@ export interface AddOnPricing {
    * Unit price
    */
   unitAmount: number | null;
+
+}
+
+export interface ItemMini {
+  /**
+   * Item ID
+   */
+  id: string | null;
+  /**
+   * Object type
+   */
+  object: string | null;
+  /**
+   * Unique code to identify the item.
+   */
+  code: string | null;
+  /**
+   * The current state of the item.
+   */
+  state: string | null;
+  /**
+   * This name describes your item and will appear on the invoice when it's purchased on a one time basis.
+   */
+  name: string | null;
+  /**
+   * Optional, description.
+   */
+  description: string | null;
 
 }
 
@@ -4706,6 +4758,16 @@ export declare class Client {
    * @return {Promise<Subscription>} A subscription.
    */
   resumeSubscription(subscriptionId: string): Promise<Subscription>;
+  /**
+   * Convert trial subscription
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/convert_trial
+   *
+   * 
+   * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @return {Promise<Subscription>} A subscription.
+   */
+  convertTrial(subscriptionId: string): Promise<Subscription>;
   /**
    * Fetch a subscription's pending change
    *
