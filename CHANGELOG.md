@@ -1,5 +1,18 @@
 # Change Log
 
+## [3.4.0](https://github.com/recurly/recurly-client-node/tree/3.4.0) (2020-02-20)
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.3.1...3.4.0)
+
+**Merged pull requests:**
+
+- Release 3.4.0 [\#82](https://github.com/recurly/recurly-client-node/pull/82) ([bhelx](https://github.com/bhelx))
+- Latest generated changes for v2019-10-10 [\#81](https://github.com/recurly/recurly-client-node/pull/81) ([bhelx](https://github.com/bhelx))
+- Use new webhooks doc link [\#80](https://github.com/recurly/recurly-client-node/pull/80) ([bhelx](https://github.com/bhelx))
+- Latest v2019-10-10 Changes [\#78](https://github.com/recurly/recurly-client-node/pull/78) ([bhelx](https://github.com/bhelx))
+- Small tweaks to docs [\#77](https://github.com/recurly/recurly-client-node/pull/77) ([bhelx](https://github.com/bhelx))
+- Use hub cli to publish release [\#76](https://github.com/recurly/recurly-client-node/pull/76) ([bhelx](https://github.com/bhelx))
+- Release 3.3.1 [\#75](https://github.com/recurly/recurly-client-node/pull/75) ([bhelx](https://github.com/bhelx))
+
 ## [3.3.1](https://github.com/recurly/recurly-client-node/tree/3.3.1) (2019-12-23)
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.3.0...3.3.1)
 
@@ -135,6 +148,7 @@
 - Latest v2018-08-09 Changes [\#17](https://github.com/recurly/recurly-client-node/pull/17) ([bhelx](https://github.com/bhelx))
 - Casting and testing improvements [\#16](https://github.com/recurly/recurly-client-node/pull/16) ([bhelx](https://github.com/bhelx))
 - Bump test packages [\#15](https://github.com/recurly/recurly-client-node/pull/15) ([bhelx](https://github.com/bhelx))
+- No longer need dep scripts [\#14](https://github.com/recurly/recurly-client-node/pull/14) ([bhelx](https://github.com/bhelx))
 - Url Encode Items in interpolatePath [\#13](https://github.com/recurly/recurly-client-node/pull/13) ([bhelx](https://github.com/bhelx))
 - Fix user agent [\#12](https://github.com/recurly/recurly-client-node/pull/12) ([bhelx](https://github.com/bhelx))
 - Error hierarchy [\#11](https://github.com/recurly/recurly-client-node/pull/11) ([bhelx](https://github.com/bhelx))
