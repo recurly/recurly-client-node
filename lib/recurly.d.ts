@@ -678,6 +678,10 @@ export interface Coupon {
    */
   redeemBy: Date | null;
   /**
+   * The date and time the unique coupon code was redeemed. This is only present for bulk coupons.
+   */
+  redeemedAt: Date | null;
+  /**
    * Created at
    */
   createdAt: Date | null;
@@ -1214,15 +1218,15 @@ export interface LineItem {
    */
   type: string | null;
   /**
-   * Unique code to identify an item, when the Catalog feature is enabled.
+   * Unique code to identify an item. Available when the Credit Invoices and Subscription Billing Terms features are enabled.
    */
   itemCode: string | null;
   /**
-   * Available when the Catalog feature is enabled.
+   * System-generated unique identifier for an item. Available when the Credit Invoices and Subscription Billing Terms features are enabled.
    */
   itemId: string | null;
   /**
-   * Optional Stock Keeping Unit assigned to an item, when the Catalog feature is enabled.
+   * Optional Stock Keeping Unit assigned to an item. Available when the Credit Invoices and Subscription Billing Terms features are enabled.
    */
   externalSku: string | null;
   /**
@@ -1508,6 +1512,10 @@ export interface Subscription {
    */
   currency: string | null;
   /**
+   * Revenue schedule type
+   */
+  revenueScheduleType: string | null;
+  /**
    * Subscription unit price
    */
   unitAmount: number | null;
@@ -1718,6 +1726,14 @@ export interface SubscriptionChange {
    * Returns `true` if the subscription change is activated.
    */
   activated: boolean | null;
+  /**
+   * Revenue schedule type
+   */
+  revenueScheduleType: string | null;
+  /**
+   * Setup fee revenue schedule type
+   */
+  setupFeeRevenueScheduleType: string | null;
   /**
    * Created at
    */
@@ -2024,6 +2040,14 @@ export interface Plan {
    */
   accountingCode: string | null;
   /**
+   * Revenue schedule type
+   */
+  revenueScheduleType: string | null;
+  /**
+   * Setup fee revenue schedule type
+   */
+  setupFeeRevenueScheduleType: string | null;
+  /**
    * Accounting code for invoice line items for the plan's setup fee. If no value is provided, it defaults to plan's accounting code.
    */
   setupFeeAccountingCode: string | null;
@@ -2123,6 +2147,10 @@ export interface AddOn {
    * Accounting code for invoice line items for this add-on. If no value is provided, it defaults to add-on's code.
    */
   accountingCode: string | null;
+  /**
+   * When this add-on is invoiced, the line item will use this revenue schedule. If `item_code`/`item_id` is part of the request then `revenue_schedule_type` must be absent in the request as the value will be set from the item.
+   */
+  revenueScheduleType: string | null;
   /**
    * Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use `unknown`, `physical`, or `digital`.
    */
