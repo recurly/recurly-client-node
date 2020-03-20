@@ -18596,6 +18596,24 @@ need and we will usher them to the appropriate places.</p>
 		
 		
 		<tr>
+			<td class='col-2 strong'>revenueScheduleType</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: When this add-on is invoiced, the line item will use this revenue schedule. If 
+<code>item_code</code>
+/
+<code>item_id</code>
+ is part of the request then 
+<code>revenue_schedule_type</code>
+ must be absent in the request as the value will be set from the item.
+</td>
+		</tr>
+
+		
+		
+		<tr>
 			<td class='col-2 strong'>state</td>
 			<td class='col-2 quiet'>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
@@ -20117,6 +20135,18 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'>: The date and time the coupon will expire and can no longer be redeemed. Time is always 11:59:59, the end-of-day Pacific time.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>redeemedAt</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>
+				
+			</td>
+			<td class='col-8'>: The date and time the unique coupon code was redeemed. This is only present for bulk coupons.
 </td>
 		</tr>
 
@@ -24310,7 +24340,7 @@ need and we will usher them to the appropriate places.</p>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-8'>: Optional Stock Keeping Unit assigned to an item, when the Catalog feature is enabled.
+			<td class='col-8'>: Optional Stock Keeping Unit assigned to an item. Available when the Credit Invoices and Subscription Billing Terms features are enabled.
 </td>
 		</tr>
 
@@ -24358,7 +24388,7 @@ need and we will usher them to the appropriate places.</p>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-8'>: Unique code to identify an item, when the Catalog feature is enabled.
+			<td class='col-8'>: Unique code to identify an item. Available when the Credit Invoices and Subscription Billing Terms features are enabled.
 </td>
 		</tr>
 
@@ -24370,7 +24400,7 @@ need and we will usher them to the appropriate places.</p>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
-			<td class='col-8'>: Available when the Catalog feature is enabled.
+			<td class='col-8'>: System-generated unique identifier for an item. Available when the Credit Invoices and Subscription Billing Terms features are enabled.
 </td>
 		</tr>
 
@@ -25433,12 +25463,36 @@ need and we will usher them to the appropriate places.</p>
 		
 		
 		<tr>
+			<td class='col-2 strong'>revenueScheduleType</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Revenue schedule type
+</td>
+		</tr>
+
+		
+		
+		<tr>
 			<td class='col-2 strong'>setupFeeAccountingCode</td>
 			<td class='col-2 quiet'>
 				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
 				
 			</td>
 			<td class='col-8'>: Accounting code for invoice line items for the plan's setup fee. If no value is provided, it defaults to plan's accounting code.
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>setupFeeRevenueScheduleType</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Setup fee revenue schedule type
 </td>
 		</tr>
 
@@ -27756,6 +27810,18 @@ need and we will usher them to the appropriate places.</p>
 		
 		
 		<tr>
+			<td class='col-2 strong'>revenueScheduleType</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Revenue schedule type
+</td>
+		</tr>
+
+		
+		
+		<tr>
 			<td class='col-2 strong'>shipping</td>
 			<td class='col-2 quiet'>
 				<a href="#subscriptionshipping">SubscriptionShipping</a>
@@ -28322,6 +28388,30 @@ need and we will usher them to the appropriate places.</p>
 				
 			</td>
 			<td class='col-8'>: Subscription quantity
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>revenueScheduleType</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Revenue schedule type
+</td>
+		</tr>
+
+		
+		
+		<tr>
+			<td class='col-2 strong'>setupFeeRevenueScheduleType</td>
+			<td class='col-2 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-8'>: Setup fee revenue schedule type
 </td>
 		</tr>
 
