@@ -28,7 +28,8 @@ describe('Http', () => {
             'Recurly-Deprecated': 'false',
             'date': 'Monday',
             'server': 'cloudflare',
-            'cf-ray': 'cf-1234'
+            'cf-ray': 'cf-1234',
+            'content-type': 'application/json; charset=utf-8'
           }
         }
       }

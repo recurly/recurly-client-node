@@ -48,6 +48,7 @@ class MockClient extends BaseClient {
       const req = new Request(options.method, options.path, requestBody)
       const resp = new Response()
       resp.request = req
+      resp.contentType = 'application/json'
       return strategy(resp, options)
     })
   }
