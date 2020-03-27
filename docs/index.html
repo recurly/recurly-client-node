@@ -285,6 +285,12 @@
 							</a>
 							
 							<a
+									href='#clientdeactivatecoupon'
+									class='button-indent regular block'>
+								<code>#deactivateCoupon</code>
+							</a>
+							
+							<a
 									href='#clientlistuniquecouponcodes'
 									class='button-indent regular block'>
 								<code>#listUniqueCouponCodes</code>
@@ -7857,6 +7863,89 @@ prevent some records from being returned.
 	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#coupon">Coupon</a>></code>
 	:
 	<span class='force-inline'>The updated coupon.
+</span>
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='clientdeactivatecoupon'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#clientdeactivatecoupon'>
+			<code>
+				deactivateCoupon
+				<span class='gray'>(couponId)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Expire a coupon</p>
+<p>API docs: <a href="https://developers.recurly.com/api/v2019-10-10#operation/deactivate_coupon">https://developers.recurly.com/api/v2019-10-10#operation/deactivate_coupon</a></p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>couponId</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-6'>Coupon ID or code. For ID no prefix is used e.g. 
+<code>e28zov4fw0v2</code>
+. For code use prefix 
+<code>code-</code>
+, e.g. 
+<code>code-10off</code>
+.
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#coupon">Coupon</a>></code>
+	:
+	<span class='force-inline'>The expired Coupon
 </span>
 	
 	

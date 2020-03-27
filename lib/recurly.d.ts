@@ -3436,6 +3436,16 @@ export declare class Client {
    */
   updateCoupon(couponId: string, body: object): Promise<Coupon>;
   /**
+   * Expire a coupon
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/deactivate_coupon
+   *
+   * 
+   * @param couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
+   * @return {Promise<Coupon>} The expired Coupon
+   */
+  deactivateCoupon(couponId: string): Promise<Coupon>;
+  /**
    * List unique coupon codes associated with a bulk coupon
    *
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_unique_coupon_codes
