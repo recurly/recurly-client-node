@@ -1,6 +1,18 @@
-# Change Log
+# Changelog
+
+## [3.5.1](https://github.com/recurly/recurly-client-node/tree/3.5.1) (2020-04-01)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.5.0...3.5.1)
+
+**Merged pull requests:**
+
+- Release 3.5.1 [\#96](https://github.com/recurly/recurly-client-node/pull/96) ([douglasmiller](https://github.com/douglasmiller))
+- Passing params object into \_makeRequest where applicable [\#95](https://github.com/recurly/recurly-client-node/pull/95) ([douglasmiller](https://github.com/douglasmiller))
+- Updating release script to be uniform across all clients [\#93](https://github.com/recurly/recurly-client-node/pull/93) ([douglasmiller](https://github.com/douglasmiller))
+- Thu Mar 26 20:45:12 UTC 2020 Upgrade API version v2019-10-10 [\#92](https://github.com/recurly/recurly-client-node/pull/92) ([bhelx](https://github.com/bhelx))
 
 ## [3.5.0](https://github.com/recurly/recurly-client-node/tree/3.5.0) (2020-03-23)
+
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.4.1...3.5.0)
 
 **Implemented enhancements:**
@@ -12,6 +24,7 @@
 - Release 3.5.0 [\#91](https://github.com/recurly/recurly-client-node/pull/91) ([bhelx](https://github.com/bhelx))
 
 ## [3.4.1](https://github.com/recurly/recurly-client-node/tree/3.4.1) (2020-03-20)
+
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.4.0...3.4.1)
 
 **Merged pull requests:**
@@ -24,6 +37,7 @@
 - Generate and commit changelog after npm release not before [\#83](https://github.com/recurly/recurly-client-node/pull/83) ([bhelx](https://github.com/bhelx))
 
 ## [3.4.0](https://github.com/recurly/recurly-client-node/tree/3.4.0) (2020-02-20)
+
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.3.1...3.4.0)
 
 **Merged pull requests:**
@@ -37,6 +51,7 @@
 - Release 3.3.1 [\#75](https://github.com/recurly/recurly-client-node/pull/75) ([bhelx](https://github.com/bhelx))
 
 ## [3.3.1](https://github.com/recurly/recurly-client-node/tree/3.3.1) (2019-12-23)
+
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.3.0...3.3.1)
 
 **Fixed bugs:**
@@ -49,6 +64,7 @@
 - Release 3.3.0 [\#71](https://github.com/recurly/recurly-client-node/pull/71) ([bhelx](https://github.com/bhelx))
 
 ## [3.3.0](https://github.com/recurly/recurly-client-node/tree/3.3.0) (2019-12-19)
+
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.2.1...3.3.0)
 
 **Implemented enhancements:**
@@ -61,6 +77,7 @@
 - Typescript definitions [\#48](https://github.com/recurly/recurly-client-node/pull/48) ([bhelx](https://github.com/bhelx))
 
 ## [3.2.1](https://github.com/recurly/recurly-client-node/tree/3.2.1) (2019-12-10)
+
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.2.0...3.2.1)
 
 **Implemented enhancements:**
@@ -72,6 +89,7 @@
 - Convert Array params to CSV strings [\#69](https://github.com/recurly/recurly-client-node/pull/69) ([douglasmiller](https://github.com/douglasmiller))
 
 ## [3.2.0](https://github.com/recurly/recurly-client-node/tree/3.2.0) (2019-12-03)
+
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.1.1...3.2.0)
 
 **Merged pull requests:**
@@ -81,6 +99,7 @@
 - Failure to parse transaction error [\#64](https://github.com/recurly/recurly-client-node/pull/64) ([bhelx](https://github.com/bhelx))
 
 ## [3.1.1](https://github.com/recurly/recurly-client-node/tree/3.1.1) (2019-11-22)
+
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.1.0...3.1.1)
 
 **Fixed bugs:**
@@ -88,6 +107,7 @@
 - Release 3.1.1 \(Bug fix for TypeError in responseEncoding function\) [\#62](https://github.com/recurly/recurly-client-node/pull/62) ([douglasmiller](https://github.com/douglasmiller))
 
 ## [3.1.0](https://github.com/recurly/recurly-client-node/tree/3.1.0) (2019-11-18)
+
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.0.1...3.1.0)
 
 **Implemented enhancements:**
@@ -109,6 +129,7 @@
 - Bump eslint-utils from 1.3.1 to 1.4.3 [\#52](https://github.com/recurly/recurly-client-node/pull/52) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [3.0.1](https://github.com/recurly/recurly-client-node/tree/3.0.1) (2019-10-19)
+
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.0.0...3.0.1)
 
 **Fixed bugs:**
@@ -120,6 +141,7 @@
 - Fix Improper import [\#50](https://github.com/recurly/recurly-client-node/pull/50) ([bhelx](https://github.com/bhelx))
 
 ## [3.0.0](https://github.com/recurly/recurly-client-node/tree/3.0.0) (2019-10-08)
+
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.0.0-beta.5...3.0.0)
 
 **Implemented enhancements:**
@@ -135,6 +157,7 @@
 - Release 3.0.0 [\#44](https://github.com/recurly/recurly-client-node/pull/44) ([bhelx](https://github.com/bhelx))
 
 ## [3.0.0-beta.5](https://github.com/recurly/recurly-client-node/tree/3.0.0-beta.5) (2019-10-01)
+
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.0.0-beta.3...3.0.0-beta.5)
 
 **Implemented enhancements:**
@@ -145,6 +168,7 @@
 - Remove the site-id constraint from Client [\#33](https://github.com/recurly/recurly-client-node/pull/33) ([bhelx](https://github.com/bhelx))
 - Update some typos in the readme [\#31](https://github.com/recurly/recurly-client-node/pull/31) ([rafdizzle86](https://github.com/rafdizzle86))
 - Document use of webhooks [\#28](https://github.com/recurly/recurly-client-node/pull/28) ([bhelx](https://github.com/bhelx))
+- Latest v2018-08-09 updates [\#27](https://github.com/recurly/recurly-client-node/pull/27) ([bhelx](https://github.com/bhelx))
 - Expose Request and Response metadata [\#26](https://github.com/recurly/recurly-client-node/pull/26) ([bhelx](https://github.com/bhelx))
 - Implement count and first methods [\#25](https://github.com/recurly/recurly-client-node/pull/25) ([bhelx](https://github.com/bhelx))
 - Add CONTRIBUTING.md [\#23](https://github.com/recurly/recurly-client-node/pull/23) ([bhelx](https://github.com/bhelx))
@@ -162,6 +186,7 @@
 - Release 3.0.0-beta.5 [\#40](https://github.com/recurly/recurly-client-node/pull/40) ([bhelx](https://github.com/bhelx))
 
 ## [3.0.0-beta.3](https://github.com/recurly/recurly-client-node/tree/3.0.0-beta.3) (2019-06-28)
+
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.0.0-beta.2...3.0.0-beta.3)
 
 **Implemented enhancements:**
@@ -177,4 +202,4 @@
 
 
 
-\* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
