@@ -48,7 +48,7 @@ describe('BaseClient', () => {
     it('Should throw an Error when invalid options are passed in', () => {
       assert.throws(() => {
         client._makeRequest('GET', '/resources/myid', null, { invalid: 'param' })
-      }, Error)
+      }, recurly.ApiError)
     })
 
     it('Should not throw an Error when semi-valid options are passed in', () => {
