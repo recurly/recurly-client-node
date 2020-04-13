@@ -23,6 +23,7 @@ describe('BaseClient', () => {
       assert.equal(client._getDefaultOptions().headers['Accept'], 'application/vnd.recurly.v2022-01-01')
     })
   })
+
   describe('#_interpolatePath', () => {
     it('Should interpolate and encode the path with the given params', () => {
       const pathTmpl = '/accounts/{account_id}/shipping_addresses/{shipping_address_id}'
@@ -32,6 +33,30 @@ describe('BaseClient', () => {
       })
 
       assert.equal(path, '/accounts/code-benjamin%20du%20monde/shipping_addresses/1234567890')
+    })
+  })
+
+  describe('#_makeRequest', () => {
+    beforeEach(() => {
+      client.mock((resp, options) => {
+        resp.status = 200
+        resp.body = JSON.stringify({ id: 'myid', object: 'my_resource' })
+        return Promise.resolve(resp)
+      })
+    })
+
+    it('Should throw an Error when invalid options are passed in', () => {
+      assert.throws(() => {
+        client._makeRequest('GET', '/resources/myid', null, { invalid: 'param' })
+      }, recurly.ApiError)
+    })
+
+    it('Should not throw an Error when semi-valid options are passed in', () => {
+      const resp = client._makeRequest('GET', '/resources/myid', null, { params: { invalid: 'param' } })
+      return resp
+        .then(resource => {
+          assert(resource instanceof MyResource)
+        })
     })
   })
 
