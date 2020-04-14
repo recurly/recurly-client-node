@@ -1775,6 +1775,14 @@ export interface SubscriptionAddOn {
    */
   unitAmount: number | null;
   /**
+   * The type of tiering used by the Add-on.
+   */
+  tierType: string | null;
+  /**
+   * Empty unless `tier_type` is `tiered`, `volume`, or `stairstep`.
+   */
+  tiers: SubscriptionAddOnTier[] | null;
+  /**
    * Created at
    */
   createdAt: Date | null;
@@ -1818,6 +1826,18 @@ export interface AddOnMini {
    * Accounting code for invoice line items for this add-on. If no value is provided, it defaults to add-on's code.
    */
   accountingCode: string | null;
+
+}
+
+export interface SubscriptionAddOnTier {
+  /**
+   * Ending quantity
+   */
+  endingQuantity: number | null;
+  /**
+   * Unit amount
+   */
+  unitAmount: number | null;
 
 }
 
@@ -2176,6 +2196,14 @@ export interface AddOn {
    */
   item: ItemMini | null;
   /**
+   * The type of tiering used by the Add-on.
+   */
+  tierType: string | null;
+  /**
+   * Tiers
+   */
+  tiers: Tier[] | null;
+  /**
    * Optional, stock keeping unit to link the item to other inventory systems.
    */
   externalSku: string | null;
@@ -2231,6 +2259,18 @@ export interface ItemMini {
    * Optional, description.
    */
   description: string | null;
+
+}
+
+export interface Tier {
+  /**
+   * Ending quantity
+   */
+  endingQuantity: number | null;
+  /**
+   * Tier pricing
+   */
+  currencies: Pricing[] | null;
 
 }
 
