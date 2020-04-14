@@ -3998,6 +3998,11 @@ paths:
           foreach($account_subscriptions as $sub) {
               echo 'Account subscription: ' . $sub->getUuid() . PHP_EOL;
           }
+      - lang: Python
+        source: |
+          subscriptions = client.list_account_subscriptions(account.id, limit=200).items()
+          for subscription in subscriptions:
+              print(subscription.uuid)
   "/sites/{site_id}/accounts/{account_id}/transactions":
     get:
       tags:
@@ -12197,6 +12202,21 @@ components:
         item:
           "$ref": "#/components/schemas/ItemMini"
           readOnly: true
+        tier_type:
+          type: string
+          title: Tier type
+          description: The type of tiering used by the Add-on.
+          default: flat
+          enum:
+          - flat
+          - tiered
+          - stairstep
+          - volume
+        tiers:
+          type: array
+          title: Tiers
+          items:
+            "$ref": "#/components/schemas/Tier"
         external_sku:
           type: string
           title: External SKU
@@ -12292,6 +12312,14 @@ components:
           title: Default quantity
           description: Default quantity for the hosted pages.
           default: 1
+        optional:
+          type: boolean
+          title: Optional
+          description: Whether the add-on is optional for the customer to include
+            in their purchase on the hosted payment page. If false, the add-on will
+            be included when a subscription is created through the Recurly UI. However,
+            the add-on will not be included when a subscription is created through
+            the API.
         tax_code:
           type: string
           title: Tax code
@@ -12308,10 +12336,29 @@ components:
           items:
             "$ref": "#/components/schemas/AddOnPricing"
           minItems: 1
-          description: If `item_code`/`item_id` is part of the request and the item
+          description: |
+            * If `item_code`/`item_id` is part of the request and the item
             has a default currency then `currencies` is optional. If the item does
             not have a default currency, then `currencies` is required. If `item_code`/`item_id`
             is not present `currencies` is required.
+            * If the add-on's `tier_type` is `tiered`, `volume`, or `stairstep`,
+            then `currencies` must be absent.
+        tier_type:
+          type: string
+          title: Tier type
+          description: The type of tiering used by the Add-on.
+          default: flat
+          enum:
+          - flat
+          - tiered
+          - stairstep
+          - volume
+        tiers:
+          type: array
+          title: Tiers
+          items:
+            "$ref": "#/components/schemas/Tier"
+          description: At least one tier is required if `tier_type` is not 'flat'.
       required:
       - code
       - name
@@ -12378,12 +12425,31 @@ components:
           title: Default quantity
           description: Default quantity for the hosted pages.
           default: 1
+        optional:
+          type: boolean
+          title: Optional
+          description: Whether the add-on is optional for the customer to include
+            in their purchase on the hosted payment page. If false, the add-on will
+            be included when a subscription is created through the Recurly UI. However,
+            the add-on will not be included when a subscription is created through
+            the API.
         currencies:
           type: array
           title: Add-on pricing
           items:
             "$ref": "#/components/schemas/AddOnPricing"
           minItems: 1
+          description: |
+            If the add-on's `tier_type` is `tiered`, `volume` or `stairstep`,
+            then `currencies` must be absent.
+        tiers:
+          type: array
+          title: Tiers
+          items:
+            "$ref": "#/components/schemas/Tier"
+          description: |
+            If tiers are provided in the request, all existing tiers on the Add-on will be
+            removed and replaced by the tiers in the request.
     BillingInfo:
       type: object
       properties:
@@ -14932,6 +14998,23 @@ components:
       required:
       - currency
       - unit_amount
+    Tier:
+      type: object
+      properties:
+        ending_quantity:
+          type: integer
+          title: Ending quantity
+          minimum: 1
+          maximum: 999999999
+          default: 999999999
+        currencies:
+          type: array
+          title: Tier pricing
+          items:
+            "$ref": "#/components/schemas/Pricing"
+          minItems: 1
+      required:
+      - currencies
     Settings:
       type: object
       properties:
@@ -15533,6 +15616,23 @@ components:
           format: float
           title: Add-on unit price
           description: This is priced in the subscription's currency.
+        tier_type:
+          type: string
+          title: Tier type
+          description: The type of tiering used by the Add-on.
+          default: flat
+          enum:
+          - flat
+          - tiered
+          - stairstep
+          - volume
+        tiers:
+          type: array
+          title: Tiers
+          items:
+            "$ref": "#/components/schemas/SubscriptionAddOnTier"
+          minItems: 1
+          description: Empty unless `tier_type` is `tiered`, `volume`, or `stairstep`.
         created_at:
           type: string
           format: date-time
@@ -15561,8 +15661,18 @@ components:
           type: number
           format: float
           title: Unit amount
-          description: Optionally, override the add-on's default unit amount.
+          description: |
+            * Optionally, override the add-on's default unit amount.
+            * If the plan add-on's `tier_type` is `tiered`, `volume`, or `stairstep`, then `unit_amount` must be absent.
           minimum: 0
+        tiers:
+          type: array
+          title: Tiers
+          items:
+            "$ref": "#/components/schemas/SubscriptionAddOnTier"
+          minItems: 1
+          description: If the plan add-on's `tier_type` is `flat`, then `tiers` must
+            be absent.
         revenue_schedule_type:
           type: string
           title: Revenue schedule type
@@ -15595,6 +15705,14 @@ components:
           title: Unit amount
           description: Optionally, override the add-on's default unit amount.
           minimum: 0
+        tiers:
+          type: array
+          title: Tiers
+          items:
+            "$ref": "#/components/schemas/SubscriptionAddOnTier"
+          minItems: 1
+          description: If the plan add-on's `tier_type` is `flat`, then `tiers` must
+            be absent.
         revenue_schedule_type:
           type: string
           title: Revenue schedule type
@@ -15603,6 +15721,20 @@ components:
           - evenly
           - at_range_end
           - at_range_start
+    SubscriptionAddOnTier:
+      type: object
+      properties:
+        ending_quantity:
+          type: integer
+          title: Ending quantity
+          minimum: 1
+          maximum: 999999999
+          default: 999999999
+        unit_amount:
+          type: number
+          format: float
+          title: Unit amount
+          minimum: 0
     SubscriptionCancel:
       type: object
       properties:
@@ -16721,6 +16853,7 @@ components:
           - Maestro
           - MasterCard
           - Test Card
+          - Union Pay
           - Unknown
           - Visa
         first_six:
