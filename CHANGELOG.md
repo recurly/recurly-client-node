@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.6.0](https://github.com/recurly/recurly-client-node/tree/HEAD)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.5.1...HEAD)
+
+**Implemented enhancements:**
+
+- Tue Apr 14 20:25:06 UTC 2020 Upgrade API version v2019-10-10 [\#103](https://github.com/recurly/recurly-client-node/pull/103) ([bhelx](https://github.com/bhelx))
+- Validating options passed to \_makeRequest [\#101](https://github.com/recurly/recurly-client-node/pull/101) ([douglasmiller](https://github.com/douglasmiller))
+
+**Merged pull requests:**
+
+- Release 3.6.0 [\#104](https://github.com/recurly/recurly-client-node/pull/104) ([douglasmiller](https://github.com/douglasmiller))
+- Included the to-be released changes in the changelog [\#102](https://github.com/recurly/recurly-client-node/pull/102) ([douglasmiller](https://github.com/douglasmiller))
+- Remove docs from tracking and use github actions [\#100](https://github.com/recurly/recurly-client-node/pull/100) ([bhelx](https://github.com/bhelx))
+- Update method parameter 'params' to 'options' and related doc comments [\#98](https://github.com/recurly/recurly-client-node/pull/98) ([douglasmiller](https://github.com/douglasmiller))
+
 ## [3.5.1](https://github.com/recurly/recurly-client-node/tree/3.5.1) (2020-04-01)
 
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.5.0...3.5.1)
