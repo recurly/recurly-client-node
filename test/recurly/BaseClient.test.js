@@ -19,7 +19,7 @@ describe('BaseClient', () => {
   describe('#constructor', () => {
     it('Should set the internal state and headers', () => {
       assert.equal(client._getDefaultOptions().headers['Authorization'], 'Basic bXlhcGlrZXk6')
-      assert.equal(client._getDefaultOptions().headers['User-Agent'], `Recurly/${pkg.version}; node`)
+      assert.equal(client._getDefaultOptions().headers['User-Agent'], `Recurly/${pkg.version}; node ${process.version}`)
       assert.equal(client._getDefaultOptions().headers['Accept'], 'application/vnd.recurly.v2022-01-01')
     })
   })
