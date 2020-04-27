@@ -34,6 +34,26 @@ describe('BaseClient', () => {
 
       assert.equal(path, '/accounts/code-benjamin%20du%20monde/shipping_addresses/1234567890')
     })
+
+    it('Should validate that there are no empty string values', () => {
+      const pathTmpl = '/accounts/{account_id}/shipping_addresses/{shipping_address_id}'
+      assert.throws(() => {
+        client._interpolatePath(pathTmpl, {
+          'account_id': '',
+          'shipping_address_id': 1234567890
+        })
+      }, recurly.ApiError)
+    })
+
+    it('Should validate that parameter values are valid types', () => {
+      const pathTmpl = '/accounts/{account_id}/shipping_addresses/{shipping_address_id}'
+      assert.throws(() => {
+        client._interpolatePath(pathTmpl, {
+          'account_id': undefined,
+          'shipping_address_id': {}
+        })
+      }, recurly.ApiError)
+    })
   })
 
   describe('#_makeRequest', () => {
