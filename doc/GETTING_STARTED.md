@@ -15,7 +15,7 @@ Or manually insert the dependency into the `dependencies` section of your `packa
 ```
 {
   // ...
-  "recurly" : "^3.6.0"
+  "recurly" : "^3.7.0"
   // ...
 }
 ```
