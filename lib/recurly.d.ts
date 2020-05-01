@@ -3480,6 +3480,21 @@ export declare class Client {
    *
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/deactivate_coupon
    *
+   * @example
+   * try {
+   *   const coupon = await client.deactivateCoupon(couponId)
+   *   console.log('Deactivated coupon: ', coupon.code)
+   * } catch (err) {
+   *   if (err instanceof recurly.errors.NotFoundError) {
+   *     // If the request was not found, you may want to alert the user or
+   *     // just return null
+   *     console.log('Resource Not Found')
+   *   } else {
+   *     // If we don't know what to do with the err, we should
+   *     // probably re-raise and let our web framework and logger handle it
+   *     console.log('Unknown Error: ', err)
+   *   }
+   * }
    * 
    * @param couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
    * @return {Promise<Coupon>} The expired Coupon
@@ -4054,6 +4069,37 @@ export declare class Client {
    * @return {Promise<Invoice>} The updated invoice.
    */
   voidInvoice(invoiceId: string): Promise<Invoice>;
+  /**
+   * Record an external payment for a manual invoices.
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/record_external_transaction
+   *
+   * @example
+   * try {
+   *   const externalTrx = {
+   *     description: "A check collected outside of Recurly",
+   *     amount: 10.0,
+   *     payment_method: 'check'
+   *   }
+   *   const transaction = await client.recordExternalTransaction(invoiceId, externalTrx)
+   *   console.log('External Transaction: ', transaction)
+   * } catch (err) {
+   *   if (err instanceof recurly.errors.NotFoundError) {
+   *     // If the request was not found, you may want to alert the user or
+   *     // just return null
+   *     console.log('Resource Not Found')
+   *   } else {
+   *     // If we don't know what to do with the err, we should
+   *     // probably re-raise and let our web framework and logger handle it
+   *     console.log('Unknown Error: ', err)
+   *   }
+   * }
+   * 
+   * @param invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {ExternalTransaction}
+   * @return {Promise<Transaction>} The recorded transaction.
+   */
+  recordExternalTransaction(invoiceId: string, body: object): Promise<Transaction>;
   /**
    * List an invoice's line items
    *
