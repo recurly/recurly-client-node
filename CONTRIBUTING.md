@@ -39,7 +39,7 @@ upstream systems.
 ## I know what's wrong and I want to submit a code change
 
 So, you are sure you want to submit a change to the code? We appreciate the help!
-Before you do, consider opening a discussion in the form of an issue. This accomplish a few things:
+Before you do, consider opening a discussion in the form of an issue. This accomplishes a few things:
 
 1. We can give you advice to implement the change
 2. We can give you an idea of our openness to the change
