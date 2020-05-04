@@ -5,7 +5,6 @@ const sinon = require('sinon')
 const { MyResource } = require('../mock_resources')
 const assert = require('assert').strict
 const recurly = require('../../lib/recurly')
-const pkg = require('../../package.json')
 const MockClient = require('../mock_client')
 
 const client = new MockClient('myapikey')
@@ -19,7 +18,8 @@ describe('BaseClient', () => {
   describe('#constructor', () => {
     it('Should set the internal state and headers', () => {
       assert.equal(client._getDefaultOptions().headers['Authorization'], 'Basic bXlhcGlrZXk6')
-      assert.equal(client._getDefaultOptions().headers['User-Agent'], `Recurly/${pkg.version}; node ${process.version}`)
+      const userAgentRegex = /^Recurly\/\d+(\.\d+){0,2}; node v\d+(\.\d+){0,2}.*$/
+      assert.ok(userAgentRegex.test(client._getDefaultOptions().headers['User-Agent']))
       assert.equal(client._getDefaultOptions().headers['Accept'], 'application/vnd.recurly.v2022-01-01')
     })
   })
