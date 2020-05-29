@@ -336,6 +336,10 @@ export interface PaymentMethod {
    */
   billingAgreementId: string | null;
   /**
+   * The name associated with the bank account.
+   */
+  nameOnAccount: string | null;
+  /**
    * The bank account type. Only present for ACH payment methods.
    */
   accountType: string | null;
@@ -1290,7 +1294,7 @@ export interface LineItem {
    */
   accountingCode: string | null;
   /**
-   * For plan-related line items this will be the plan's code, for add-on related line items it will be the add-on's code. For item-related line itmes it will be the item's `external_sku`.
+   * For plan-related line items this will be the plan's code, for add-on related line items it will be the add-on's code. For item-related line items it will be the item's `external_sku`.
    */
   productCode: string | null;
   /**
@@ -1774,6 +1778,10 @@ export interface SubscriptionAddOn {
    * This is priced in the subscription's currency.
    */
   unitAmount: number | null;
+  /**
+   * Revenue schedule type
+   */
+  revenueScheduleType: string | null;
   /**
    * The type of tiering used by the Add-on.
    */
@@ -2292,6 +2300,10 @@ export interface ShippingMethod {
    */
   name: string | null;
   /**
+   * Accounting code for shipping method.
+   */
+  accountingCode: string | null;
+  /**
    * Used by Avalara, Vertex, and Recurly’s built-in tax feature. The tax code values are specific to each tax system. If you are using Recurly’s built-in taxes the values are:  - `FR` – Common Carrier FOB Destination - `FR022000` – Common Carrier FOB Origin - `FR020400` – Non Common Carrier FOB Destination - `FR020500` – Non Common Carrier FOB Origin - `FR010100` – Delivery by Company Vehicle Before Passage of Title - `FR010200` – Delivery by Company Vehicle After Passage of Title - `NT` – Non-Taxable 
    */
   taxCode: string | null;
@@ -2356,6 +2368,7 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
+   * @param params.state - Filter by state.
    * @return {Pager<Site>} A list of sites.
    */
   listSites(params?: object): Pager<Site>;
