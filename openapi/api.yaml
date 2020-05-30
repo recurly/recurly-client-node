@@ -284,6 +284,7 @@ paths:
       - "$ref": "#/components/parameters/limit"
       - "$ref": "#/components/parameters/order"
       - "$ref": "#/components/parameters/sort_dates"
+      - "$ref": "#/components/parameters/filter_state"
       responses:
         '200':
           description: A list of sites.
@@ -338,7 +339,7 @@ paths:
           for (Site site : sites) {
               System.out.println(site.getSubdomain());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $sites = $client->listSites($params);
@@ -380,7 +381,44 @@ paths:
               schema:
                 "$ref": "#/components/schemas/Error"
       x-code-samples:
-      - lang: Php
+      - lang: Python
+        source: |
+          try:
+              site = client.get_site(site_id)
+              print("Got Site %s" % site)
+          except recurly.errors.NotFoundError:
+              # If the resource was not found, you may want to alert the user or
+              # just return nil
+              print("Resource Not Found")
+      - lang: ".NET"
+        source: |
+          try
+          {
+              Site site = client.GetSite(siteId);
+              Console.WriteLine($"Fetched site {site.Id}");
+          }
+          catch (Recurly.Errors.NotFound ex)
+          {
+              // If the resource was not found
+              // we may want to alert the user or just return null
+              Console.WriteLine($"Resource Not Found: {ex.Error.Message}");
+          }
+          catch (Recurly.Errors.ApiError ex)
+          {
+              // Use ApiError to catch a generic error from the API
+              Console.WriteLine($"Unexpected Recurly Error: {ex.Error.Message}");
+          }
+      - lang: Ruby
+        source: |
+          begin
+            site = @client.get_site(site_id: site_id)
+            puts "Got Site #{site}"
+          rescue Recurly::Errors::NotFoundError
+            # If the resource was not found, you may want to alert the user or
+            # just return nil
+            puts "Resource Not Found"
+          end
+      - lang: PHP
         source: |
           try {
               $site = $client->getSite($site_id);
@@ -479,7 +517,7 @@ paths:
           for (Account acct : accounts) {
               System.out.println(acct.getCode());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = [
               'limit' => 200,
@@ -698,7 +736,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $account_create = array(
@@ -836,7 +874,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $account = $client->getAccount($account_id);
@@ -992,7 +1030,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $account_update = array(
@@ -1114,7 +1152,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $account = $client->deactivateAccount($account_id);
@@ -1227,7 +1265,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $acquisition = $client->getAccountAcquisition($account_id);
@@ -1348,6 +1386,28 @@ paths:
               // Use ApiError to catch a generic error from the API
               Console.WriteLine($"Unexpected Recurly Error: {ex.Error.Message}");
           }
+      - lang: Ruby
+        source: |
+          begin
+            acquisition_update = {
+              campaign: "podcast-marketing",
+              channel: "social_media",
+              subchannel: "twitter",
+              cost: {
+                currency: "USD",
+                amount: 0.50
+              }
+            }
+            acquisition = @client.update_account_acquisition(
+              account_id: account_id,
+              body: acquisition_update
+            )
+            puts "Updated AccountAcqusition #{acquisition}"
+          rescue Recurly::Errors::ValidationError => e
+            # If the request was invalid, you may want to tell your user
+            # why. You can find the invalid params and reasons in e.recurly_error.params
+            puts "ValidationError: #{e.recurly_error.params}"
+          end
       - lang: Java
         source: |
           try {
@@ -1366,7 +1426,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $acquisition_update = array(
@@ -1477,7 +1537,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |-
           try {
               $client->removeAccountAcquisition($account_id);
@@ -1599,7 +1659,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $account = $client->reactivateAccount($account_id);
@@ -1716,7 +1776,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $balance = $client->getAccountBalance($account_id);
@@ -1835,7 +1895,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $binfo = $client->getBillingInfo($account_id);
@@ -2005,7 +2065,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $binfo_update = array(
@@ -2121,7 +2181,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |-
           try {
               $client->removeBillingInfo($account_id);
@@ -2180,6 +2240,13 @@ paths:
           redemptions = client.list_account_coupon_redemptions(account_id, limit=200).items()
           for redemption in redemptions:
               print(redemption.id)
+      - lang: ".NET"
+        source: |
+          var redemptions = client.ListAccountCouponRedemptions(accountId);
+          foreach(CouponRedemption redemption in redemptions)
+          {
+              Console.WriteLine(redemption.Id);
+          }
       - lang: Ruby
         source: |
           redemptions = @client.list_account_coupon_redemptions(
@@ -2198,7 +2265,7 @@ paths:
           for (CouponRedemption redemption : redemptions) {
               System.out.println(redemption.getId());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $account_coupon_redemptions = $client->listAccountCouponRedemptions($account->getId(), $params);
@@ -2310,7 +2377,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $redemption = $client->getActiveCouponRedemption($account_id);
@@ -2384,6 +2451,27 @@ paths:
               # why. You can find the invalid params and reasons in e.error.params
               print("ValidationError: %s" % e.error.message)
               print(e.error.params)
+      - lang: ".NET"
+        source: |-
+          try {
+            var redemptionReq = new CouponRedemptionCreate()
+            {
+              CouponId = couponId,
+            };
+            var redemption = client.CreateCouponRedemption(accountId, redemptionReq);
+            Console.WriteLine($"Created coupon redemption: {redemption.Id}");
+
+          } catch (Recurly.Errors.Validation ex)
+          {
+              // If the request was not valid, you may want to tell your user
+              // why. You can find the invalid params and reasons in ex.Error.Params
+              Console.WriteLine($"Failed validation: {ex.Error.Message}");
+          }
+          catch (Recurly.Errors.ApiError ex)
+          {
+              // Use ApiError to catch a generic error from the API
+              Console.WriteLine($"Unexpected Recurly Error: {ex.Error.Message}");
+          }
       - lang: Ruby
         source: |
           begin
@@ -2417,7 +2505,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |-
           try {
               $redemption_create = array(
@@ -2481,6 +2569,23 @@ paths:
               # If the resource was not found, you may want to alert the user or
               # just return nil
               print("Resource Not Found")
+      - lang: ".NET"
+        source: |-
+          try {
+            var redemption = client.RemoveCouponRedemption(accountId);
+            Console.WriteLine($"Removed coupon redemption from account: {redemption.Id}");
+
+          } catch (Recurly.Errors.Validation ex)
+          {
+              // If the request was not valid, you may want to tell your user
+              // why. You can find the invalid params and reasons in ex.Error.Params
+              Console.WriteLine($"Failed validation: {ex.Error.Message}");
+          }
+          catch (Recurly.Errors.ApiError ex)
+          {
+              // Use ApiError to catch a generic error from the API
+              Console.WriteLine($"Unexpected Recurly Error: {ex.Error.Message}");
+          }
       - lang: Ruby
         source: |
           begin
@@ -2504,7 +2609,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |-
           try {
               $redemption = $client->removeCouponRedemption($account_id);
@@ -2603,7 +2708,7 @@ paths:
           for (CreditPayment payment : payments) {
               System.out.println(payment.getUuid());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $credit_payments = $client->listAccountCreditPayments($account->getId(), $params);
@@ -2667,6 +2772,13 @@ paths:
           invoices = client.list_account_invoices(account_id, limit=200).items()
           for invoice in invoices:
               print(invoice.number)
+      - lang: ".NET"
+        source: |
+          var invoices = client.ListAccountInvoices(accountId);
+          foreach(Invoice invoice in invoices)
+          {
+              Console.WriteLine(invoice.Id);
+          }
       - lang: Ruby
         source: |
           invoices = @client.list_account_invoices(
@@ -2685,7 +2797,7 @@ paths:
           for (Invoice invoice : invoices) {
               System.out.println(invoice.getNumber());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 10];
           $invoices = $client->listAccountInvoices($account->getId(), $params);
@@ -2842,7 +2954,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |-
           try {
               $invoice_create = array(
@@ -3013,7 +3125,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |-
           try {
               $invoice_preview = array(
@@ -3092,6 +3204,13 @@ paths:
           line_items = client.list_account_line_items(account_id, limit=200).items()
           for line_item in line_items:
               print(line_item.id)
+      - lang: ".NET"
+        source: |
+          var lineItems = client.ListAccountLineItems(accountId);
+          foreach(LineItem lineItem in lineItems)
+          {
+              Console.WriteLine(lineItem.Id);
+          }
       - lang: Ruby
         source: |
           line_items = @client.list_account_line_items(
@@ -3110,7 +3229,7 @@ paths:
           for (LineItem lineItem : lineItems) {
               System.out.println(lineItem.getId());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $account_line_items = $client->listAccountLineItems($account_id, $params);
@@ -3264,7 +3383,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |-
           try {
               $line_item_create = [
@@ -3360,7 +3479,7 @@ paths:
           for (AccountNote note : notes) {
               System.out.println(note.getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $account_notes = $client->listAccountNotes($account_id, $params);
@@ -3481,7 +3600,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $note = $client->getAccountNote($account_id, $account_node_id);
@@ -3575,6 +3694,14 @@ paths:
 
           for (ShippingAddress address : addresses) {
               System.out.println(address.getStreet1());
+          }
+      - lang: PHP
+        source: |
+          $params = ['limit' => 200];
+          $shippingAddresses = $client->listShippingAddresses($account_id, $params);
+
+          foreach($shippingAddresses as $address) {
+            echo 'Shipping Address: ' . $address->getId() . PHP_EOL;
           }
       - lang: Go
         source: "listParams := &recurly.ListShippingAddressesParams{\n\tSort:  recurly.String(\"created_at\"),\n\tOrder:
@@ -3696,6 +3823,26 @@ paths:
               // Use ApiError to catch a generic error from the API
               Console.WriteLine($"Unexpected Recurly Error: {ex.Error.Message}");
           }
+      - lang: Ruby
+        source: |
+          begin
+            shipping_address_create = {
+              nickname: 'Work',
+              street1: '900 Camp St',
+              city: 'New Orleans',
+              region: 'LA',
+              country: 'US',
+              postal_code: '70115',
+              first_name: 'Joanna',
+              last_name: 'Du Monde'
+            }
+            shipping_address = @client.create_shipping_address(account_id: account_id, body: shipping_address_create)
+            puts "Created Shipping Address #{shipping_address}"
+          rescue Recurly::Errors::NotFoundError
+            # If the resource was not found, you may want to alert the user or
+            # just return nil
+            puts "Resource Not Found"
+          end
       - lang: Java
         source: |
           try {
@@ -3718,7 +3865,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $address_create = array(
@@ -3804,8 +3951,8 @@ paths:
       - lang: Python
         source: |
           try:
-              subscription = client.get_subscription(subscription_id)
-              print("Got Subscription %s" % subscription)
+              client.get_shipping_address(account_id, shipping_address_id)
+              print("Got ShippingAddress %s" % shipping_address_id)
           except recurly.errors.NotFoundError:
               # If the resource was not found, you may want to alert the user or
               # just return nil
@@ -3854,7 +4001,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $shipping_address = $client->getShippingAddress($account_id, $shipping_address_id);
@@ -4020,7 +4167,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $shad_update = array(
@@ -4137,7 +4284,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |-
           try {
               $client->removeShippingAddress($account_id, $shipping_address_id);
@@ -4205,6 +4352,12 @@ paths:
           subscriptions = client.list_account_subscriptions(account.id, limit=200).items()
           for subscription in subscriptions:
               print(subscription.uuid)
+      - lang: ".NET"
+        source: |
+          var subscriptions = client.ListAccountSubscriptions(accountId);
+          foreach(Subscription subscription in subscriptions) {
+            Console.WriteLine(subscription.Id);
+          }
       - lang: Ruby
         source: |
           subscriptions = @client.list_account_subscriptions(
@@ -4223,7 +4376,7 @@ paths:
           for (Subscription subscription : subscriptions) {
               System.out.println(subscription.getUuid());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $account_subscriptions = $client->listAccountSubscriptions($account_id, $params);
@@ -4283,6 +4436,18 @@ paths:
               schema:
                 "$ref": "#/components/schemas/Error"
       x-code-samples:
+      - lang: Python
+        source: |
+          transactions = client.list_account_transactions(account_id, limit=200).items()
+          for transaction in transactions:
+              print("Transaction %s" % transaction.id)
+      - lang: ".NET"
+        source: |
+          var transactions = client.ListAccountTransactions(accountId);
+          foreach(Transaction transaction in transactions)
+          {
+              Console.WriteLine(transaction.Id);
+          }
       - lang: Ruby
         source: |
           transactions = @client.list_account_transactions(
@@ -4301,7 +4466,7 @@ paths:
           for (Transaction transaction : transactions) {
               System.out.println(transaction.getUuid());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $account_transactions = $client->listAccountTransactions($account_id, $params);
@@ -4361,6 +4526,11 @@ paths:
               schema:
                 "$ref": "#/components/schemas/Error"
       x-code-samples:
+      - lang: Python
+        source: |
+          child_accounts = client.list_child_accounts(account_id, limit=200).items()
+          for account in child_accounts:
+              print("Child Account %s" % account.code)
       - lang: Ruby
         source: |
           child_accounts = @client.list_child_accounts(
@@ -4370,7 +4540,7 @@ paths:
           child_accounts.each do |child|
             puts "Account: #{child.code}"
           end
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $child_accounts = $client->listChildAccounts($account_id, $params);
@@ -4430,13 +4600,20 @@ paths:
           acquisitions = client.list_account_acquisition(limit=200).items()
           for acquisition in acquisitions:
               print(acquisition.id)
+      - lang: ".NET"
+        source: |
+          var acquisitions = client.ListAccountAcquisition();
+          foreach(AccountAcquisition acquisition in acquisitions)
+          {
+              Console.WriteLine(acquisition.Id);
+          }
       - lang: Ruby
         source: |
           acquisitions = @client.list_account_acquisition(limit: 200)
           acquisitions.each do |acquisition|
             puts "AccountAcquisition: #{acquisition.cost}"
           end
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $account_acquisition = $client->listAccountAcquisition($params);
@@ -4526,7 +4703,7 @@ paths:
           for (Coupon coupon : coupons) {
               System.out.println(coupon.getCode());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $coupons = $client->listCoupons($params);
@@ -4601,6 +4778,36 @@ paths:
               # why. You can find the invalid params and reasons in e.error.params
               print("ValidationError: %s" % e.error.message)
               print(e.error.params)
+      - lang: ".NET"
+        source: |
+          try
+          {
+              var couponReq = new CouponCreate()
+              {
+                  Name = "Promotional Coupon",
+                  Code = couponCode,
+                  DiscountType = "fixed",
+                  Currencies = new List<CouponPricing>() {
+                    new CouponPricing() {
+                      Currency = "USD",
+                      Discount = 1000
+                    }
+                  }
+              };
+              Coupon coupon = client.CreateCoupon(couponReq);
+              Console.WriteLine($"Created coupon {coupon.Id}");
+          }
+          catch (Recurly.Errors.Validation ex)
+          {
+              // If the request was not valid, you may want to tell your user
+              // why. You can find the invalid params and reasons in ex.Error.Params
+              Console.WriteLine($"Failed validation: {ex.Error.Message}");
+          }
+          catch (Recurly.Errors.ApiError ex)
+          {
+              // Use ApiError to catch a generic error from the API
+              Console.WriteLine($"Unexpected Recurly Error: {ex.Error.Message}");
+          }
       - lang: Ruby
         source: |
           begin
@@ -4650,7 +4857,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $coupon_create = array(
@@ -4781,7 +4988,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $coupon = $client->getCoupon($coupon_id);
@@ -4849,7 +5056,53 @@ paths:
               schema:
                 "$ref": "#/components/schemas/Error"
       x-code-samples:
-      - lang: Php
+      - lang: Python
+        source: |
+          try:
+              coupon_update = {
+                "name": "New Coupon Name",
+              }
+              coupon = client.update_coupon(coupon_id, coupon_update)
+              print("Updated Coupon %s" % coupon)
+          except recurly.errors.NotFoundError:
+              # If the resource was not found, you may want to alert the user or
+              # just return nil
+              print("Resource Not Found")
+      - lang: ".NET"
+        source: |
+          try
+          {
+              var couponReq = new CouponUpdate() {
+                  Name = "New Coupon Name"
+              };
+              Coupon coupon = client.UpdateCoupon(couponId, couponReq);
+              Console.WriteLine($"Updated Coupon: {coupon.Id}");
+          }
+          catch (Recurly.Errors.Validation ex)
+          {
+              // If the request was not valid, you may want to tell your user
+              // why. You can find the invalid params and reasons in ex.Error.Params
+              Console.WriteLine($"Failed validation: {ex.Error.Message}");
+          }
+          catch (Recurly.Errors.ApiError ex)
+          {
+              // Use ApiError to catch a generic error from the API
+              Console.WriteLine($"Unexpected Recurly Error: {ex.Error.Message}");
+          }
+      - lang: Ruby
+        source: |
+          begin
+            coupon_update = {
+              name: "New Coupon Name"
+            }
+            coupon = @client.update_coupon(coupon_id: coupon_id, body: coupon_update)
+            puts "Updated Coupon #{coupon}"
+          rescue Recurly::Errors::NotFoundError
+            # If the resource was not found, you may want to alert the user or
+            # just return nil
+            puts "Resource Not Found"
+          end
+      - lang: PHP
         source: |
           try {
               $coupon_update = array(
@@ -4970,7 +5223,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $coupon = $client->deactivateCoupon($coupon_id);
@@ -5112,6 +5365,11 @@ paths:
           for await (const payment of payments.each()) {
             console.log(payment.uuid)
           }
+      - lang: Python
+        source: |
+          payments = client.list_credit_payments(limit=200).items()
+          for payment in payments:
+              print("Credit Payment %s" % payment.id)
       - lang: ".NET"
         source: |
           var payments = client.ListCreditPayments(limit: 200);
@@ -5134,7 +5392,7 @@ paths:
           for (CreditPayment payment : payments) {
               System.out.println(payment.getUuid());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $credit_payments = $client->listCreditPayments($params);
@@ -5261,7 +5519,7 @@ paths:
           for (CustomFieldDefinition field : fields) {
               System.out.println(field.getDisplayName());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $custom_field_definitions = $client->listCustomFieldDefinitions($params);
@@ -5322,6 +5580,13 @@ paths:
               console.log('Unknown Error: ', err)
             }
           }
+      - lang: Python
+        source: |
+          try:
+              custom_field_definition = client.get_custom_field_definition(custom_field_definition_id)
+              print("Custom Field Definition %s" % custom_field_definition)
+          except recurly.errors.NotFoundError as e:
+              print("Invoice not found")
       - lang: ".NET"
         source: |
           try
@@ -5340,6 +5605,18 @@ paths:
               // Use ApiError to catch a generic error from the API
               Console.WriteLine($"Unexpected Recurly Error: {ex.Error.Message}");
           }
+      - lang: Ruby
+        source: |
+          begin
+            custom_field_definition = @client.get_custom_field_definition(
+              custom_field_definition_id: custom_field_definition_id
+            )
+            puts "Got Custom Field Definition #{custom_field_definition}"
+          rescue Recurly::Errors::NotFoundError
+            # If the resource was not found, you may want to alert the user or
+            # just return nil
+            puts "Resource Not Found"
+          end
       - lang: Java
         source: |
           try {
@@ -5353,7 +5630,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $custom_field_def = $client->getCustomFieldDefinition($definition_id);
@@ -5450,7 +5727,7 @@ paths:
           for (Item item : items) {
               System.out.println(item.getCode());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $items = $client->listItems($params);
@@ -5645,7 +5922,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $item_create = array(
@@ -5771,7 +6048,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $item = $client->getItem($item_id);
@@ -5932,7 +6209,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $item_update = array(
@@ -6055,7 +6332,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $item = $client->deactivateItem($item_id);
@@ -6179,7 +6456,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $item = $client->reactivateItem($item_id);
@@ -6276,7 +6553,7 @@ paths:
           for (Invoice invoice : invoices) {
               System.out.println(invoice.getNumber());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => '200'];
           $invoices = $client->listInvoices($params);
@@ -6385,7 +6662,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $invoice = $client->getInvoice($invoice_id);
@@ -6463,6 +6740,19 @@ paths:
               console.log('Unknown Error: ', err)
             }
           }
+      - lang: Python
+        source: |
+          try:
+              invoice_update = {
+                "customer_notes": "New Notes",
+                "terms_and_conditions": "New Terms and Conditions",
+              }
+              invoice = client.put_invoice(invoice_id, invoice_update)
+              print("Updated Invoice %s" % invoice.id)
+          except recurly.errors.NotFoundError:
+              # If the resource was not found, you may want to alert the user or
+              # just return nil
+              print("Resource Not Found")
       - lang: ".NET"
         source: |
           try
@@ -6486,6 +6776,20 @@ paths:
               // Use ApiError to catch a generic error from the API
               Console.WriteLine($"Unexpected Recurly Error: {ex.Error.Message}");
           }
+      - lang: Ruby
+        source: |
+          begin
+            invoice_update = {
+              customer_notes: "New Notes",
+              terms_and_conditions: "New Terms and Conditions"
+            }
+            invoice = @client.put_invoice(invoice_id: invoice_id, body: invoice_update)
+            puts "Updated invoice #{invoice}"
+          rescue Recurly::Errors::NotFoundError
+            # If the resource was not found, you may want to alert the user or
+            # just return nil
+            puts "Resource Not Found"
+          end
       - lang: Java
         source: |
           try {
@@ -6502,6 +6806,26 @@ paths:
           } catch (ApiException e) {
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
+          }
+      - lang: PHP
+        source: |
+          try {
+              $invoice_update =  array(
+                "customer_notes" => "New Notes",
+                "terms_and_conditions" => "New terms and conditions",
+              );
+              $invoice = $client->putInvoice($invoice_id, $invoice_update);
+
+              echo 'Updated Invoice:' . PHP_EOL;
+              var_dump($invoice);
+          } catch (\Recurly\Errors\Validation $e) {
+              // If the request was not valid, you may want to tell your user
+              // why. You can find the invalid params and reasons in err.params
+              var_dump($e);
+          } catch (\Recurly\RecurlyError $e) {
+              // If we don't know what to do with the err, we should
+              // probably re-raise and let our web framework and logger handle it
+              var_dump($e);
           }
       - lang: Go
         source: "updateReq := &recurly.InvoiceUpdatable{\n\tCustomerNotes:      recurly.String(\"New
@@ -6631,7 +6955,7 @@ paths:
           } catch (java.io.IOException e) {
               System.out.println("Unexpected File Writing Error: " + e.toString());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $invoice = $client->getInvoicePdf($invoice_id);
@@ -6757,7 +7081,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $invoice = $client->collectInvoice($invoice_id);
@@ -6835,6 +7159,15 @@ paths:
               console.log('Unknown Error: ', err)
             }
           }
+      - lang: Python
+        source: |
+          try:
+              invoice = client.fail_invoice(invoice_id)
+              print("Failed Invoice %s" % invoice.id)
+          except recurly.errors.NotFoundError:
+              # If the resource was not found, you may want to alert the user or
+              # just return nil
+              print("Resource Not Found")
       - lang: ".NET"
         source: |
           try
@@ -6876,7 +7209,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $invoice = $client->failInvoice($invoice_id);
@@ -7005,7 +7338,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $invoice = $client->markInvoiceSuccessful($invoice_id);
@@ -7079,6 +7412,15 @@ paths:
               console.log('Unknown Error: ', err)
             }
           }
+      - lang: Python
+        source: |
+          try:
+              invoice = client.reopen_invoice(invoice_id)
+              print("Reopened Invoice %s" % invoice.id)
+          except recurly.errors.NotFoundError:
+              # If the resource was not found, you may want to alert the user or
+              # just return nil
+              print("Resource Not Found")
       - lang: ".NET"
         source: |
           try
@@ -7120,7 +7462,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $invoice = $client->reopenInvoice($invoice_id);
@@ -7179,7 +7521,26 @@ paths:
               schema:
                 "$ref": "#/components/schemas/Error"
       x-code-samples:
-      - lang: Php
+      - lang: Python
+        source: |
+          try:
+              invoice = client.void_invoice(invoice_id)
+              print("Voided Invoice %s" % invoice.id)
+          except recurly.errors.NotFoundError:
+              # If the resource was not found, you may want to alert the user or
+              # just return nil
+              print("Resource Not Found")
+      - lang: Ruby
+        source: |
+          begin
+            invoice = @client.void_invoice(invoice_id: invoice_id)
+            puts "Voided invoice #{invoice}"
+          rescue Recurly::Errors::NotFoundError
+            # If the resource was not found, you may want to alert the user or
+            # just return nil
+            puts "Resource Not Found"
+          end
+      - lang: PHP
         source: |
           try {
               $invoice = $client->voidInvoice($invoice_id);
@@ -7311,7 +7672,33 @@ paths:
               schema:
                 "$ref": "#/components/schemas/Error"
       x-code-samples:
-      - lang: Php
+      - lang: Python
+        source: |
+          try:
+              line_items = client.list_invoice_line_items(invoice_id, limit=200).items()
+              for item in line_items:
+                print("Invoice Line Items %s" % item.id)
+          except recurly.errors.NotFoundError:
+              # If the resource was not found, you may want to alert the user or
+              # just return nil
+              print("Resource Not Found")
+      - lang: ".NET"
+        source: |
+          var lineItems = client.ListInvoiceLineItems(invoiceId);
+          foreach(LineItem lineItem in lineItems)
+          {
+              Console.WriteLine(lineItem.Id);
+          }
+      - lang: Ruby
+        source: |
+          line_items = @client.list_invoice_line_items(
+            invoice_id: invoice_id,
+            limit: 200
+          )
+          line_items.each do |line_item|
+            puts "Line Item: #{line_item.id}"
+          end
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $invoice_line_items = $client->listInvoiceLineItems($invoice_id, $params);
@@ -7359,6 +7746,23 @@ paths:
               schema:
                 "$ref": "#/components/schemas/Error"
       x-code-samples:
+      - lang: Python
+        source: |
+          try:
+              redemptions = client.list_invoice_coupon_redemptions(invoice_id, limit=200).items()
+              for redemption in redemptions:
+                print("Invoice Coupon Redemption %s" % redemption)
+          except recurly.errors.NotFoundError:
+              # If the resource was not found, you may want to alert the user or
+              # just return nil
+              print("Resource Not Found")
+      - lang: ".NET"
+        source: |
+          var couponRedemptions = client.ListInvoiceCouponRedemptions(invoiceId);
+          foreach(CouponRedemption redemption in couponRedemptions)
+          {
+              Console.WriteLine(redemption.Id);
+          }
       - lang: Ruby
         source: |
           coupon_redemptions = @client.list_invoice_coupon_redemptions(
@@ -7377,7 +7781,7 @@ paths:
           for (CouponRedemption redemption : redemptions) {
               System.out.println(redemption.getId());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $invoice_coupon_redemptions = $client->listInvoiceCouponRedemptions($invoice_id, $params);
@@ -7433,6 +7837,16 @@ paths:
           for await (const invoice of invoices.each()) {
             console.log(invoice.number)
           }
+      - lang: Python
+        source: |
+          try:
+              related_invoices = client.list_related_invoices(invoice_id, limit=200).items()
+              for invoice in related_invoices:
+                print("Related invoice %s" % invoice.id)
+          except recurly.errors.NotFoundError:
+              # If the resource was not found, you may want to alert the user or
+              # just return nil
+              print("Resource Not Found")
       - lang: ".NET"
         source: |
           var invoices = client.ListRelatedInvoices(invoiceId);
@@ -7440,6 +7854,15 @@ paths:
           {
               Console.WriteLine(invoice.Number);
           }
+      - lang: Ruby
+        source: |
+          invoices = @client.list_related_invoices(
+            invoice_id: invoice_id,
+            limit: 200
+          )
+          invoices.each do |invoice|
+            puts "Invoice: #{invoice.number}"
+          end
       - lang: Java
         source: |
           final Pager<Invoice> invoices = client.listRelatedInvoices(invoiceId);
@@ -7447,7 +7870,7 @@ paths:
           for (Invoice invoice : invoices) {
               System.out.println(invoice.getNumber());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $related_invoices = $client->listRelatedInvoices($invoice_id);
 
@@ -7598,7 +8021,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $refund = array(
@@ -7688,6 +8111,14 @@ paths:
           {
               Console.WriteLine($"Item {item.Uuid} for {item.Amount}");
           }
+      - lang: Ruby
+        source: |
+          line_items = @client.list_line_items(
+            limit: 200
+          )
+          line_items.each do |line_item|
+            puts "LineItem: #{line_item.id}"
+          end
       - lang: Java
         source: |
           QueryParams params = new QueryParams();
@@ -7697,7 +8128,7 @@ paths:
           for (LineItem lineItem : lineItems) {
               System.out.println("Item " + lineItem.getUuid() + " for " + lineItem.getAmount());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $line_items = $client->listLineItems($params);
@@ -7806,7 +8237,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $line_item = $client->getLineItem($line_item_id);
@@ -7926,7 +8357,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $client->removeLineItem($line_item_id);
@@ -8021,7 +8452,7 @@ paths:
           for (Plan plan : plans) {
               System.out.println(plan.getCode());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $plans = $client->listPlans($params);
@@ -8197,7 +8628,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $plan_create = array(
@@ -8328,7 +8759,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $plan = $client->getPlan($plan_id);
@@ -8409,6 +8840,18 @@ paths:
               console.log('Unknown Error: ', err)
             }
           }
+      - lang: Python
+        source: |
+          try:
+              plan_update = {
+                "name": "Monthly Kombucha Subscription",
+              }
+              plan = client.update_plan(plan_id, plan_update)
+              print("Updated Plan %s" % plan)
+          except recurly.errors.NotFoundError:
+              # If the resource was not found, you may want to alert the user or
+              # just return nil
+              print("Resource Not Found")
       - lang: ".NET"
         source: |
           try
@@ -8430,6 +8873,19 @@ paths:
               // Use ApiError to catch a generic error from the API
               Console.WriteLine($"Unexpected Recurly Error: {ex.Error.Message}");
           }
+      - lang: Ruby
+        source: |
+          begin
+            plan_update = {
+              name: "Monthly Kombucha Subscription"
+            }
+            plan = @client.update_plan(plan_id: plan_id, body: plan_update)
+            puts "Updated plan #{plan}"
+          rescue Recurly::Errors::NotFoundError
+            # If the resource was not found, you may want to alert the user or
+            # just return nil
+            puts "Resource Not Found"
+          end
       - lang: Java
         source: |
           try {
@@ -8446,7 +8902,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $plan_update = array(
@@ -8510,6 +8966,15 @@ paths:
               console.log('Unknown Error: ', err)
             }
           }
+      - lang: Python
+        source: |
+          try:
+              plan = client.remove_plan(plan_id)
+              print("Removed Plan %s" % plan)
+          except recurly.errors.NotFoundError:
+              # If the resource was not found, you may want to alert the user or
+              # just return nil
+              print("Resource Not Found")
       - lang: ".NET"
         source: |
           try
@@ -8528,6 +8993,16 @@ paths:
               // Use ApiError to catch a generic error from the API
               Console.WriteLine($"Unexpected Recurly Error: {ex.Error.Message}");
           }
+      - lang: Ruby
+        source: |
+          begin
+            plan = @client.remove_plan(plan_id: plan_id)
+            puts "Removed plan #{plan}"
+          rescue Recurly::Errors::NotFoundError
+            # If the resource was not found, you may want to alert the user or
+            # just return nil
+            puts "Resource Not Found"
+          end
       - lang: Java
         source: |
           try {
@@ -8541,7 +9016,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $plan = $client->removePlan($plan_id);
@@ -8609,6 +9084,13 @@ paths:
           add_ons = client.list_plan_add_ons(plan_id).items()
           for add_on in add_ons:
               print(add_on.code)
+      - lang: ".NET"
+        source: |
+          var addOns = client.ListPlanAddOns(planId);
+          foreach(AddOn addOn in addOns)
+          {
+              Console.WriteLine(addOn.Code);
+          }
       - lang: Ruby
         source: |
           add_ons = @client.list_plan_add_ons(
@@ -8627,7 +9109,7 @@ paths:
           for (AddOn addOn : addOns) {
               System.out.println(addOn.getCode());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $plan_add_ons = $client->listPlanAddOns($plan_id, $params);
@@ -8728,6 +9210,27 @@ paths:
               // Use ApiError to catch a generic error from the API
               Console.WriteLine($"Unexpected Recurly Error: {ex.Error.Message}");
           }
+      - lang: Ruby
+        source: |
+          begin
+            new_add_on = {
+              code: 'coffee_grinder',
+              name: 'A quality grinder for your beans',
+              default_quantity: 1,
+              currencies: [
+                {
+                  currency: 'USD',
+                  unit_amount: 10_000
+                }
+              ]
+            }
+            add_on = @client.create_plan_add_on(plan_id: plan_id, body: new_add_on)
+            puts "Created plan add-on #{add_on}"
+          rescue Recurly::Errors::NotFoundError
+            # If the resource was not found, you may want to alert the user or
+            # just return nil
+            puts "Resource Not Found"
+          end
       - lang: Java
         source: |
           try {
@@ -8755,7 +9258,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $add_on_create = [
@@ -8825,8 +9328,8 @@ paths:
       - lang: Python
         source: |
           try:
-              shipping_addr = client.get_shipping_address(account_id, shipping_address_id)
-              print("Got ShippingAddress %s" % shipping_addr)
+              add_on = client.get_plan_add_on(plan_id, add_on_id)
+              print("Got Plan Add-On %s" % add_on)
           except recurly.errors.NotFoundError:
               # If the resource was not found, you may want to alert the user or
               # just return nil
@@ -8874,7 +9377,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $add_on = $client->getPlanAddOn($plan_id, $add_on_id);
@@ -8938,7 +9441,47 @@ paths:
               schema:
                 "$ref": "#/components/schemas/Error"
       x-code-samples:
-      - lang: Php
+      - lang: Python
+        source: |
+          try:
+              add_on_update = {
+                "name": "New Add-On Name",
+              }
+              add_on = client.update_plan_add_on(plan_id, add_on_id, add_on_update)
+              print("Updated Plan Add-On %s" % add_on)
+          except recurly.errors.NotFoundError:
+              # If the resource was not found, you may want to alert the user or
+              # just return nil
+              print("Resource Not Found")
+      - lang: ".NET"
+        source: |
+          try
+          {
+              var addOnReq = new AddOnUpdate {
+                Name = "New Add-On Name"
+              };
+              AddOn addOn = client.UpdatePlanAddOn(planId, planAddOnId, addOnReq);
+              Console.WriteLine($"Updated add-on: {addOn.Code}");
+          }
+          catch (Recurly.Errors.NotFound ex)
+          {
+              // If the resource was not found
+              // we may want to alert the user or just return null
+              Console.WriteLine($"Resource Not Found: {ex.Error.Message}");
+          }
+          catch (Recurly.Errors.ApiError ex)
+          {
+              // Use ApiError to catch a generic error from the API
+              Console.WriteLine($"Unexpected Recurly Error: {ex.Error.Message}");
+          }
+      - lang: Ruby
+        source: "begin\n  add_on_update = {\n    name: \"A quality grinder for your
+          finest beans\"\n  }\n  add_on = @client.update_plan_add_on(\n    plan_id:
+          plan_id, \n    add_on_id: add_on_id, \n    body: add_on_update\n  )\n  puts
+          \"Updated add-on #{add_on}\"\nrescue Recurly::Errors::NotFoundError\n  #
+          If the resource was not found, you may want to alert the user or\n  # just
+          return nil\n  puts \"Resource Not Found\"\nend\n"
+      - lang: PHP
         source: |
           try {
               $add_on_update = array(
@@ -8988,7 +9531,39 @@ paths:
               schema:
                 "$ref": "#/components/schemas/Error"
       x-code-samples:
-      - lang: Php
+      - lang: Python
+        source: |
+          try:
+              add_on = client.remove_plan_add_on(plan_id, add_on_id)
+              print("Removed Plan Add-On %s" % add_on_id)
+          except recurly.errors.NotFoundError:
+              # If the resource was not found, you may want to alert the user or
+              # just return nil
+              print("Resource Not Found")
+      - lang: ".NET"
+        source: |
+          try
+          {
+              AddOn addOn = client.RemovePlanAddOn(planId, planAddOnId);
+              Console.WriteLine($"Removed Plan Add-On: {addOn.Code}");
+          }
+          catch (Recurly.Errors.NotFound ex)
+          {
+              // If the resource was not found
+              // we may want to alert the user or just return null
+              Console.WriteLine($"Resource Not Found: {ex.Error.Message}");
+          }
+          catch (Recurly.Errors.ApiError ex)
+          {
+              // Use ApiError to catch a generic error from the API
+              Console.WriteLine($"Unexpected Recurly Error: {ex.Error.Message}");
+          }
+      - lang: Ruby
+        source: "begin\n  add_on = @client.remove_plan_add_on(\n    plan_id: plan_id,
+          \n    add_on_id: add_on_id\n  )\n  puts \"Removed add-on #{add_on}\"\nrescue
+          Recurly::Errors::NotFoundError\n  # If the resource was not found, you may
+          want to alert the user or\n  # just return nil\n  puts \"Resource Not Found\"\nend\n"
+      - lang: PHP
         source: |
           try {
               $add_on = $client->removePlanAddOn($plan_id, $add_on_id);
@@ -9051,6 +9626,11 @@ paths:
               schema:
                 "$ref": "#/components/schemas/Error"
       x-code-samples:
+      - lang: Python
+        source: |
+          add_ons = client.list_add_ons().items()
+          for add_on in add_ons:
+              print("Add-On %s" % add_on.code)
       - lang: ".NET"
         source: |
           var addOns = client.ListAddOns();
@@ -9058,6 +9638,14 @@ paths:
           {
               Console.WriteLine(addOn.Code);
           }
+      - lang: Ruby
+        source: |
+          add_ons = @client.list_add_ons(
+            limit: 200
+          )
+          add_ons.each do |add_on|
+            puts "AddOn: #{add_on.code}"
+          end
       - lang: Java
         source: |
           QueryParams params = new QueryParams();
@@ -9067,7 +9655,7 @@ paths:
           for (AddOn addOn : addOns) {
               System.out.println(addOn.getCode());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $add_ons = $client->listAddOns($params);
@@ -9110,7 +9698,44 @@ paths:
               schema:
                 "$ref": "#/components/schemas/Error"
       x-code-samples:
-      - lang: Php
+      - lang: Python
+        source: |
+          try:
+              add_on = client.get_add_on(add_on_id)
+              print("Got Add-On %s" % add_on)
+          except recurly.errors.NotFoundError:
+              # If the resource was not found, you may want to alert the user or
+              # just return nil
+              print("Resource Not Found")
+      - lang: ".NET"
+        source: |
+          try
+          {
+              AddOn addOn = client.GetAddOn(addOnId);
+              Console.WriteLine($"Fetched add-on: {addOn.Code}");
+          }
+          catch (Recurly.Errors.NotFound ex)
+          {
+              // If the resource was not found
+              // we may want to alert the user or just return null
+              Console.WriteLine($"Resource Not Found: {ex.Error.Message}");
+          }
+          catch (Recurly.Errors.ApiError ex)
+          {
+              // Use ApiError to catch a generic error from the API
+              Console.WriteLine($"Unexpected Recurly Error: {ex.Error.Message}");
+          }
+      - lang: Ruby
+        source: |
+          begin
+            add_on = @client.get_add_on(add_on_id: add_on_id)
+            puts "Got add-on #{add_on}"
+          rescue Recurly::Errors::NotFoundError
+            # If the resource was not found, you may want to alert the user or
+            # just return nil
+            puts "Resource Not Found"
+          end
+      - lang: PHP
         source: |
           try {
               $add_on = $client->getAddOn($add_on_id);
@@ -9172,7 +9797,27 @@ paths:
               schema:
                 "$ref": "#/components/schemas/Error"
       x-code-samples:
-      - lang: Php
+      - lang: Python
+        source: |
+          shipping_methods = client.list_shipping_methods(limit=200).items()
+          for shipping_method in shipping_methods:
+            print("Shipping Method %s" % shipping_method.code)
+      - lang: ".NET"
+        source: |
+          var shippingMethods = client.ListShippingMethods();
+          foreach(ShippingMethod shippingMethod in shippingMethods)
+          {
+              Console.WriteLine(shippingMethod.Code);
+          }
+      - lang: Ruby
+        source: |
+          shipping_methods = @client.list_shipping_methods(
+            limit: 200
+          )
+          shipping_methods.each do |shipping_method|
+            puts "Shipping Method: #{shipping_method.code}"
+          end
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $shipping_methods = $client->listShippingMethods($params);
@@ -9298,7 +9943,7 @@ paths:
           for (Subscription subscription : subscriptions) {
               System.out.println(subscription.getUuid());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $subscriptions = $client->listSubscriptions($params);
@@ -9460,7 +10105,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $sub_create = array(
@@ -9589,7 +10234,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $subscription = $client->getSubscription($subscription_id);
@@ -9617,8 +10262,8 @@ paths:
       operationId: modify_subscription
       summary: Modify a subscription
       description: This only lets you change the subscription settings that have no
-        impact on the billed amount. Use the `/sites/{site_id}/subscriptions/{subscription_id}/change`
-        to make those changes.
+        impact on the billed amount. Use the [Create Subscription Change](#operation/create_subscription_change)
+        endpoint to make those changes.
       parameters:
       - "$ref": "#/components/parameters/site_id"
       - "$ref": "#/components/parameters/subscription_id"
@@ -9730,7 +10375,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $changes = array(
@@ -9887,7 +10532,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $subscription = $client->terminateSubscription($subscription_id);
@@ -10025,7 +10670,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $subscription = $client->cancelSubscription($subscription_id);
@@ -10105,6 +10750,15 @@ paths:
               console.log('Unknown Error: ', err)
             }
           }
+      - lang: Python
+        source: |
+          try:
+              subscription = client.reactivate_subscription(subscription_id)
+              print("Reactivated Subscription %s" % subscription)
+          except recurly.errors.NotFoundError:
+              # If the resource was not found, you may want to alert the user or
+              # just return nil
+              print("Resource Not Found")
       - lang: ".NET"
         source: |
           try
@@ -10148,7 +10802,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $subscription = $client->reactivateSubscription($subscription_id);
@@ -10229,6 +10883,27 @@ paths:
               # why. You can find the invalid params and reasons in e.error.params
               print("ValidationError: %s" % e.error.message)
               print(e.error.params)
+      - lang: ".NET"
+        source: |
+          try
+          {
+              var pauseReq = new SubscriptionPause() {
+                RemainingPauseCycles = 2
+              };
+              Subscription subscription = client.PauseSubscription(subscriptionId, pauseReq);
+              Console.WriteLine($"Paused Subscription {subscription.Id}");
+          }
+          catch (Recurly.Errors.NotFound ex)
+          {
+              // If the resource was not found
+              // we may want to alert the user or just return null
+              Console.WriteLine($"Resource Not Found: {ex.Error.Message}");
+          }
+          catch (Recurly.Errors.ApiError ex)
+          {
+              // Use ApiError to catch a generic error from the API
+              Console.WriteLine($"Unexpected Recurly Error: {ex.Error.Message}");
+          }
       - lang: Ruby
         source: |
           begin
@@ -10261,7 +10936,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $sub_pause = [ "remaining_pause_cycles" => 10 ];
@@ -10336,6 +11011,24 @@ paths:
               # why. You can find the invalid params and reasons in e.error.params
               print("ValidationError: %s" % e.error.message)
               print(e.error.params)
+      - lang: ".NET"
+        source: |
+          try
+          {
+              Subscription subscription = client.ResumeSubscription(subscriptionId);
+              Console.WriteLine($"Resumed Subscription {subscription.Id}");
+          }
+          catch (Recurly.Errors.NotFound ex)
+          {
+              // If the resource was not found
+              // we may want to alert the user or just return null
+              Console.WriteLine($"Resource Not Found: {ex.Error.Message}");
+          }
+          catch (Recurly.Errors.ApiError ex)
+          {
+              // Use ApiError to catch a generic error from the API
+              Console.WriteLine($"Unexpected Recurly Error: {ex.Error.Message}");
+          }
       - lang: Ruby
         source: |
           begin
@@ -10348,7 +11041,7 @@ paths:
             # just return nil
             puts "Resource Not Found"
           end
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $subscription = $client->resumeSubscription($subscription_id);
@@ -10522,7 +11215,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $change = $client->getSubscriptionChange($subscription_id);
@@ -10677,7 +11370,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $change_create = array(
@@ -10799,7 +11492,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $client->removeSubscriptionChange($subscription_id);
@@ -10867,6 +11560,13 @@ paths:
           invoices = client.list_subscription_invoices(subscription_id).items()
           for invoice in invoices:
               print(invoice.number)
+      - lang: ".NET"
+        source: |
+          var subscriptionInvoices = client.ListSubscriptionInvoices(subscriptionId);
+          foreach(Invoice invoice in subscriptionInvoices)
+          {
+              Console.WriteLine(invoice.Number);
+          }
       - lang: Ruby
         source: |
           invoices = @client.list_subscription_invoices(
@@ -10885,7 +11585,7 @@ paths:
           for (Invoice invoice : invoices) {
               System.out.println(invoice.getNumber());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $subscription_invoices = $client->listSubscriptionInvoices($subscription_id, $params);
@@ -10950,6 +11650,13 @@ paths:
           line_items = client.list_subscription_line_items(subscription_id).items()
           for line_item in line_items:
               print(line_item.id)
+      - lang: ".NET"
+        source: |
+          var subscriptionLineItems = client.ListSubscriptionLineItems(subscriptionId);
+          foreach(LineItem lineItem in subscriptionLineItems)
+          {
+              Console.WriteLine(lineItem.Id);
+          }
       - lang: Ruby
         source: |
           line_items = @client.list_subscription_line_items(
@@ -10968,7 +11675,7 @@ paths:
           for (LineItem lineItem : lineItems) {
               System.out.println(lineItem.getId());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $subscription_line_items = $client->listSubscriptionLineItems($subscription_id, $params);
@@ -11023,6 +11730,13 @@ paths:
           redemptions = client.list_subscription_coupon_redemptions(subscription_id).items()
           for redemption in redemptions:
               print(redemption.uuid)
+      - lang: ".NET"
+        source: |
+          var subscriptionCouponRedemptions = client.ListSubscriptionCouponRedemptions(subscriptionId);
+          foreach(CouponRedemption redemption in subscriptionCouponRedemptions)
+          {
+              Console.WriteLine(redemption.Id);
+          }
       - lang: Ruby
         source: |
           coupon_redemptions = @client.list_subscription_coupon_redemptions(
@@ -11041,7 +11755,7 @@ paths:
           for (CouponRedemption redemption : redemptions) {
               System.out.println(redemption.getId());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $subscription_coupon_redemptions = $client->listSubscriptionCouponRedemptions($subscription_id, $params);
@@ -11132,7 +11846,7 @@ paths:
           for (Transaction transaction : transactions) {
               System.out.println(transaction.getUuid());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           $params = ['limit' => 200];
           $transactions = $client->listTransactions($params);
@@ -11192,6 +11906,15 @@ paths:
               console.log('Unknown Error: ', err)
             }
           }
+      - lang: Python
+        source: |
+          try:
+            transaction = client.get_transaction(transaction_id)
+            print("Got Transaction %s" % transaction)
+          except recurly.errors.NotFoundError:
+              # If the resource was not found, you may want to alert the user or
+              # just return nil
+              print("Resource Not Found")
       - lang: ".NET"
         source: |
           try
@@ -11233,7 +11956,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $transaction = $client->getTransaction($transaction_id);
@@ -11513,14 +12236,11 @@ paths:
       - lang: Java
         source: |
           try {
-              PurchaseCreate purchase = new PurchaseCreate();
-              purchase.setCurrency("USD");
 
               AccountPurchase account = new AccountPurchase();
               account.setCode(accountCode);
               account.setFirstName("Benjamin");
               account.setLastName("Eckel");
-              purchase.setAccount(account);
 
               BillingInfoCreate billing = new BillingInfoCreate();
               billing.setTokenId(rjsTokenId);
@@ -11531,6 +12251,9 @@ paths:
               sub.setPlanCode(planCode);
               subscriptions.add(sub);
 
+              PurchaseCreate purchase = new PurchaseCreate();
+              purchase.setCurrency("USD");
+              purchase.setAccount(account);
               purchase.setSubscriptions(subscriptions);
 
               InvoiceCollection collection = client.createPurchase(purchase);
@@ -11544,7 +12267,7 @@ paths:
               // Use ApiException to catch a generic error from the API
               System.out.println("Unexpected Recurly Error: " + e.getError().getMessage());
           }
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $purchase_create = array(
@@ -11744,7 +12467,7 @@ paths:
             # why. You can find the invalid params and reasons in e.recurly_error.params
             puts "ValidationError: #{e.recurly_error.params}"
           end
-      - lang: Php
+      - lang: PHP
         source: |
           try {
               $purchase_preview = array(
@@ -13354,7 +14077,7 @@ components:
         token_id:
           type: string
           title: Token ID
-          description: A token [generated by Recurly.js](https://docs.recurly.com/js/#getting-a-token).
+          description: A token [generated by Recurly.js](https://developers.recurly.com/reference/recurly-js/#getting-a-token).
           maxLength: 22
         first_name:
           type: string
@@ -15038,7 +15761,7 @@ components:
           title: Product code
           description: For plan-related line items this will be the plan's code, for
             add-on related line items it will be the add-on's code. For item-related
-            line itmes it will be the item's `external_sku`.
+            line items it will be the item's `external_sku`.
           maxLength: 50
         credit_reason_code:
           type: string
@@ -16017,6 +16740,11 @@ components:
           title: Name
           description: The name of the shipping method displayed to customers.
           maxLength: 100
+        accounting_code:
+          type: string
+          title: Accounting Code
+          description: Accounting code for shipping method.
+          maxLength: 20
         tax_code:
           type: string
           title: Tax code
@@ -16432,6 +17160,14 @@ components:
           format: float
           title: Add-on unit price
           description: This is priced in the subscription's currency.
+        revenue_schedule_type:
+          type: string
+          title: Revenue schedule type
+          enum:
+          - never
+          - evenly
+          - at_range_end
+          - at_range_start
         tier_type:
           type: string
           title: Tier type
@@ -17761,6 +18497,9 @@ components:
           type: string
           description: Billing Agreement identifier. Only present for Amazon or Paypal
             payment methods.
+        name_on_account:
+          type: string
+          description: The name associated with the bank account.
         account_type:
           type: string
           description: The bank account type. Only present for ACH payment methods.
