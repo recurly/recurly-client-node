@@ -178,7 +178,7 @@ const count = await accounts.count()
 ### Error Handling
 
 This library currently throws 1 primary class of exceptions, recurly.ApiError.
-The ApiError comes in a few flavors which help you determine what to do next. To see a full list, view the [api_errors module](lib/recurly/api_errors.js).
+The ApiError comes in a few flavors which help you determine what to do next. To see a full list, view the [api_errors module](https://github.com/recurly/recurly-client-node/blob/master/lib/recurly/api_errors.js).
 
 ```js
 try {
