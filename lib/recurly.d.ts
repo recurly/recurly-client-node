@@ -1775,6 +1775,10 @@ export interface SubscriptionAddOn {
    */
   addOn: AddOnMini | null;
   /**
+   * Used to determine where the associated add-on data is pulled from. If this value is set to `plan_add_on` or left blank, then add-on data will be pulled from the plan's add-ons. If the associated `plan` has `allow_any_item_on_subscriptions` set to `true` and this field is set to `item`, then the associated add-on data will be pulled from the site's item catalog. 
+   */
+  addOnSource: string | null;
+  /**
    * Add-on quantity
    */
   quantity: number | null;
@@ -2325,6 +2329,74 @@ export interface ShippingMethod {
   createdAt: Date | null;
   /**
    * Last updated at
+   */
+  updatedAt: Date | null;
+  /**
+   * Deleted at
+   */
+  deletedAt: Date | null;
+
+}
+
+export interface SubscriptionChangePreview {
+  /**
+   * Invoice collection
+   */
+  invoiceCollection: InvoiceCollection | null;
+  /**
+   * The ID of the Subscription Change.
+   */
+  id: string | null;
+  /**
+   * Object type
+   */
+  object: string | null;
+  /**
+   * The ID of the subscription that is going to be changed.
+   */
+  subscriptionId: string | null;
+  /**
+   * Just the important parts.
+   */
+  plan: PlanMini | null;
+  /**
+   * These add-ons will be used when the subscription renews.
+   */
+  addOns: SubscriptionAddOn[] | null;
+  /**
+   * Unit amount
+   */
+  unitAmount: number | null;
+  /**
+   * Subscription quantity
+   */
+  quantity: number | null;
+  /**
+   * Subscription shipping details
+   */
+  shipping: SubscriptionShipping | null;
+  /**
+   * Activated at
+   */
+  activateAt: Date | null;
+  /**
+   * Returns `true` if the subscription change is activated.
+   */
+  activated: boolean | null;
+  /**
+   * Revenue schedule type
+   */
+  revenueScheduleType: string | null;
+  /**
+   * Setup fee revenue schedule type
+   */
+  setupFeeRevenueScheduleType: string | null;
+  /**
+   * Created at
+   */
+  createdAt: Date | null;
+  /**
+   * Updated at
    */
   updatedAt: Date | null;
   /**
@@ -5302,6 +5374,17 @@ export declare class Client {
    * @return {Promise<Empty>} Subscription change was deleted.
    */
   removeSubscriptionChange(subscriptionId: string): Promise<Empty>;
+  /**
+   * Preview a new subscription change
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/preview_subscription_change
+   *
+   * 
+   * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionChangeCreate}
+   * @return {Promise<SubscriptionChangePreview>} A subscription change.
+   */
+  previewSubscriptionChange(subscriptionId: string, body: object): Promise<SubscriptionChangePreview>;
   /**
    * List a subscription's invoices
    *

@@ -2,6 +2,7 @@
 
 require('../test_helper')
 const utils = require('../../lib/recurly/utils')
+const inspect = require('util').inspect
 const assert = require('assert').strict
 const resourceDefs = require('../mock_resources')
 const { MyResource, MySubResource } = resourceDefs
@@ -46,7 +47,8 @@ describe('schemas', () => {
       it('Should thrown an error with an invalid property', () => {
         const schema = new Schema(MyResource)
         const statement = () => schema.cast({ mySubResource: 'My String' })
-        assert.throws(statement, { name: 'Error', message: 'MyResource could not map value pair mySubResource => \'My String\' to schema type ResourceProperty { type: [Function: MySubResource] }' })
+        const propertyTypeInspect = inspect(MySubResource)
+        assert.throws(statement, { name: 'Error', message: `MyResource could not map value pair mySubResource => 'My String' to schema type ResourceProperty { type: ${propertyTypeInspect} }` })
       })
     })
   })
