@@ -1,8 +1,20 @@
 # Changelog
 
-## [3.9.0](https://github.com/recurly/recurly-client-node/tree/HEAD)
+## [3.10.0](https://github.com/recurly/recurly-client-node/tree/HEAD)
 
-[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.8.1...HEAD)
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.9.0...HEAD)
+
+**Implemented enhancements:**
+
+- Wed Jul  1 02:09:59 UTC 2020 Upgrade API version v2019-10-10 [\#128](https://github.com/recurly/recurly-client-node/pull/128) ([douglasmiller](https://github.com/douglasmiller))
+
+**Merged pull requests:**
+
+- Release 3.10.0 [\#129](https://github.com/recurly/recurly-client-node/pull/129) ([douglasmiller](https://github.com/douglasmiller))
+
+## [3.9.0](https://github.com/recurly/recurly-client-node/tree/3.9.0) (2020-06-30)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.8.1...3.9.0)
 
 **Implemented enhancements:**
 
