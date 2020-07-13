@@ -1099,7 +1099,7 @@ export interface Invoice {
    * This will default to the Customer Notes text specified on the Invoice Settings. Specify custom notes to add or override Customer Notes.
    */
   customerNotes: string | null;
-  lineItems: LineItemList | null;
+  lineItems: LineItem | null;
   /**
    * Transactions
    */
@@ -1739,10 +1739,6 @@ export interface SubscriptionChange {
    */
   revenueScheduleType: string | null;
   /**
-   * Setup fee revenue schedule type
-   */
-  setupFeeRevenueScheduleType: string | null;
-  /**
    * Created at
    */
   createdAt: Date | null;
@@ -1791,7 +1787,7 @@ export interface SubscriptionAddOn {
    */
   revenueScheduleType: string | null;
   /**
-   * The type of tiering used by the Add-on.
+   * The pricing model for the add-on.  For more information, [click here](https://docs.recurly.com/docs/billing-models#section-quantity-based). 
    */
   tierType: string | null;
   /**
@@ -2064,7 +2060,7 @@ export interface Plan {
    */
   trialLength: number | null;
   /**
-   * Allow free trial subscriptions to be created without billing info.
+   * Allow free trial subscriptions to be created without billing info. Should not be used if billing info is needed for initial invoice due to existing uninvoiced charges or setup fee.
    */
   trialRequiresBillingInfo: boolean | null;
   /**
@@ -2076,10 +2072,6 @@ export interface Plan {
    */
   autoRenew: boolean | null;
   /**
-   * Accounting code for invoice line items for the plan. If no value is provided, it defaults to plan's code.
-   */
-  accountingCode: string | null;
-  /**
    * Revenue schedule type
    */
   revenueScheduleType: string | null;
@@ -2087,6 +2079,10 @@ export interface Plan {
    * Setup fee revenue schedule type
    */
   setupFeeRevenueScheduleType: string | null;
+  /**
+   * Accounting code for invoice line items for the plan. If no value is provided, it defaults to plan's code.
+   */
+  accountingCode: string | null;
   /**
    * Accounting code for invoice line items for the plan's setup fee. If no value is provided, it defaults to plan's accounting code.
    */
@@ -2214,13 +2210,13 @@ export interface AddOn {
   /**
    * Add-on pricing
    */
-  currencies: AddOnPricing[] | null;
+  currencies: Pricing[] | null;
   /**
    * Just the important parts.
    */
   item: ItemMini | null;
   /**
-   * The type of tiering used by the Add-on.
+   * The pricing model for the add-on.  For more information, [click here](https://docs.recurly.com/docs/billing-models#section-quantity-based). 
    */
   tierType: string | null;
   /**
@@ -2243,18 +2239,6 @@ export interface AddOn {
    * Deleted at
    */
   deletedAt: Date | null;
-
-}
-
-export interface AddOnPricing {
-  /**
-   * 3-letter ISO 4217 currency code.
-   */
-  currency: string | null;
-  /**
-   * Unit price
-   */
-  unitAmount: number | null;
 
 }
 
@@ -2388,10 +2372,6 @@ export interface SubscriptionChangePreview {
    */
   revenueScheduleType: string | null;
   /**
-   * Setup fee revenue schedule type
-   */
-  setupFeeRevenueScheduleType: string | null;
-  /**
    * Created at
    */
   createdAt: Date | null;
@@ -2424,7 +2404,7 @@ export declare class Client {
   /**
    * List sites
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_sites
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_sites
    *
    * @example
    * const sites = client.listSites({ limit: 200 })
@@ -2459,23 +2439,8 @@ export declare class Client {
   /**
    * Fetch a site
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_site
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_site
    *
-   * @example
-   * try {
-   *   const site = await client.getSite(siteId)
-   *   console.log('Fetched site: ', site)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param siteId - Site ID or subdomain. For ID no prefix is used e.g. `e28zov4fw0v2`. For subdomain use prefix `subdomain-`, e.g. `subdomain-recurly`.
    * @return {Promise<Site>} A site.
@@ -2484,7 +2449,7 @@ export declare class Client {
   /**
    * List a site's accounts
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_accounts
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_accounts
    *
    * @example
    * const accounts = client.listAccounts({ limit: 200 })
@@ -2512,10 +2477,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.email - Filter for accounts with this exact email address. A blank value will return accounts with both `null` and `""` email addresses. Note that multiple accounts can share one email address.
@@ -2529,7 +2494,7 @@ export declare class Client {
   /**
    * Create an account
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_account
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/create_account
    *
    * @example
    * try {
@@ -2566,7 +2531,7 @@ export declare class Client {
   /**
    * Fetch an account
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_account
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_account
    *
    * @example
    * try {
@@ -2591,7 +2556,7 @@ export declare class Client {
   /**
    * Modify an account
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/update_account
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/update_account
    *
    * @example
    * try {
@@ -2621,7 +2586,7 @@ export declare class Client {
   /**
    * Deactivate an account
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/deactivate_account
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/deactivate_account
    *
    * @example
    * try {
@@ -2645,7 +2610,7 @@ export declare class Client {
   /**
    * Fetch an account's acquisition data
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_account_acquisition
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_account_acquisition
    *
    * @example
    * try {
@@ -2670,7 +2635,7 @@ export declare class Client {
   /**
    * Update an account's acquisition data
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/update_account_acquisition
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/update_account_acquisition
    *
    * @example
    * try {
@@ -2701,7 +2666,7 @@ export declare class Client {
   /**
    * Remove an account's acquisition data
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/remove_account_acquisition
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/remove_account_acquisition
    *
    * @example
    * try {
@@ -2726,7 +2691,7 @@ export declare class Client {
   /**
    * Reactivate an inactive account
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/reactivate_account
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/reactivate_account
    *
    * @example
    * try {
@@ -2750,7 +2715,7 @@ export declare class Client {
   /**
    * Fetch an account's balance and past due status
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_account_balance
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_account_balance
    *
    * @example
    * try {
@@ -2775,7 +2740,7 @@ export declare class Client {
   /**
    * Fetch an account's billing information
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_billing_info
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_billing_info
    *
    * @example
    * try {
@@ -2800,7 +2765,7 @@ export declare class Client {
   /**
    * Set an account's billing information
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/update_billing_info
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/update_billing_info
    *
    * @example
    * try {
@@ -2830,7 +2795,7 @@ export declare class Client {
   /**
    * Remove an account's billing information
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/remove_billing_info
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/remove_billing_info
    *
    * @example
    * try {
@@ -2855,14 +2820,8 @@ export declare class Client {
   /**
    * Show the coupon redemptions for an account
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_account_coupon_redemptions
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_account_coupon_redemptions
    *
-   * @example
-   * const redemptions = client.listAccountCouponRedemptions(accountId, { limit: 200 })
-   * 
-   * for await (const redemption of redemptions.each()) {
-   *   console.log(redemption.id)
-   * }
    * 
    * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {Object} params - The optional url parameters for this request.
@@ -2882,10 +2841,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<CouponRedemption>} A list of the the coupon redemptions on an account.
@@ -2894,7 +2853,7 @@ export declare class Client {
   /**
    * Show the coupon redemption that is active on an account
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_active_coupon_redemption
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_active_coupon_redemption
    *
    * @example
    * try {
@@ -2919,7 +2878,7 @@ export declare class Client {
   /**
    * Generate an active coupon redemption on an account
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_coupon_redemption
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/create_coupon_redemption
    *
    * 
    * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
@@ -2930,23 +2889,8 @@ export declare class Client {
   /**
    * Delete the active coupon redemption from an account
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/remove_coupon_redemption
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/remove_coupon_redemption
    *
-   * @example
-   * try {
-   *   const redemption = await client.removeCouponRedemption(accountId)
-   *   console.log('Removed coupon redemption: ', redemption.id)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @return {Promise<CouponRedemption>} Coupon redemption deleted.
@@ -2955,7 +2899,7 @@ export declare class Client {
   /**
    * List an account's credit payments
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_account_credit_payments
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_account_credit_payments
    *
    * @example
    * const payments = client.listAccountCreditPayments(accountId, { limit: 200 })
@@ -2972,10 +2916,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<CreditPayment>} A list of the account's credit payments.
@@ -2984,14 +2928,8 @@ export declare class Client {
   /**
    * List an account's invoices
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_account_invoices
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_account_invoices
    *
-   * @example
-   * const invoices = client.listAccountInvoices(accountId, { limit: 200 })
-   * 
-   * for await (const invoice of invoices.each()) {
-   *   console.log(invoice.number)
-   * }
    * 
    * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {Object} params - The optional url parameters for this request.
@@ -3013,10 +2951,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.type - Filter by type when:
@@ -3031,7 +2969,7 @@ export declare class Client {
   /**
    * Create an invoice for pending line items
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_invoice
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/create_invoice
    *
    * @example
    * try {
@@ -3063,7 +3001,7 @@ export declare class Client {
   /**
    * Preview new invoice for pending line items
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/preview_invoice
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/preview_invoice
    *
    * @example
    * try {
@@ -3095,14 +3033,8 @@ export declare class Client {
   /**
    * List an account's line items
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_account_line_items
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_account_line_items
    *
-   * @example
-   * const lineItems = client.listAccountLineItems(accountId, { limit: 200 })
-   * 
-   * for await (const lineItem of lineItems.each()) {
-   *   console.log(lineItem.id)
-   * }
    * 
    * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {Object} params - The optional url parameters for this request.
@@ -3124,10 +3056,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.original - Filter by original field.
@@ -3139,7 +3071,7 @@ export declare class Client {
   /**
    * Create a new line item for the account
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_line_item
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/create_line_item
    *
    * @example
    * try {
@@ -3170,7 +3102,7 @@ export declare class Client {
   /**
    * Fetch a list of an account's notes
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_account_notes
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_account_notes
    *
    * @example
    * const notes = client.listAccountNotes(accountId, { limit: 200 })
@@ -3199,7 +3131,7 @@ export declare class Client {
   /**
    * Fetch an account note
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_account_note
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_account_note
    *
    * @example
    * try {
@@ -3226,7 +3158,7 @@ export declare class Client {
   /**
    * Fetch a list of an account's shipping addresses
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_shipping_addresses
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_shipping_addresses
    *
    * @example
    * const addresses = client.listShippingAddresses(accountId, { limit: 200 })
@@ -3255,10 +3187,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<ShippingAddress>} A list of an account's shipping addresses.
@@ -3267,7 +3199,7 @@ export declare class Client {
   /**
    * Create a new shipping address for the account
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_shipping_address
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/create_shipping_address
    *
    * @example
    * try {
@@ -3302,7 +3234,7 @@ export declare class Client {
   /**
    * Fetch an account's shipping address
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_shipping_address
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_shipping_address
    *
    * @example
    * try {
@@ -3328,7 +3260,7 @@ export declare class Client {
   /**
    * Update an account's shipping address
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/update_shipping_address
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/update_shipping_address
    *
    * @example
    * try {
@@ -3359,7 +3291,7 @@ export declare class Client {
   /**
    * Remove an account's shipping address
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/remove_shipping_address
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/remove_shipping_address
    *
    * @example
    * try {
@@ -3385,14 +3317,8 @@ export declare class Client {
   /**
    * List an account's subscriptions
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_account_subscriptions
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_account_subscriptions
    *
-   * @example
-   * const subscriptions = client.listAccountSubscriptions(accountId, { limit: 200 })
-   * 
-   * for await (const subscription of subscriptions.each()) {
-   *   console.log(subscription.uuid)
-   * }
    * 
    * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {Object} params - The optional url parameters for this request.
@@ -3414,10 +3340,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.state - Filter by state.
@@ -3432,14 +3358,8 @@ export declare class Client {
   /**
    * List an account's transactions
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_account_transactions
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_account_transactions
    *
-   * @example
-   * const transactions = client.listAccountTransactions(accountId, { limit: 200 })
-   * 
-   * for await (const transaction of transactions.each()) {
-   *   console.log(transaction.uuid)
-   * }
    * 
    * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {Object} params - The optional url parameters for this request.
@@ -3461,10 +3381,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.type - Filter by type field. The value `payment` will return both `purchase` and `capture` transactions.
@@ -3475,7 +3395,7 @@ export declare class Client {
   /**
    * List an account's child accounts
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_child_accounts
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_child_accounts
    *
    * 
    * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
@@ -3498,10 +3418,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.email - Filter for accounts with this exact email address. A blank value will return accounts with both `null` and `""` email addresses. Note that multiple accounts can share one email address.
@@ -3515,14 +3435,8 @@ export declare class Client {
   /**
    * List a site's account acquisition data
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_account_acquisition
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_account_acquisition
    *
-   * @example
-   * const acquisitions = client.listAccountAcquisition({ limit: 200 })
-   * 
-   * for await (const acquisition of acquisitions.each()) {
-   *   console.log(acquisition.id)
-   * }
    * 
    * @param {Object} params - The optional url parameters for this request.
    * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
@@ -3543,10 +3457,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<AccountAcquisition>} A list of the site's account acquisition data.
@@ -3555,7 +3469,7 @@ export declare class Client {
   /**
    * List a site's coupons
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_coupons
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_coupons
    *
    * @example
    * const coupons = client.listCoupons({ limit: 200 })
@@ -3583,10 +3497,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<Coupon>} A list of the site's coupons.
@@ -3595,29 +3509,8 @@ export declare class Client {
   /**
    * Create a new coupon
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_coupon
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/create_coupon
    *
-   * @example
-   * try {
-   *   const couponCreate = {
-   *     name: "Promotional Coupon",
-   *     code: couponCode,
-   *     discount_type: "fixed",
-   *     currencies: [{"currency": "USD", "discount": 10}],
-   *   }
-   *   const coupon = await client.createCoupon(couponCreate)
-   *   console.log('Created coupon: ', coupon.id)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {CouponCreate}
    * @return {Promise<Coupon>} A new coupon.
@@ -3626,7 +3519,7 @@ export declare class Client {
   /**
    * Fetch a coupon
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_coupon
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_coupon
    *
    * @example
    * try {
@@ -3651,26 +3544,8 @@ export declare class Client {
   /**
    * Update an active coupon
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/update_coupon
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/update_coupon
    *
-   * @example
-   * try {
-   *   const couponUpdate = {
-   *     name: "New Coupon Name"
-   *   }
-   *   const coupon = await client.updateCoupon(couponId, couponUpdate)
-   *   console.log('Updated coupon: ', coupon)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
    * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {CouponUpdate}
@@ -3680,23 +3555,8 @@ export declare class Client {
   /**
    * Expire a coupon
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/deactivate_coupon
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/deactivate_coupon
    *
-   * @example
-   * try {
-   *   const coupon = await client.deactivateCoupon(couponId)
-   *   console.log('Deactivated coupon: ', coupon.code)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
    * @return {Promise<Coupon>} The expired Coupon
@@ -3705,7 +3565,7 @@ export declare class Client {
   /**
    * List unique coupon codes associated with a bulk coupon
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_unique_coupon_codes
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_unique_coupon_codes
    *
    * 
    * @param couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
@@ -3728,10 +3588,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<UniqueCouponCode>} A list of unique coupon codes that were generated
@@ -3740,7 +3600,7 @@ export declare class Client {
   /**
    * List a site's credit payments
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_credit_payments
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_credit_payments
    *
    * @example
    * const payments = client.listCreditPayments({ limit: 200 })
@@ -3756,10 +3616,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<CreditPayment>} A list of the site's credit payments.
@@ -3768,7 +3628,7 @@ export declare class Client {
   /**
    * Fetch a credit payment
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_credit_payment
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_credit_payment
    *
    * 
    * @param creditPaymentId - Credit Payment ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
@@ -3778,7 +3638,7 @@ export declare class Client {
   /**
    * List a site's custom field definitions
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_custom_field_definitions
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_custom_field_definitions
    *
    * @example
    * const definitions = client.listCustomFieldDefinitions({ limit: 200 })
@@ -3806,10 +3666,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.relatedType - Filter by related type.
@@ -3819,7 +3679,7 @@ export declare class Client {
   /**
    * Fetch an custom field definition
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_custom_field_definition
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_custom_field_definition
    *
    * @example
    * try {
@@ -3844,7 +3704,7 @@ export declare class Client {
   /**
    * List a site's items
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_items
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_items
    *
    * @example
    * const items = client.listItems({ limit: 200 })
@@ -3872,10 +3732,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.state - Filter by state.
@@ -3885,7 +3745,7 @@ export declare class Client {
   /**
    * Create a new item
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_item
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/create_item
    *
    * @example
    * try {
@@ -3922,7 +3782,7 @@ export declare class Client {
   /**
    * Fetch an item
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_item
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_item
    *
    * @example
    * try {
@@ -3947,7 +3807,7 @@ export declare class Client {
   /**
    * Update an active item
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/update_item
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/update_item
    *
    * @example
    * try {
@@ -3977,7 +3837,7 @@ export declare class Client {
   /**
    * Deactivate an item
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/deactivate_item
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/deactivate_item
    *
    * @example
    * try {
@@ -4001,7 +3861,7 @@ export declare class Client {
   /**
    * Reactivate an inactive item
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/reactivate_item
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/reactivate_item
    *
    * @example
    * try {
@@ -4025,7 +3885,7 @@ export declare class Client {
   /**
    * List a site's invoices
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_invoices
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_invoices
    *
    * @example
    * const invoices = client.listInvoices({ limit: 200 })
@@ -4053,10 +3913,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.type - Filter by type when:
@@ -4071,7 +3931,7 @@ export declare class Client {
   /**
    * Fetch an invoice
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_invoice
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_invoice
    *
    * @example
    * try {
@@ -4096,7 +3956,7 @@ export declare class Client {
   /**
    * Update an invoice
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/put_invoice
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/put_invoice
    *
    * @example
    * try {
@@ -4128,7 +3988,7 @@ export declare class Client {
   /**
    * Fetch an invoice as a PDF
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_invoice_pdf
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_invoice_pdf
    *
    * @example
    * try {
@@ -4161,7 +4021,7 @@ export declare class Client {
   /**
    * Collect a pending or past due, automatic invoice
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/collect_invoice
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/collect_invoice
    *
    * @example
    * try {
@@ -4188,7 +4048,7 @@ export declare class Client {
   /**
    * Mark an open invoice as failed
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/fail_invoice
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/fail_invoice
    *
    * @example
    * try {
@@ -4213,7 +4073,7 @@ export declare class Client {
   /**
    * Mark an open invoice as successful
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/mark_invoice_successful
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/mark_invoice_successful
    *
    * @example
    * try {
@@ -4239,7 +4099,7 @@ export declare class Client {
   /**
    * Reopen a closed, manual invoice
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/reopen_invoice
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/reopen_invoice
    *
    * @example
    * try {
@@ -4264,23 +4124,8 @@ export declare class Client {
   /**
    * Void a credit invoice.
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/void_invoice
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/void_invoice
    *
-   * @example
-   * try {
-   *   const invoice = await client.voidInvoice(invoiceId)
-   *   console.log('Voided invoice: ', invoice)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @return {Promise<Invoice>} The updated invoice.
@@ -4289,28 +4134,8 @@ export declare class Client {
   /**
    * Record an external payment for a manual invoices.
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/record_external_transaction
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/record_external_transaction
    *
-   * @example
-   * try {
-   *   const externalTrx = {
-   *     description: "A check collected outside of Recurly",
-   *     amount: 10.0,
-   *     payment_method: 'check'
-   *   }
-   *   const transaction = await client.recordExternalTransaction(invoiceId, externalTrx)
-   *   console.log('External Transaction: ', transaction)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {ExternalTransaction}
@@ -4320,14 +4145,8 @@ export declare class Client {
   /**
    * List an invoice's line items
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_invoice_line_items
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_invoice_line_items
    *
-   * @example
-   * const lineItems = client.listInvoiceLineItems(invoiceId, { limit: 200 })
-   * 
-   * for await (const lineItem of lineItems.each()) {
-   *   console.log(lineItem.id)
-   * }
    * 
    * @param invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @param {Object} params - The optional url parameters for this request.
@@ -4349,10 +4168,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.original - Filter by original field.
@@ -4364,14 +4183,8 @@ export declare class Client {
   /**
    * Show the coupon redemptions applied to an invoice
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_invoice_coupon_redemptions
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_invoice_coupon_redemptions
    *
-   * @example
-   * const redemptions = client.listInvoiceCouponRedemptions(invoiceId, { limit: 200 })
-   * 
-   * for await (const redemption of redemptions.each()) {
-   *   console.log(redemption.id)
-   * }
    * 
    * @param invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @param {Object} params - The optional url parameters for this request.
@@ -4391,10 +4204,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<CouponRedemption>} A list of the the coupon redemptions associated with the invoice.
@@ -4403,7 +4216,7 @@ export declare class Client {
   /**
    * List an invoice's related credit or charge invoices
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_related_invoices
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_related_invoices
    *
    * @example
    * const invoices = client.listRelatedInvoices(invoiceId, { limit: 200 })
@@ -4419,7 +4232,7 @@ export declare class Client {
   /**
    * Refund an invoice
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/refund_invoice
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/refund_invoice
    *
    * @example
    * try {
@@ -4452,7 +4265,7 @@ export declare class Client {
   /**
    * List a site's line items
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_line_items
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_line_items
    *
    * @example
    * const lineItems = client.listLineItems({ limit: 200 })
@@ -4480,10 +4293,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.original - Filter by original field.
@@ -4495,7 +4308,7 @@ export declare class Client {
   /**
    * Fetch a line item
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_line_item
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_line_item
    *
    * @example
    * try {
@@ -4520,7 +4333,7 @@ export declare class Client {
   /**
    * Delete an uninvoiced line item
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/remove_line_item
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/remove_line_item
    *
    * @example
    * try {
@@ -4545,7 +4358,7 @@ export declare class Client {
   /**
    * List a site's plans
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_plans
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_plans
    *
    * @example
    * const plans = client.listPlans({ limit: 200 })
@@ -4573,10 +4386,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.state - Filter by state.
@@ -4586,7 +4399,7 @@ export declare class Client {
   /**
    * Create a plan
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_plan
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/create_plan
    *
    * @example
    * try {
@@ -4621,7 +4434,7 @@ export declare class Client {
   /**
    * Fetch a plan
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_plan
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_plan
    *
    * @example
    * try {
@@ -4646,7 +4459,7 @@ export declare class Client {
   /**
    * Update a plan
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/update_plan
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/update_plan
    *
    * @example
    * try {
@@ -4675,7 +4488,7 @@ export declare class Client {
   /**
    * Remove a plan
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/remove_plan
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/remove_plan
    *
    * @example
    * try {
@@ -4700,14 +4513,8 @@ export declare class Client {
   /**
    * List a plan's add-ons
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_plan_add_ons
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_plan_add_ons
    *
-   * @example
-   * const addOns = client.listPlanAddOns(planId, { limit: 200 })
-   * 
-   * for await (const addOn of addOns.each()) {
-   *   console.log(addOn.code)
-   * }
    * 
    * @param planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
    * @param {Object} params - The optional url parameters for this request.
@@ -4729,10 +4536,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.state - Filter by state.
@@ -4742,35 +4549,8 @@ export declare class Client {
   /**
    * Create an add-on
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_plan_add_on
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/create_plan_add_on
    *
-   * @example
-   * try {
-   *   const addOnCreate = {
-   *     code: 'coffee_grinder',
-   *     name: 'A quality grinder for your beans',
-   *     defaultQuantity: 1,
-   *     currencies: [
-   *       {
-   *         currency: 'USD',
-   *         unitAmount: 10000
-   *       }
-   *     ]
-   *   }
-   * 
-   *   const addOn = await client.createPlanAddOn(planId, addOnCreate)
-   *   console.log('Created add-on: ', addOn.code)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
    * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {AddOnCreate}
@@ -4780,23 +4560,8 @@ export declare class Client {
   /**
    * Fetch a plan's add-on
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_plan_add_on
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_plan_add_on
    *
-   * @example
-   * try {
-   *   const addOn = await client.getPlanAddOn(planId, addOnId)
-   *   console.log('Fetched add-on: ', addOn.code)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
    * @param addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
@@ -4806,26 +4571,8 @@ export declare class Client {
   /**
    * Update an add-on
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/update_plan_add_on
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/update_plan_add_on
    *
-   * @example
-   * try {
-   *   const addOnUpdate = {
-   *     name: 'New AddOn Name',
-   *   }
-   *   const addOn = await client.updatePlanAddOn(planId, addOnId, addOnUpdate)
-   *   console.log('Updated add-on: ', addOn)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
    * @param addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
@@ -4836,23 +4583,8 @@ export declare class Client {
   /**
    * Remove an add-on
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/remove_plan_add_on
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/remove_plan_add_on
    *
-   * @example
-   * try {
-   *   const addOn = await client.removePlanAddOn(planId, addOnId)
-   *   console.log('Removed plan add-on: ', addOn)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
    * @param addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
@@ -4862,14 +4594,8 @@ export declare class Client {
   /**
    * List a site's add-ons
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_add_ons
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_add_ons
    *
-   * @example
-   * const addOns = client.listAddOns({ limit: 200 })
-   * 
-   * for await (const addOn of addOns.each()) {
-   *   console.log(addOn.code)
-   * }
    * 
    * @param {Object} params - The optional url parameters for this request.
    * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
@@ -4890,10 +4616,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.state - Filter by state.
@@ -4903,23 +4629,8 @@ export declare class Client {
   /**
    * Fetch an add-on
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_add_on
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_add_on
    *
-   * @example
-   * try {
-   *   const addOn = await client.getAddOn(addOnId)
-   *   console.log('Fetched add-on: ', addOn)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
    * @return {Promise<AddOn>} An add-on.
@@ -4928,14 +4639,8 @@ export declare class Client {
   /**
    * List a site's shipping methods
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_shipping_methods
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_shipping_methods
    *
-   * @example
-   * const methods = client.listShippingMethods({ limit: 200 })
-   * 
-   * for await (const method of methods.each()) {
-   *   console.log(method.code)
-   * }
    * 
    * @param {Object} params - The optional url parameters for this request.
    * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
@@ -4956,10 +4661,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<ShippingMethod>} A list of the site's shipping methods.
@@ -4968,7 +4673,7 @@ export declare class Client {
   /**
    * Create a new shipping method
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_shipping_method
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/create_shipping_method
    *
    * 
    * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {ShippingMethodCreate}
@@ -4978,17 +4683,17 @@ export declare class Client {
   /**
    * Fetch a shipping method
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_shipping_method
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_shipping_method
    *
    * 
-   * @param id - Shipping Method ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-usps_2-day`.
+   * @param shippingMethodId - Shipping Method ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-usps_2-day`.
    * @return {Promise<ShippingMethod>} A shipping method.
    */
-  getShippingMethod(id: string): Promise<ShippingMethod>;
+  getShippingMethod(shippingMethodId: string): Promise<ShippingMethod>;
   /**
    * Update an active Shipping Method
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/update_shipping_method
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/update_shipping_method
    *
    * 
    * @param shippingMethodId - Shipping Method ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-usps_2-day`.
@@ -4999,7 +4704,7 @@ export declare class Client {
   /**
    * Deactivate a shipping method
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/deactivate_shipping_method
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/deactivate_shipping_method
    *
    * 
    * @param shippingMethodId - Shipping Method ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-usps_2-day`.
@@ -5009,7 +4714,7 @@ export declare class Client {
   /**
    * List a site's subscriptions
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_subscriptions
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_subscriptions
    *
    * @example
    * const subscriptions = client.listSubscriptions({ limit: 200 })
@@ -5037,10 +4742,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.state - Filter by state.
@@ -5055,7 +4760,7 @@ export declare class Client {
   /**
    * Create a new subscription
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_subscription
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/create_subscription
    *
    * @example
    * try {
@@ -5087,7 +4792,7 @@ export declare class Client {
   /**
    * Fetch a subscription
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_subscription
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_subscription
    *
    * @example
    * try {
@@ -5112,7 +4817,7 @@ export declare class Client {
   /**
    * Modify a subscription
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/modify_subscription
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/modify_subscription
    *
    * @example
    * try {
@@ -5143,7 +4848,7 @@ export declare class Client {
   /**
    * Terminate a subscription
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/terminate_subscription
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/terminate_subscription
    *
    * @example
    * try {
@@ -5179,7 +4884,7 @@ export declare class Client {
   /**
    * Cancel a subscription
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/cancel_subscription
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/cancel_subscription
    *
    * @example
    * try {
@@ -5206,7 +4911,7 @@ export declare class Client {
   /**
    * Reactivate a canceled subscription
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/reactivate_subscription
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/reactivate_subscription
    *
    * @example
    * try {
@@ -5232,26 +4937,8 @@ export declare class Client {
   /**
    * Pause subscription
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/pause_subscription
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/pause_subscription
    *
-   * @example
-   * try {
-   *   let pauseReq = {
-   *     remaining_pause_cycles: 2,
-   *   }
-   *   const subscription = await client.pauseSubscription(subscriptionId, pauseReq)
-   *   console.log('Paused subscription: ', subscription.id)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionPause}
@@ -5261,23 +4948,8 @@ export declare class Client {
   /**
    * Resume subscription
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/resume_subscription
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/resume_subscription
    *
-   * @example
-   * try {
-   *   const subscription = await client.resumeSubscription(subscriptionId)
-   *   console.log('Resumed subscription: ', subscription.id)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @return {Promise<Subscription>} A subscription.
@@ -5286,7 +4958,7 @@ export declare class Client {
   /**
    * Convert trial subscription
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/convert_trial
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/convert_trial
    *
    * 
    * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
@@ -5296,7 +4968,7 @@ export declare class Client {
   /**
    * Fetch a subscription's pending change
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_subscription_change
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_subscription_change
    *
    * @example
    * try {
@@ -5321,7 +4993,7 @@ export declare class Client {
   /**
    * Create a new subscription change
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_subscription_change
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/create_subscription_change
    *
    * @example
    * try {
@@ -5352,7 +5024,7 @@ export declare class Client {
   /**
    * Delete the pending subscription change
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/remove_subscription_change
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/remove_subscription_change
    *
    * @example
    * try {
@@ -5377,7 +5049,7 @@ export declare class Client {
   /**
    * Preview a new subscription change
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/preview_subscription_change
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/preview_subscription_change
    *
    * 
    * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
@@ -5388,14 +5060,8 @@ export declare class Client {
   /**
    * List a subscription's invoices
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_subscription_invoices
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_subscription_invoices
    *
-   * @example
-   * const invoices = client.listSubscriptionInvoices(subscriptionId, { limit: 200 })
-   * 
-   * for await (const invoice of invoices.each()) {
-   *   console.log(invoice.number)
-   * }
    * 
    * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @param {Object} params - The optional url parameters for this request.
@@ -5417,10 +5083,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.type - Filter by type when:
@@ -5435,14 +5101,8 @@ export declare class Client {
   /**
    * List a subscription's line items
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_subscription_line_items
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_subscription_line_items
    *
-   * @example
-   * const lineItems = client.listSubscriptionLineItems(subscriptionId, { limit: 200 })
-   * 
-   * for await (const lineItem of lineItems.each()) {
-   *   console.log(lineItem.id)
-   * }
    * 
    * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @param {Object} params - The optional url parameters for this request.
@@ -5464,10 +5124,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.original - Filter by original field.
@@ -5479,14 +5139,8 @@ export declare class Client {
   /**
    * Show the coupon redemptions for a subscription
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_subscription_coupon_redemptions
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_subscription_coupon_redemptions
    *
-   * @example
-   * const redemptions = client.listSubscriptionCouponRedemptions(subscriptionId, { limit: 200 })
-   * 
-   * for await (const redemption of redemptions.each()) {
-   *   console.log(redemption.id)
-   * }
    * 
    * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @param {Object} params - The optional url parameters for this request.
@@ -5506,10 +5160,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<CouponRedemption>} A list of the the coupon redemptions on a subscription.
@@ -5518,7 +5172,7 @@ export declare class Client {
   /**
    * List a site's transactions
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_transactions
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/list_transactions
    *
    * @example
    * const transactions = client.listTransactions({ limit: 200 })
@@ -5546,10 +5200,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.type - Filter by type field. The value `payment` will return both `purchase` and `capture` transactions.
@@ -5560,7 +5214,7 @@ export declare class Client {
   /**
    * Fetch a transaction
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_transaction
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_transaction
    *
    * @example
    * try {
@@ -5585,7 +5239,7 @@ export declare class Client {
   /**
    * Fetch a unique coupon code
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_unique_coupon_code
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/get_unique_coupon_code
    *
    * 
    * @param uniqueCouponCodeId - Unique Coupon Code ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-abc-8dh2-def`.
@@ -5595,7 +5249,7 @@ export declare class Client {
   /**
    * Deactivate a unique coupon code
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/deactivate_unique_coupon_code
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/deactivate_unique_coupon_code
    *
    * 
    * @param uniqueCouponCodeId - Unique Coupon Code ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-abc-8dh2-def`.
@@ -5605,7 +5259,7 @@ export declare class Client {
   /**
    * Restore a unique coupon code
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/reactivate_unique_coupon_code
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/reactivate_unique_coupon_code
    *
    * 
    * @param uniqueCouponCodeId - Unique Coupon Code ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-abc-8dh2-def`.
@@ -5615,7 +5269,7 @@ export declare class Client {
   /**
    * Create a new purchase
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_purchase
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/create_purchase
    *
    * @example
    * try {
@@ -5655,7 +5309,7 @@ export declare class Client {
   /**
    * Preview a new purchase
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/preview_purchase
+   * API docs: https://developers.recurly.com/api/v2020-01-01#operation/preview_purchase
    *
    * @example
    * try {
