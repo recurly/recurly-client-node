@@ -7,14 +7,14 @@ const MockClient = require('../mock_client')
 const Pager = require('../../lib/recurly/Pager')
 
 const client = new MockClient('myapikey')
-const pager = new Pager(client, '/resources', { limit: 200 })
+const pager = new Pager(client, '/resources', { params: { limit: 200 } })
 
 describe('Pager', () => {
   describe('#constructor', () => {
     it('Should set the internal state', () => {
       assert.equal(pager.client, client)
       assert.equal(pager.path, '/resources')
-      assert.deepEqual(pager.params, { limit: 200 })
+      assert.deepEqual(pager.options, { params: { limit: 200 } })
     })
   })
 
@@ -70,7 +70,7 @@ describe('Pager', () => {
     })
 
     it('Should return the count from recurly-total-records header', () => {
-      let p = client.listResources({ sort: 'updated_at' })
+      let p = client.listResources({ params: { sort: 'updated_at' } })
       return p.count().then(count => {
         assert.equal(count, 9000)
       })
@@ -115,7 +115,7 @@ describe('Pager', () => {
         assert(typeof pager.each === 'function')
       })
       it('Should page through each component', () => {
-        const resources = client.listResources({ state: 'active', limit: 3 })
+        const resources = client.listResources({ params: { state: 'active', limit: 3 } })
         let count = 0
 
         return (async () => {
@@ -134,7 +134,7 @@ describe('Pager', () => {
         assert(typeof pager.eachPage === 'function')
       })
       it('Should page through each page', () => {
-        const resources = client.listResources({ state: 'active', limit: 3 })
+        const resources = client.listResources({ params: { state: 'active', limit: 3 } })
         let count = 0
         let pageCount = 0
 

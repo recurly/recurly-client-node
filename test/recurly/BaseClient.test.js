@@ -80,6 +80,20 @@ describe('BaseClient', () => {
     })
   })
 
+  describe('#_buildQuery', () => {
+    it('Should return an empty string when options.params is an empty object', () => {
+      assert.equal(client._buildQuery({ params: {} }), '')
+    })
+
+    it('Should add params to query string', () => {
+      assert.equal(client._buildQuery({ params: { limit: 1 } }), '?limit=1')
+    })
+
+    it('Should convert array params to csv', () => {
+      assert.equal(client._buildQuery({ params: { ids: [ 1, 2 ] } }), '?ids=1%2C2')
+    })
+  })
+
   describe('with mocked request adapter', () => {
     beforeEach(() => {
       client.mock((resp, options) => {
