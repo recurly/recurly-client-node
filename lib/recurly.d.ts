@@ -1099,7 +1099,7 @@ export interface Invoice {
    * This will default to the Customer Notes text specified on the Invoice Settings. Specify custom notes to add or override Customer Notes.
    */
   customerNotes: string | null;
-  lineItems: LineItem | null;
+  lineItems: LineItemList | null;
   /**
    * Transactions
    */
