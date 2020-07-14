@@ -80,25 +80,17 @@ describe('BaseClient', () => {
     })
   })
 
-  describe('#_buildPath', () => {
-    it('Should return path when options has no params key', () => {
-      const path = '/resources/myid'
-      assert.equal(client._buildPath(path), path)
-    })
-
-    it('Should return path when options.params is an empty object', () => {
-      const path = '/resources/myid'
-      assert.equal(client._buildPath(path, { params: {} }), path)
+  describe('#_buildQuery', () => {
+    it('Should return an empty string when options.params is an empty object', () => {
+      assert.equal(client._buildQuery({ params: {} }), '')
     })
 
     it('Should add params to query string', () => {
-      const path = '/resources/myid'
-      assert.equal(client._buildPath(path, { params: { limit: 1 } }), `${path}?limit=1`)
+      assert.equal(client._buildQuery({ params: { limit: 1 } }), '?limit=1')
     })
 
     it('Should convert array params to csv', () => {
-      const path = '/resources/myid'
-      assert.equal(client._buildPath(path, { params: { ids: [ 1, 2 ] } }), `${path}?ids=1%2C2`)
+      assert.equal(client._buildQuery({ params: { ids: [ 1, 2 ] } }), '?ids=1%2C2')
     })
   })
 
