@@ -13,10 +13,10 @@ class MockClient extends BaseClient {
     return 'v2022-01-01'
   }
 
-  listResources (params = {}) {
+  listResources (options = {}) {
     let path = '/resources'
     path = this._interpolatePath(path)
-    return new Pager(this, path, params)
+    return new Pager(this, path, options)
   }
 
   async getResource (resourceId) {
