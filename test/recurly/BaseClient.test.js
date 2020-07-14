@@ -17,10 +17,10 @@ describe('BaseClient', () => {
 
   describe('#constructor', () => {
     it('Should set the internal state and headers', () => {
-      assert.equal(client._getDefaultOptions().headers['Authorization'], 'Basic bXlhcGlrZXk6')
+      assert.equal(client._getRequestOptions('GET', '/resources', {}).headers['Authorization'], 'Basic bXlhcGlrZXk6')
       const userAgentRegex = /^Recurly\/\d+(\.\d+){0,2}; node v\d+(\.\d+){0,2}.*$/
-      assert.ok(userAgentRegex.test(client._getDefaultOptions().headers['User-Agent']))
-      assert.equal(client._getDefaultOptions().headers['Accept'], 'application/vnd.recurly.v2022-01-01')
+      assert.ok(userAgentRegex.test(client._getRequestOptions('GET', '/resources', {}).headers['User-Agent']))
+      assert.equal(client._getRequestOptions('GET', '/resources', {}).headers['Accept'], 'application/vnd.recurly.v2022-01-01')
     })
   })
 
