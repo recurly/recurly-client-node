@@ -218,7 +218,7 @@ describe('BaseClient', () => {
           assert(client.calledWith(options, null))
         })
     })
-    it('Should throw a ValidationError on 422', () => {
+    it('Should throw a UnprocessableEntityError on 422', () => {
       client.mock((resp, options) => {
         resp.status = 422
         resp.body = null
@@ -228,7 +228,7 @@ describe('BaseClient', () => {
         .listResources()
         .count()
         .catch(err => {
-          assert(err instanceof recurly.errors.ValidationError)
+          assert(err instanceof recurly.errors.UnprocessableEntityError)
 
           let options = sinon.match({
             method: 'HEAD',
