@@ -1,8 +1,24 @@
 # Changelog
 
-## [3.10.0](https://github.com/recurly/recurly-client-node/tree/HEAD)
+## [3.11.0](https://github.com/recurly/recurly-client-node/tree/HEAD)
 
-[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.9.0...HEAD)
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.10.0...HEAD)
+
+**Implemented enhancements:**
+
+- Add request types to TS definitions [\#134](https://github.com/recurly/recurly-client-node/pull/134) ([bhelx](https://github.com/bhelx))
+- Adding hierarchical errors [\#132](https://github.com/recurly/recurly-client-node/pull/132) ([douglasmiller](https://github.com/douglasmiller))
+
+**Merged pull requests:**
+
+- Release 3.11.0 [\#139](https://github.com/recurly/recurly-client-node/pull/139) ([douglasmiller](https://github.com/douglasmiller))
+- Latest Changes for 2019-10-10 \(usage, measured units, etc\) [\#138](https://github.com/recurly/recurly-client-node/pull/138) ([bhelx](https://github.com/bhelx))
+- Running npm audit fix [\#133](https://github.com/recurly/recurly-client-node/pull/133) ([bhelx](https://github.com/bhelx))
+- Mon Jul  6 14:52:04 UTC 2020 Upgrade API version v2019-10-10 [\#130](https://github.com/recurly/recurly-client-node/pull/130) ([douglasmiller](https://github.com/douglasmiller))
+
+## [3.10.0](https://github.com/recurly/recurly-client-node/tree/3.10.0) (2020-07-01)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.9.0...3.10.0)
 
 **Implemented enhancements:**
 
