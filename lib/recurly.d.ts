@@ -1743,6 +1743,10 @@ export interface SubscriptionChange {
    */
   setupFeeRevenueScheduleType?: string | null;
   /**
+   * Invoice Collection
+   */
+  invoiceCollection?: InvoiceCollection | null;
+  /**
    * Created at
    */
   createdAt?: Date | null;
@@ -1795,9 +1799,13 @@ export interface SubscriptionAddOn {
    */
   tierType?: string | null;
   /**
-   * Empty unless `tier_type` is `tiered`, `volume`, or `stairstep`.
+   * If tiers are provided in the request, all existing tiers on the Subscription Add-on will be removed and replaced by the tiers in the request. 
    */
   tiers?: SubscriptionAddOnTier[] | null;
+  /**
+   * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0. Required if add_on_type is usage and usage_type is percentage.
+   */
+  usagePercentage?: number | null;
   /**
    * Created at
    */
@@ -1830,6 +1838,22 @@ export interface AddOnMini {
    * Describes your add-on and will appear in subscribers' invoices.
    */
   name?: string | null;
+  /**
+   * Whether the add-on type is fixed, or usage-based.
+   */
+  addOnType?: string | null;
+  /**
+   * Type of usage, returns usage type if `add_on_type` is `usage`.
+   */
+  usageType?: string | null;
+  /**
+   * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0.
+   */
+  usagePercentage?: number | null;
+  /**
+   * System-generated unique identifier for an measured unit associated with the add-on.
+   */
+  measuredUnitId?: string | null;
   /**
    * Item ID
    */
@@ -2017,6 +2041,46 @@ export interface Pricing {
 
 }
 
+export interface MeasuredUnit {
+  /**
+   * Item ID
+   */
+  id?: string | null;
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * Unique internal name of the measured unit on your site.
+   */
+  name?: string | null;
+  /**
+   * Display name for the measured unit. Can only contain spaces, underscores and must be alphanumeric.
+   */
+  displayName?: string | null;
+  /**
+   * The current state of the measured unit.
+   */
+  state?: string | null;
+  /**
+   * Optional internal description.
+   */
+  description?: string | null;
+  /**
+   * Created at
+   */
+  createdAt?: Date | null;
+  /**
+   * Last updated at
+   */
+  updatedAt?: Date | null;
+  /**
+   * Deleted at
+   */
+  deletedAt?: Date | null;
+
+}
+
 export interface BinaryFile {
   data?: string | null;
 
@@ -2188,6 +2252,22 @@ export interface AddOn {
    */
   name?: string | null;
   /**
+   * Whether the add-on type is fixed, or usage-based.
+   */
+  addOnType?: string | null;
+  /**
+   * Type of usage, returns usage type if `add_on_type` is `usage`.
+   */
+  usageType?: string | null;
+  /**
+   * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0.
+   */
+  usagePercentage?: number | null;
+  /**
+   * System-generated unique identifier for an measured unit associated with the add-on.
+   */
+  measuredUnitId?: string | null;
+  /**
    * Accounting code for invoice line items for this add-on. If no value is provided, it defaults to add-on's code.
    */
   accountingCode?: string | null;
@@ -2340,10 +2420,6 @@ export interface ShippingMethod {
 
 export interface SubscriptionChangePreview {
   /**
-   * Invoice collection
-   */
-  invoiceCollection?: InvoiceCollection | null;
-  /**
    * The ID of the Subscription Change.
    */
   id?: string | null;
@@ -2392,6 +2468,10 @@ export interface SubscriptionChangePreview {
    */
   setupFeeRevenueScheduleType?: string | null;
   /**
+   * Invoice Collection
+   */
+  invoiceCollection?: InvoiceCollection | null;
+  /**
    * Created at
    */
   createdAt?: Date | null;
@@ -2403,6 +2483,59 @@ export interface SubscriptionChangePreview {
    * Deleted at
    */
   deletedAt?: Date | null;
+
+}
+
+export interface Usage {
+  id?: string | null;
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * Custom field for recording the id in your own system associated with the usage, so you can provide auditable usage displays to your customers using a GET on this endpoint.
+   */
+  merchantTag?: string | null;
+  /**
+   * The amount of usage. Can be positive, negative, or 0. No decimals allowed, we will strip them. If the usage-based add-on is billed with a percentage, your usage will be a monetary amount you will want to format in cents. (e.g., $5.00 is "500").
+   */
+  amount?: number | null;
+  /**
+   * Type of usage, returns usage type if `add_on_type` is `usage`.
+   */
+  usageType?: string | null;
+  /**
+   * The pricing model for the add-on.  For more information, [click here](https://docs.recurly.com/docs/billing-models#section-quantity-based). 
+   */
+  tierType?: string | null;
+  /**
+   * The tiers and prices of the subscription based on the usage_timestamp. If tier_type = flat, tiers = null
+   */
+  tiers?: SubscriptionAddOnTier[] | null;
+  /**
+   * The ID of the measured unit associated with the add-on the usage record is for.
+   */
+  measuredUnitId?: string | null;
+  /**
+   * When the usage was recorded in your system.
+   */
+  recordingTimestamp?: Date | null;
+  /**
+   * When the usage actually happened. This will define the line item dates this usage is billed under and is important for revenue recognition.
+   */
+  usageTimestamp?: Date | null;
+  /**
+   * When the usage record was billed on an invoice.
+   */
+  billedAt?: Date | null;
+  /**
+   * When the usage record was created in Recurly.
+   */
+  createdAt?: Date | null;
+  /**
+   * When the usage record was billed on an invoice.
+   */
+  updatedAt?: Date | null;
 
 }
 
@@ -3131,6 +3264,38 @@ export interface ItemUpdate {
 
 }
 
+export interface MeasuredUnitCreate {
+  /**
+   * Unique internal name of the measured unit on your site.
+   */
+  name?: string | null;
+  /**
+   * Display name for the measured unit.
+   */
+  displayName?: string | null;
+  /**
+   * Optional internal description.
+   */
+  description?: string | null;
+
+}
+
+export interface MeasuredUnitUpdate {
+  /**
+   * Unique internal name of the measured unit on your site.
+   */
+  name?: string | null;
+  /**
+   * Display name for the measured unit.
+   */
+  displayName?: string | null;
+  /**
+   * Optional internal description.
+   */
+  description?: string | null;
+
+}
+
 export interface InvoiceUpdatable {
   /**
    * This identifies the PO number associated with the invoice. Not editable for credit invoices.
@@ -3434,6 +3599,26 @@ export interface AddOnCreate {
    */
   name?: string | null;
   /**
+   * Whether the add-on type is fixed, or usage-based.
+   */
+  addOnType?: string | null;
+  /**
+   * Type of usage, required if `add_on_type` is `usage`.
+   */
+  usageType?: string | null;
+  /**
+   * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0. Required if `add_on_type` is usage and `usage_type` is percentage. Must be omitted otherwise. `usage_percentage` does not support tiers.
+   */
+  usagePercentage?: number | null;
+  /**
+   * System-generated unique identifier for a measured unit to be associated with the add-on. Either `measured_unit_id` or `measured_unit_name` are required when `add_on_type` is `usage`. If `measured_unit_id` and `measured_unit_name` are both present, `measured_unit_id` will be used.
+   */
+  measuredUnitId?: string | null;
+  /**
+   * Name of a measured unit to be associated with the add-on. Either `measured_unit_id` or `measured_unit_name` are required when `add_on_type` is `usage`. If `measured_unit_id` and `measured_unit_name` are both present, `measured_unit_id` will be used.
+   */
+  measuredUnitName?: string | null;
+  /**
    * Plan ID
    */
   planId?: string | null;
@@ -3593,6 +3778,18 @@ export interface AddOnUpdate {
    * Describes your add-on and will appear in subscribers' invoices. If an `Item` is associated to the `AddOn` then `name` must be absent.
    */
   name?: string | null;
+  /**
+   * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0. Required if `add_on_type` is usage and `usage_type` is percentage. Must be omitted otherwise. `usage_percentage` does not support tiers.
+   */
+  usagePercentage?: number | null;
+  /**
+   * System-generated unique identifier for a measured unit to be associated with the add-on. Either `measured_unit_id` or `measured_unit_name` are required when `add_on_type` is `usage`. If `measured_unit_id` and `measured_unit_name` are both present, `measured_unit_id` will be used.
+   */
+  measuredUnitId?: string | null;
+  /**
+   * Name of a measured unit to be associated with the add-on. Either `measured_unit_id` or `measured_unit_name` are required when `add_on_type` is `usage`. If `measured_unit_id` and `measured_unit_name` are both present, `measured_unit_id` will be used.
+   */
+  measuredUnitName?: string | null;
   /**
    * Accounting code for invoice line items for this add-on. If no value is provided, it defaults to add-on's code. If an `Item` is associated to the `AddOn` then `accounting code` must be absent.
    */
@@ -3808,6 +4005,10 @@ export interface SubscriptionAddOnCreate {
    */
   tiers?: SubscriptionAddOnTier[] | null;
   /**
+   * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0. Required if `add_on_type` is usage and `usage_type` is percentage. Must be omitted otherwise. `usage_percentage` does not support tiers.
+   */
+  usagePercentage?: number | null;
+  /**
    * Revenue schedule type
    */
   revenueScheduleType?: string | null;
@@ -4005,9 +4206,33 @@ export interface SubscriptionAddOnUpdate {
    */
   tiers?: SubscriptionAddOnTier[] | null;
   /**
+   * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0. Required if add_on_type is usage and usage_type is percentage.
+   */
+  usagePercentage?: number | null;
+  /**
    * Revenue schedule type
    */
   revenueScheduleType?: string | null;
+
+}
+
+export interface UsageCreate {
+  /**
+   * Custom field for recording the id in your own system associated with the usage, so you can provide auditable usage displays to your customers using a GET on this endpoint.
+   */
+  merchantTag?: string | null;
+  /**
+   * The amount of usage. Can be positive, negative, or 0. No decimals allowed, we will strip them. If the usage-based add-on is billed with a percentage, your usage will be a monetary amount you will want to format in cents. (e.g., $5.00 is "500").
+   */
+  amount?: number | null;
+  /**
+   * When the usage was recorded in your system.
+   */
+  recordingTimestamp?: Date | null;
+  /**
+   * When the usage actually happened. This will define the line item dates this usage is billed under and is important for revenue recognition.
+   */
+  usageTimestamp?: Date | null;
 
 }
 
@@ -4202,6 +4427,10 @@ export interface SubscriptionPurchase {
    */
   trialEndsAt?: Date | null;
   /**
+   * If set, the subscription will begin in the future on this date. The subscription will apply the setup fee and trial period, unless the plan has no trial.
+   */
+  startsAt?: Date | null;
+  /**
    * If present, this sets the date the subscription's next billing period will start (`current_period_ends_at`). This can be used to align the subscription’s billing to a specific day of the month. The initial invoice will be prorated for the period between the subscription's activation date and the billing period end date. Subsequent periods will be based off the plan interval. For a subscription with a trial period, this will change when the trial expires.
    */
   nextBillDate?: Date | null;
@@ -4335,10 +4564,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.email - Filter for accounts with this exact email address. A blank value will return accounts with both `null` and `""` email addresses. Note that multiple accounts can share one email address.
@@ -4705,10 +4934,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<CouponRedemption>} A list of the the coupon redemptions on an account.
@@ -4795,10 +5024,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<CreditPayment>} A list of the account's credit payments.
@@ -4836,10 +5065,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.type - Filter by type when:
@@ -4947,10 +5176,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.original - Filter by original field.
@@ -5078,10 +5307,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<ShippingAddress>} A list of an account's shipping addresses.
@@ -5237,10 +5466,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.state - Filter by state.
@@ -5284,10 +5513,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.type - Filter by type field. The value `payment` will return both `purchase` and `capture` transactions.
@@ -5321,10 +5550,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.email - Filter for accounts with this exact email address. A blank value will return accounts with both `null` and `""` email addresses. Note that multiple accounts can share one email address.
@@ -5366,10 +5595,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<AccountAcquisition>} A list of the site's account acquisition data.
@@ -5406,10 +5635,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<Coupon>} A list of the site's coupons.
@@ -5551,10 +5780,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<UniqueCouponCode>} A list of unique coupon codes that were generated
@@ -5579,10 +5808,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<CreditPayment>} A list of the site's credit payments.
@@ -5629,10 +5858,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.relatedType - Filter by related type.
@@ -5695,10 +5924,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.state - Filter by state.
@@ -5846,6 +6075,82 @@ export declare class Client {
    */
   reactivateItem(itemId: string): Promise<Item>;
   /**
+   * List a site's measured units
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_measured_unit
+   *
+   * 
+   * @param {Object} params - The optional url parameters for this request.
+   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
+   *   
+   *   **Important notes:**
+   *   
+   *   * The `ids` parameter cannot be used with any other ordering or filtering
+   *     parameters (`limit`, `order`, `sort`, `begin_time`, `end_time`, etc)
+   *   * Invalid or unknown IDs will be ignored, so you should check that the
+   *     results correspond to your request.
+   *   * Records are returned in an arbitrary order. Since results are all
+   *     returned at once you can sort the records yourself.
+   *   
+   * @param params.limit - Limit number of records 1-200.
+   * @param params.order - Sort order.
+   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   *   order. In descending order updated records will move behind the cursor and could
+   *   prevent some records from being returned.
+   *   
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
+   *   
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
+   *   
+   * @param params.state - Filter by state.
+   * @return {Pager<MeasuredUnit>} A list of the site's measured units.
+   */
+  listMeasuredUnit(params?: object): Pager<MeasuredUnit>;
+  /**
+   * Create a new measured unit
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_measured_unit
+   *
+   * 
+   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {MeasuredUnitCreate}
+   * @return {Promise<MeasuredUnit>} A new measured unit.
+   */
+  createMeasuredUnit(body: MeasuredUnitCreate): Promise<MeasuredUnit>;
+  /**
+   * Fetch a measured unit
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_measured_unit
+   *
+   * 
+   * @param measuredUnitId - Measured unit ID or name. For ID no prefix is used e.g. `e28zov4fw0v2`. For name use prefix `name-`, e.g. `name-Storage`.
+   * @return {Promise<MeasuredUnit>} An item.
+   */
+  getMeasuredUnit(measuredUnitId: string): Promise<MeasuredUnit>;
+  /**
+   * Update a measured unit
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/update_measured_unit
+   *
+   * 
+   * @param measuredUnitId - Measured unit ID or name. For ID no prefix is used e.g. `e28zov4fw0v2`. For name use prefix `name-`, e.g. `name-Storage`.
+   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {MeasuredUnitUpdate}
+   * @return {Promise<MeasuredUnit>} The updated measured_unit.
+   */
+  updateMeasuredUnit(measuredUnitId: string, body: MeasuredUnitUpdate): Promise<MeasuredUnit>;
+  /**
+   * Remove a measured unit
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/remove_measured_unit
+   *
+   * 
+   * @param measuredUnitId - Measured unit ID or name. For ID no prefix is used e.g. `e28zov4fw0v2`. For name use prefix `name-`, e.g. `name-Storage`.
+   * @return {Promise<MeasuredUnit>} A measured unit.
+   */
+  removeMeasuredUnit(measuredUnitId: string): Promise<MeasuredUnit>;
+  /**
    * List a site's invoices
    *
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_invoices
@@ -5876,10 +6181,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.type - Filter by type when:
@@ -6172,10 +6477,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.original - Filter by original field.
@@ -6214,10 +6519,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<CouponRedemption>} A list of the the coupon redemptions associated with the invoice.
@@ -6303,10 +6608,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.original - Filter by original field.
@@ -6396,10 +6701,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.state - Filter by state.
@@ -6552,10 +6857,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.state - Filter by state.
@@ -6713,10 +7018,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.state - Filter by state.
@@ -6779,10 +7084,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<ShippingMethod>} A list of the site's shipping methods.
@@ -6860,10 +7165,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.state - Filter by state.
@@ -7240,10 +7545,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.type - Filter by type when:
@@ -7287,10 +7592,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.original - Filter by original field.
@@ -7329,15 +7634,83 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<CouponRedemption>} A list of the the coupon redemptions on a subscription.
    */
   listSubscriptionCouponRedemptions(subscriptionId: string, params?: object): Pager<CouponRedemption>;
+  /**
+   * List a subscription add-on's usage records
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_usage
+   *
+   * 
+   * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
+   * @param {Object} params - The optional url parameters for this request.
+   * @param params.limit - Limit number of records 1-200.
+   * @param params.order - Sort order.
+   * @param params.sort - Sort field. You *really* only want to sort by `usage_timestamp` in ascending
+   *   order. In descending order updated records will move behind the cursor and could
+   *   prevent some records from being returned.
+   *   
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=usage_timestamp` or `sort=recorded_timestamp`.
+   *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
+   *   
+   * @param params.endTime - Inclusively filter by end_time when `sort=usage_timestamp` or `sort=recorded_timestamp`.
+   *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
+   *   
+   * @param params.billingStatus - Filter by usage record's billing status
+   * @return {Pager<Usage>} A list of the subscription add-on's usage records.
+   */
+  listUsage(subscriptionId: string, addOnId: string, params?: object): Pager<Usage>;
+  /**
+   * Log a usage record on this subscription add-on
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_usage
+   *
+   * 
+   * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
+   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {UsageCreate}
+   * @return {Promise<Usage>} The created usage record.
+   */
+  createUsage(subscriptionId: string, addOnId: string, body: UsageCreate): Promise<Usage>;
+  /**
+   * Get a usage record
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_usage
+   *
+   * 
+   * @param usageId - Usage Record ID.
+   * @return {Promise<Usage>} The usage record.
+   */
+  getUsage(usageId: string): Promise<Usage>;
+  /**
+   * Update a usage record
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/update_usage
+   *
+   * 
+   * @param usageId - Usage Record ID.
+   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {UsageCreate}
+   * @return {Promise<Usage>} The updated usage record.
+   */
+  updateUsage(usageId: string, body: UsageCreate): Promise<Usage>;
+  /**
+   * Delete a usage record.
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/remove_usage
+   *
+   * 
+   * @param usageId - Usage Record ID.
+   * @return {Promise<Empty>} Usage was successfully deleted.
+   */
+  removeUsage(usageId: string): Promise<Empty>;
   /**
    * List a site's transactions
    *
@@ -7369,10 +7742,10 @@ export declare class Client {
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @param params.type - Filter by type field. The value `payment` will return both `purchase` and `capture` transactions.
