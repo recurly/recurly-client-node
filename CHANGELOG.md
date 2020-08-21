@@ -1,8 +1,21 @@
 # Changelog
 
-## [3.11.0](https://github.com/recurly/recurly-client-node/tree/HEAD)
+## [3.12.0](https://github.com/recurly/recurly-client-node/tree/HEAD)
 
-[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.10.0...HEAD)
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.11.0...HEAD)
+
+**Implemented enhancements:**
+
+- Fri Aug 21 16:24:16 UTC 2020 Upgrade API version v2019-10-10 [\#141](https://github.com/recurly/recurly-client-node/pull/141) ([douglasmiller](https://github.com/douglasmiller))
+- Fixes typo in ServiceUnavailableError [\#140](https://github.com/recurly/recurly-client-node/pull/140) ([chrissrogers](https://github.com/chrissrogers))
+
+**Merged pull requests:**
+
+- Release 3.12.0 [\#142](https://github.com/recurly/recurly-client-node/pull/142) ([douglasmiller](https://github.com/douglasmiller))
+
+## [3.11.0](https://github.com/recurly/recurly-client-node/tree/3.11.0) (2020-07-31)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.10.0...3.11.0)
 
 **Implemented enhancements:**
 
