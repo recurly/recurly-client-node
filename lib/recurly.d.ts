@@ -1346,6 +1346,14 @@ export interface LineItem {
    */
   taxExempt?: boolean | null;
   /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the line item is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
+   */
+  avalaraTransactionType?: number | null;
+  /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the line item is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
+   */
+  avalaraServiceType?: number | null;
+  /**
    * Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use `unknown`, `physical`, or `digital`.
    */
   taxCode?: string | null;
@@ -1999,6 +2007,14 @@ export interface Item {
    */
   revenueScheduleType?: string | null;
   /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the item is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
+   */
+  avalaraTransactionType?: number | null;
+  /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the item is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
+   */
+  avalaraServiceType?: number | null;
+  /**
    * Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use `unknown`, `physical`, or `digital`.
    */
   taxCode?: string | null;
@@ -2156,6 +2172,14 @@ export interface Plan {
    */
   setupFeeAccountingCode?: string | null;
   /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the plan is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
+   */
+  avalaraTransactionType?: number | null;
+  /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the plan is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
+   */
+  avalaraServiceType?: number | null;
+  /**
    * Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use `unknown`, `physical`, or `digital`.
    */
   taxCode?: string | null;
@@ -2275,6 +2299,14 @@ export interface AddOn {
    * When this add-on is invoiced, the line item will use this revenue schedule. If `item_code`/`item_id` is part of the request then `revenue_schedule_type` must be absent in the request as the value will be set from the item.
    */
   revenueScheduleType?: string | null;
+  /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the add-on is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
+   */
+  avalaraTransactionType?: number | null;
+  /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the add-on is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
+   */
+  avalaraServiceType?: number | null;
   /**
    * Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use `unknown`, `physical`, or `digital`.
    */
@@ -2976,6 +3008,14 @@ export interface LineItemCreate {
    */
   taxExempt?: boolean | null;
   /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the line item is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types. If an `Item` is associated to the `LineItem`, then the `avalara_transaction_type` must be absent.
+   */
+  avalaraTransactionType?: number | null;
+  /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the line item is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types. If an `Item` is associated to the `LineItem`, then the `avalara_service_type` must be absent.
+   */
+  avalaraServiceType?: number | null;
+  /**
    * Optional field used by Avalara, Vertex, and Recurly's EU VAT tax feature to determine taxation rules. If you have your own AvaTax or Vertex account configured, use their tax codes to assign specific tax rules. If you are using Recurly's EU VAT feature, you can use values of `unknown`, `physical`, or `digital`.
    */
   taxCode?: string | null;
@@ -3190,6 +3230,14 @@ export interface ItemCreate {
    */
   revenueScheduleType?: string | null;
   /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the item is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
+   */
+  avalaraTransactionType?: number | null;
+  /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the item is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
+   */
+  avalaraServiceType?: number | null;
+  /**
    * Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use `unknown`, `physical`, or `digital`.
    */
   taxCode?: string | null;
@@ -3245,6 +3293,14 @@ export interface ItemUpdate {
    * Revenue schedule type
    */
   revenueScheduleType?: string | null;
+  /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the item is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
+   */
+  avalaraTransactionType?: number | null;
+  /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the item is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
+   */
+  avalaraServiceType?: number | null;
   /**
    * Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use `unknown`, `physical`, or `digital`.
    */
@@ -3519,6 +3575,14 @@ export interface PlanCreate {
    */
   setupFeeAccountingCode?: string | null;
   /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the plan is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
+   */
+  avalaraTransactionType?: number | null;
+  /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the plan is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
+   */
+  avalaraServiceType?: number | null;
+  /**
    * Optional field used by Avalara, Vertex, and Recurly's EU VAT tax feature to determine taxation rules. If you have your own AvaTax or Vertex account configured, use their tax codes to assign specific tax rules. If you are using Recurly's EU VAT feature, you can use values of `unknown`, `physical`, or `digital`.
    */
   taxCode?: string | null;
@@ -3643,6 +3707,14 @@ export interface AddOnCreate {
    */
   optional?: boolean | null;
   /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the add-on is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types. If an `Item` is associated to the `AddOn`, then the `avalara_transaction_type` must be absent.
+   */
+  avalaraTransactionType?: number | null;
+  /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the add-on is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types. If an `Item` is associated to the `AddOn`, then the `avalara_service_type` must be absent.
+   */
+  avalaraServiceType?: number | null;
+  /**
    * Optional field used by Avalara, Vertex, and Recurly's EU VAT tax feature to determine taxation rules. If you have your own AvaTax or Vertex account configured, use their tax codes to assign specific tax rules. If you are using Recurly's EU VAT feature, you can use values of `unknown`, `physical`, or `digital`. If `item_code`/`item_id` is part of the request then `tax_code` must be absent.
    */
   taxCode?: string | null;
@@ -3739,6 +3811,14 @@ export interface PlanUpdate {
    */
   setupFeeAccountingCode?: string | null;
   /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the plan is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
+   */
+  avalaraTransactionType?: number | null;
+  /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the plan is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
+   */
+  avalaraServiceType?: number | null;
+  /**
    * Optional field used by Avalara, Vertex, and Recurly's EU VAT tax feature to determine taxation rules. If you have your own AvaTax or Vertex account configured, use their tax codes to assign specific tax rules. If you are using Recurly's EU VAT feature, you can use values of `unknown`, `physical`, or `digital`.
    */
   taxCode?: string | null;
@@ -3798,6 +3878,14 @@ export interface AddOnUpdate {
    * When this add-on is invoiced, the line item will use this revenue schedule. If an `Item` is associated to the `AddOn` then `revenue_schedule_type` must be absent in the request as the value will be set from the item.
    */
   revenueScheduleType?: string | null;
+  /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the add-on is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types. If an `Item` is associated to the `AddOn`, then the `avalara_transaction_type` must be absent.
+   */
+  avalaraTransactionType?: number | null;
+  /**
+   * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the add-on is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types. If an `Item` is associated to the `AddOn`, then the `avalara_service_type` must be absent.
+   */
+  avalaraServiceType?: number | null;
   /**
    * Optional field used by Avalara, Vertex, and Recurly's EU VAT tax feature to determine taxation rules. If you have your own AvaTax or Vertex account configured, use their tax codes to assign specific tax rules. If you are using Recurly's EU VAT feature, you can use values of `unknown`, `physical`, or `digital`. If an `Item` is associated to the `AddOn` then `tax code` must be absent.
    */
@@ -4138,7 +4226,7 @@ export interface SubscriptionChangeCreate {
    */
   couponCodes?: string[] | null;
   /**
-   * If you provide a value for this field it will replace any existing add-ons. So, when adding or modifying an add-on, you need to include the existing subscription add-ons. Unchanged add-ons can be included just using the subscription add-on's ID: `{"id": "abc123"}`.  If a subscription add-on's `code` is supplied without the `id`, `{"code": "def456"}`, the subscription add-on attributes will be set to the current values of the plan add-on unless provided in the request.  - If an `id` is passed, any attributes not passed in will pull from the   existing subscription add-on - If a `code` is passed, any attributes not passed in will pull from the   current values of the plan add-on - Attributes passed in as part of the request will override either of the   above scenarios 
+   * If this value is omitted your existing add-ons will be removed. If you provide a value for this field it will replace any existing add-ons. So, when adding or modifying an add-on, you need to include the existing subscription add-ons. Unchanged add-ons can be included just using the subscription add-on's ID: `{"id": "abc123"}`.  If a subscription add-on's `code` is supplied without the `id`, `{"code": "def456"}`, the subscription add-on attributes will be set to the current values of the plan add-on unless provided in the request.  - If an `id` is passed, any attributes not passed in will pull from the   existing subscription add-on - If a `code` is passed, any attributes not passed in will pull from the   current values of the plan add-on - Attributes passed in as part of the request will override either of the   above scenarios 
    */
   addOns?: SubscriptionAddOnUpdate[] | null;
   /**
@@ -4366,7 +4454,7 @@ export interface AccountPurchase {
 
 export interface ShippingPurchase {
   /**
-   * Assign a shipping address from the account's existing shipping addresses. If this and `shipping_address` are both present, `shipping_address` will take precedence.
+   * Assign a shipping address from the account's existing shipping addresses. If this and `address` are both present, `address` will take precedence.
    */
   addressId?: string | null;
   address?: ShippingAddressCreate | null;
@@ -7652,6 +7740,18 @@ export declare class Client {
    * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @param addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
    * @param {Object} params - The optional url parameters for this request.
+   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
+   *   
+   *   **Important notes:**
+   *   
+   *   * The `ids` parameter cannot be used with any other ordering or filtering
+   *     parameters (`limit`, `order`, `sort`, `begin_time`, `end_time`, etc)
+   *   * Invalid or unknown IDs will be ignored, so you should check that the
+   *     results correspond to your request.
+   *   * Records are returned in an arbitrary order. Since results are all
+   *     returned at once you can sort the records yourself.
+   *   
    * @param params.limit - Limit number of records 1-200.
    * @param params.order - Sort order.
    * @param params.sort - Sort field. You *really* only want to sort by `usage_timestamp` in ascending
