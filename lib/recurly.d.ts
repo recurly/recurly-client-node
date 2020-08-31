@@ -1755,6 +1755,10 @@ export interface SubscriptionChange {
    */
   invoiceCollection?: InvoiceCollection | null;
   /**
+   * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
+   */
+  customFields?: CustomField[] | null;
+  /**
    * Created at
    */
   createdAt?: Date | null;
@@ -2504,6 +2508,10 @@ export interface SubscriptionChangePreview {
    */
   invoiceCollection?: InvoiceCollection | null;
   /**
+   * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
+   */
+  customFields?: CustomField[] | null;
+  /**
    * Created at
    */
   createdAt?: Date | null;
@@ -3122,11 +3130,11 @@ export interface CouponCreate {
    */
   appliesToNonPlanCharges?: boolean | null;
   /**
-   * The coupon is valid for all plans if true. If false then `plans` and `plans_names` will list the applicable plans.
+   * The coupon is valid for all plans if true. If false then `plans` and `plans_names` will list the applicable plans. 
    */
   appliesToAllPlans?: boolean | null;
   /**
-   * List of plan codes to which this coupon applies. See `applies_to_all_plans`
+   * List of plan codes to which this coupon applies. Required if `applies_to_all_plans` is false. Overrides `applies_to_all_plans` when `applies_to_all_plans` is true. 
    */
   planCodes?: string[] | null;
   /**
@@ -4237,6 +4245,10 @@ export interface SubscriptionChangeCreate {
    * Revenue schedule type
    */
   revenueScheduleType?: string | null;
+  /**
+   * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
+   */
+  customFields?: CustomField[] | null;
   /**
    * For manual invoicing, this identifies the PO number associated with the subscription.
    */
