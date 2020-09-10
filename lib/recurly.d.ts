@@ -682,6 +682,14 @@ export interface Coupon {
    */
   redeemBy?: Date | null;
   /**
+   * The Coupon ID of the parent Bulk Coupon
+   */
+  bulkCouponId?: string | null;
+  /**
+   * The Coupon code of the parent Bulk Coupon
+   */
+  bulkCouponCode?: string | null;
+  /**
    * The date and time the unique coupon code was redeemed. This is only present for bulk coupons.
    */
   redeemedAt?: Date | null;
@@ -1911,6 +1919,14 @@ export interface UniqueCouponCode {
    */
   state?: string | null;
   /**
+   * The Coupon ID of the parent Bulk Coupon
+   */
+  bulkCouponId?: string | null;
+  /**
+   * The Coupon code of the parent Bulk Coupon
+   */
+  bulkCouponCode?: string | null;
+  /**
    * Created at
    */
   createdAt?: Date | null;
@@ -2565,6 +2581,14 @@ export interface Usage {
    */
   usageTimestamp?: Date | null;
   /**
+   * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0.
+   */
+  usagePercentage?: number | null;
+  /**
+   * Unit price
+   */
+  unitAmount?: number | null;
+  /**
    * When the usage record was billed on an invoice.
    */
   billedAt?: Date | null;
@@ -2576,6 +2600,35 @@ export interface Usage {
    * When the usage record was billed on an invoice.
    */
   updatedAt?: Date | null;
+
+}
+
+export interface ExportDates {
+  /**
+   * An array of dates that have available exports.
+   */
+  dates?: string[] | null;
+
+}
+
+export interface ExportFiles {
+  files?: ExportFile[] | null;
+
+}
+
+export interface ExportFile {
+  /**
+   * Name of the export file.
+   */
+  name?: string | null;
+  /**
+   * MD5 hash of the export file.
+   */
+  md5sum?: string | null;
+  /**
+   * A presigned link to download the export file.
+   */
+  href?: string | null;
 
 }
 
@@ -8000,5 +8053,25 @@ export declare class Client {
    * @return {Promise<InvoiceCollection>} Returns preview of the new invoices
    */
   previewPurchase(body: PurchaseCreate): Promise<InvoiceCollection>;
+  /**
+   * List the dates that have an available export to download.
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_export_dates
+   *
+   * 
+   * @return {Promise<ExportDates>} Returns a list of dates.
+   */
+  getExportDates(): Promise<ExportDates>;
+  /**
+   * List of the export files that are available to download.
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_export_files
+   *
+   * 
+   * @param {Object} params - The optional url parameters for this request.
+   * @param params.date - Date for which to get a list of available automated export files. Date must be in YYYY-MM-DD format.
+   * @return {Promise<ExportFiles>} Returns a list of export files to download.
+   */
+  getExportFiles(params?: object): Promise<ExportFiles>;
 
 }
