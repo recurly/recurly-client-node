@@ -8068,10 +8068,9 @@ export declare class Client {
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_export_files
    *
    * 
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.date - Date for which to get a list of available automated export files. Date must be in YYYY-MM-DD format.
+   * @param exportDate - Date for which to get a list of available automated export files. Date must be in YYYY-MM-DD format.
    * @return {Promise<ExportFiles>} Returns a list of export files to download.
    */
-  getExportFiles(params?: object): Promise<ExportFiles>;
+  getExportFiles(exportDate: string): Promise<ExportFiles>;
 
 }
