@@ -650,7 +650,7 @@ export interface Coupon {
    */
   appliesToNonPlanCharges?: boolean | null;
   /**
-   * TODO
+   * A list of plan names for which this coupon applies.
    */
   plansNames?: string[] | null;
   /**
@@ -681,6 +681,14 @@ export interface Coupon {
    * The date and time the coupon will expire and can no longer be redeemed. Time is always 11:59:59, the end-of-day Pacific time.
    */
   redeemBy?: Date | null;
+  /**
+   * The Coupon ID of the parent Bulk Coupon
+   */
+  bulkCouponId?: string | null;
+  /**
+   * The Coupon code of the parent Bulk Coupon
+   */
+  bulkCouponCode?: string | null;
   /**
    * The date and time the unique coupon code was redeemed. This is only present for bulk coupons.
    */
@@ -1911,6 +1919,14 @@ export interface UniqueCouponCode {
    */
   state?: string | null;
   /**
+   * The Coupon ID of the parent Bulk Coupon
+   */
+  bulkCouponId?: string | null;
+  /**
+   * The Coupon code of the parent Bulk Coupon
+   */
+  bulkCouponCode?: string | null;
+  /**
    * Created at
    */
   createdAt?: Date | null;
@@ -2565,6 +2581,14 @@ export interface Usage {
    */
   usageTimestamp?: Date | null;
   /**
+   * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0.
+   */
+  usagePercentage?: number | null;
+  /**
+   * Unit price
+   */
+  unitAmount?: number | null;
+  /**
    * When the usage record was billed on an invoice.
    */
   billedAt?: Date | null;
@@ -2576,6 +2600,43 @@ export interface Usage {
    * When the usage record was billed on an invoice.
    */
   updatedAt?: Date | null;
+
+}
+
+export interface ExportDates {
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * An array of dates that have available exports.
+   */
+  dates?: string[] | null;
+
+}
+
+export interface ExportFiles {
+  /**
+   * Object type
+   */
+  object?: string | null;
+  files?: ExportFile[] | null;
+
+}
+
+export interface ExportFile {
+  /**
+   * Name of the export file.
+   */
+  name?: string | null;
+  /**
+   * MD5 hash of the export file.
+   */
+  md5sum?: string | null;
+  /**
+   * A presigned link to download the export file.
+   */
+  href?: string | null;
 
 }
 
@@ -3032,7 +3093,7 @@ export interface LineItemCreate {
    */
   productCode?: string | null;
   /**
-   * Only allowed if the Gift Cards feature is enabled on your site and `type` is `credit`. Can only have a value of `external_gift_card`. Set this value in order to track gift card credits from external gift cards (like InComm). It also skips billing information requirements.
+   * Origin `external_gift_card` is allowed if the Gift Cards feature is enabled on your site and `type` is `credit`. Set this value in order to track gift card credits from external gift cards (like InComm). It also skips billing information requirements.  Origin `prepayment` is only allowed if `type` is `charge` and `tax_exempt` is left blank or set to true.  This origin creates a charge and opposite credit on the account to be used for future invoices.
    */
   origin?: string | null;
   /**
@@ -3675,7 +3736,7 @@ export interface AddOnCreate {
    */
   addOnType?: string | null;
   /**
-   * Type of usage, required if `add_on_type` is `usage`.
+   * Type of usage, required if `add_on_type` is `usage`. See our [Guide](https://developers.recurly.com/guides/usage-based-billing-guide.html) for an overview of how to configure usage add-ons. 
    */
   usageType?: string | null;
   /**
@@ -3731,7 +3792,7 @@ export interface AddOnCreate {
    */
   currencies?: AddOnPricing[] | null;
   /**
-   * The pricing model for the add-on.  For more information, [click here](https://docs.recurly.com/docs/billing-models#section-quantity-based). 
+   * The pricing model for the add-on.  For more information, [click here](https://docs.recurly.com/docs/billing-models#section-quantity-based). See our [Guide](https://developers.recurly.com/guides/item-addon-guide.html) for an overview of how to configure quantity-based pricing models. 
    */
   tierType?: string | null;
   /**
@@ -4097,11 +4158,11 @@ export interface SubscriptionAddOnCreate {
    */
   unitAmount?: number | null;
   /**
-   * If the plan add-on's `tier_type` is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount`. There must be one tier with an `ending_quantity` of 999999999 which is the default if not provided. 
+   * If the plan add-on's `tier_type` is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount`. There must be one tier with an `ending_quantity` of 999999999 which is the default if not provided. See our [Guide](https://developers.recurly.com/guides/item-addon-guide.html) for an overview of how to configure quantity-based pricing models. 
    */
   tiers?: SubscriptionAddOnTier[] | null;
   /**
-   * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0. Required if `add_on_type` is usage and `usage_type` is percentage. Must be omitted otherwise. `usage_percentage` does not support tiers.
+   * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0. Required if `add_on_type` is usage and `usage_type` is percentage. Must be omitted otherwise. `usage_percentage` does not support tiers. See our [Guide](https://developers.recurly.com/guides/usage-based-billing-guide.html) for an overview of how to configure usage add-ons.
    */
   usagePercentage?: number | null;
   /**
@@ -8000,5 +8061,24 @@ export declare class Client {
    * @return {Promise<InvoiceCollection>} Returns preview of the new invoices
    */
   previewPurchase(body: PurchaseCreate): Promise<InvoiceCollection>;
+  /**
+   * List the dates that have an available export to download.
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_export_dates
+   *
+   * 
+   * @return {Promise<ExportDates>} Returns a list of dates.
+   */
+  getExportDates(): Promise<ExportDates>;
+  /**
+   * List of the export files that are available to download.
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_export_files
+   *
+   * 
+   * @param exportDate - Date for which to get a list of available automated export files. Date must be in YYYY-MM-DD format.
+   * @return {Promise<ExportFiles>} Returns a list of export files to download.
+   */
+  getExportFiles(exportDate: string): Promise<ExportFiles>;
 
 }
