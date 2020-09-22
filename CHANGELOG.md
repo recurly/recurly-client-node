@@ -1,8 +1,20 @@
 # Changelog
 
-## [3.13.0](https://github.com/recurly/recurly-client-node/tree/HEAD)
+## [3.14.0](https://github.com/recurly/recurly-client-node/tree/HEAD)
 
-[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.12.0...HEAD)
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.13.0...HEAD)
+
+**Implemented enhancements:**
+
+- Latest Changes for 2019-10-10 \(Automated Exports, additional resource data attributes\) [\#147](https://github.com/recurly/recurly-client-node/pull/147) ([douglasmiller](https://github.com/douglasmiller))
+
+**Merged pull requests:**
+
+- Release 3.14.0 [\#148](https://github.com/recurly/recurly-client-node/pull/148) ([douglasmiller](https://github.com/douglasmiller))
+
+## [3.13.0](https://github.com/recurly/recurly-client-node/tree/3.13.0) (2020-08-31)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.12.0...3.13.0)
 
 **Implemented enhancements:**
 
