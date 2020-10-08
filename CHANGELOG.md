@@ -1,8 +1,20 @@
 # Changelog
 
-## [3.14.0](https://github.com/recurly/recurly-client-node/tree/HEAD)
+## [3.14.1](https://github.com/recurly/recurly-client-node/tree/HEAD)
 
-[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.13.0...HEAD)
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.14.0...HEAD)
+
+**Fixed bugs:**
+
+- Makes response header references case insensitive [\#149](https://github.com/recurly/recurly-client-node/pull/149) ([dbrudner](https://github.com/dbrudner))
+
+**Merged pull requests:**
+
+- Release 3.14.1 [\#151](https://github.com/recurly/recurly-client-node/pull/151) ([douglasmiller](https://github.com/douglasmiller))
+
+## [3.14.0](https://github.com/recurly/recurly-client-node/tree/3.14.0) (2020-09-22)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.13.0...3.14.0)
 
 **Implemented enhancements:**
 
