@@ -8082,3 +8082,99 @@ export declare class Client {
   getExportFiles(exportDate: string): Promise<ExportFiles>;
 
 }
+
+export interface ApiError {
+  constructor: (message: string, type: string, attributes: any) => void;
+  getResponse: () => Response;
+
+  /**
+   * @private
+   */
+  _setResponse: (response: Response) => void;
+}
+
+export interface ResponseError extends ApiError { }
+export interface ServerError extends ResponseError { }
+export interface InternalServerError extends ServerError { }
+export interface BadGatewayError extends ServerError { }
+export interface ServiceUnavailableError extends ServerError { }
+export interface TimeoutError extends ServerError { }
+export interface RedirectionError extends ResponseError { }
+export interface NotModifiedError extends ResponseError { }
+export interface ClientError extends ApiError { }
+export interface BadRequestError extends ClientError { }
+export interface InvalidContentTypeError extends BadRequestError { }
+export interface UnauthorizedError extends ClientError { }
+export interface PaymentRequiredError extends ClientError { }
+export interface ForbiddenError extends ClientError { }
+export interface InvalidApiKeyError extends ForbiddenError { }
+export interface InvalidPermissionsError extends ForbiddenError { }
+export interface NotFoundError extends ClientError { }
+export interface NotAcceptableError extends ClientError { }
+export interface UnknownApiVersionError extends NotAcceptableError { }
+export interface UnavailableInApiVersionError extends NotAcceptableError { }
+export interface InvalidApiVersionError extends NotAcceptableError { }
+export interface PreconditionFailedError extends ClientError { }
+export interface UnprocessableEntityError extends ClientError { }
+export interface ValidationError extends UnprocessableEntityError { }
+export interface MissingFeatureError extends UnprocessableEntityError { }
+export interface TransactionError extends UnprocessableEntityError { }
+export interface SimultaneousRequestError extends UnprocessableEntityError { }
+export interface ImmutableSubscriptionError extends UnprocessableEntityError { }
+export interface InvalidTokenError extends UnprocessableEntityError { }
+export interface TooManyRequestsError extends ClientError { }
+export interface RateLimitedError extends TooManyRequestsError { }
+
+type ErrorMap = {
+  500: InternalServerError,
+  502: BadGatewayError,
+  503: ServiceUnavailableError,
+  504: TimeoutError,
+  304: NotModifiedError,
+  400: BadRequestError,
+  401: UnauthorizedError,
+  402: PaymentRequiredError,
+  403: ForbiddenError,
+  404: NotFoundError,
+  406: NotAcceptableError,
+  412: PreconditionFailedError,
+  422: UnprocessableEntityError,
+  429: TooManyRequestsError
+}
+
+interface Errors {
+  ERROR_MAP: ErrorMap;
+  ResponseError: ResponseError;
+  ServerError: ServerError;
+  InternalServerError: InternalServerError;
+  BadGatewayError: BadGatewayError;
+  ServiceUnavailableError: ServiceUnavailableError;
+  TimeoutError: TimeoutError;
+  RedirectionError: RedirectionError;
+  NotModifiedError: NotModifiedError;
+  ClientError: ClientError;
+  BadRequestError: BadRequestError;
+  InvalidContentTypeError: InvalidContentTypeError;
+  UnauthorizedError: UnauthorizedError;
+  PaymentRequiredError: PaymentRequiredError;
+  ForbiddenError: ForbiddenError;
+  InvalidApiKeyError: InvalidApiKeyError;
+  InvalidPermissionsError: InvalidPermissionsError;
+  NotFoundError: NotFoundError;
+  NotAcceptableError: NotAcceptableError;
+  UnknownApiVersionError: UnknownApiVersionError;
+  UnavailableInApiVersionError: UnavailableInApiVersionError;
+  InvalidApiVersionError: InvalidApiVersionError;
+  PreconditionFailedError: PreconditionFailedError;
+  UnprocessableEntityError: UnprocessableEntityError;
+  ValidationError: ValidationError;
+  MissingFeatureError: MissingFeatureError;
+  TransactionError: TransactionError;
+  SimultaneousRequestError: SimultaneousRequestError;
+  ImmutableSubscriptionError: ImmutableSubscriptionError;
+  InvalidTokenError: InvalidTokenError;
+  TooManyRequestsError: TooManyRequestsError;
+  RateLimitedError: RateLimitedError;
+}
+
+export const errors: Errors
