@@ -8115,3 +8115,99 @@ export declare class Client {
   getExportFiles(exportDate: string): Promise<ExportFiles>;
 
 }
+
+export class ApiError {
+  constructor (message: string, type: string, attributes: any);
+  getResponse: () => Response;
+
+  /**
+   * @private
+   */
+  _setResponse: (response: Response) => void;
+}
+
+export class ResponseError extends ApiError { }
+export class ServerError extends ResponseError { }
+export class InternalServerError extends ServerError { }
+export class BadGatewayError extends ServerError { }
+export class ServiceUnavailableError extends ServerError { }
+export class TimeoutError extends ServerError { }
+export class RedirectionError extends ResponseError { }
+export class NotModifiedError extends ResponseError { }
+export class ClientError extends ApiError { }
+export class BadRequestError extends ClientError { }
+export class InvalidContentTypeError extends BadRequestError { }
+export class UnauthorizedError extends ClientError { }
+export class PaymentRequiredError extends ClientError { }
+export class ForbiddenError extends ClientError { }
+export class InvalidApiKeyError extends ForbiddenError { }
+export class InvalidPermissionsError extends ForbiddenError { }
+export class NotFoundError extends ClientError { }
+export class NotAcceptableError extends ClientError { }
+export class UnknownApiVersionError extends NotAcceptableError { }
+export class UnavailableInApiVersionError extends NotAcceptableError { }
+export class InvalidApiVersionError extends NotAcceptableError { }
+export class PreconditionFailedError extends ClientError { }
+export class UnprocessableEntityError extends ClientError { }
+export class ValidationError extends UnprocessableEntityError { }
+export class MissingFeatureError extends UnprocessableEntityError { }
+export class TransactionError extends UnprocessableEntityError { }
+export class SimultaneousRequestError extends UnprocessableEntityError { }
+export class ImmutableSubscriptionError extends UnprocessableEntityError { }
+export class InvalidTokenError extends UnprocessableEntityError { }
+export class TooManyRequestsError extends ClientError { }
+export class RateLimitedError extends TooManyRequestsError { }
+
+export interface ErrorMap {
+  500: InternalServerError;
+  502: BadGatewayError;
+  503: ServiceUnavailableError;
+  504: TimeoutError;
+  304: NotModifiedError;
+  400: BadRequestError;
+  401: UnauthorizedError;
+  402: PaymentRequiredError;
+  403: ForbiddenError;
+  404: NotFoundError;
+  406: NotAcceptableError;
+  412: PreconditionFailedError;
+  422: UnprocessableEntityError;
+  429: TooManyRequestsError;
+}
+
+export interface Errors {
+  ERROR_MAP: ErrorMap;
+  ResponseError: ResponseError;
+  ServerError: ServerError;
+  InternalServerError: InternalServerError;
+  BadGatewayError: BadGatewayError;
+  ServiceUnavailableError: ServiceUnavailableError;
+  TimeoutError: TimeoutError;
+  RedirectionError: RedirectionError;
+  NotModifiedError: NotModifiedError;
+  ClientError: ClientError;
+  BadRequestError: BadRequestError;
+  InvalidContentTypeError: InvalidContentTypeError;
+  UnauthorizedError: UnauthorizedError;
+  PaymentRequiredError: PaymentRequiredError;
+  ForbiddenError: ForbiddenError;
+  InvalidApiKeyError: InvalidApiKeyError;
+  InvalidPermissionsError: InvalidPermissionsError;
+  NotFoundError: NotFoundError;
+  NotAcceptableError: NotAcceptableError;
+  UnknownApiVersionError: UnknownApiVersionError;
+  UnavailableInApiVersionError: UnavailableInApiVersionError;
+  InvalidApiVersionError: InvalidApiVersionError;
+  PreconditionFailedError: PreconditionFailedError;
+  UnprocessableEntityError: UnprocessableEntityError;
+  ValidationError: ValidationError;
+  MissingFeatureError: MissingFeatureError;
+  TransactionError: TransactionError;
+  SimultaneousRequestError: SimultaneousRequestError;
+  ImmutableSubscriptionError: ImmutableSubscriptionError;
+  InvalidTokenError: InvalidTokenError;
+  TooManyRequestsError: TooManyRequestsError;
+  RateLimitedError: RateLimitedError;
+}
+
+export const errors: Errors
