@@ -1,8 +1,21 @@
 # Changelog
 
-## [3.14.1](https://github.com/recurly/recurly-client-node/tree/HEAD)
+## [3.15.0](https://github.com/recurly/recurly-client-node/tree/HEAD)
 
-[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.14.0...HEAD)
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.14.1...HEAD)
+
+**Implemented enhancements:**
+
+- Mon Oct 19 20:40:44 UTC 2020 Upgrade API version v2019-10-10 [\#154](https://github.com/recurly/recurly-client-node/pull/154) ([douglasmiller](https://github.com/douglasmiller))
+
+**Merged pull requests:**
+
+- Release 3.15.0 [\#155](https://github.com/recurly/recurly-client-node/pull/155) ([douglasmiller](https://github.com/douglasmiller))
+- Adds errors types [\#153](https://github.com/recurly/recurly-client-node/pull/153) ([dbrudner](https://github.com/dbrudner))
+
+## [3.14.1](https://github.com/recurly/recurly-client-node/tree/3.14.1) (2020-10-08)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.14.0...3.14.1)
 
 **Fixed bugs:**
 
