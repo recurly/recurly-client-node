@@ -8083,8 +8083,8 @@ export declare class Client {
 
 }
 
-export interface ApiError {
-  constructor: (message: string, type: string, attributes: any) => void;
+export class ApiError {
+  constructor (message: string, type: string, attributes: any);
   getResponse: () => Response;
 
   /**
@@ -8093,56 +8093,56 @@ export interface ApiError {
   _setResponse: (response: Response) => void;
 }
 
-export interface ResponseError extends ApiError { }
-export interface ServerError extends ResponseError { }
-export interface InternalServerError extends ServerError { }
-export interface BadGatewayError extends ServerError { }
-export interface ServiceUnavailableError extends ServerError { }
-export interface TimeoutError extends ServerError { }
-export interface RedirectionError extends ResponseError { }
-export interface NotModifiedError extends ResponseError { }
-export interface ClientError extends ApiError { }
-export interface BadRequestError extends ClientError { }
-export interface InvalidContentTypeError extends BadRequestError { }
-export interface UnauthorizedError extends ClientError { }
-export interface PaymentRequiredError extends ClientError { }
-export interface ForbiddenError extends ClientError { }
-export interface InvalidApiKeyError extends ForbiddenError { }
-export interface InvalidPermissionsError extends ForbiddenError { }
-export interface NotFoundError extends ClientError { }
-export interface NotAcceptableError extends ClientError { }
-export interface UnknownApiVersionError extends NotAcceptableError { }
-export interface UnavailableInApiVersionError extends NotAcceptableError { }
-export interface InvalidApiVersionError extends NotAcceptableError { }
-export interface PreconditionFailedError extends ClientError { }
-export interface UnprocessableEntityError extends ClientError { }
-export interface ValidationError extends UnprocessableEntityError { }
-export interface MissingFeatureError extends UnprocessableEntityError { }
-export interface TransactionError extends UnprocessableEntityError { }
-export interface SimultaneousRequestError extends UnprocessableEntityError { }
-export interface ImmutableSubscriptionError extends UnprocessableEntityError { }
-export interface InvalidTokenError extends UnprocessableEntityError { }
-export interface TooManyRequestsError extends ClientError { }
-export interface RateLimitedError extends TooManyRequestsError { }
+export class ResponseError extends ApiError { }
+export class ServerError extends ResponseError { }
+export class InternalServerError extends ServerError { }
+export class BadGatewayError extends ServerError { }
+export class ServiceUnavailableError extends ServerError { }
+export class TimeoutError extends ServerError { }
+export class RedirectionError extends ResponseError { }
+export class NotModifiedError extends ResponseError { }
+export class ClientError extends ApiError { }
+export class BadRequestError extends ClientError { }
+export class InvalidContentTypeError extends BadRequestError { }
+export class UnauthorizedError extends ClientError { }
+export class PaymentRequiredError extends ClientError { }
+export class ForbiddenError extends ClientError { }
+export class InvalidApiKeyError extends ForbiddenError { }
+export class InvalidPermissionsError extends ForbiddenError { }
+export class NotFoundError extends ClientError { }
+export class NotAcceptableError extends ClientError { }
+export class UnknownApiVersionError extends NotAcceptableError { }
+export class UnavailableInApiVersionError extends NotAcceptableError { }
+export class InvalidApiVersionError extends NotAcceptableError { }
+export class PreconditionFailedError extends ClientError { }
+export class UnprocessableEntityError extends ClientError { }
+export class ValidationError extends UnprocessableEntityError { }
+export class MissingFeatureError extends UnprocessableEntityError { }
+export class TransactionError extends UnprocessableEntityError { }
+export class SimultaneousRequestError extends UnprocessableEntityError { }
+export class ImmutableSubscriptionError extends UnprocessableEntityError { }
+export class InvalidTokenError extends UnprocessableEntityError { }
+export class TooManyRequestsError extends ClientError { }
+export class RateLimitedError extends TooManyRequestsError { }
 
-type ErrorMap = {
-  500: InternalServerError,
-  502: BadGatewayError,
-  503: ServiceUnavailableError,
-  504: TimeoutError,
-  304: NotModifiedError,
-  400: BadRequestError,
-  401: UnauthorizedError,
-  402: PaymentRequiredError,
-  403: ForbiddenError,
-  404: NotFoundError,
-  406: NotAcceptableError,
-  412: PreconditionFailedError,
-  422: UnprocessableEntityError,
-  429: TooManyRequestsError
+export interface ErrorMap {
+  500: InternalServerError;
+  502: BadGatewayError;
+  503: ServiceUnavailableError;
+  504: TimeoutError;
+  304: NotModifiedError;
+  400: BadRequestError;
+  401: UnauthorizedError;
+  402: PaymentRequiredError;
+  403: ForbiddenError;
+  404: NotFoundError;
+  406: NotAcceptableError;
+  412: PreconditionFailedError;
+  422: UnprocessableEntityError;
+  429: TooManyRequestsError;
 }
 
-interface Errors {
+export interface Errors {
   ERROR_MAP: ErrorMap;
   ResponseError: ResponseError;
   ServerError: ServerError;
