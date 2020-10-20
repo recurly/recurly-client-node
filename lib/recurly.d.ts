@@ -5916,6 +5916,17 @@ export declare class Client {
    */
   deactivateCoupon(couponId: string): Promise<Coupon>;
   /**
+   * Restore an inactive coupon
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/restore_coupon
+   *
+   * 
+   * @param couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
+   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {CouponUpdate}
+   * @return {Promise<Coupon>} The restored coupon.
+   */
+  restoreCoupon(couponId: string, body: CouponUpdate): Promise<Coupon>;
+  /**
    * List unique coupon codes associated with a bulk coupon
    *
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_unique_coupon_codes
@@ -8066,6 +8077,17 @@ export declare class Client {
    *
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_export_dates
    *
+   * @example
+   * try {
+   *   const export_dates = await client.getExportDates()
+   *   export_dates.dates.forEach(date => {
+   *     console.log(`Exports are available for: ${date}`)
+   *   })
+   * } catch (err) {
+   *   if (err instanceof recurly.ApiError) {
+   *     console.log('Unexpected error', err)
+   *   }
+   * }
    * 
    * @return {Promise<ExportDates>} Returns a list of dates.
    */
@@ -8075,6 +8097,17 @@ export declare class Client {
    *
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_export_files
    *
+   * @example
+   * try {
+   *   const export_files = await client.getExportFiles(export_date)
+   *   export_files.files.forEach(file => {
+   *     console.log(`Export file download URL: ${file.href}`)
+   *   })
+   * } catch (err) {
+   *   if (err instanceof recurly.ApiError) {
+   *     console.log('Unexpected error', err)
+   *   }
+   * }
    * 
    * @param exportDate - Date for which to get a list of available automated export files. Date must be in YYYY-MM-DD format.
    * @return {Promise<ExportFiles>} Returns a list of export files to download.
