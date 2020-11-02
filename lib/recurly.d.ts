@@ -5108,7 +5108,7 @@ export declare class Client {
   /**
    * Get the list of billing information associated with an account
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_billing_infos
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_billing_infos
    *
    * 
    * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
@@ -5137,7 +5137,7 @@ export declare class Client {
    *   
    * @return {Pager<BillingInfo>} A list of the the billing information for an account's
    */
-  getBillingInfos(accountId: string, params?: object): Pager<BillingInfo>;
+  listBillingInfos(accountId: string, params?: object): Pager<BillingInfo>;
   /**
    * Set an account's billing information when the wallet feature is enabled
    *
@@ -5175,14 +5175,14 @@ export declare class Client {
   /**
    * Remove an account's billing information
    *
-   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/remove_one_billing_info
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/remove_a_billing_info
    *
    * 
    * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param billingInfoId - Billing Info ID.
    * @return {Promise<Empty>} Billing information deleted
    */
-  removeOneBillingInfo(accountId: string, billingInfoId: string): Promise<Empty>;
+  removeABillingInfo(accountId: string, billingInfoId: string): Promise<Empty>;
   /**
    * Show the coupon redemptions for an account
    *
