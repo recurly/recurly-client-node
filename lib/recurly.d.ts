@@ -2649,7 +2649,7 @@ export declare class Pager<T> {
   count(): number;
   first(): T;
   each(): AsyncIterable<T>;
-  eachPage(): AsyncIterable<T>;
+  eachPage(): AsyncIterable<T[]>;
 }
 
 export interface AccountCreate {
