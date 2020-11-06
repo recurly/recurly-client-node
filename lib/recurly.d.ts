@@ -8235,12 +8235,12 @@ export declare class Client {
 
 }
 
-declare namespace errors {
-  export class ApiError extends Error {
-    constructor (message: string, type: string, attributes: any);
-    getResponse: () => Response;
-  }
+export class ApiError extends Error {
+  constructor (message: string, type: string, attributes: any);
+  getResponse: () => Response;
+}
 
+declare namespace errors {
   export class ResponseError extends ApiError { }
   export class ServerError extends ResponseError { }
   export class InternalServerError extends ServerError { }
