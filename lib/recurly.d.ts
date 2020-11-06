@@ -2669,7 +2669,7 @@ export declare class Pager<T> {
   count(): number;
   first(): T;
   each(): AsyncIterable<T>;
-  eachPage(): AsyncIterable<T>;
+  eachPage(): AsyncIterable<T[]>;
 }
 
 export interface AccountCreate {
@@ -4686,8 +4686,8 @@ export declare class Client {
    *   console.log(site.subdomain)
    * }
    * 
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -4699,16 +4699,16 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.state - Filter by state.
+   * @param {string} options.state - Filter by state.
    * @return {Pager<Site>} A list of sites.
    */
-  listSites(params?: object): Pager<Site>;
+  listSites(options?: object): Pager<Site>;
   /**
    * Fetch a site
    *
@@ -4730,7 +4730,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param siteId - Site ID or subdomain. For ID no prefix is used e.g. `e28zov4fw0v2`. For subdomain use prefix `subdomain-`, e.g. `subdomain-recurly`.
+   * @param {string} siteId - Site ID or subdomain. For ID no prefix is used e.g. `e28zov4fw0v2`. For subdomain use prefix `subdomain-`, e.g. `subdomain-recurly`.
    * @return {Promise<Site>} A site.
    */
   getSite(siteId: string): Promise<Site>;
@@ -4746,8 +4746,8 @@ export declare class Client {
    *   console.log(account.code)
    * }
    * 
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -4759,26 +4759,26 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.email - Filter for accounts with this exact email address. A blank value will return accounts with both `null` and `""` email addresses. Note that multiple accounts can share one email address.
-   * @param params.subscriber - Filter for accounts with or without a subscription in the `active`,
+   * @param {string} options.email - Filter for accounts with this exact email address. A blank value will return accounts with both `null` and `""` email addresses. Note that multiple accounts can share one email address.
+   * @param {boolean} options.subscriber - Filter for accounts with or without a subscription in the `active`,
    *   `canceled`, or `future` state.
    *   
-   * @param params.pastDue - Filter for accounts with an invoice in the `past_due` state.
+   * @param {string} options.pastDue - Filter for accounts with an invoice in the `past_due` state.
    * @return {Pager<Account>} A list of the site's accounts.
    */
-  listAccounts(params?: object): Pager<Account>;
+  listAccounts(options?: object): Pager<Account>;
   /**
    * Create an account
    *
@@ -4812,7 +4812,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {AccountCreate}
+   * @param {AccountCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {AccountCreate}
    * @return {Promise<Account>} An account.
    */
   createAccount(body: AccountCreate): Promise<Account>;
@@ -4837,7 +4837,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @return {Promise<Account>} An account.
    */
   getAccount(accountId: string): Promise<Account>;
@@ -4866,8 +4866,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {AccountUpdate}
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {AccountUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {AccountUpdate}
    * @return {Promise<Account>} An account.
    */
   updateAccount(accountId: string, body: AccountUpdate): Promise<Account>;
@@ -4891,7 +4891,7 @@ export declare class Client {
    *   throw err
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @return {Promise<Account>} An account.
    */
   deactivateAccount(accountId: string): Promise<Account>;
@@ -4916,7 +4916,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @return {Promise<AccountAcquisition>} An account's acquisition data.
    */
   getAccountAcquisition(accountId: string): Promise<AccountAcquisition>;
@@ -4946,8 +4946,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {AccountAcquisitionUpdatable}
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {AccountAcquisitionUpdatable} body - The object representing the JSON request to send to the server. It should conform to the schema of {AccountAcquisitionUpdatable}
    * @return {Promise<AccountAcquisition>} An account's updated acquisition data.
    */
   updateAccountAcquisition(accountId: string, body: AccountAcquisitionUpdatable): Promise<AccountAcquisition>;
@@ -4972,7 +4972,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @return {Promise<Empty>} Acquisition data was succesfully deleted.
    */
   removeAccountAcquisition(accountId: string): Promise<Empty>;
@@ -4996,7 +4996,7 @@ export declare class Client {
    *   throw err
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @return {Promise<Account>} An account.
    */
   reactivateAccount(accountId: string): Promise<Account>;
@@ -5021,7 +5021,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @return {Promise<AccountBalance>} An account's balance.
    */
   getAccountBalance(accountId: string): Promise<AccountBalance>;
@@ -5046,7 +5046,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @return {Promise<BillingInfo>} An account's billing information.
    */
   getBillingInfo(accountId: string): Promise<BillingInfo>;
@@ -5075,8 +5075,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {BillingInfoCreate}
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {BillingInfoCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {BillingInfoCreate}
    * @return {Promise<BillingInfo>} Updated billing information.
    */
   updateBillingInfo(accountId: string, body: BillingInfoCreate): Promise<BillingInfo>;
@@ -5101,7 +5101,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @return {Promise<Empty>} Billing information deleted
    */
   removeBillingInfo(accountId: string): Promise<Empty>;
@@ -5195,9 +5195,9 @@ export declare class Client {
    *   console.log(redemption.id)
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -5209,19 +5209,19 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<CouponRedemption>} A list of the the coupon redemptions on an account.
    */
-  listAccountCouponRedemptions(accountId: string, params?: object): Pager<CouponRedemption>;
+  listAccountCouponRedemptions(accountId: string, options?: object): Pager<CouponRedemption>;
   /**
    * Show the coupon redemption that is active on an account
    *
@@ -5243,7 +5243,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @return {Promise<CouponRedemption>} An active coupon redemption on an account.
    */
   getActiveCouponRedemption(accountId: string): Promise<CouponRedemption>;
@@ -5253,8 +5253,8 @@ export declare class Client {
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_coupon_redemption
    *
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {CouponRedemptionCreate}
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {CouponRedemptionCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {CouponRedemptionCreate}
    * @return {Promise<CouponRedemption>} Returns the new coupon redemption.
    */
   createCouponRedemption(accountId: string, body: CouponRedemptionCreate): Promise<CouponRedemption>;
@@ -5279,7 +5279,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @return {Promise<CouponRedemption>} Coupon redemption deleted.
    */
   removeCouponRedemption(accountId: string): Promise<CouponRedemption>;
@@ -5295,23 +5295,23 @@ export declare class Client {
    *   console.log(payment.uuid)
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<CreditPayment>} A list of the account's credit payments.
    */
-  listAccountCreditPayments(accountId: string, params?: object): Pager<CreditPayment>;
+  listAccountCreditPayments(accountId: string, options?: object): Pager<CreditPayment>;
   /**
    * List an account's invoices
    *
@@ -5324,9 +5324,9 @@ export declare class Client {
    *   console.log(invoice.number)
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -5338,19 +5338,19 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.type - Filter by type when:
+   * @param {string} options.type - Filter by type when:
    *   - `type=charge`, only charge invoices will be returned.
    *   - `type=credit`, only credit invoices will be returned.
    *   - `type=non-legacy`, only charge and credit invoices will be returned.
@@ -5358,7 +5358,7 @@ export declare class Client {
    *   
    * @return {Pager<Invoice>} A list of the account's invoices.
    */
-  listAccountInvoices(accountId: string, params?: object): Pager<Invoice>;
+  listAccountInvoices(accountId: string, options?: object): Pager<Invoice>;
   /**
    * Create an invoice for pending line items
    *
@@ -5386,8 +5386,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceCreate}
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {InvoiceCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceCreate}
    * @return {Promise<InvoiceCollection>} Returns the new invoices.
    */
   createInvoice(accountId: string, body: InvoiceCreate): Promise<InvoiceCollection>;
@@ -5418,8 +5418,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceCreate}
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {InvoiceCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceCreate}
    * @return {Promise<InvoiceCollection>} Returns the invoice previews.
    */
   previewInvoice(accountId: string, body: InvoiceCreate): Promise<InvoiceCollection>;
@@ -5435,9 +5435,9 @@ export declare class Client {
    *   console.log(lineItem.id)
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -5449,24 +5449,24 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.original - Filter by original field.
-   * @param params.state - Filter by state field.
-   * @param params.type - Filter by type field.
+   * @param {string} options.original - Filter by original field.
+   * @param {string} options.state - Filter by state field.
+   * @param {string} options.type - Filter by type field.
    * @return {Pager<LineItem>} A list of the account's line items.
    */
-  listAccountLineItems(accountId: string, params?: object): Pager<LineItem>;
+  listAccountLineItems(accountId: string, options?: object): Pager<LineItem>;
   /**
    * Create a new line item for the account
    *
@@ -5493,8 +5493,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {LineItemCreate}
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {LineItemCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {LineItemCreate}
    * @return {Promise<LineItem>} Returns the new line item.
    */
   createLineItem(accountId: string, body: LineItemCreate): Promise<LineItem>;
@@ -5510,9 +5510,9 @@ export declare class Client {
    *   console.log(note.message)
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -5526,7 +5526,7 @@ export declare class Client {
    *   
    * @return {Pager<AccountNote>} A list of an account's notes.
    */
-  listAccountNotes(accountId: string, params?: object): Pager<AccountNote>;
+  listAccountNotes(accountId: string, options?: object): Pager<AccountNote>;
   /**
    * Fetch an account note
    *
@@ -5549,8 +5549,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param accountNoteId - Account Note ID.
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {string} accountNoteId - Account Note ID.
    * @return {Promise<AccountNote>} An account note.
    */
   getAccountNote(accountId: string, accountNoteId: string): Promise<AccountNote>;
@@ -5566,9 +5566,9 @@ export declare class Client {
    *   console.log(address.street1)
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -5580,21 +5580,21 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<ShippingAddress>} A list of an account's shipping addresses.
    */
-  listShippingAddresses(accountId: string, params?: object): Pager<ShippingAddress>;
+  listShippingAddresses(accountId: string, options?: object): Pager<ShippingAddress>;
   /**
    * Create a new shipping address for the account
    *
@@ -5625,8 +5625,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {ShippingAddressCreate}
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {ShippingAddressCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {ShippingAddressCreate}
    * @return {Promise<ShippingAddress>} Returns the new shipping address.
    */
   createShippingAddress(accountId: string, body: ShippingAddressCreate): Promise<ShippingAddress>;
@@ -5651,8 +5651,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param shippingAddressId - Shipping Address ID.
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {string} shippingAddressId - Shipping Address ID.
    * @return {Promise<ShippingAddress>} A shipping address.
    */
   getShippingAddress(accountId: string, shippingAddressId: string): Promise<ShippingAddress>;
@@ -5681,9 +5681,9 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param shippingAddressId - Shipping Address ID.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {ShippingAddressUpdate}
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {string} shippingAddressId - Shipping Address ID.
+   * @param {ShippingAddressUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {ShippingAddressUpdate}
    * @return {Promise<ShippingAddress>} The updated shipping address.
    */
   updateShippingAddress(accountId: string, shippingAddressId: string, body: ShippingAddressUpdate): Promise<ShippingAddress>;
@@ -5708,8 +5708,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param shippingAddressId - Shipping Address ID.
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {string} shippingAddressId - Shipping Address ID.
    * @return {Promise<Empty>} Shipping address deleted.
    */
   removeShippingAddress(accountId: string, shippingAddressId: string): Promise<Empty>;
@@ -5725,9 +5725,9 @@ export declare class Client {
    *   console.log(subscription.uuid)
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -5739,19 +5739,19 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.state - Filter by state.
+   * @param {string} options.state - Filter by state.
    *   
    *   - When `state=active`, `state=canceled`, `state=expired`, or `state=future`, subscriptions with states that match the query and only those subscriptions will be returned.
    *   - When `state=in_trial`, only subscriptions that have a trial_started_at date earlier than now and a trial_ends_at date later than now will be returned.
@@ -5759,7 +5759,7 @@ export declare class Client {
    *   
    * @return {Pager<Subscription>} A list of the account's subscriptions.
    */
-  listAccountSubscriptions(accountId: string, params?: object): Pager<Subscription>;
+  listAccountSubscriptions(accountId: string, options?: object): Pager<Subscription>;
   /**
    * List an account's transactions
    *
@@ -5772,9 +5772,9 @@ export declare class Client {
    *   console.log(transaction.uuid)
    * }
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -5786,32 +5786,32 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.type - Filter by type field. The value `payment` will return both `purchase` and `capture` transactions.
-   * @param params.success - Filter by success field.
+   * @param {string} options.type - Filter by type field. The value `payment` will return both `purchase` and `capture` transactions.
+   * @param {string} options.success - Filter by success field.
    * @return {Pager<Transaction>} A list of the account's transactions.
    */
-  listAccountTransactions(accountId: string, params?: object): Pager<Transaction>;
+  listAccountTransactions(accountId: string, options?: object): Pager<Transaction>;
   /**
    * List an account's child accounts
    *
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_child_accounts
    *
    * 
-   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -5823,26 +5823,26 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.email - Filter for accounts with this exact email address. A blank value will return accounts with both `null` and `""` email addresses. Note that multiple accounts can share one email address.
-   * @param params.subscriber - Filter for accounts with or without a subscription in the `active`,
+   * @param {string} options.email - Filter for accounts with this exact email address. A blank value will return accounts with both `null` and `""` email addresses. Note that multiple accounts can share one email address.
+   * @param {boolean} options.subscriber - Filter for accounts with or without a subscription in the `active`,
    *   `canceled`, or `future` state.
    *   
-   * @param params.pastDue - Filter for accounts with an invoice in the `past_due` state.
+   * @param {string} options.pastDue - Filter for accounts with an invoice in the `past_due` state.
    * @return {Pager<Account>} A list of an account's child accounts.
    */
-  listChildAccounts(accountId: string, params?: object): Pager<Account>;
+  listChildAccounts(accountId: string, options?: object): Pager<Account>;
   /**
    * List a site's account acquisition data
    *
@@ -5855,8 +5855,8 @@ export declare class Client {
    *   console.log(acquisition.id)
    * }
    * 
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -5868,21 +5868,21 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<AccountAcquisition>} A list of the site's account acquisition data.
    */
-  listAccountAcquisition(params?: object): Pager<AccountAcquisition>;
+  listAccountAcquisition(options?: object): Pager<AccountAcquisition>;
   /**
    * List a site's coupons
    *
@@ -5895,8 +5895,8 @@ export declare class Client {
    *   console.log(coupon.code)
    * }
    * 
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -5908,21 +5908,21 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<Coupon>} A list of the site's coupons.
    */
-  listCoupons(params?: object): Pager<Coupon>;
+  listCoupons(options?: object): Pager<Coupon>;
   /**
    * Create a new coupon
    *
@@ -5950,7 +5950,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {CouponCreate}
+   * @param {CouponCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {CouponCreate}
    * @return {Promise<Coupon>} A new coupon.
    */
   createCoupon(body: CouponCreate): Promise<Coupon>;
@@ -5975,7 +5975,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
+   * @param {string} couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
    * @return {Promise<Coupon>} A coupon.
    */
   getCoupon(couponId: string): Promise<Coupon>;
@@ -6003,8 +6003,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {CouponUpdate}
+   * @param {string} couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
+   * @param {CouponUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {CouponUpdate}
    * @return {Promise<Coupon>} The updated coupon.
    */
   updateCoupon(couponId: string, body: CouponUpdate): Promise<Coupon>;
@@ -6029,7 +6029,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
+   * @param {string} couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
    * @return {Promise<Coupon>} The expired Coupon
    */
   deactivateCoupon(couponId: string): Promise<Coupon>;
@@ -6039,8 +6039,8 @@ export declare class Client {
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/restore_coupon
    *
    * 
-   * @param couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {CouponUpdate}
+   * @param {string} couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
+   * @param {CouponUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {CouponUpdate}
    * @return {Promise<Coupon>} The restored coupon.
    */
   restoreCoupon(couponId: string, body: CouponUpdate): Promise<Coupon>;
@@ -6050,9 +6050,9 @@ export declare class Client {
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_unique_coupon_codes
    *
    * 
-   * @param couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {string} couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -6064,21 +6064,21 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<UniqueCouponCode>} A list of unique coupon codes that were generated
    */
-  listUniqueCouponCodes(couponId: string, params?: object): Pager<UniqueCouponCode>;
+  listUniqueCouponCodes(couponId: string, options?: object): Pager<UniqueCouponCode>;
   /**
    * List a site's credit payments
    *
@@ -6091,29 +6091,29 @@ export declare class Client {
    *   console.log(payment.uuid)
    * }
    * 
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<CreditPayment>} A list of the site's credit payments.
    */
-  listCreditPayments(params?: object): Pager<CreditPayment>;
+  listCreditPayments(options?: object): Pager<CreditPayment>;
   /**
    * Fetch a credit payment
    *
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_credit_payment
    *
    * 
-   * @param creditPaymentId - Credit Payment ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param {string} creditPaymentId - Credit Payment ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @return {Promise<CreditPayment>} A credit payment.
    */
   getCreditPayment(creditPaymentId: string): Promise<CreditPayment>;
@@ -6129,8 +6129,8 @@ export declare class Client {
    *   console.log(definition.displayName)
    * }
    * 
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -6142,22 +6142,22 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.relatedType - Filter by related type.
+   * @param {string} options.relatedType - Filter by related type.
    * @return {Pager<CustomFieldDefinition>} A list of the site's custom field definitions.
    */
-  listCustomFieldDefinitions(params?: object): Pager<CustomFieldDefinition>;
+  listCustomFieldDefinitions(options?: object): Pager<CustomFieldDefinition>;
   /**
    * Fetch an custom field definition
    *
@@ -6179,7 +6179,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param customFieldDefinitionId - Custom Field Definition ID
+   * @param {string} customFieldDefinitionId - Custom Field Definition ID
    * @return {Promise<CustomFieldDefinition>} An custom field definition.
    */
   getCustomFieldDefinition(customFieldDefinitionId: string): Promise<CustomFieldDefinition>;
@@ -6195,8 +6195,8 @@ export declare class Client {
    *   console.log(item.code)
    * }
    * 
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -6208,22 +6208,22 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.state - Filter by state.
+   * @param {string} options.state - Filter by state.
    * @return {Pager<Item>} A list of the site's items.
    */
-  listItems(params?: object): Pager<Item>;
+  listItems(options?: object): Pager<Item>;
   /**
    * Create a new item
    *
@@ -6257,7 +6257,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {ItemCreate}
+   * @param {ItemCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {ItemCreate}
    * @return {Promise<Item>} A new item.
    */
   createItem(body: ItemCreate): Promise<Item>;
@@ -6282,7 +6282,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param itemId - Item ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-red`.
+   * @param {string} itemId - Item ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-red`.
    * @return {Promise<Item>} An item.
    */
   getItem(itemId: string): Promise<Item>;
@@ -6311,8 +6311,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param itemId - Item ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-red`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {ItemUpdate}
+   * @param {string} itemId - Item ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-red`.
+   * @param {ItemUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {ItemUpdate}
    * @return {Promise<Item>} The updated item.
    */
   updateItem(itemId: string, body: ItemUpdate): Promise<Item>;
@@ -6336,7 +6336,7 @@ export declare class Client {
    *   throw err
    * }
    * 
-   * @param itemId - Item ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-red`.
+   * @param {string} itemId - Item ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-red`.
    * @return {Promise<Item>} An item.
    */
   deactivateItem(itemId: string): Promise<Item>;
@@ -6360,7 +6360,7 @@ export declare class Client {
    *   throw err
    * }
    * 
-   * @param itemId - Item ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-red`.
+   * @param {string} itemId - Item ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-red`.
    * @return {Promise<Item>} An item.
    */
   reactivateItem(itemId: string): Promise<Item>;
@@ -6370,8 +6370,8 @@ export declare class Client {
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_measured_unit
    *
    * 
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -6383,29 +6383,29 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.state - Filter by state.
+   * @param {string} options.state - Filter by state.
    * @return {Pager<MeasuredUnit>} A list of the site's measured units.
    */
-  listMeasuredUnit(params?: object): Pager<MeasuredUnit>;
+  listMeasuredUnit(options?: object): Pager<MeasuredUnit>;
   /**
    * Create a new measured unit
    *
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_measured_unit
    *
    * 
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {MeasuredUnitCreate}
+   * @param {MeasuredUnitCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {MeasuredUnitCreate}
    * @return {Promise<MeasuredUnit>} A new measured unit.
    */
   createMeasuredUnit(body: MeasuredUnitCreate): Promise<MeasuredUnit>;
@@ -6415,7 +6415,7 @@ export declare class Client {
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_measured_unit
    *
    * 
-   * @param measuredUnitId - Measured unit ID or name. For ID no prefix is used e.g. `e28zov4fw0v2`. For name use prefix `name-`, e.g. `name-Storage`.
+   * @param {string} measuredUnitId - Measured unit ID or name. For ID no prefix is used e.g. `e28zov4fw0v2`. For name use prefix `name-`, e.g. `name-Storage`.
    * @return {Promise<MeasuredUnit>} An item.
    */
   getMeasuredUnit(measuredUnitId: string): Promise<MeasuredUnit>;
@@ -6425,8 +6425,8 @@ export declare class Client {
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/update_measured_unit
    *
    * 
-   * @param measuredUnitId - Measured unit ID or name. For ID no prefix is used e.g. `e28zov4fw0v2`. For name use prefix `name-`, e.g. `name-Storage`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {MeasuredUnitUpdate}
+   * @param {string} measuredUnitId - Measured unit ID or name. For ID no prefix is used e.g. `e28zov4fw0v2`. For name use prefix `name-`, e.g. `name-Storage`.
+   * @param {MeasuredUnitUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {MeasuredUnitUpdate}
    * @return {Promise<MeasuredUnit>} The updated measured_unit.
    */
   updateMeasuredUnit(measuredUnitId: string, body: MeasuredUnitUpdate): Promise<MeasuredUnit>;
@@ -6436,7 +6436,7 @@ export declare class Client {
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/remove_measured_unit
    *
    * 
-   * @param measuredUnitId - Measured unit ID or name. For ID no prefix is used e.g. `e28zov4fw0v2`. For name use prefix `name-`, e.g. `name-Storage`.
+   * @param {string} measuredUnitId - Measured unit ID or name. For ID no prefix is used e.g. `e28zov4fw0v2`. For name use prefix `name-`, e.g. `name-Storage`.
    * @return {Promise<MeasuredUnit>} A measured unit.
    */
   removeMeasuredUnit(measuredUnitId: string): Promise<MeasuredUnit>;
@@ -6452,8 +6452,8 @@ export declare class Client {
    *   console.log(invoice.number)
    * }
    * 
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -6465,19 +6465,19 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.type - Filter by type when:
+   * @param {string} options.type - Filter by type when:
    *   - `type=charge`, only charge invoices will be returned.
    *   - `type=credit`, only credit invoices will be returned.
    *   - `type=non-legacy`, only charge and credit invoices will be returned.
@@ -6485,7 +6485,7 @@ export declare class Client {
    *   
    * @return {Pager<Invoice>} A list of the site's invoices.
    */
-  listInvoices(params?: object): Pager<Invoice>;
+  listInvoices(options?: object): Pager<Invoice>;
   /**
    * Fetch an invoice
    *
@@ -6507,7 +6507,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @return {Promise<Invoice>} An invoice.
    */
   getInvoice(invoiceId: string): Promise<Invoice>;
@@ -6538,8 +6538,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceUpdatable}
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {InvoiceUpdatable} body - The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceUpdatable}
    * @return {Promise<Invoice>} An invoice.
    */
   putInvoice(invoiceId: string, body: InvoiceUpdatable): Promise<Invoice>;
@@ -6572,7 +6572,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @return {Promise<BinaryFile>} An invoice as a PDF.
    */
   getInvoicePdf(invoiceId: string): Promise<BinaryFile>;
@@ -6597,12 +6597,12 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.body - The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceCollect}
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {InvoiceCollect} options.body - The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceCollect}
    * @return {Promise<Invoice>} The updated invoice.
    */
-  collectInvoice(invoiceId: string, params?: object): Promise<Invoice>;
+  collectInvoice(invoiceId: string, options?: object): Promise<Invoice>;
   /**
    * Mark an open invoice as failed
    *
@@ -6624,7 +6624,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @return {Promise<Invoice>} The updated invoice.
    */
   failInvoice(invoiceId: string): Promise<Invoice>;
@@ -6650,7 +6650,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @return {Promise<Invoice>} The updated invoice.
    */
   markInvoiceSuccessful(invoiceId: string): Promise<Invoice>;
@@ -6675,7 +6675,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @return {Promise<Invoice>} The updated invoice.
    */
   reopenInvoice(invoiceId: string): Promise<Invoice>;
@@ -6700,7 +6700,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @return {Promise<Invoice>} The updated invoice.
    */
   voidInvoice(invoiceId: string): Promise<Invoice>;
@@ -6730,8 +6730,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {ExternalTransaction}
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {ExternalTransaction} body - The object representing the JSON request to send to the server. It should conform to the schema of {ExternalTransaction}
    * @return {Promise<Transaction>} The recorded transaction.
    */
   recordExternalTransaction(invoiceId: string, body: ExternalTransaction): Promise<Transaction>;
@@ -6747,9 +6747,9 @@ export declare class Client {
    *   console.log(lineItem.id)
    * }
    * 
-   * @param invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -6761,24 +6761,24 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.original - Filter by original field.
-   * @param params.state - Filter by state field.
-   * @param params.type - Filter by type field.
+   * @param {string} options.original - Filter by original field.
+   * @param {string} options.state - Filter by state field.
+   * @param {string} options.type - Filter by type field.
    * @return {Pager<LineItem>} A list of the invoice's line items.
    */
-  listInvoiceLineItems(invoiceId: string, params?: object): Pager<LineItem>;
+  listInvoiceLineItems(invoiceId: string, options?: object): Pager<LineItem>;
   /**
    * Show the coupon redemptions applied to an invoice
    *
@@ -6791,9 +6791,9 @@ export declare class Client {
    *   console.log(redemption.id)
    * }
    * 
-   * @param invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -6805,19 +6805,19 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<CouponRedemption>} A list of the the coupon redemptions associated with the invoice.
    */
-  listInvoiceCouponRedemptions(invoiceId: string, params?: object): Pager<CouponRedemption>;
+  listInvoiceCouponRedemptions(invoiceId: string, options?: object): Pager<CouponRedemption>;
   /**
    * List an invoice's related credit or charge invoices
    *
@@ -6830,10 +6830,10 @@ export declare class Client {
    *   console.log(invoice.number)
    * }
    * 
-   * @param invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @return {Pager<Invoice>} A list of the credit or charge invoices associated with the invoice.
    */
-  listRelatedInvoices(invoiceId: string, params?: object): Pager<Invoice>;
+  listRelatedInvoices(invoiceId: string, options?: object): Pager<Invoice>;
   /**
    * Refund an invoice
    *
@@ -6862,8 +6862,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceRefund}
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {InvoiceRefund} body - The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceRefund}
    * @return {Promise<Invoice>} Returns the new credit invoice.
    */
   refundInvoice(invoiceId: string, body: InvoiceRefund): Promise<Invoice>;
@@ -6879,8 +6879,8 @@ export declare class Client {
    *   console.log(`Item ${item.id} for ${item.amount}`)
    * }
    * 
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -6892,24 +6892,24 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.original - Filter by original field.
-   * @param params.state - Filter by state field.
-   * @param params.type - Filter by type field.
+   * @param {string} options.original - Filter by original field.
+   * @param {string} options.state - Filter by state field.
+   * @param {string} options.type - Filter by type field.
    * @return {Pager<LineItem>} A list of the site's line items.
    */
-  listLineItems(params?: object): Pager<LineItem>;
+  listLineItems(options?: object): Pager<LineItem>;
   /**
    * Fetch a line item
    *
@@ -6931,7 +6931,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param lineItemId - Line Item ID.
+   * @param {string} lineItemId - Line Item ID.
    * @return {Promise<LineItem>} A line item.
    */
   getLineItem(lineItemId: string): Promise<LineItem>;
@@ -6956,7 +6956,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param lineItemId - Line Item ID.
+   * @param {string} lineItemId - Line Item ID.
    * @return {Promise<Empty>} Line item deleted.
    */
   removeLineItem(lineItemId: string): Promise<Empty>;
@@ -6972,8 +6972,8 @@ export declare class Client {
    *   console.log(plan.code)
    * }
    * 
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -6985,22 +6985,22 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.state - Filter by state.
+   * @param {string} options.state - Filter by state.
    * @return {Pager<Plan>} A list of plans.
    */
-  listPlans(params?: object): Pager<Plan>;
+  listPlans(options?: object): Pager<Plan>;
   /**
    * Create a plan
    *
@@ -7032,7 +7032,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {PlanCreate}
+   * @param {PlanCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {PlanCreate}
    * @return {Promise<Plan>} A plan.
    */
   createPlan(body: PlanCreate): Promise<Plan>;
@@ -7057,7 +7057,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
+   * @param {string} planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
    * @return {Promise<Plan>} A plan.
    */
   getPlan(planId: string): Promise<Plan>;
@@ -7085,8 +7085,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {PlanUpdate}
+   * @param {string} planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
+   * @param {PlanUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {PlanUpdate}
    * @return {Promise<Plan>} A plan.
    */
   updatePlan(planId: string, body: PlanUpdate): Promise<Plan>;
@@ -7111,7 +7111,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
+   * @param {string} planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
    * @return {Promise<Plan>} Plan deleted
    */
   removePlan(planId: string): Promise<Plan>;
@@ -7127,9 +7127,9 @@ export declare class Client {
    *   console.log(addOn.code)
    * }
    * 
-   * @param planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {string} planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -7141,22 +7141,22 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.state - Filter by state.
+   * @param {string} options.state - Filter by state.
    * @return {Pager<AddOn>} A list of add-ons.
    */
-  listPlanAddOns(planId: string, params?: object): Pager<AddOn>;
+  listPlanAddOns(planId: string, options?: object): Pager<AddOn>;
   /**
    * Create an add-on
    *
@@ -7190,8 +7190,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {AddOnCreate}
+   * @param {string} planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
+   * @param {AddOnCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {AddOnCreate}
    * @return {Promise<AddOn>} An add-on.
    */
   createPlanAddOn(planId: string, body: AddOnCreate): Promise<AddOn>;
@@ -7216,8 +7216,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
-   * @param addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
+   * @param {string} planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
+   * @param {string} addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
    * @return {Promise<AddOn>} An add-on.
    */
   getPlanAddOn(planId: string, addOnId: string): Promise<AddOn>;
@@ -7245,9 +7245,9 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
-   * @param addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {AddOnUpdate}
+   * @param {string} planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
+   * @param {string} addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
+   * @param {AddOnUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {AddOnUpdate}
    * @return {Promise<AddOn>} An add-on.
    */
   updatePlanAddOn(planId: string, addOnId: string, body: AddOnUpdate): Promise<AddOn>;
@@ -7272,8 +7272,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
-   * @param addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
+   * @param {string} planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
+   * @param {string} addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
    * @return {Promise<AddOn>} Add-on deleted
    */
   removePlanAddOn(planId: string, addOnId: string): Promise<AddOn>;
@@ -7289,8 +7289,8 @@ export declare class Client {
    *   console.log(addOn.code)
    * }
    * 
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -7302,22 +7302,22 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.state - Filter by state.
+   * @param {string} options.state - Filter by state.
    * @return {Pager<AddOn>} A list of add-ons.
    */
-  listAddOns(params?: object): Pager<AddOn>;
+  listAddOns(options?: object): Pager<AddOn>;
   /**
    * Fetch an add-on
    *
@@ -7339,7 +7339,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
+   * @param {string} addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
    * @return {Promise<AddOn>} An add-on.
    */
   getAddOn(addOnId: string): Promise<AddOn>;
@@ -7355,8 +7355,8 @@ export declare class Client {
    *   console.log(method.code)
    * }
    * 
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -7368,28 +7368,28 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<ShippingMethod>} A list of the site's shipping methods.
    */
-  listShippingMethods(params?: object): Pager<ShippingMethod>;
+  listShippingMethods(options?: object): Pager<ShippingMethod>;
   /**
    * Create a new shipping method
    *
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_shipping_method
    *
    * 
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {ShippingMethodCreate}
+   * @param {ShippingMethodCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {ShippingMethodCreate}
    * @return {Promise<ShippingMethod>} A new shipping method.
    */
   createShippingMethod(body: ShippingMethodCreate): Promise<ShippingMethod>;
@@ -7399,7 +7399,7 @@ export declare class Client {
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_shipping_method
    *
    * 
-   * @param id - Shipping Method ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-usps_2-day`.
+   * @param {string} id - Shipping Method ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-usps_2-day`.
    * @return {Promise<ShippingMethod>} A shipping method.
    */
   getShippingMethod(id: string): Promise<ShippingMethod>;
@@ -7409,8 +7409,8 @@ export declare class Client {
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/update_shipping_method
    *
    * 
-   * @param shippingMethodId - Shipping Method ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-usps_2-day`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {ShippingMethodUpdate}
+   * @param {string} shippingMethodId - Shipping Method ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-usps_2-day`.
+   * @param {ShippingMethodUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {ShippingMethodUpdate}
    * @return {Promise<ShippingMethod>} The updated shipping method.
    */
   updateShippingMethod(shippingMethodId: string, body: ShippingMethodUpdate): Promise<ShippingMethod>;
@@ -7420,7 +7420,7 @@ export declare class Client {
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/deactivate_shipping_method
    *
    * 
-   * @param shippingMethodId - Shipping Method ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-usps_2-day`.
+   * @param {string} shippingMethodId - Shipping Method ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-usps_2-day`.
    * @return {Promise<ShippingMethod>} A shipping method.
    */
   deactivateShippingMethod(shippingMethodId: string): Promise<ShippingMethod>;
@@ -7436,8 +7436,8 @@ export declare class Client {
    *   console.log(subscription.uuid)
    * }
    * 
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -7449,19 +7449,19 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.state - Filter by state.
+   * @param {string} options.state - Filter by state.
    *   
    *   - When `state=active`, `state=canceled`, `state=expired`, or `state=future`, subscriptions with states that match the query and only those subscriptions will be returned.
    *   - When `state=in_trial`, only subscriptions that have a trial_started_at date earlier than now and a trial_ends_at date later than now will be returned.
@@ -7469,7 +7469,7 @@ export declare class Client {
    *   
    * @return {Pager<Subscription>} A list of the site's subscriptions.
    */
-  listSubscriptions(params?: object): Pager<Subscription>;
+  listSubscriptions(options?: object): Pager<Subscription>;
   /**
    * Create a new subscription
    *
@@ -7498,7 +7498,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionCreate}
+   * @param {SubscriptionCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionCreate}
    * @return {Promise<Subscription>} A subscription.
    */
   createSubscription(body: SubscriptionCreate): Promise<Subscription>;
@@ -7523,7 +7523,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @return {Promise<Subscription>} A subscription.
    */
   getSubscription(subscriptionId: string): Promise<Subscription>;
@@ -7553,8 +7553,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionUpdate}
+   * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param {SubscriptionUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionUpdate}
    * @return {Promise<Subscription>} A subscription.
    */
   modifySubscription(subscriptionId: string, body: SubscriptionUpdate): Promise<Subscription>;
@@ -7579,9 +7579,9 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.refund - The type of refund to perform:
+   * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string} options.refund - The type of refund to perform:
    *   
    *   * `full` - Performs a full refund of the last invoice for the current subscription term.
    *   * `partial` - Prorates a refund based on the amount of time remaining in the current bill cycle.
@@ -7593,7 +7593,7 @@ export declare class Client {
    *   
    * @return {Promise<Subscription>} An expired subscription.
    */
-  terminateSubscription(subscriptionId: string, params?: object): Promise<Subscription>;
+  terminateSubscription(subscriptionId: string, options?: object): Promise<Subscription>;
   /**
    * Cancel a subscription
    *
@@ -7615,12 +7615,12 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.body - The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionCancel}
+   * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {SubscriptionCancel} options.body - The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionCancel}
    * @return {Promise<Subscription>} A canceled or failed subscription.
    */
-  cancelSubscription(subscriptionId: string, params?: object): Promise<Subscription>;
+  cancelSubscription(subscriptionId: string, options?: object): Promise<Subscription>;
   /**
    * Reactivate a canceled subscription
    *
@@ -7643,7 +7643,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @return {Promise<Subscription>} An active subscription.
    */
   reactivateSubscription(subscriptionId: string): Promise<Subscription>;
@@ -7671,8 +7671,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionPause}
+   * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param {SubscriptionPause} body - The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionPause}
    * @return {Promise<Subscription>} A subscription.
    */
   pauseSubscription(subscriptionId: string, body: SubscriptionPause): Promise<Subscription>;
@@ -7697,7 +7697,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @return {Promise<Subscription>} A subscription.
    */
   resumeSubscription(subscriptionId: string): Promise<Subscription>;
@@ -7707,7 +7707,7 @@ export declare class Client {
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/convert_trial
    *
    * 
-   * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @return {Promise<Subscription>} A subscription.
    */
   convertTrial(subscriptionId: string): Promise<Subscription>;
@@ -7732,7 +7732,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @return {Promise<SubscriptionChange>} A subscription's pending change.
    */
   getSubscriptionChange(subscriptionId: string): Promise<SubscriptionChange>;
@@ -7762,8 +7762,8 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionChangeCreate}
+   * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param {SubscriptionChangeCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionChangeCreate}
    * @return {Promise<SubscriptionChange>} A subscription change.
    */
   createSubscriptionChange(subscriptionId: string, body: SubscriptionChangeCreate): Promise<SubscriptionChange>;
@@ -7788,7 +7788,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @return {Promise<Empty>} Subscription change was deleted.
    */
   removeSubscriptionChange(subscriptionId: string): Promise<Empty>;
@@ -7798,8 +7798,8 @@ export declare class Client {
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/preview_subscription_change
    *
    * 
-   * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionChangeCreate}
+   * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param {SubscriptionChangeCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionChangeCreate}
    * @return {Promise<SubscriptionChangePreview>} A subscription change.
    */
   previewSubscriptionChange(subscriptionId: string, body: SubscriptionChangeCreate): Promise<SubscriptionChangePreview>;
@@ -7815,9 +7815,9 @@ export declare class Client {
    *   console.log(invoice.number)
    * }
    * 
-   * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -7829,19 +7829,19 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.type - Filter by type when:
+   * @param {string} options.type - Filter by type when:
    *   - `type=charge`, only charge invoices will be returned.
    *   - `type=credit`, only credit invoices will be returned.
    *   - `type=non-legacy`, only charge and credit invoices will be returned.
@@ -7849,7 +7849,7 @@ export declare class Client {
    *   
    * @return {Pager<Invoice>} A list of the subscription's invoices.
    */
-  listSubscriptionInvoices(subscriptionId: string, params?: object): Pager<Invoice>;
+  listSubscriptionInvoices(subscriptionId: string, options?: object): Pager<Invoice>;
   /**
    * List a subscription's line items
    *
@@ -7862,9 +7862,9 @@ export declare class Client {
    *   console.log(lineItem.id)
    * }
    * 
-   * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -7876,24 +7876,24 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.original - Filter by original field.
-   * @param params.state - Filter by state field.
-   * @param params.type - Filter by type field.
+   * @param {string} options.original - Filter by original field.
+   * @param {string} options.state - Filter by state field.
+   * @param {string} options.type - Filter by type field.
    * @return {Pager<LineItem>} A list of the subscription's line items.
    */
-  listSubscriptionLineItems(subscriptionId: string, params?: object): Pager<LineItem>;
+  listSubscriptionLineItems(subscriptionId: string, options?: object): Pager<LineItem>;
   /**
    * Show the coupon redemptions for a subscription
    *
@@ -7906,9 +7906,9 @@ export declare class Client {
    *   console.log(redemption.id)
    * }
    * 
-   * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -7920,29 +7920,29 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
    * @return {Pager<CouponRedemption>} A list of the the coupon redemptions on a subscription.
    */
-  listSubscriptionCouponRedemptions(subscriptionId: string, params?: object): Pager<CouponRedemption>;
+  listSubscriptionCouponRedemptions(subscriptionId: string, options?: object): Pager<CouponRedemption>;
   /**
    * List a subscription add-on's usage records
    *
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_usage
    *
    * 
-   * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
-   * @param addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param {string} addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -7954,31 +7954,31 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `usage_timestamp` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `usage_timestamp` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=usage_timestamp` or `sort=recorded_timestamp`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=usage_timestamp` or `sort=recorded_timestamp`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=usage_timestamp` or `sort=recorded_timestamp`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=usage_timestamp` or `sort=recorded_timestamp`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.billingStatus - Filter by usage record's billing status
+   * @param {string} options.billingStatus - Filter by usage record's billing status
    * @return {Pager<Usage>} A list of the subscription add-on's usage records.
    */
-  listUsage(subscriptionId: string, addOnId: string, params?: object): Pager<Usage>;
+  listUsage(subscriptionId: string, addOnId: string, options?: object): Pager<Usage>;
   /**
    * Log a usage record on this subscription add-on
    *
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_usage
    *
    * 
-   * @param subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
-   * @param addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {UsageCreate}
+   * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param {string} addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
+   * @param {UsageCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {UsageCreate}
    * @return {Promise<Usage>} The created usage record.
    */
   createUsage(subscriptionId: string, addOnId: string, body: UsageCreate): Promise<Usage>;
@@ -7988,7 +7988,7 @@ export declare class Client {
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_usage
    *
    * 
-   * @param usageId - Usage Record ID.
+   * @param {string} usageId - Usage Record ID.
    * @return {Promise<Usage>} The usage record.
    */
   getUsage(usageId: string): Promise<Usage>;
@@ -7998,8 +7998,8 @@ export declare class Client {
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/update_usage
    *
    * 
-   * @param usageId - Usage Record ID.
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {UsageCreate}
+   * @param {string} usageId - Usage Record ID.
+   * @param {UsageCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {UsageCreate}
    * @return {Promise<Usage>} The updated usage record.
    */
   updateUsage(usageId: string, body: UsageCreate): Promise<Usage>;
@@ -8009,7 +8009,7 @@ export declare class Client {
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/remove_usage
    *
    * 
-   * @param usageId - Usage Record ID.
+   * @param {string} usageId - Usage Record ID.
    * @return {Promise<Empty>} Usage was successfully deleted.
    */
   removeUsage(usageId: string): Promise<Empty>;
@@ -8025,8 +8025,8 @@ export declare class Client {
    *   console.log(transaction.uuid)
    * }
    * 
-   * @param {Object} params - The optional url parameters for this request.
-   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {string[]} options.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
    *   **Important notes:**
@@ -8038,23 +8038,23 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
-   * @param params.limit - Limit number of records 1-200.
-   * @param params.order - Sort order.
-   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   * @param {number} options.limit - Limit number of records 1-200.
+   * @param {string} options.order - Sort order.
+   * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
    *   order. In descending order updated records will move behind the cursor and could
    *   prevent some records from being returned.
    *   
-   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
-   * @param params.type - Filter by type field. The value `payment` will return both `purchase` and `capture` transactions.
-   * @param params.success - Filter by success field.
+   * @param {string} options.type - Filter by type field. The value `payment` will return both `purchase` and `capture` transactions.
+   * @param {string} options.success - Filter by success field.
    * @return {Pager<Transaction>} A list of the site's transactions.
    */
-  listTransactions(params?: object): Pager<Transaction>;
+  listTransactions(options?: object): Pager<Transaction>;
   /**
    * Fetch a transaction
    *
@@ -8076,7 +8076,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param transactionId - Transaction ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param {string} transactionId - Transaction ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @return {Promise<Transaction>} A transaction.
    */
   getTransaction(transactionId: string): Promise<Transaction>;
@@ -8086,7 +8086,7 @@ export declare class Client {
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_unique_coupon_code
    *
    * 
-   * @param uniqueCouponCodeId - Unique Coupon Code ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-abc-8dh2-def`.
+   * @param {string} uniqueCouponCodeId - Unique Coupon Code ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-abc-8dh2-def`.
    * @return {Promise<UniqueCouponCode>} A unique coupon code.
    */
   getUniqueCouponCode(uniqueCouponCodeId: string): Promise<UniqueCouponCode>;
@@ -8096,7 +8096,7 @@ export declare class Client {
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/deactivate_unique_coupon_code
    *
    * 
-   * @param uniqueCouponCodeId - Unique Coupon Code ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-abc-8dh2-def`.
+   * @param {string} uniqueCouponCodeId - Unique Coupon Code ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-abc-8dh2-def`.
    * @return {Promise<UniqueCouponCode>} A unique coupon code.
    */
   deactivateUniqueCouponCode(uniqueCouponCodeId: string): Promise<UniqueCouponCode>;
@@ -8106,7 +8106,7 @@ export declare class Client {
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/reactivate_unique_coupon_code
    *
    * 
-   * @param uniqueCouponCodeId - Unique Coupon Code ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-abc-8dh2-def`.
+   * @param {string} uniqueCouponCodeId - Unique Coupon Code ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-abc-8dh2-def`.
    * @return {Promise<UniqueCouponCode>} A unique coupon code.
    */
   reactivateUniqueCouponCode(uniqueCouponCodeId: string): Promise<UniqueCouponCode>;
@@ -8146,7 +8146,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {PurchaseCreate}
+   * @param {PurchaseCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {PurchaseCreate}
    * @return {Promise<InvoiceCollection>} Returns the new invoices
    */
   createPurchase(body: PurchaseCreate): Promise<InvoiceCollection>;
@@ -8186,7 +8186,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {PurchaseCreate}
+   * @param {PurchaseCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {PurchaseCreate}
    * @return {Promise<InvoiceCollection>} Returns preview of the new invoices
    */
   previewPurchase(body: PurchaseCreate): Promise<InvoiceCollection>;
@@ -8227,7 +8227,7 @@ export declare class Client {
    *   }
    * }
    * 
-   * @param exportDate - Date for which to get a list of available automated export files. Date must be in YYYY-MM-DD format.
+   * @param {string} exportDate - Date for which to get a list of available automated export files. Date must be in YYYY-MM-DD format.
    * @return {Promise<ExportFiles>} Returns a list of export files to download.
    */
   getExportFiles(exportDate: string): Promise<ExportFiles>;
