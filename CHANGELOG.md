@@ -1,8 +1,23 @@
 # Changelog
 
-## [3.15.0](https://github.com/recurly/recurly-client-node/tree/HEAD)
+## [3.16.0](https://github.com/recurly/recurly-client-node/tree/HEAD)
 
-[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.14.1...HEAD)
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.15.0...HEAD)
+
+**Implemented enhancements:**
+
+- Latest Changes for 2019-10-10 \(Wallet, Item Coupons\) [\#158](https://github.com/recurly/recurly-client-node/pull/158) ([douglasmiller](https://github.com/douglasmiller))
+
+**Merged pull requests:**
+
+- Release 3.16.0 [\#163](https://github.com/recurly/recurly-client-node/pull/163) ([douglasmiller](https://github.com/douglasmiller))
+- Moving ApiError outside of errors namespace in TS declarations [\#162](https://github.com/recurly/recurly-client-node/pull/162) ([douglasmiller](https://github.com/douglasmiller))
+- Updating typescript declarations [\#160](https://github.com/recurly/recurly-client-node/pull/160) ([douglasmiller](https://github.com/douglasmiller))
+- Correct @param, Pager.eachPage types [\#159](https://github.com/recurly/recurly-client-node/pull/159) ([jguidry-recurly](https://github.com/jguidry-recurly))
+
+## [3.15.0](https://github.com/recurly/recurly-client-node/tree/3.15.0) (2020-10-20)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.14.1...3.15.0)
 
 **Implemented enhancements:**
 
