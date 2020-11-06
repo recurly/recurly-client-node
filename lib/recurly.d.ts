@@ -286,6 +286,10 @@ export interface BillingInfo {
    */
   fraud?: FraudInfo | null;
   /**
+   * The `primary_payment_method` indicator is used to designate the primary billing info on the account. The first billing info created on an account will always become primary. Adding additional billing infos provides the flexibility to mark another billing info as primary, or adding additional non-primary billing infos. This can be accomplished by passing the `primary_payment_method` indicator. When adding billing infos via the billing_info and /accounts endpoints, this value is not permitted, and will return an error if provided.
+   */
+  primaryPaymentMethod?: boolean | null;
+  /**
    * When the billing information was created.
    */
   createdAt?: Date | null;
@@ -646,6 +650,10 @@ export interface Coupon {
    */
   appliesToAllPlans?: boolean | null;
   /**
+   * The coupon is valid for all items if true. If false then `items` will list the applicable items. 
+   */
+  appliesToAllItems?: boolean | null;
+  /**
    * The coupon is valid for one-time, non-plan charges if true.
    */
   appliesToNonPlanCharges?: boolean | null;
@@ -657,6 +665,10 @@ export interface Coupon {
    * A list of plans for which this coupon applies. This will be `null` if `applies_to_all_plans=true`.
    */
   plans?: PlanMini[] | null;
+  /**
+   * A list of items for which this coupon applies. This will be `null` if `applies_to_all_items=true`. 
+   */
+  items?: ItemMini[] | null;
   /**
    * Whether the discount is for all eligible charges on the account, or only a specific subscription.
    */
@@ -725,6 +737,34 @@ export interface PlanMini {
    * This name describes your plan and will appear on the Hosted Payment Page and the subscriber's invoice.
    */
   name?: string | null;
+
+}
+
+export interface ItemMini {
+  /**
+   * Item ID
+   */
+  id?: string | null;
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * Unique code to identify the item.
+   */
+  code?: string | null;
+  /**
+   * The current state of the item.
+   */
+  state?: string | null;
+  /**
+   * This name describes your item and will appear on the invoice when it's purchased on a one time basis.
+   */
+  name?: string | null;
+  /**
+   * Optional, description.
+   */
+  description?: string | null;
 
 }
 
@@ -1029,6 +1069,10 @@ export interface Invoice {
    * Account mini details
    */
   account?: AccountMini | null;
+  /**
+   * The `billing_info_id` is the value that represents a specific billing info for an end customer. When `billing_info_id` is used to assign billing info to the subscription, all future billing events for the subscription will bill to the specified billing info.
+   */
+  billingInfoId?: string | null;
   /**
    * If the invoice is charging or refunding for one or more subscriptions, these are their IDs.
    */
@@ -1611,6 +1655,10 @@ export interface Subscription {
    * Recurring subscriptions paid with ACH will have this attribute set. This timestamp is used for alerting customers to reauthorize in 3 years in accordance with NACHA rules. If a subscription becomes inactive or the billing info is no longer a bank account, this timestamp is cleared.
    */
   bankAccountAuthorizedAt?: Date | null;
+  /**
+   * Billing Info ID.
+   */
+  billingInfoId?: string | null;
 
 }
 
@@ -2390,34 +2438,6 @@ export interface AddOnPricing {
 
 }
 
-export interface ItemMini {
-  /**
-   * Item ID
-   */
-  id?: string | null;
-  /**
-   * Object type
-   */
-  object?: string | null;
-  /**
-   * Unique code to identify the item.
-   */
-  code?: string | null;
-  /**
-   * The current state of the item.
-   */
-  state?: string | null;
-  /**
-   * This name describes your item and will appear on the invoice when it's purchased on a one time basis.
-   */
-  name?: string | null;
-  /**
-   * Optional, description.
-   */
-  description?: string | null;
-
-}
-
 export interface Tier {
   /**
    * Ending quantity
@@ -2911,6 +2931,10 @@ export interface BillingInfoCreate {
    * The bank account type. (ACH only)
    */
   accountType?: string | null;
+  /**
+   * The `primary_payment_method` indicator is used to designate the primary billing info on the account. The first billing info created on an account will always become primary. Adding additional billing infos provides the flexibility to mark another billing info as primary, or adding additional non-primary billing infos. This can be accomplished by passing the `primary_payment_method` indicator. When adding billing infos via the billing_info and /accounts endpoints, this value is not permitted, and will return an error if provided.
+   */
+  primaryPaymentMethod?: boolean | null;
 
 }
 
@@ -3195,9 +3219,17 @@ export interface CouponCreate {
    */
   appliesToAllPlans?: boolean | null;
   /**
+   * To apply coupon to Items in your Catalog, include a list of `item_codes` in the request that the coupon will apply to. Or set value to true to apply to all Items in your Catalog. The following values are not permitted when `applies_to_all_items` is included: `free_trial_amount` and `free_trial_unit`. 
+   */
+  appliesToAllItems?: boolean | null;
+  /**
    * List of plan codes to which this coupon applies. Required if `applies_to_all_plans` is false. Overrides `applies_to_all_plans` when `applies_to_all_plans` is true. 
    */
   planCodes?: string[] | null;
+  /**
+   * List of item codes to which this coupon applies. Sending `item_codes` is only permitted when `applies_to_all_items` is set to false. The following values are not permitted when `item_codes` is included: `free_trial_amount` and `free_trial_unit`. 
+   */
+  itemCodes?: string[] | null;
   /**
    * This field does not apply when the discount_type is `free_trial`. - "single_use" coupons applies to the first invoice only. - "temporal" coupons will apply to invoices for the duration determined by the `temporal_unit` and `temporal_amount` attributes. - "forever" coupons will apply to invoices forever. 
    */
@@ -3503,6 +3535,10 @@ export interface InvoiceCollect {
    * An optional type designation for the payment gateway transaction created by this request. Supports 'moto' value, which is the acronym for mail order and telephone transactions.
    */
   transactionType?: string | null;
+  /**
+   * The `billing_info_id` is the value that represents a specific billing info for an end customer. When `billing_info_id` is used to assign billing info to the subscription, all future billing events for the subscription will bill to the specified billing info.
+   */
+  billingInfoId?: string | null;
 
 }
 
@@ -4233,6 +4269,10 @@ export interface SubscriptionUpdate {
    * Subscription shipping details
    */
   shipping?: SubscriptionShippingUpdate | null;
+  /**
+   * The `billing_info_id` is the value that represents a specific billing info for an end customer. When `billing_info_id` is used to assign billing info to the subscription, all future billing events for the subscription will bill to the specified billing info.
+   */
+  billingInfoId?: string | null;
 
 }
 
@@ -5065,6 +5105,84 @@ export declare class Client {
    * @return {Promise<Empty>} Billing information deleted
    */
   removeBillingInfo(accountId: string): Promise<Empty>;
+  /**
+   * Get the list of billing information associated with an account
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_billing_infos
+   *
+   * 
+   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {Object} params - The optional url parameters for this request.
+   * @param params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
+   *   
+   *   **Important notes:**
+   *   
+   *   * The `ids` parameter cannot be used with any other ordering or filtering
+   *     parameters (`limit`, `order`, `sort`, `begin_time`, `end_time`, etc)
+   *   * Invalid or unknown IDs will be ignored, so you should check that the
+   *     results correspond to your request.
+   *   * Records are returned in an arbitrary order. Since results are all
+   *     returned at once you can sort the records yourself.
+   *   
+   * @param params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   *   order. In descending order updated records will move behind the cursor and could
+   *   prevent some records from being returned.
+   *   
+   * @param params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
+   *   
+   * @param params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
+   *   
+   * @return {Pager<BillingInfo>} A list of the the billing information for an account's
+   */
+  listBillingInfos(accountId: string, params?: object): Pager<BillingInfo>;
+  /**
+   * Set an account's billing information when the wallet feature is enabled
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_billing_info
+   *
+   * 
+   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {BillingInfoCreate}
+   * @return {Promise<BillingInfo>} Updated billing information.
+   */
+  createBillingInfo(accountId: string, body: BillingInfoCreate): Promise<BillingInfo>;
+  /**
+   * Fetch a billing info
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_a_billing_info
+   *
+   * 
+   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param billingInfoId - Billing Info ID.
+   * @return {Promise<BillingInfo>} A billing info.
+   */
+  getABillingInfo(accountId: string, billingInfoId: string): Promise<BillingInfo>;
+  /**
+   * Update an account's billing information
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/update_a_billing_info
+   *
+   * 
+   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param billingInfoId - Billing Info ID.
+   * @param body - The object representing the JSON request to send to the server. It should conform to the schema of {BillingInfoCreate}
+   * @return {Promise<BillingInfo>} Updated billing information.
+   */
+  updateABillingInfo(accountId: string, billingInfoId: string, body: BillingInfoCreate): Promise<BillingInfo>;
+  /**
+   * Remove an account's billing information
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/remove_a_billing_info
+   *
+   * 
+   * @param accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param billingInfoId - Billing Info ID.
+   * @return {Promise<Empty>} Billing information deleted
+   */
+  removeABillingInfo(accountId: string, billingInfoId: string): Promise<Empty>;
   /**
    * Show the coupon redemptions for an account
    *
@@ -8129,6 +8247,7 @@ export class ApiError {
 export class ResponseError extends ApiError { }
 export class ServerError extends ResponseError { }
 export class InternalServerError extends ServerError { }
+export class ServiceNotAvailableError extends InternalServerError { }
 export class BadGatewayError extends ServerError { }
 export class ServiceUnavailableError extends ServerError { }
 export class TimeoutError extends ServerError { }
@@ -8180,6 +8299,7 @@ export interface Errors {
   ResponseError: ResponseError;
   ServerError: ServerError;
   InternalServerError: InternalServerError;
+  ServiceNotAvailableError: ServiceNotAvailableError;
   BadGatewayError: BadGatewayError;
   ServiceUnavailableError: ServiceUnavailableError;
   TimeoutError: TimeoutError;
