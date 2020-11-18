@@ -1520,7 +1520,7 @@ export declare class Subscription {
    */
   shipping?: SubscriptionShipping | null;
   /**
-   * Coupon redemptions
+   * Returns subscription level coupon redemptions that are tied to this subscription.
    */
   couponRedemptions?: CouponRedemptionMini[] | null;
   /**
@@ -5220,6 +5220,7 @@ export declare class Client {
    * @param {Date} options.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
+   * @param {string} options.state - Filter by state.
    * @return {Pager<CouponRedemption>} A list of the the coupon redemptions on an account.
    */
   listAccountCouponRedemptions(accountId: string, options?: object): Pager<CouponRedemption>;
@@ -7592,6 +7593,7 @@ export declare class Client {
    *   
    *   You may also terminate a subscription with no refund and then manually refund specific invoices.
    *   
+   * @param {boolean} options.charge - Applicable only if the subscription has usage based add-ons and unbilled usage logged for the current billing cycle. If true, current billing cycle unbilled usage is billed on the final invoice. If false, Recurly will create a negative usage record for current billing cycle usage that will zero out the final invoice line items.
    * @return {Promise<Subscription>} An expired subscription.
    */
   terminateSubscription(subscriptionId: string, options?: object): Promise<Subscription>;
