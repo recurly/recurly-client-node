@@ -2933,6 +2933,14 @@ export interface BillingInfoCreate {
     */
   accountType?: string | null;
   /**
+    * Tax identifier is required if adding a billing info that is a consumer card in Brazil. This would be the customer's CPF, CPF is a Brazilian tax identifier for all tax paying residents.
+    */
+  taxIdentifier?: string | null;
+  /**
+    * this field and a value of 'cpf' are required if adding a billing info that is an elo or hipercard type in Brazil.
+    */
+  taxIdentifierType?: string | null;
+  /**
     * The `primary_payment_method` indicator is used to designate the primary billing info on the account. The first billing info created on an account will always become primary. Adding additional billing infos provides the flexibility to mark another billing info as primary, or adding additional non-primary billing infos. This can be accomplished by passing the `primary_payment_method` indicator. When adding billing infos via the billing_info and /accounts endpoints, this value is not permitted, and will return an error if provided.
     */
   primaryPaymentMethod?: boolean | null;
@@ -3941,10 +3949,6 @@ export interface PlanUpdate {
     */
   hostedPages?: PlanHostedPages | null;
   /**
-    * Add Ons
-    */
-  addOns?: AddOnCreate[] | null;
-  /**
     * Used to determine whether items can be assigned as add-ons to individual subscriptions. If `true`, items can be assigned as add-ons to individual subscription add-ons. If `false`, only plan add-ons can be used. 
     */
   allowAnyItemOnSubscriptions?: boolean | null;
@@ -4068,7 +4072,7 @@ export interface SubscriptionCreate {
     * You must provide either a `plan_code` or `plan_id`. If both are provided the `plan_id` will be used.
     */
   planId?: string | null;
-  account?: AccountCreate | null;
+  account?: object | null;
   /**
     * Create a shipping address on the account and assign it to the subscription.
     */
@@ -4882,14 +4886,11 @@ export declare class Client {
    *   const account = await client.deactivateAccount(accountId)
    *   console.log('Deleted account: ', account.code)
    * } catch (err) {
-   *   if (err && err.type === 'not-found') {
+   *   if (err instanceof recurly.errors.NotFoundError) {
    *     // If the request was not found, you may want to alert the user or
    *     // just return null
    *     console.log('Resource Not Found')
    *   }
-   *   // If we don't know what to do with the err, we should
-   *   // probably re-raise and let our web framework and logger handle it
-   *   throw err
    * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
@@ -4987,14 +4988,11 @@ export declare class Client {
    *   const account = await client.reactivateAccount(accountId)
    *   console.log('Reactivated account: ', account.code)
    * } catch (err) {
-   *   if (err && err.type === 'not_found') {
+   *   if (err instanceof recurly.errors.NotFoundError) {
    *     // If the request was not found, you may want to alert the user or
    *     // just return null
    *     console.log('Resource Not Found')
    *   }
-   *   // If we don't know what to do with the err, we should
-   *   // probably re-raise and let our web framework and logger handle it
-   *   throw err
    * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
@@ -6040,6 +6038,20 @@ export declare class Client {
    *
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/restore_coupon
    *
+   * @example
+   * try {
+   *   const coupon = await client.restoreCoupon(couponId, {
+   *     name: "New Coupon Name"
+   *   })
+   *   console.log('Restored coupon: ', coupon.code)
+   * } catch (err) {
+   *   if (err instanceof recurly.errors.NotFoundError) {
+   *     // If the request was not found, you may want to alert the user or
+   *     // just return null
+   *     console.log('Resource Not Found')
+   *   }
+   * 
+   * }
    * 
    * @param {string} couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
    * @param {CouponUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {CouponUpdate}
@@ -6328,14 +6340,11 @@ export declare class Client {
    *   const item = await client.deactivateItem(itemId)
    *   console.log('Deleted item: ', item.code)
    * } catch (err) {
-   *   if (err && err.type === 'not-found') {
+   *   if (err instanceof recurly.errors.NotFoundError) {
    *     // If the request was not found, you may want to alert the user or
    *     // just return null
    *     console.log('Resource Not Found')
    *   }
-   *   // If we don't know what to do with the err, we should
-   *   // probably re-raise and let our web framework and logger handle it
-   *   throw err
    * }
    * 
    * @param {string} itemId - Item ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-red`.
@@ -6352,14 +6361,11 @@ export declare class Client {
    *   const item = await client.reactivateItem(itemId)
    *   console.log('Reactivated item: ', item.code)
    * } catch (err) {
-   *   if (err && err.type === 'not_found') {
+   *   if (err instanceof recurly.errors.NotFoundError) {
    *     // If the request was not found, you may want to alert the user or
    *     // just return null
    *     console.log('Resource Not Found')
    *   }
-   *   // If we don't know what to do with the err, we should
-   *   // probably re-raise and let our web framework and logger handle it
-   *   throw err
    * }
    * 
    * @param {string} itemId - Item ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-red`.
