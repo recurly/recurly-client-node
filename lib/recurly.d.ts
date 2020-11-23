@@ -4072,7 +4072,7 @@ export interface SubscriptionCreate {
     * You must provide either a `plan_code` or `plan_id`. If both are provided the `plan_id` will be used.
     */
   planId?: string | null;
-  account?: object | null;
+  account?: AccountCreate | null;
   /**
     * Create a shipping address on the account and assign it to the subscription.
     */
