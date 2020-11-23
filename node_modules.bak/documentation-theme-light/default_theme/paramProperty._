@@ -1,0 +1,18 @@
+<tr>
+  <td class='col-2 strong'><%- property.name %></td>
+  <td class="col-2 quiet">
+    <%= formatType(property.type) %>
+    <% if (property.default) { %>
+      (default <code><%- property.default %></code>)
+    <% } %>
+  </td>
+  <td class='col-8'><%= md(property.description, true) %></td>
+</tr>
+<% if(property.properties && property.properties.length) { %>
+  <% property.properties.forEach(function(childProperty) { %>
+    <%= renderParamProperty({
+      property: childProperty,
+      renderParamProperty: renderParamProperty
+    }) %>
+  <% }) %>
+<% } %>

@@ -1,0 +1,10 @@
+<div class="section-indent">
+  <% members.forEach(function(member) { %>
+    <%= renderSection({
+        section: member,
+        renderSection: renderSection,
+        renderParamProperty: renderParamProperty,
+     	  nested: true
+    }) %>
+  <% }) %>
+</div>
