@@ -1,8 +1,22 @@
 # Changelog
 
-## [3.16.0](https://github.com/recurly/recurly-client-node/tree/HEAD)
+## [3.17.0](https://github.com/recurly/recurly-client-node/tree/HEAD)
 
-[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.15.0...HEAD)
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.16.0...HEAD)
+
+**Implemented enhancements:**
+
+- Latest Changes for 2019-10-10 \(tax\_identifier / tax\_identifier\_type\) [\#166](https://github.com/recurly/recurly-client-node/pull/166) ([douglasmiller](https://github.com/douglasmiller))
+- Latest Changes for 2019-10-10 [\#164](https://github.com/recurly/recurly-client-node/pull/164) ([douglasmiller](https://github.com/douglasmiller))
+
+**Merged pull requests:**
+
+- Release 3.17.0 [\#169](https://github.com/recurly/recurly-client-node/pull/169) ([douglasmiller](https://github.com/douglasmiller))
+- Update getting-started guide with memo about headers [\#165](https://github.com/recurly/recurly-client-node/pull/165) ([joannasese](https://github.com/joannasese))
+
+## [3.16.0](https://github.com/recurly/recurly-client-node/tree/3.16.0) (2020-11-06)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.15.0...3.16.0)
 
 **Implemented enhancements:**
 
