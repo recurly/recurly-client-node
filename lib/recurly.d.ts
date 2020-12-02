@@ -2666,8 +2666,8 @@ export interface Empty {
 }
 
 export declare class Pager<T> {
-  count(): number;
-  first(): T;
+  count(): Promise<number>;
+  first(): Promise<T>;
   each(): AsyncIterable<T>;
   eachPage(): AsyncIterable<T[]>;
 }
