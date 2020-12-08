@@ -4074,6 +4074,10 @@ export interface SubscriptionCreate {
   planId?: string | null;
   account?: AccountCreate | null;
   /**
+    * The `billing_info_id` is the value that represents a specific billing info for an end customer. When `billing_info_id` is used to assign billing info to the subscription, all future billing events for the subscription will bill to the specified billing info.
+    */
+  billingInfoId?: string | null;
+  /**
     * Create a shipping address on the account and assign it to the subscription.
     */
   shipping?: SubscriptionShippingCreate | null;
@@ -4448,6 +4452,10 @@ export interface PurchaseCreate {
     */
   currency?: string | null;
   account?: AccountPurchase | null;
+  /**
+    * The `billing_info_id` is the value that represents a specific billing info for an end customer. When `billing_info_id` is used to assign billing info to the subscription, all future billing events for the subscription will bill to the specified billing info.
+    */
+  billingInfoId?: string | null;
   /**
     * Must be set to manual in order to preview a purchase for an Account that does not have payment information associated with the Billing Info.
     */
