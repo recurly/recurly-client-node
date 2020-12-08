@@ -1,8 +1,24 @@
 # Changelog
 
-## [3.17.0](https://github.com/recurly/recurly-client-node/tree/HEAD)
+## [3.18.0](https://github.com/recurly/recurly-client-node/tree/HEAD)
 
-[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.16.0...HEAD)
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.17.0...HEAD)
+
+**Implemented enhancements:**
+
+- Latest Changes for 2019-10-10 [\#172](https://github.com/recurly/recurly-client-node/pull/172) ([douglasmiller](https://github.com/douglasmiller))
+
+**Fixed bugs:**
+
+- Fix types of count\(\) and first\(\) on Pager\<T\> [\#171](https://github.com/recurly/recurly-client-node/pull/171) ([douglasmiller](https://github.com/douglasmiller))
+
+**Merged pull requests:**
+
+- Release 3.18.0 [\#173](https://github.com/recurly/recurly-client-node/pull/173) ([douglasmiller](https://github.com/douglasmiller))
+
+## [3.17.0](https://github.com/recurly/recurly-client-node/tree/3.17.0) (2020-11-24)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.16.0...3.17.0)
 
 **Implemented enhancements:**
 
