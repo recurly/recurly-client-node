@@ -560,6 +560,10 @@ export declare class CouponRedemption {
    * The Account on which the coupon was applied.
    */
   account?: AccountMini | null;
+  /**
+   * Subscription ID
+   */
+  subscriptionId?: string | null;
   coupon?: Coupon | null;
   /**
    * Coupon Redemption state
@@ -3025,6 +3029,10 @@ export interface CouponRedemptionCreate {
     * 3-letter ISO 4217 currency code.
     */
   currency?: string | null;
+  /**
+    * Subscription ID
+    */
+  subscriptionId?: string | null;
 
 }
 
@@ -5256,7 +5264,7 @@ export declare class Client {
    */
   getActiveCouponRedemption(accountId: string): Promise<CouponRedemption>;
   /**
-   * Generate an active coupon redemption on an account
+   * Generate an active coupon redemption on an account or subscription
    *
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_coupon_redemption
    *
