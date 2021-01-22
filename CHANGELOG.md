@@ -1,8 +1,20 @@
 # Changelog
 
-## [3.18.0](https://github.com/recurly/recurly-client-node/tree/HEAD)
+## [3.19.0](https://github.com/recurly/recurly-client-node/tree/HEAD)
 
-[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.17.0...HEAD)
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.18.0...HEAD)
+
+**Implemented enhancements:**
+
+- Latest Changes for 2019-10-10 [\#178](https://github.com/recurly/recurly-client-node/pull/178) ([douglasmiller](https://github.com/douglasmiller))
+
+**Merged pull requests:**
+
+- Release 3.19.0 [\#179](https://github.com/recurly/recurly-client-node/pull/179) ([douglasmiller](https://github.com/douglasmiller))
+
+## [3.18.0](https://github.com/recurly/recurly-client-node/tree/3.18.0) (2020-12-08)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.17.0...3.18.0)
 
 **Implemented enhancements:**
 
