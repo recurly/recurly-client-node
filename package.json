@@ -15,14 +15,14 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
+    "@types/node": "^12.11.1",
     "acorn": "^6.0.0",
-    "documentation": "^11.0.1",
+    "documentation": "^13.1.1",
     "documentation-theme-light": "^1.1.0",
     "mocha": "^5.2.0",
     "nyc": "^14.1.1",
-    "standard": "^12.0.1",
     "sinon": "^7.5.0",
-    "typescript": "^3.6.4",
-    "@types/node": "^12.11.1"
+    "standard": "^12.0.1",
+    "typescript": "^3.6.4"
   }
 }
