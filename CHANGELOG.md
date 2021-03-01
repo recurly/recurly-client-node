@@ -1,8 +1,93 @@
 # Changelog
 
-## [3.10.0](https://github.com/recurly/recurly-client-node/tree/HEAD)
+## [4.0.0](https://github.com/recurly/recurly-client-node/tree/4.0.0) (2021-03-01)
 
-[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.9.0...HEAD)
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.19.0...4.0.0)
+
+# Major Version Release
+
+The 4.x major version of the client pairs with the `v2021-02-25` API version. This version of the client and the API contain breaking changes that should be considered before upgrading your integration.
+
+## Breaking Changes in the API
+All changes to the core API are documented in the [Developer Portal changelog](https://developers.recurly.com/api/changelog.html#v2021-02-25---current-ga-version)
+
+## Breaking Changes in Client
+
+- Classify unexpected error responses from Recurly API via an HTTP status code mapping provided in `recurly.errors.ERROR_MAP`. Status code `502` now maps to `recurly.errors.BadGatewayError`.  [#136]
+- Replace `recurly.errors.ValidationError` with `recurly.errors. UnprocessableEntityError`.  [#136]
+- Accept `params`, `headers` though an options object for all client operations. [#131] [#135]
+
+    ### 3.x
+    
+    ```javascript
+    const accounts = await client.listAccounts({ limit: 200 })
+    ```
+    
+    ### 4.x
+    
+    ```javascript
+    const accounts = await client.listAccounts({
+      params: { limit: 200 },
+      headers: { 'Accept-Language': 'fr' }
+    })
+    ```
+
+**Implemented enhancements:**
+
+- Updating error mapping based on status code [\#136](https://github.com/recurly/recurly-client-node/pull/136) ([douglasmiller](https://github.com/douglasmiller))
+- Update Pager to accept query parameters as options.params [\#135](https://github.com/recurly/recurly-client-node/pull/135) ([douglasmiller](https://github.com/douglasmiller))
+- Add support to specify custom headers [\#131](https://github.com/recurly/recurly-client-node/pull/131) ([douglasmiller](https://github.com/douglasmiller))
+
+**Merged pull requests:**
+
+- Release 4.0.0 [\#184](https://github.com/recurly/recurly-client-node/pull/184) ([douglasmiller](https://github.com/douglasmiller))
+- Bump lodash from 4.17.15 to 4.17.21 [\#182](https://github.com/recurly/recurly-client-node/pull/182) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Updating changelog script and changelog generator config for 4.x release [\#181](https://github.com/recurly/recurly-client-node/pull/181) ([douglasmiller](https://github.com/douglasmiller))
+- Mon Jul  6 14:52:04 UTC 2020 Upgrade API version v2019-10-10 [\#130](https://github.com/recurly/recurly-client-node/pull/130) ([douglasmiller](https://github.com/douglasmiller))
+
+## [3.19.0](https://github.com/recurly/recurly-client-node/tree/3.19.0) (2021-01-22)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.18.0...3.19.0)
+
+## [3.18.0](https://github.com/recurly/recurly-client-node/tree/3.18.0) (2020-12-08)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.17.0...3.18.0)
+
+## [3.17.0](https://github.com/recurly/recurly-client-node/tree/3.17.0) (2020-11-24)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.16.0...3.17.0)
+
+## [3.16.0](https://github.com/recurly/recurly-client-node/tree/3.16.0) (2020-11-06)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.15.0...3.16.0)
+
+## [3.15.0](https://github.com/recurly/recurly-client-node/tree/3.15.0) (2020-10-20)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.14.1...3.15.0)
+
+## [3.14.1](https://github.com/recurly/recurly-client-node/tree/3.14.1) (2020-10-08)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.14.0...3.14.1)
+
+## [3.14.0](https://github.com/recurly/recurly-client-node/tree/3.14.0) (2020-09-22)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.13.0...3.14.0)
+
+## [3.13.0](https://github.com/recurly/recurly-client-node/tree/3.13.0) (2020-08-31)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.12.0...3.13.0)
+
+## [3.12.0](https://github.com/recurly/recurly-client-node/tree/3.12.0) (2020-08-21)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.11.0...3.12.0)
+
+## [3.11.0](https://github.com/recurly/recurly-client-node/tree/3.11.0) (2020-07-31)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.10.0...3.11.0)
+
+## [3.10.0](https://github.com/recurly/recurly-client-node/tree/3.10.0) (2020-07-01)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.9.0...3.10.0)
 
 **Implemented enhancements:**
 
