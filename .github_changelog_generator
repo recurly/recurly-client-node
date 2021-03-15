@@ -2,6 +2,6 @@ user=recurly
 project=recurly-client-node
 unreleased=false
 since-tag=3.0.0-beta.2
-exclude-labels=question,bug?,duplicate
+exclude-labels=internal,question,bug?,duplicate
 issues-wo-labels=false
 verbose=false
