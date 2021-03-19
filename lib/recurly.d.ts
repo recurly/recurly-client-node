@@ -4697,8 +4697,8 @@ export declare class Client {
    *   console.log(site.subdomain)
    * }
    * 
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -4758,8 +4758,8 @@ export declare class Client {
    *   console.log(account.code)
    * }
    * 
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -5125,8 +5125,8 @@ export declare class Client {
    *
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -5210,8 +5210,8 @@ export declare class Client {
    * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -5303,8 +5303,8 @@ export declare class Client {
    * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {number} options.params.limit - Limit number of records 1-200.
    * @param {string} options.params.order - Sort order.
    * @param {string} options.params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
@@ -5333,8 +5333,8 @@ export declare class Client {
    * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -5445,8 +5445,8 @@ export declare class Client {
    * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -5521,8 +5521,8 @@ export declare class Client {
    * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -5578,8 +5578,8 @@ export declare class Client {
    * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -5738,8 +5738,8 @@ export declare class Client {
    * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -5786,8 +5786,8 @@ export declare class Client {
    * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -5824,8 +5824,8 @@ export declare class Client {
    *
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -5870,8 +5870,8 @@ export declare class Client {
    *   console.log(acquisition.id)
    * }
    * 
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -5911,8 +5911,8 @@ export declare class Client {
    *   console.log(coupon.code)
    * }
    * 
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -6081,8 +6081,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *
    * 
    * @param {string} couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -6122,8 +6122,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   console.log(payment.uuid)
    * }
    * 
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {number} options.params.limit - Limit number of records 1-200.
    * @param {string} options.params.order - Sort order.
    * @param {string} options.params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
@@ -6161,8 +6161,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   console.log(definition.displayName)
    * }
    * 
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -6228,8 +6228,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   console.log(item.code)
    * }
    * 
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -6404,8 +6404,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_measured_unit
    *
    * 
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -6487,8 +6487,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   console.log(invoice.number)
    * }
    * 
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -6634,8 +6634,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * }
    * 
    * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {InvoiceCollect} options.params.body - The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceCollect}
    * @return {Promise<Invoice>} The updated invoice.
    */
@@ -6785,8 +6785,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * }
    * 
    * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -6830,8 +6830,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * }
    * 
    * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -6918,8 +6918,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   console.log(`Item ${item.id} for ${item.amount}`)
    * }
    * 
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -7012,8 +7012,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   console.log(plan.code)
    * }
    * 
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -7169,8 +7169,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * }
    * 
    * @param {string} planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -7331,8 +7331,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   console.log(addOn.code)
    * }
    * 
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -7398,8 +7398,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   console.log(method.code)
    * }
    * 
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -7480,8 +7480,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   console.log(subscription.uuid)
    * }
    * 
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -7625,8 +7625,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * }
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string} options.params.refund - The type of refund to perform:
    *   
    *   * `full` - Performs a full refund of the last invoice for the current subscription term.
@@ -7663,8 +7663,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * }
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {SubscriptionCancel} options.params.body - The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionCancel}
    * @return {Promise<Subscription>} A canceled or failed subscription.
    */
@@ -7864,8 +7864,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * }
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -7912,8 +7912,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * }
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -7957,8 +7957,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * }
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -7992,8 +7992,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @param {string} addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
@@ -8077,8 +8077,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   console.log(transaction.uuid)
    * }
    * 
--  * @param {Object} options - Optional configurations for the request
--  * @param {Object} options.params - The optional url parameters for this request.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
    *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
    *   
