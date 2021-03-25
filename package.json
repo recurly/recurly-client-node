@@ -13,7 +13,6 @@
   },
   "author": "DX Team <dx@recurly.com>",
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
     "@types/node": "^12.11.1",
     "acorn": "^6.0.0",

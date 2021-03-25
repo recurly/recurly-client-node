@@ -2486,9 +2486,13 @@ export declare class AddOnPricing {
 
 export declare class Tier {
   /**
-   * Ending quantity
+   * Ending quantity for the tier.  This represents a unit amount for unit-priced add ons, but for percentage type usage add ons, represents the site default currency in its minimum divisible unit.
    */
   endingQuantity?: number | null;
+  /**
+   * Decimal usage percentage.
+   */
+  usagePercentage?: string | null;
   /**
    * Tier pricing
    */
@@ -3751,7 +3755,7 @@ export interface AddOnCreate {
     */
   usageType?: string | null;
   /**
-    * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0. Required if `add_on_type` is usage and `usage_type` is percentage. Must be omitted otherwise. `usage_percentage` does not support tiers.
+    * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0. Required if `add_on_type` is usage, `tier_type` is `flat` and `usage_type` is percentage. Must be omitted otherwise.
     */
   usagePercentage?: number | null;
   /**
@@ -3807,7 +3811,7 @@ export interface AddOnCreate {
     */
   tierType?: string | null;
   /**
-    * If the tier_type is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount` for the desired `currencies`. There must be one tier with an `ending_quantity` of 999999999 which is the default if not provided. 
+    * If the tier_type is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount` for the desired `currencies`, or alternatively, `usage_percentage` for usage percentage type usage add ons. There must be one tier with an `ending_quantity` of 999999999 which is the default if not provided. 
     */
   tiers?: Tier[] | null;
 
@@ -3831,9 +3835,13 @@ export interface AddOnPricing {
 
 export interface Tier {
   /**
-    * Ending quantity
+    * Ending quantity for the tier.  This represents a unit amount for unit-priced add ons, but for percentage type usage add ons, represents the site default currency in its minimum divisible unit.
     */
   endingQuantity?: number | null;
+  /**
+    * Decimal usage percentage.
+    */
+  usagePercentage?: string | null;
   /**
     * Tier pricing
     */
@@ -3955,7 +3963,7 @@ export interface AddOnUpdate {
     */
   name?: string | null;
   /**
-    * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0. Required if `add_on_type` is usage and `usage_type` is percentage. Must be omitted otherwise. `usage_percentage` does not support tiers.
+    * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0. Required if `add_on_type` is usage, `tier_type` is `flat` and `usage_type` is percentage. Must be omitted otherwise.
     */
   usagePercentage?: number | null;
   /**
@@ -4003,7 +4011,7 @@ export interface AddOnUpdate {
     */
   currencies?: AddOnPricing[] | null;
   /**
-    * If the tier_type is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount` for the desired `currencies`. There must be one tier with an `ending_quantity` of 999999999 which is the default if not provided. 
+    * If the tier_type is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount` for the desired `currencies`, or alternatively, `usage_percentage` for usage percentage type usage add ons. There must be one tier with an `ending_quantity` of 999999999 which is the default if not provided. 
     */
   tiers?: Tier[] | null;
 
