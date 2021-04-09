@@ -282,6 +282,10 @@ export declare class BillingInfo {
    */
   primaryPaymentMethod?: boolean | null;
   /**
+   * The `backup_payment_method` indicator is used to designate a billing info as a backup on the account that will be tried if the billing info marked `primary_payment_method` fails.
+   */
+  backupPaymentMethod?: boolean | null;
+  /**
    * When the billing information was created.
    */
   createdAt?: Date | null;
@@ -931,6 +935,10 @@ export declare class Transaction {
    * Did this transaction complete successfully?
    */
   success?: boolean | null;
+  /**
+   * Indicates if the transaction was completed using a backup payment
+   */
+  backupPaymentMethodUsed?: boolean | null;
   /**
    * Indicates if part or all of this transaction was refunded.
    */
@@ -2910,6 +2918,10 @@ export interface BillingInfoCreate {
     * The `primary_payment_method` indicator is used to designate the primary billing info on the account. The first billing info created on an account will always become primary. Adding additional billing infos provides the flexibility to mark another billing info as primary, or adding additional non-primary billing infos. This can be accomplished by passing the `primary_payment_method` indicator. When adding billing infos via the billing_info and /accounts endpoints, this value is not permitted, and will return an error if provided.
     */
   primaryPaymentMethod?: boolean | null;
+  /**
+    * The `backup_payment_method` indicator is used to designate a billing info as a backup on the account that will be tried if the billing info marked `primary_payment_method` fails. All payment methods, including the billing info marked `primary_payment_method` can be set as a backup. An account can have a maximum of 1 backup, if a user sets a different payment method as a backup, the existing backup will no longer be marked as such.
+    */
+  backupPaymentMethod?: boolean | null;
 
 }
 
@@ -4623,7 +4635,7 @@ export interface SubscriptionPurchase {
     */
   planId?: string | null;
   /**
-    * Override the unit amount of the subscription plan by setting this value in cents. If not provided, the subscription will inherit the price from the subscription plan for the provided currency.
+    * Override the unit amount of the subscription plan by setting this value. If not provided, the subscription will inherit the price from the subscription plan for the provided currency.
     */
   unitAmount?: number | null;
   /**
