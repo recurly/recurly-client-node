@@ -77,7 +77,7 @@ export declare class Address {
    */
   postalCode?: string | null;
   /**
-   * Country, 2-letter ISO code.
+   * Country, 2-letter ISO 3166-1 alpha-2 code.
    */
   country?: string | null;
 
@@ -250,7 +250,7 @@ export declare class ShippingAddress {
    */
   postalCode?: string | null;
   /**
-   * Country, 2-letter ISO code.
+   * Country, 2-letter ISO 3166-1 alpha-2 code.
    */
   country?: string | null;
   /**
@@ -286,11 +286,11 @@ export declare class BillingInfo {
    */
   fraud?: FraudInfo | null;
   /**
-   * The `primary_payment_method` indicator is used to designate the primary billing info on the account. The first billing info created on an account will always become primary. Adding additional billing infos provides the flexibility to mark another billing info as primary, or adding additional non-primary billing infos. This can be accomplished by passing the `primary_payment_method` indicator. When adding billing infos via the billing_info and /accounts endpoints, this value is not permitted, and will return an error if provided.
+   * The `primary_payment_method` field is used to indicate the primary billing info on the account. The first billing info created on an account will always become primary. This payment method will be used
    */
   primaryPaymentMethod?: boolean | null;
   /**
-   * The `backup_payment_method` indicator is used to designate a billing info as a backup on the account that will be tried if the billing info marked `primary_payment_method` fails.
+   * The `backup_payment_method` field is used to indicate a billing info as a backup on the account that will be tried if the initial billing info used for an invoice is declined.
    */
   backupPaymentMethod?: boolean | null;
   /**
@@ -335,6 +335,10 @@ export declare class PaymentMethod {
    * A token used in place of a credit card in order to perform transactions.
    */
   gatewayToken?: string | null;
+  /**
+   * The 2-letter ISO 3166-1 alpha-2 country code associated with the credit card BIN, if known by Recurly. Available on the BillingInfo object only. Available when the BIN country lookup feature is enabled.
+   */
+  ccBinCountry?: string | null;
   /**
    * An identifier for a specific payment gateway.
    */
@@ -384,7 +388,7 @@ export declare class BillingInfoUpdatedBy {
    */
   ip?: string | null;
   /**
-   * Country of IP address, if known by Recurly.
+   * Country, 2-letter ISO 3166-1 alpha-2 code matching the origin IP address, if known by Recurly.
    */
   country?: string | null;
 
@@ -548,6 +552,188 @@ export declare class AccountBalanceAmount {
    * Total amount the account is past due.
    */
   amount?: number | null;
+
+}
+
+export declare class Transaction {
+  /**
+   * Transaction ID
+   */
+  id?: string | null;
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * The UUID is useful for matching data with the CSV exports and building URLs into Recurly's UI.
+   */
+  uuid?: string | null;
+  /**
+   * If this transaction is a refund (`type=refund`), this will be the ID of the original transaction on the invoice being refunded.
+   */
+  originalTransactionId?: string | null;
+  /**
+   * Account mini details
+   */
+  account?: AccountMini | null;
+  /**
+   * Invoice mini details
+   */
+  invoice?: InvoiceMini | null;
+  /**
+   * Invoice mini details
+   */
+  voidedByInvoice?: InvoiceMini | null;
+  /**
+   * If the transaction is charging or refunding for one or more subscriptions, these are their IDs.
+   */
+  subscriptionIds?: string[] | null;
+  /**
+   * - `authorization` – verifies billing information and places a hold on money in the customer's account. - `capture` – captures funds held by an authorization and completes a purchase. - `purchase` – combines the authorization and capture in one transaction. - `refund` – returns all or a portion of the money collected in a previous transaction to the customer. - `verify` – a $0 or $1 transaction used to verify billing information which is immediately voided. 
+   */
+  type?: string | null;
+  /**
+   * Describes how the transaction was triggered.
+   */
+  origin?: string | null;
+  /**
+   * 3-letter ISO 4217 currency code.
+   */
+  currency?: string | null;
+  /**
+   * Total transaction amount sent to the payment gateway.
+   */
+  amount?: number | null;
+  /**
+   * The current transaction status. Note that the status may change, e.g. a `pending` transaction may become `declined` or `success` may later become `void`.
+   */
+  status?: string | null;
+  /**
+   * Did this transaction complete successfully?
+   */
+  success?: boolean | null;
+  /**
+   * Indicates if the transaction was completed using a backup payment
+   */
+  backupPaymentMethodUsed?: boolean | null;
+  /**
+   * Indicates if part or all of this transaction was refunded.
+   */
+  refunded?: boolean | null;
+  billingAddress?: Address | null;
+  /**
+   * The method by which the payment was collected.
+   */
+  collectionMethod?: string | null;
+  paymentMethod?: PaymentMethod | null;
+  /**
+   * IP address provided when the billing information was collected:  - When the customer enters billing information into the Recurly.js or Hosted Payment Pages, Recurly records the IP address. - When the merchant enters billing information using the API, the merchant may provide an IP address. - When the merchant enters billing information using the UI, no IP address is recorded. 
+   */
+  ipAddressV4?: string | null;
+  /**
+   * Origin IP address country, 2-letter ISO 3166-1 alpha-2 code, if known by Recurly.
+   */
+  ipAddressCountry?: string | null;
+  /**
+   * Status code
+   */
+  statusCode?: string | null;
+  /**
+   * For declined (`success=false`) transactions, the message displayed to the merchant.
+   */
+  statusMessage?: string | null;
+  /**
+   * For declined (`success=false`) transactions, the message displayed to the customer.
+   */
+  customerMessage?: string | null;
+  /**
+   * Language code for the message
+   */
+  customerMessageLocale?: string | null;
+  paymentGateway?: TransactionPaymentGateway | null;
+  /**
+   * Transaction message from the payment gateway.
+   */
+  gatewayMessage?: string | null;
+  /**
+   * Transaction reference number from the payment gateway.
+   */
+  gatewayReference?: string | null;
+  /**
+   * Transaction approval code from the payment gateway.
+   */
+  gatewayApprovalCode?: string | null;
+  /**
+   * For declined transactions (`success=false`), this field lists the gateway error code.
+   */
+  gatewayResponseCode?: string | null;
+  /**
+   * Time, in seconds, for gateway to process the transaction.
+   */
+  gatewayResponseTime?: number | null;
+  /**
+   * The values in this field will vary from gateway to gateway.
+   */
+  gatewayResponseValues?: object | null;
+  /**
+   * When processed, result from checking the CVV/CVC value on the transaction.
+   */
+  cvvCheck?: string | null;
+  /**
+   * When processed, result from checking the overall AVS on the transaction.
+   */
+  avsCheck?: string | null;
+  /**
+   * Created at
+   */
+  createdAt?: Date | null;
+  /**
+   * Updated at
+   */
+  updatedAt?: Date | null;
+  /**
+   * Voided at
+   */
+  voidedAt?: Date | null;
+  /**
+   * Collected at, or if not collected yet, the time the transaction was created.
+   */
+  collectedAt?: Date | null;
+
+}
+
+export declare class InvoiceMini {
+  /**
+   * Invoice ID
+   */
+  id?: string | null;
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * Invoice number
+   */
+  number?: string | null;
+  /**
+   * Invoice type
+   */
+  type?: string | null;
+  /**
+   * Invoice state
+   */
+  state?: string | null;
+
+}
+
+export declare class TransactionPaymentGateway {
+  id?: string | null;
+  /**
+   * Object type
+   */
+  object?: string | null;
+  type?: string | null;
+  name?: string | null;
 
 }
 
@@ -874,188 +1060,6 @@ export declare class CreditPayment {
 
 }
 
-export declare class InvoiceMini {
-  /**
-   * Invoice ID
-   */
-  id?: string | null;
-  /**
-   * Object type
-   */
-  object?: string | null;
-  /**
-   * Invoice number
-   */
-  number?: string | null;
-  /**
-   * Invoice type
-   */
-  type?: string | null;
-  /**
-   * Invoice state
-   */
-  state?: string | null;
-
-}
-
-export declare class Transaction {
-  /**
-   * Transaction ID
-   */
-  id?: string | null;
-  /**
-   * Object type
-   */
-  object?: string | null;
-  /**
-   * The UUID is useful for matching data with the CSV exports and building URLs into Recurly's UI.
-   */
-  uuid?: string | null;
-  /**
-   * If this transaction is a refund (`type=refund`), this will be the ID of the original transaction on the invoice being refunded.
-   */
-  originalTransactionId?: string | null;
-  /**
-   * Account mini details
-   */
-  account?: AccountMini | null;
-  /**
-   * Invoice mini details
-   */
-  invoice?: InvoiceMini | null;
-  /**
-   * Invoice mini details
-   */
-  voidedByInvoice?: InvoiceMini | null;
-  /**
-   * If the transaction is charging or refunding for one or more subscriptions, these are their IDs.
-   */
-  subscriptionIds?: string[] | null;
-  /**
-   * - `authorization` – verifies billing information and places a hold on money in the customer's account. - `capture` – captures funds held by an authorization and completes a purchase. - `purchase` – combines the authorization and capture in one transaction. - `refund` – returns all or a portion of the money collected in a previous transaction to the customer. - `verify` – a $0 or $1 transaction used to verify billing information which is immediately voided. 
-   */
-  type?: string | null;
-  /**
-   * Describes how the transaction was triggered.
-   */
-  origin?: string | null;
-  /**
-   * 3-letter ISO 4217 currency code.
-   */
-  currency?: string | null;
-  /**
-   * Total transaction amount sent to the payment gateway.
-   */
-  amount?: number | null;
-  /**
-   * The current transaction status. Note that the status may change, e.g. a `pending` transaction may become `declined` or `success` may later become `void`.
-   */
-  status?: string | null;
-  /**
-   * Did this transaction complete successfully?
-   */
-  success?: boolean | null;
-  /**
-   * Indicates if the transaction was completed using a backup payment
-   */
-  backupPaymentMethodUsed?: boolean | null;
-  /**
-   * Indicates if part or all of this transaction was refunded.
-   */
-  refunded?: boolean | null;
-  billingAddress?: Address | null;
-  /**
-   * The method by which the payment was collected.
-   */
-  collectionMethod?: string | null;
-  paymentMethod?: PaymentMethod | null;
-  /**
-   * IP address provided when the billing information was collected:  - When the customer enters billing information into the Recurly.js or Hosted Payment Pages, Recurly records the IP address. - When the merchant enters billing information using the API, the merchant may provide an IP address. - When the merchant enters billing information using the UI, no IP address is recorded. 
-   */
-  ipAddressV4?: string | null;
-  /**
-   * IP address's country
-   */
-  ipAddressCountry?: string | null;
-  /**
-   * Status code
-   */
-  statusCode?: string | null;
-  /**
-   * For declined (`success=false`) transactions, the message displayed to the merchant.
-   */
-  statusMessage?: string | null;
-  /**
-   * For declined (`success=false`) transactions, the message displayed to the customer.
-   */
-  customerMessage?: string | null;
-  /**
-   * Language code for the message
-   */
-  customerMessageLocale?: string | null;
-  paymentGateway?: TransactionPaymentGateway | null;
-  /**
-   * Transaction message from the payment gateway.
-   */
-  gatewayMessage?: string | null;
-  /**
-   * Transaction reference number from the payment gateway.
-   */
-  gatewayReference?: string | null;
-  /**
-   * Transaction approval code from the payment gateway.
-   */
-  gatewayApprovalCode?: string | null;
-  /**
-   * For declined transactions (`success=false`), this field lists the gateway error code.
-   */
-  gatewayResponseCode?: string | null;
-  /**
-   * Time, in seconds, for gateway to process the transaction.
-   */
-  gatewayResponseTime?: number | null;
-  /**
-   * The values in this field will vary from gateway to gateway.
-   */
-  gatewayResponseValues?: object | null;
-  /**
-   * When processed, result from checking the CVV/CVC value on the transaction.
-   */
-  cvvCheck?: string | null;
-  /**
-   * When processed, result from checking the overall AVS on the transaction.
-   */
-  avsCheck?: string | null;
-  /**
-   * Created at
-   */
-  createdAt?: Date | null;
-  /**
-   * Updated at
-   */
-  updatedAt?: Date | null;
-  /**
-   * Voided at
-   */
-  voidedAt?: Date | null;
-  /**
-   * Collected at, or if not collected yet, the time the transaction was created.
-   */
-  collectedAt?: Date | null;
-
-}
-
-export declare class TransactionPaymentGateway {
-  id?: string | null;
-  /**
-   * Object type
-   */
-  object?: string | null;
-  type?: string | null;
-  name?: string | null;
-
-}
-
 export declare class Invoice {
   /**
    * Invoice ID
@@ -1120,7 +1124,7 @@ export declare class Invoice {
    */
   discount?: number | null;
   /**
-   * The summation of charges, discounts, and credits, before tax.
+   * The summation of charges and credits, before discounts and taxes.
    */
   subtotal?: number | null;
   /**
@@ -1233,7 +1237,7 @@ export declare class InvoiceAddress {
    */
   postalCode?: string | null;
   /**
-   * Country, 2-letter ISO code.
+   * Country, 2-letter ISO 3166-1 alpha-2 code.
    */
   country?: string | null;
 
@@ -1252,6 +1256,30 @@ export declare class TaxInfo {
    * Rate
    */
   rate?: number | null;
+  /**
+   * Provides additional tax details for Canadian Sales Tax when there is tax applied at both the country and province levels. This will only be populated for the Invoice response when fetching a single invoice and not for the InvoiceList or LineItem.
+   */
+  taxDetails?: TaxDetail[] | null;
+
+}
+
+export declare class TaxDetail {
+  /**
+   * Provides the tax type for the region. For Canadian Sales Tax, this will be GST, HST, QST or PST.
+   */
+  type?: string | null;
+  /**
+   * Provides the tax region applied on an invoice. For Canadian Sales Tax, this will be either the 2 letter province code or country code.
+   */
+  region?: string | null;
+  /**
+   * Provides the tax rate for the region.
+   */
+  rate?: number | null;
+  /**
+   * The total tax applied for this tax type.
+   */
+  tax?: number | null;
 
 }
 
@@ -1838,6 +1866,10 @@ export declare class SubscriptionChange {
    * Deleted at
    */
   deletedAt?: Date | null;
+  /**
+   * Accept nested attributes for three_d_secure_action_result_token_id
+   */
+  billingInfo?: SubscriptionChangeBillingInfo | null;
 
 }
 
@@ -1958,6 +1990,14 @@ export declare class SubscriptionAddOnTier {
    * Unit amount
    */
   unitAmount?: number | null;
+
+}
+
+export declare class SubscriptionChangeBillingInfo {
+  /**
+   * A token generated by Recurly.js after completing a 3-D Secure device fingerprinting or authentication challenge.
+   */
+  threeDSecureActionResultTokenId?: string | null;
 
 }
 
@@ -2571,6 +2611,10 @@ export declare class SubscriptionChangePreview {
    * Deleted at
    */
   deletedAt?: Date | null;
+  /**
+   * Accept nested attributes for three_d_secure_action_result_token_id
+   */
+  billingInfo?: SubscriptionChangeBillingInfo | null;
 
 }
 
@@ -2800,7 +2844,7 @@ export interface ShippingAddressCreate {
     */
   postalCode?: string | null;
   /**
-    * Country, 2-letter ISO code.
+    * Country, 2-letter ISO 3166-1 alpha-2 code.
     */
   country?: string | null;
 
@@ -2840,7 +2884,7 @@ export interface Address {
     */
   postalCode?: string | null;
   /**
-    * Country, 2-letter ISO code.
+    * Country, 2-letter ISO 3166-1 alpha-2 code.
     */
   country?: string | null;
 
@@ -2953,11 +2997,11 @@ export interface BillingInfoCreate {
     */
   taxIdentifierType?: string | null;
   /**
-    * The `primary_payment_method` indicator is used to designate the primary billing info on the account. The first billing info created on an account will always become primary. Adding additional billing infos provides the flexibility to mark another billing info as primary, or adding additional non-primary billing infos. This can be accomplished by passing the `primary_payment_method` indicator. When adding billing infos via the billing_info and /accounts endpoints, this value is not permitted, and will return an error if provided.
+    * The `primary_payment_method` field is used to designate the primary billing info on the account. The first billing info created on an account will always become primary. Adding additional billing infos provides the flexibility to mark another billing info as primary, or adding additional non-primary billing infos. This can be accomplished by passing the `primary_payment_method` with a value of `true`. When adding billing infos via the billing_info and /accounts endpoints, this value is not permitted, and will return an error if provided.
     */
   primaryPaymentMethod?: boolean | null;
   /**
-    * The `backup_payment_method` indicator is used to designate a billing info as a backup on the account that will be tried if the billing info marked `primary_payment_method` fails. All payment methods, including the billing info marked `primary_payment_method` can be set as a backup. An account can have a maximum of 1 backup, if a user sets a different payment method as a backup, the existing backup will no longer be marked as such.
+    * The `backup_payment_method` field is used to designate a billing info as a backup on the account that will be tried if the initial billing info used for an invoice is declined. All payment methods, including the billing info marked `primary_payment_method` can be set as a backup. An account can have a maximum of 1 backup, if a user sets a different payment method as a backup, the existing backup will no longer be marked as such.
     */
   backupPaymentMethod?: boolean | null;
 
@@ -3029,6 +3073,14 @@ export interface AccountUpdate {
     * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
     */
   customFields?: CustomField[] | null;
+
+}
+
+export interface BillingInfoVerify {
+  /**
+    * An identifier for a specific payment gateway.
+    */
+  gatewayCode?: string | null;
 
 }
 
@@ -3184,7 +3236,7 @@ export interface ShippingAddressUpdate {
     */
   postalCode?: string | null;
   /**
-    * Country, 2-letter ISO code.
+    * Country, 2-letter ISO 3166-1 alpha-2 code.
     */
   country?: string | null;
 
@@ -3549,7 +3601,7 @@ export interface InvoiceAddress {
     */
   postalCode?: string | null;
   /**
-    * Country, 2-letter ISO code.
+    * Country, 2-letter ISO 3166-1 alpha-2 code.
     */
   country?: string | null;
 
@@ -4130,7 +4182,7 @@ export interface SubscriptionCreate {
     */
   customFields?: CustomField[] | null;
   /**
-    * If set, overrides the default trial behavior for the subscription. The date must be in the future.
+    * IIf set, overrides the default trial behavior for the subscription. When the current date time or a past date time is provided the subscription will begin with no trial phase (overriding any plan default trial). When a future date time is provided the subscription will begin with a trial phase ending at the specified date time.
     */
   trialEndsAt?: Date | null;
   /**
@@ -4657,7 +4709,7 @@ export interface SubscriptionPurchase {
     */
   shipping?: SubscriptionShippingPurchase | null;
   /**
-    * If set, overrides the default trial behavior for the subscription. The date must be in the future.
+    * If set, overrides the default trial behavior for the subscription. When the current date time or a past date time is provided the subscription will begin with no trial phase (overriding any plan default trial). When a future date time is provided the subscription will begin with a trial phase ending at the specified date time.
     */
   trialEndsAt?: Date | null;
   /**
@@ -5133,6 +5185,33 @@ export declare class Client {
    */
   removeBillingInfo(accountId: string): Promise<Empty>;
   /**
+   * Verify an account's credit card billing information
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/verify_billing_info
+   *
+   * @example
+   * try {
+   *   const transaction = await client.verifyBillingInfo(accountId)
+   *   console.log('Fetched Transaction: ', transaction.id)
+   * } catch (err) {
+   *   if (err instanceof recurly.errors.NotFoundError) {
+   *     // If the request was not found, you may want to alert the user or
+   *     // just return null
+   *     console.log('Resource Not Found')
+   *   } else {
+   *     // If we don't know what to do with the err, we should
+   *     // probably re-raise and let our web framework and logger handle it
+   *     console.log('Unknown Error: ', err)
+   *   }
+   * }
+   * 
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {Object} options - The optional url parameters for this request.
+   * @param {BillingInfoVerify} options.body - The object representing the JSON request to send to the server. It should conform to the schema of {BillingInfoVerify}
+   * @return {Promise<Transaction>} Transaction information from verify.
+   */
+  verifyBillingInfo(accountId: string, options?: object): Promise<Transaction>;
+  /**
    * Get the list of billing information associated with an account
    *
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/list_billing_infos
@@ -5166,7 +5245,7 @@ export declare class Client {
    */
   listBillingInfos(accountId: string, options?: object): Pager<BillingInfo>;
   /**
-   * Set an account's billing information when the wallet feature is enabled
+   * Add new billing information on an account
    *
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/create_billing_info
    *
