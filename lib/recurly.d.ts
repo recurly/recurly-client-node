@@ -69,7 +69,7 @@ export declare class Address {
    */
   postalCode?: string | null;
   /**
-   * Country, 2-letter ISO code.
+   * Country, 2-letter ISO 3166-1 alpha-2 code.
    */
   country?: string | null;
 
@@ -242,7 +242,7 @@ export declare class ShippingAddress {
    */
   postalCode?: string | null;
   /**
-   * Country, 2-letter ISO code.
+   * Country, 2-letter ISO 3166-1 alpha-2 code.
    */
   country?: string | null;
   /**
@@ -328,6 +328,10 @@ export declare class PaymentMethod {
    */
   gatewayToken?: string | null;
   /**
+   * The 2-letter ISO 3166-1 alpha-2 country code associated with the credit card BIN, if known by Recurly. Available on the BillingInfo object only. Available when the BIN country lookup feature is enabled.
+   */
+  ccBinCountry?: string | null;
+  /**
    * An identifier for a specific payment gateway.
    */
   gatewayCode?: string | null;
@@ -376,7 +380,7 @@ export declare class BillingInfoUpdatedBy {
    */
   ip?: string | null;
   /**
-   * Country of IP address, if known by Recurly.
+   * Country, 2-letter ISO 3166-1 alpha-2 code matching the origin IP address, if known by Recurly.
    */
   country?: string | null;
 
@@ -619,7 +623,7 @@ export declare class Transaction {
    */
   ipAddressV4?: string | null;
   /**
-   * IP address's country
+   * Origin IP address country, 2-letter ISO 3166-1 alpha-2 code, if known by Recurly.
    */
   ipAddressCountry?: string | null;
   /**
@@ -748,7 +752,7 @@ export declare class AddressWithName {
    */
   postalCode?: string | null;
   /**
-   * Country, 2-letter ISO code.
+   * Country, 2-letter ISO 3166-1 alpha-2 code.
    */
   country?: string | null;
 
@@ -1252,7 +1256,7 @@ export declare class InvoiceAddress {
    */
   postalCode?: string | null;
   /**
-   * Country, 2-letter ISO code.
+   * Country, 2-letter ISO 3166-1 alpha-2 code.
    */
   country?: string | null;
   /**
@@ -1279,6 +1283,9 @@ export declare class TaxInfo {
    * Rate
    */
   rate?: number | null;
+  /**
+   * Provides additional tax details for Canadian Sales Tax when there is tax applied at both the country and province levels. This will only be populated for the Invoice response when fetching a single invoice and not for the InvoiceList or LineItem.
+   */
   taxDetails?: TaxDetail[] | null;
 
 }
@@ -2831,7 +2838,7 @@ export interface ShippingAddressCreate {
     */
   postalCode?: string | null;
   /**
-    * Country, 2-letter ISO code.
+    * Country, 2-letter ISO 3166-1 alpha-2 code.
     */
   country?: string | null;
 
@@ -2863,7 +2870,7 @@ export interface Address {
     */
   postalCode?: string | null;
   /**
-    * Country, 2-letter ISO code.
+    * Country, 2-letter ISO 3166-1 alpha-2 code.
     */
   country?: string | null;
 
@@ -2944,11 +2951,11 @@ export interface BillingInfoCreate {
     */
   iban?: string | null;
   /**
-    * Tax identifier is required if adding a billing info that is a consumer card in Brazil. This would be the customer's CPF, CPF is a Brazilian tax identifier for all tax paying residents.
+    * Tax identifier is required if adding a billing info that is a consumer card in Brazil or in Argentina. This would be the customer's CPF (Brazil) and CUIT (Argentina). CPF and CUIT are tax identifiers for all residents who pay taxes in Brazil and Argentina respectively.
     */
   taxIdentifier?: string | null;
   /**
-    * this field and a value of 'cpf' are required if adding a billing info that is an elo or hipercard type in Brazil.
+    * This field and a value of `cpf` or `cuit` are required if adding a billing info that is an elo or hipercard type in Brazil or in Argentina.
     */
   taxIdentifierType?: string | null;
   /**
@@ -3191,7 +3198,7 @@ export interface ShippingAddressUpdate {
     */
   postalCode?: string | null;
   /**
-    * Country, 2-letter ISO code.
+    * Country, 2-letter ISO 3166-1 alpha-2 code.
     */
   country?: string | null;
 
@@ -3548,7 +3555,7 @@ export interface InvoiceAddress {
     */
   postalCode?: string | null;
   /**
-    * Country, 2-letter ISO code.
+    * Country, 2-letter ISO 3166-1 alpha-2 code.
     */
   country?: string | null;
   /**
@@ -4161,7 +4168,7 @@ export interface SubscriptionCreate {
     */
   customFields?: CustomField[] | null;
   /**
-    * If set, overrides the default trial behavior for the subscription. The date must be in the future.
+    * If set, overrides the default trial behavior for the subscription. When the current date time or a past date time is provided the subscription will begin with no trial phase (overriding any plan default trial). When a future date time is provided the subscription will begin with a trial phase ending at the specified date time.
     */
   trialEndsAt?: Date | null;
   /**
@@ -4704,7 +4711,7 @@ export interface SubscriptionPurchase {
     */
   shipping?: SubscriptionShippingPurchase | null;
   /**
-    * If set, overrides the default trial behavior for the subscription. The date must be in the future.
+    * If set, overrides the default trial behavior for the subscription. When the current date time or a past date time is provided the subscription will begin with no trial phase (overriding any plan default trial). When a future date time is provided the subscription will begin with a trial phase ending at the specified date time.
     */
   trialEndsAt?: Date | null;
   /**
