@@ -4380,7 +4380,7 @@ export interface SubscriptionCancel {
 
 export interface SubscriptionPause {
   /**
-    * Number of billing cycles to pause the subscriptions.
+    * Number of billing cycles to pause the subscriptions. A value of 0 will cancel any pending pauses on the subscription.
     */
   remainingPauseCycles?: number | null;
 
@@ -7836,6 +7836,16 @@ export declare class Client {
    * @return {Promise<Subscription>} A subscription.
    */
   convertTrial(subscriptionId: string): Promise<Subscription>;
+  /**
+   * Fetch a preview of a subscription's renewal invoice(s)
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/get_preview_renewal
+   *
+   * 
+   * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @return {Promise<InvoiceCollection>} A preview of the subscription's renewal invoice(s).
+   */
+  getPreviewRenewal(subscriptionId: string): Promise<InvoiceCollection>;
   /**
    * Fetch a subscription's pending change
    *
