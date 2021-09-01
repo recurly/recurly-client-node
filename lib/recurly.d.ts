@@ -201,6 +201,10 @@ export declare class Account {
    * An enumerable describing the billing behavior of the account, specifically whether the account is self-paying or will rely on the parent account to pay.
    */
   billTo?: string | null;
+  /**
+   * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+   */
+  dunningCampaignId?: string | null;
   address?: Address | null;
   billingInfo?: BillingInfo | null;
   /**
@@ -518,6 +522,10 @@ export declare class AccountMini {
   company?: string | null;
   parentAccountId?: string | null;
   billTo?: string | null;
+  /**
+   * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+   */
+  dunningCampaignId?: string | null;
 
 }
 
@@ -1219,6 +1227,10 @@ export declare class Invoice {
    * Date invoice was marked paid or failed.
    */
   closedAt?: Date | null;
+  /**
+   * Unique ID to identify the dunning campaign used when dunning the invoice. Available when the Dunning Campaigns feature is enabled. For sites without multiple dunning campaigns enabled, this will always be the default dunning campaign.
+   */
+  dunningCampaignId?: string | null;
 
 }
 
@@ -2362,6 +2374,10 @@ export declare class Plan {
    */
   allowAnyItemOnSubscriptions?: boolean | null;
   /**
+   * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this plan. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+   */
+  dunningCampaignId?: string | null;
+  /**
    * Created at
    */
   createdAt?: Date | null;
@@ -2710,6 +2726,123 @@ export declare class ExportFile {
 
 }
 
+export declare class DunningCampaign {
+  id?: string | null;
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * Campaign code.
+   */
+  code?: string | null;
+  /**
+   * Campaign name.
+   */
+  name?: string | null;
+  /**
+   * Campaign description.
+   */
+  description?: string | null;
+  /**
+   * Whether or not this is the default campaign for accounts or plans without an assigned dunning campaign.
+   */
+  defaultCampaign?: boolean | null;
+  /**
+   * Dunning Cycle settings.
+   */
+  dunningCycles?: DunningCycle[] | null;
+  /**
+   * When the current campaign was created in Recurly.
+   */
+  createdAt?: Date | null;
+  /**
+   * When the current campaign was updated in Recurly.
+   */
+  updatedAt?: Date | null;
+  /**
+   * When the current campaign was deleted in Recurly.
+   */
+  deletedAt?: Date | null;
+
+}
+
+export declare class DunningCycle {
+  /**
+   * The type of invoice this cycle applies to.
+   */
+  type?: string | null;
+  /**
+   * Whether the dunning settings will be applied to manual trials. Only applies to trial cycles.
+   */
+  appliesToManualTrial?: boolean | null;
+  /**
+   * The number of days after a transaction failure before the first dunning email is sent.
+   */
+  firstCommunicationInterval?: number | null;
+  /**
+   * Whether or not to send an extra email immediately to customers whose initial payment attempt fails with either a hard decline or invalid billing info.
+   */
+  sendImmediatelyOnHardDecline?: boolean | null;
+  /**
+   * Dunning intervals.
+   */
+  intervals?: DunningInterval[] | null;
+  /**
+   * Whether the subscription(s) should be cancelled at the end of the dunning cycle.
+   */
+  expireSubscription?: boolean | null;
+  /**
+   * Whether the invoice should be failed at the end of the dunning cycle.
+   */
+  failInvoice?: boolean | null;
+  /**
+   * The number of days between the first dunning email being sent and the end of the dunning cycle.
+   */
+  totalDunningDays?: number | null;
+  /**
+   * The number of days between a transaction failure and the end of the dunning cycle.
+   */
+  totalRecyclingDays?: number | null;
+  /**
+   * Current campaign version.
+   */
+  version?: number | null;
+  /**
+   * When the current settings were created in Recurly.
+   */
+  createdAt?: Date | null;
+  /**
+   * When the current settings were updated in Recurly.
+   */
+  updatedAt?: Date | null;
+
+}
+
+export declare class DunningInterval {
+  /**
+   * Number of days before sending the next email.
+   */
+  days?: number | null;
+  /**
+   * Email template being used.
+   */
+  emailTemplate?: string | null;
+
+}
+
+export declare class DunningCampaignsBulkUpdateResponse {
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * An array containing all of the `Plan` resources that have been updated.
+   */
+  plans?: Plan[] | null;
+
+}
+
 
 
 export interface Empty {
@@ -2777,6 +2910,10 @@ export interface AccountCreate {
     * An optional type designation for the payment gateway transaction created by this request. Supports 'moto' value, which is the acronym for mail order and telephone transactions.
     */
   transactionType?: string | null;
+  /**
+    * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+    */
+  dunningCampaignId?: string | null;
   address?: Address | null;
   billingInfo?: BillingInfoCreate | null;
   /**
@@ -3029,6 +3166,10 @@ export interface AccountUpdate {
     * An optional type designation for the payment gateway transaction created by this request. Supports 'moto' value, which is the acronym for mail order and telephone transactions.
     */
   transactionType?: string | null;
+  /**
+    * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+    */
+  dunningCampaignId?: string | null;
   address?: Address | null;
   billingInfo?: BillingInfoCreate | null;
   /**
@@ -3754,6 +3895,10 @@ export interface PlanCreate {
     * Used to determine whether items can be assigned as add-ons to individual subscriptions. If `true`, items can be assigned as add-ons to individual subscription add-ons. If `false`, only plan add-ons can be used. 
     */
   allowAnyItemOnSubscriptions?: boolean | null;
+  /**
+    * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this plan. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+    */
+  dunningCampaignId?: string | null;
 
 }
 
@@ -4010,6 +4155,10 @@ export interface PlanUpdate {
     * Used to determine whether items can be assigned as add-ons to individual subscriptions. If `true`, items can be assigned as add-ons to individual subscription add-ons. If `false`, only plan add-ons can be used. 
     */
   allowAnyItemOnSubscriptions?: boolean | null;
+  /**
+    * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this plan. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+    */
+  dunningCampaignId?: string | null;
 
 }
 
@@ -4652,6 +4801,10 @@ export interface AccountPurchase {
     * An optional type designation for the payment gateway transaction created by this request. Supports 'moto' value, which is the acronym for mail order and telephone transactions.
     */
   transactionType?: string | null;
+  /**
+    * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+    */
+  dunningCampaignId?: string | null;
   address?: Address | null;
   billingInfo?: BillingInfoCreate | null;
   /**
@@ -4763,6 +4916,18 @@ export interface SubscriptionShippingPurchase {
     * Assigns the subscription's shipping cost. If this is greater than zero then a `method_id` or `method_code` is required.
     */
   amount?: number | null;
+
+}
+
+export interface DunningCampaignsBulkUpdate {
+  /**
+    * List of `plan_codes` associated with the Plans for which the dunning campaign should be updated. Required unless `plan_ids` is present.
+    */
+  planCodes?: string[] | null;
+  /**
+    * List of `plan_ids` associated with the Plans for which the dunning campaign should be updated. Required unless `plan_codes` is present.
+    */
+  planIds?: string[] | null;
 
 }
 
@@ -8407,6 +8572,41 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * @return {Promise<ExportFiles>} Returns a list of export files to download.
    */
   getExportFiles(exportDate: string): Promise<ExportFiles>;
+  /**
+   * Show the dunning campaigns for a site
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_dunning_campaigns
+   *
+   * 
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
+   * @param {string} options.params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   *   order. In descending order updated records will move behind the cursor and could
+   *   prevent some records from being returned.
+   *   
+   * @return {Pager<DunningCampaign>} A list of the the dunning_campaigns on an account.
+   */
+  listDunningCampaigns(options?: object): Pager<DunningCampaign>;
+  /**
+   * Show the settings for a dunning campaign
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_dunning_campaign
+   *
+   * 
+   * @param {string} dunningCampaignId - Dunning Campaign ID, e.g. `e28zov4fw0v2`.
+   * @return {Promise<DunningCampaign>} Settings for a dunning campaign.
+   */
+  getDunningCampaign(dunningCampaignId: string): Promise<DunningCampaign>;
+  /**
+   * Assign a dunning campaign to multiple plans
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/put_dunning_campaign_bulk_update
+   *
+   * 
+   * @param {DunningCampaignsBulkUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {DunningCampaignsBulkUpdate}
+   * @return {Promise<DunningCampaignsBulkUpdateResponse>} A list of updated plans.
+   */
+  putDunningCampaignBulkUpdate(body: DunningCampaignsBulkUpdate): Promise<DunningCampaignsBulkUpdateResponse>;
 
 }
 
