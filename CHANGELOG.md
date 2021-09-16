@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.9.0](https://github.com/recurly/recurly-client-node/tree/4.9.0) (2021-09-16)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.8.0...4.9.0)
+
+
+**Merged Pull Requests**
+
+- Generated Latest Changes for v2021-02-25 (Support to new subscription fields and response) [#216](https://github.com/recurly/recurly-client-node/pull/216) ([recurly-integrations](https://github.com/recurly-integrations))
+
+
+
 ## [4.8.0](https://github.com/recurly/recurly-client-node/tree/4.8.0) (2021-09-01)
 
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.7.0...4.8.0)
