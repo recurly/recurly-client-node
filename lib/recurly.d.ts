@@ -1670,6 +1670,18 @@ export declare class Subscription {
    */
   subtotal?: number | null;
   /**
+   * Estimated tax
+   */
+  tax?: number | null;
+  /**
+   * Tax info
+   */
+  taxInfo?: TaxInfo | null;
+  /**
+   * Estimated total
+   */
+  total?: number | null;
+  /**
    * Collection method
    */
   collectionMethod?: string | null;
@@ -1721,6 +1733,10 @@ export declare class Subscription {
    * Recurring subscriptions paid with ACH will have this attribute set. This timestamp is used for alerting customers to reauthorize in 3 years in accordance with NACHA rules. If a subscription becomes inactive or the billing info is no longer a bank account, this timestamp is cleared.
    */
   bankAccountAuthorizedAt?: Date | null;
+  /**
+   * If present, this subscription's transactions will use the payment gateway with this code.
+   */
+  gatewayCode?: string | null;
   /**
    * Billing Info ID.
    */
@@ -4494,6 +4510,10 @@ export interface SubscriptionUpdate {
     */
   netTerms?: number | null;
   /**
+    * If present, this subscription's transactions will use the payment gateway with this code.
+    */
+  gatewayCode?: string | null;
+  /**
     * Subscription shipping details
     */
   shipping?: SubscriptionShippingUpdate | null;
@@ -4607,6 +4627,11 @@ export interface SubscriptionChangeShippingCreate {
     * Assigns the subscription's shipping cost. If this is greater than zero then a `method_id` or `method_code` is required.
     */
   amount?: number | null;
+  /**
+    * Assign a shipping address from the account's existing shipping addresses. If this and address are both present, address will take precedence.
+    */
+  addressId?: string | null;
+  address?: ShippingAddressCreate | null;
 
 }
 
