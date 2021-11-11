@@ -1358,6 +1358,10 @@ export declare class LineItem {
    */
   account?: AccountMini | null;
   /**
+   * The UUID of the account responsible for originating the line item.
+   */
+  billForAccountId?: string | null;
+  /**
    * If the line item is a charge or credit for a subscription, this is its ID.
    */
   subscriptionId?: string | null;
