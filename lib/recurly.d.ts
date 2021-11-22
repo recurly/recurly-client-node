@@ -1368,6 +1368,10 @@ export declare class LineItem {
    */
   account?: AccountMini | null;
   /**
+   * The UUID of the account responsible for originating the line item.
+   */
+  billForAccountId?: string | null;
+  /**
    * If the line item is a charge or credit for a subscription, this is its ID.
    */
   subscriptionId?: string | null;
@@ -3103,6 +3107,30 @@ export interface BillingInfoCreate {
     * The International Bank Account Number, up to 34 alphanumeric characters comprising a country code; two check digits; and a number that includes the domestic bank account number, branch identifier, and potential routing information
     */
   iban?: string | null;
+  /**
+    * The name associated with the bank account (ACH, SEPA, Bacs only)
+    */
+  nameOnAccount?: string | null;
+  /**
+    * The bank account number. (ACH, Bacs only)
+    */
+  accountNumber?: string | null;
+  /**
+    * The bank's rounting number. (ACH only)
+    */
+  routingNumber?: string | null;
+  /**
+    * Bank identifier code for UK based banks. Required for Bacs based billing infos. (Bacs only)
+    */
+  sortCode?: string | null;
+  /**
+    * The payment method type for a non-credit card based billing info. The value of `bacs` is the only accepted value (Bacs only)
+    */
+  type?: string | null;
+  /**
+    * The bank account type. (ACH only)
+    */
+  accountType?: string | null;
   /**
     * Tax identifier is required if adding a billing info that is a consumer card in Brazil or in Argentina. This would be the customer's CPF (Brazil) and CUIT (Argentina). CPF and CUIT are tax identifiers for all residents who pay taxes in Brazil and Argentina respectively.
     */
