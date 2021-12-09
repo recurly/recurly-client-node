@@ -1114,7 +1114,7 @@ export declare class Invoice {
    */
   account?: AccountMini | null;
   /**
-   * The `billing_info_id` is the value that represents a specific billing info for an end customer. When `billing_info_id` is used to assign billing info to the subscription, all future billing events for the subscription will bill to the specified billing info.
+   * The `billing_info_id` is the value that represents a specific billing info for an end customer. When `billing_info_id` is used to assign billing info to the subscription, all future billing events for the subscription will bill to the specified billing info. `billing_info_id` can ONLY be used for sites utilizing the Wallet feature.
    */
   billingInfoId?: string | null;
   /**
@@ -1869,6 +1869,10 @@ export declare class SubscriptionChange {
    */
   unitAmount?: number | null;
   /**
+   * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+   */
+  taxInclusive?: boolean | null;
+  /**
    * Subscription quantity
    */
   quantity?: number | null;
@@ -2248,6 +2252,10 @@ export declare class Pricing {
    * Unit price
    */
   unitAmount?: number | null;
+  /**
+   * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+   */
+  taxInclusive?: boolean | null;
 
 }
 
@@ -2425,6 +2433,10 @@ export declare class PlanPricing {
    * Unit price
    */
   unitAmount?: number | null;
+  /**
+   * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+   */
+  taxInclusive?: boolean | null;
 
 }
 
@@ -2569,6 +2581,10 @@ export declare class AddOnPricing {
    * Allows up to 9 decimal places. Only supported when `add_on_type` = `usage`. If `unit_amount_decimal` is provided, `unit_amount` cannot be provided. 
    */
   unitAmountDecimal?: string | null;
+  /**
+   * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+   */
+  taxInclusive?: boolean | null;
 
 }
 
@@ -3293,6 +3309,10 @@ export interface LineItemCreate {
     */
   unitAmount?: number | null;
   /**
+    * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+    */
+  taxInclusive?: boolean | null;
+  /**
     * This number will be multiplied by the unit amount to compute the subtotal before any discounts or taxes.
     */
   quantity?: number | null;
@@ -3594,6 +3614,10 @@ export interface Pricing {
     * Unit price
     */
   unitAmount?: number | null;
+  /**
+    * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+    */
+  taxInclusive?: boolean | null;
 
 }
 
@@ -3764,7 +3788,7 @@ export interface InvoiceCollect {
     */
   transactionType?: string | null;
   /**
-    * The `billing_info_id` is the value that represents a specific billing info for an end customer. When `billing_info_id` is used to assign billing info to the subscription, all future billing events for the subscription will bill to the specified billing info.
+    * The `billing_info_id` is the value that represents a specific billing info for an end customer. When `billing_info_id` is used to assign billing info to the subscription, all future billing events for the subscription will bill to the specified billing info. `billing_info_id` can ONLY be used for sites utilizing the Wallet feature.
     */
   billingInfoId?: string | null;
 
@@ -3959,6 +3983,10 @@ export interface PlanPricing {
     * Unit price
     */
   unitAmount?: number | null;
+  /**
+    * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+    */
+  taxInclusive?: boolean | null;
 
 }
 
@@ -4083,6 +4111,10 @@ export interface AddOnPricing {
     * Allows up to 9 decimal places. Only supported when `add_on_type` = `usage`. If `unit_amount_decimal` is provided, `unit_amount` cannot be provided. 
     */
   unitAmountDecimal?: string | null;
+  /**
+    * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+    */
+  taxInclusive?: boolean | null;
 
 }
 
@@ -4325,7 +4357,7 @@ export interface SubscriptionCreate {
   planId?: string | null;
   account?: AccountCreate | null;
   /**
-    * The `billing_info_id` is the value that represents a specific billing info for an end customer. When `billing_info_id` is used to assign billing info to the subscription, all future billing events for the subscription will bill to the specified billing info.
+    * The `billing_info_id` is the value that represents a specific billing info for an end customer. When `billing_info_id` is used to assign billing info to the subscription, all future billing events for the subscription will bill to the specified billing info. `billing_info_id` can ONLY be used for sites utilizing the Wallet feature.
     */
   billingInfoId?: string | null;
   /**
@@ -4344,6 +4376,10 @@ export interface SubscriptionCreate {
     * Override the unit amount of the subscription plan by setting this value. If not provided, the subscription will inherit the price from the subscription plan for the provided currency.
     */
   unitAmount?: number | null;
+  /**
+    * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+    */
+  taxInclusive?: boolean | null;
   /**
     * Optionally override the default quantity of 1.
     */
@@ -4542,11 +4578,15 @@ export interface SubscriptionUpdate {
     */
   gatewayCode?: string | null;
   /**
+    * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+    */
+  taxInclusive?: boolean | null;
+  /**
     * Subscription shipping details
     */
   shipping?: SubscriptionShippingUpdate | null;
   /**
-    * The `billing_info_id` is the value that represents a specific billing info for an end customer. When `billing_info_id` is used to assign billing info to the subscription, all future billing events for the subscription will bill to the specified billing info.
+    * The `billing_info_id` is the value that represents a specific billing info for an end customer. When `billing_info_id` is used to assign billing info to the subscription, all future billing events for the subscription will bill to the specified billing info. `billing_info_id` can ONLY be used for sites utilizing the Wallet feature.
     */
   billingInfoId?: string | null;
 
@@ -4598,6 +4638,10 @@ export interface SubscriptionChangeCreate {
     * Optionally, sets custom pricing for the subscription, overriding the plan's default unit amount. The subscription's current currency will be used.
     */
   unitAmount?: number | null;
+  /**
+    * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+    */
+  taxInclusive?: boolean | null;
   /**
     * Optionally override the default quantity of 1.
     */
@@ -4738,7 +4782,7 @@ export interface PurchaseCreate {
   currency?: string | null;
   account?: AccountPurchase | null;
   /**
-    * The `billing_info_id` is the value that represents a specific billing info for an end customer. When `billing_info_id` is used to assign billing info to the subscription, all future billing events for the subscription will bill to the specified billing info.
+    * The `billing_info_id` is the value that represents a specific billing info for an end customer. When `billing_info_id` is used to assign billing info to the subscription, all future billing events for the subscription will bill to the specified billing info. `billing_info_id` can ONLY be used for sites utilizing the Wallet feature.
     */
   billingInfoId?: string | null;
   /**
@@ -4909,6 +4953,10 @@ export interface SubscriptionPurchase {
     * Override the unit amount of the subscription plan by setting this value. If not provided, the subscription will inherit the price from the subscription plan for the provided currency.
     */
   unitAmount?: number | null;
+  /**
+    * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+    */
+  taxInclusive?: boolean | null;
   /**
     * Optionally override the default quantity of 1.
     */
@@ -5501,7 +5549,7 @@ export declare class Client {
    *
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param {string} billingInfoId - Billing Info ID.
+   * @param {string} billingInfoId - Billing Info ID. Can ONLY be used for sites utilizing the Wallet feature.
    * @return {Promise<BillingInfo>} A billing info.
    */
   getABillingInfo(accountId: string, billingInfoId: string): Promise<BillingInfo>;
@@ -5512,7 +5560,7 @@ export declare class Client {
    *
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param {string} billingInfoId - Billing Info ID.
+   * @param {string} billingInfoId - Billing Info ID. Can ONLY be used for sites utilizing the Wallet feature.
    * @param {BillingInfoCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {BillingInfoCreate}
    * @return {Promise<BillingInfo>} Updated billing information.
    */
@@ -5524,7 +5572,7 @@ export declare class Client {
    *
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
-   * @param {string} billingInfoId - Billing Info ID.
+   * @param {string} billingInfoId - Billing Info ID. Can ONLY be used for sites utilizing the Wallet feature.
    * @return {Promise<Empty>} Billing information deleted
    */
   removeABillingInfo(accountId: string, billingInfoId: string): Promise<Empty>;
