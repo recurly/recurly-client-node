@@ -211,6 +211,10 @@ export declare class Account {
    * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
    */
   customFields?: CustomField[] | null;
+  /**
+   * Invoice template associated to the account. Available when invoice customization flag is enabled.
+   */
+  invoiceTemplate?: AccountInvoiceTemplate | null;
 
 }
 
@@ -399,6 +403,18 @@ export declare class CustomField {
    * Any values that resemble a credit card number or security code (CVV/CVC) will be rejected.
    */
   value?: string | null;
+
+}
+
+export declare class AccountInvoiceTemplate {
+  /**
+   * Unique ID to identify the invoice template.
+   */
+  id?: string | null;
+  /**
+   * Template name
+   */
+  name?: string | null;
 
 }
 
@@ -1340,15 +1356,15 @@ export declare class LineItem {
    */
   type?: string | null;
   /**
-   * Unique code to identify an item. Available when the Credit Invoices and Subscription Billing Terms features are enabled.
+   * Unique code to identify an item. Available when the Credit Invoices feature is enabled.
    */
   itemCode?: string | null;
   /**
-   * System-generated unique identifier for an item. Available when the Credit Invoices and Subscription Billing Terms features are enabled.
+   * System-generated unique identifier for an item. Available when the Credit Invoices feature is enabled.
    */
   itemId?: string | null;
   /**
-   * Optional Stock Keeping Unit assigned to an item. Available when the Credit Invoices and Subscription Billing Terms features are enabled.
+   * Optional Stock Keeping Unit assigned to an item. Available when the Credit Invoices feature is enabled.
    */
   externalSku?: string | null;
   /**
@@ -3140,7 +3156,7 @@ export interface BillingInfoCreate {
     */
   sortCode?: string | null;
   /**
-    * The payment method type for a non-credit card based billing info. The value of `bacs` is the only accepted value (Bacs only)
+    * The payment method type for a non-credit card based billing info. `bacs` and `becs` are the only accepted values.
     */
   type?: string | null;
   /**
@@ -3321,11 +3337,11 @@ export interface LineItemCreate {
     */
   description?: string | null;
   /**
-    * Unique code to identify an item. Available when the Credit Invoices and Subscription Billing Terms features are enabled.
+    * Unique code to identify an item. Available when the Credit Invoices feature is enabled.
     */
   itemCode?: string | null;
   /**
-    * System-generated unique identifier for an item. Available when the Credit Invoices and Subscription Billing Terms features are enabled.
+    * System-generated unique identifier for an item. Available when the Credit Invoices feature is enabled.
     */
   itemId?: string | null;
   /**
@@ -4012,11 +4028,11 @@ export interface PlanHostedPages {
 
 export interface AddOnCreate {
   /**
-    * Unique code to identify an item. Available when the `Credit Invoices` and `Subscription Billing Terms` features are enabled. If `item_id` and `item_code` are both present, `item_id` will be used.
+    * Unique code to identify an item. Available when the `Credit Invoices` feature are enabled. If `item_id` and `item_code` are both present, `item_id` will be used.
     */
   itemCode?: string | null;
   /**
-    * System-generated unique identifier for an item. Available when the `Credit Invoices` and `Subscription Billing Terms` features are enabled. If `item_id` and `item_code` are both present, `item_id` will be used.
+    * System-generated unique identifier for an item. Available when the `Credit Invoices` feature is enabled. If `item_id` and `item_code` are both present, `item_id` will be used.
     */
   itemId?: string | null;
   /**
