@@ -36,6 +36,16 @@ const myApiKey = '<myapikey>'
 const client = new recurly.Client(myApiKey)
 ```
 
+To access Recurly API in Europe, you will need to specify the EU Region in the `options`.
+
+```js
+const recurly = require('recurly')
+// You should store your API key somewhere safe
+// and not in plain text if possible
+const myApiKey = '<myapikey>'
+const client = new recurly.Client(myApiKey, { 'region': 'eu' })
+```
+
 **Note**: to import using typescript:
 ```ts
 import * as recurly from "recurly";
