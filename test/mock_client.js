@@ -4,8 +4,8 @@ const Pager = require('../lib/recurly/Pager')
 const { Request, Response } = require('../lib/recurly/Http')
 
 class MockClient extends BaseClient {
-  constructor (apiKey) {
-    super(apiKey)
+  constructor (apiKey, options = {}) {
+    super(apiKey, options)
     this._sandbox = sinon.createSandbox()
   }
 

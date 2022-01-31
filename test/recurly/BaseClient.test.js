@@ -22,6 +22,22 @@ describe('BaseClient', () => {
       assert.ok(userAgentRegex.test(client._getRequestOptions('GET', '/resources', {}).headers['User-Agent']))
       assert.equal(client._getRequestOptions('GET', '/resources', {}).headers['Accept'], 'application/vnd.recurly.v2022-01-01')
     })
+
+    it('should set host to EU DataCenter', () => {
+      const clientEU = new MockClient('myapikey', { 'region': 'eu' })
+      assert.equal(clientEU._httpOptions.host, 'v3.eu.recurly.com')
+    })
+
+    it('should set host to US DataCenter', () => {
+      assert.equal(client._httpOptions.host, 'v3.recurly.com')
+    })
+
+    it('should validate that region is an invalid value', () => {
+      assert.throws(() => {
+        const invalidClient = new MockClient('myapikey', { 'region': 'none' })
+        assert.equal(invalidClient._httpOptions.host, '')
+      }, recurly.ApiError)
+    })
   })
 
   describe('#_interpolatePath', () => {
