@@ -1330,15 +1330,15 @@ export declare class LineItem {
    */
   type?: string | null;
   /**
-   * Unique code to identify an item. Available when the Credit Invoices and Subscription Billing Terms features are enabled.
+   * Unique code to identify an item. Available when the Credit Invoices feature is enabled.
    */
   itemCode?: string | null;
   /**
-   * System-generated unique identifier for an item. Available when the Credit Invoices and Subscription Billing Terms features are enabled.
+   * System-generated unique identifier for an item. Available when the Credit Invoices feature is enabled.
    */
   itemId?: string | null;
   /**
-   * Optional Stock Keeping Unit assigned to an item. Available when the Credit Invoices and Subscription Billing Terms features are enabled.
+   * Optional Stock Keeping Unit assigned to an item. Available when the Credit Invoices feature is enabled.
    */
   externalSku?: string | null;
   /**
@@ -3142,7 +3142,7 @@ export interface BillingInfoCreate {
     */
   sortCode?: string | null;
   /**
-    * The payment method type for a non-credit card based billing info. The value of `bacs` is the only accepted value (Bacs only)
+    * The payment method type for a non-credit card based billing info. `bacs` and `becs` are the only accepted values.
     */
   type?: string | null;
   /**
@@ -3323,11 +3323,11 @@ export interface LineItemCreate {
     */
   description?: string | null;
   /**
-    * Unique code to identify an item. Avaliable when the Credit Invoices and Subscription Billing Terms features are enabled.
+    * Unique code to identify an item. Avaliable when the Credit Invoices feature is enabled.
     */
   itemCode?: string | null;
   /**
-    * System-generated unique identifier for an item. Available when the Credit Invoices and Subscription Billing Terms features are enabled.
+    * System-generated unique identifier for an item. Available when the Credit Invoices feature is enabled.
     */
   itemId?: string | null;
   /**
@@ -4014,11 +4014,11 @@ export interface PlanHostedPages {
 
 export interface AddOnCreate {
   /**
-    * Unique code to identify an item. Avaliable when the `Credit Invoices` and `Subscription Billing Terms` features are enabled. If `item_id` and `item_code` are both present, `item_id` will be used.
+    * Unique code to identify an item. Avaliable when the `Credit Invoices` feature is enabled. If `item_id` and `item_code` are both present, `item_id` will be used.
     */
   itemCode?: string | null;
   /**
-    * System-generated unique identifier for an item. Available when the `Credit Invoices` and `Subscription Billing Terms` features are enabled. If `item_id` and `item_code` are both present, `item_id` will be used.
+    * System-generated unique identifier for an item. Available when the `Credit Invoices` feature is enabled. If `item_id` and `item_code` are both present, `item_id` will be used.
     */
   itemId?: string | null;
   /**
@@ -8634,6 +8634,7 @@ declare namespace errors {
   export class ServerError extends ResponseError { }
   export class InternalServerError extends ServerError { }
   export class ServiceNotAvailableError extends InternalServerError { }
+  export class TaxServiceError extends InternalServerError { }
   export class BadGatewayError extends ServerError { }
   export class ServiceUnavailableError extends ServerError { }
   export class TimeoutError extends ServerError { }
