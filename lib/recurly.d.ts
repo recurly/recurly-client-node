@@ -8790,6 +8790,7 @@ declare namespace errors {
   export class ServerError extends ResponseError { }
   export class InternalServerError extends ServerError { }
   export class ServiceNotAvailableError extends InternalServerError { }
+  export class TaxServiceError extends InternalServerError { }
   export class BadGatewayError extends ServerError { }
   export class ServiceUnavailableError extends ServerError { }
   export class TimeoutError extends ServerError { }
