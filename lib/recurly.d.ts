@@ -210,7 +210,7 @@ export declare class Account {
    */
   billTo?: string | null;
   /**
-   * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+   * Unique ID to identify a dunning campaign. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
    */
   dunningCampaignId?: string | null;
   address?: Address | null;
@@ -531,7 +531,7 @@ export declare class AccountMini {
   parentAccountId?: string | null;
   billTo?: string | null;
   /**
-   * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+   * Unique ID to identify a dunning campaign. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
    */
   dunningCampaignId?: string | null;
 
@@ -1201,7 +1201,7 @@ export declare class Invoice {
    */
   closedAt?: Date | null;
   /**
-   * Unique ID to identify the dunning campaign used when dunning the invoice. Available when the Dunning Campaigns feature is enabled. For sites without multiple dunning campaigns enabled, this will always be the default dunning campaign.
+   * Unique ID to identify the dunning campaign used when dunning the invoice. For sites without multiple dunning campaigns enabled, this will always be the default dunning campaign.
    */
   dunningCampaignId?: string | null;
 
@@ -2344,7 +2344,7 @@ export declare class Plan {
    */
   allowAnyItemOnSubscriptions?: boolean | null;
   /**
-   * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this plan. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+   * Unique ID to identify a dunning campaign. Used to specify if a non-default dunning campaign should be assigned to this plan. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
    */
   dunningCampaignId?: string | null;
   /**
@@ -2941,7 +2941,7 @@ export interface AccountCreate {
     */
   transactionType?: string | null;
   /**
-    * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+    * Unique ID to identify a dunning campaign. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
     */
   dunningCampaignId?: string | null;
   address?: Address | null;
@@ -3229,7 +3229,7 @@ export interface AccountUpdate {
     */
   transactionType?: string | null;
   /**
-    * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+    * Unique ID to identify a dunning campaign. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
     */
   dunningCampaignId?: string | null;
   address?: Address | null;
@@ -3966,7 +3966,7 @@ export interface PlanCreate {
     */
   allowAnyItemOnSubscriptions?: boolean | null;
   /**
-    * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this plan. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+    * Unique ID to identify a dunning campaign. Used to specify if a non-default dunning campaign should be assigned to this plan. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
     */
   dunningCampaignId?: string | null;
 
@@ -4210,7 +4210,7 @@ export interface PlanUpdate {
     */
   allowAnyItemOnSubscriptions?: boolean | null;
   /**
-    * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this plan. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+    * Unique ID to identify a dunning campaign. Used to specify if a non-default dunning campaign should be assigned to this plan. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
     */
   dunningCampaignId?: string | null;
 
@@ -4852,7 +4852,7 @@ export interface AccountPurchase {
     */
   transactionType?: string | null;
   /**
-    * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+    * Unique ID to identify a dunning campaign. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
     */
   dunningCampaignId?: string | null;
   address?: Address | null;
