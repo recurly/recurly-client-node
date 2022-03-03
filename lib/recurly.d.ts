@@ -202,19 +202,19 @@ export declare class Account {
    */
   billTo?: string | null;
   /**
-   * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+   * Unique ID to identify a dunning campaign. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
    */
   dunningCampaignId?: string | null;
+  /**
+   * Unique ID to identify an invoice template. Available when the Invoice Customization feature is enabled. Used to specify if a non-default invoice template will be used to generate invoices for the account. For sites without multiple invoice templates enabled, the default template will always be used.
+   */
+  invoiceTemplateId?: string | null;
   address?: Address | null;
   billingInfo?: BillingInfo | null;
   /**
    * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
    */
   customFields?: CustomField[] | null;
-  /**
-   * Invoice template associated to the account. Available when invoice customization flag is enabled.
-   */
-  invoiceTemplate?: AccountInvoiceTemplate | null;
 
 }
 
@@ -406,18 +406,6 @@ export declare class CustomField {
 
 }
 
-export declare class AccountInvoiceTemplate {
-  /**
-   * Unique ID to identify the invoice template.
-   */
-  id?: string | null;
-  /**
-   * Template name
-   */
-  name?: string | null;
-
-}
-
 export declare class ErrorMayHaveTransaction {
   /**
    * Type
@@ -539,7 +527,7 @@ export declare class AccountMini {
   parentAccountId?: string | null;
   billTo?: string | null;
   /**
-   * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+   * Unique ID to identify a dunning campaign. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
    */
   dunningCampaignId?: string | null;
 
@@ -1110,6 +1098,10 @@ export declare class Invoice {
    */
   id?: string | null;
   /**
+   * Invoice UUID
+   */
+  uuid?: string | null;
+  /**
    * Object type
    */
   object?: string | null;
@@ -1244,7 +1236,7 @@ export declare class Invoice {
    */
   closedAt?: Date | null;
   /**
-   * Unique ID to identify the dunning campaign used when dunning the invoice. Available when the Dunning Campaigns feature is enabled. For sites without multiple dunning campaigns enabled, this will always be the default dunning campaign.
+   * Unique ID to identify the dunning campaign used when dunning the invoice. For sites without multiple dunning campaigns enabled, this will always be the default dunning campaign.
    */
   dunningCampaignId?: string | null;
 
@@ -1981,6 +1973,10 @@ export declare class SubscriptionAddOn {
    */
   tiers?: SubscriptionAddOnTier[] | null;
   /**
+   * If percentage tiers are provided in the request, all existing percentage tiers on the Subscription Add-on will be removed and replaced by the percentage tiers in the request. 
+   */
+  percentageTiers?: SubscriptionAddOnPercentageTier[] | null;
+  /**
    * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0. Required if add_on_type is usage and usage_type is percentage.
    */
   usagePercentage?: number | null;
@@ -2061,7 +2057,19 @@ export declare class SubscriptionAddOnTier {
    */
   unitAmountDecimal?: string | null;
   /**
-   * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places represented as a string. A value between 0.0 and 100.0. Optionally, override tiers' default usage percentage. Required if add-on's `add_on_type` is `usage` and `usage_type` is `percentage`. Must be omitted otherwise.
+   * This field is deprecated. Do not used it anymore for percentage tiers subscription add ons. Use the percentage_tiers object instead.
+   */
+  usagePercentage?: string | null;
+
+}
+
+export declare class SubscriptionAddOnPercentageTier {
+  /**
+   * Ending amount
+   */
+  endingAmount?: number | null;
+  /**
+   * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places represented as a string. A value between 0.0 and 100.0. 
    */
   usagePercentage?: string | null;
 
@@ -2418,7 +2426,7 @@ export declare class Plan {
    */
   allowAnyItemOnSubscriptions?: boolean | null;
   /**
-   * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this plan. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+   * Unique ID to identify a dunning campaign. Used to specify if a non-default dunning campaign should be assigned to this plan. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
    */
   dunningCampaignId?: string | null;
   /**
@@ -2566,6 +2574,10 @@ export declare class AddOn {
    */
   tiers?: Tier[] | null;
   /**
+   * Percentage Tiers
+   */
+  percentageTiers?: PercentageTiersByCurrency[] | null;
+  /**
    * Optional, stock keeping unit to link the item to other inventory systems.
    */
   externalSku?: string | null;
@@ -2610,7 +2622,7 @@ export declare class Tier {
    */
   endingQuantity?: number | null;
   /**
-   * Decimal usage percentage.
+   * This field is deprecated. Do not used it anymore for percentage tiers add ons. Use the percentage_tiers object instead.
    */
   usagePercentage?: string | null;
   /**
@@ -2633,6 +2645,30 @@ export declare class TierPricing {
    * Allows up to 9 decimal places. Only supported when `add_on_type` = `usage`. If `unit_amount_decimal` is provided, `unit_amount` cannot be provided. 
    */
   unitAmountDecimal?: string | null;
+
+}
+
+export declare class PercentageTiersByCurrency {
+  /**
+   * 3-letter ISO 4217 currency code.
+   */
+  currency?: string | null;
+  /**
+   * Tiers
+   */
+  tiers?: PercentageTier[] | null;
+
+}
+
+export declare class PercentageTier {
+  /**
+   * Ending amount for the tier. Allows up to 2 decimal places. The last tier ending_amount is null.
+   */
+  endingAmount?: number | null;
+  /**
+   * Decimal usage percentage.
+   */
+  usagePercentage?: string | null;
 
 }
 
@@ -2895,6 +2931,31 @@ export declare class DunningCampaignsBulkUpdateResponse {
 
 }
 
+export declare class InvoiceTemplate {
+  id?: string | null;
+  /**
+   * Invoice template code.
+   */
+  code?: string | null;
+  /**
+   * Invoice template name.
+   */
+  name?: string | null;
+  /**
+   * Invoice template description.
+   */
+  description?: string | null;
+  /**
+   * When the invoice template was created in Recurly.
+   */
+  createdAt?: Date | null;
+  /**
+   * When the invoice template was updated in Recurly.
+   */
+  updatedAt?: Date | null;
+
+}
+
 
 
 export interface Empty {
@@ -2963,7 +3024,7 @@ export interface AccountCreate {
     */
   transactionType?: string | null;
   /**
-    * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+    * Unique ID to identify a dunning campaign. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
     */
   dunningCampaignId?: string | null;
   /**
@@ -3183,6 +3244,14 @@ export interface BillingInfoCreate {
     * The `backup_payment_method` field is used to designate a billing info as a backup on the account that will be tried if the initial billing info used for an invoice is declined. All payment methods, including the billing info marked `primary_payment_method` can be set as a backup. An account can have a maximum of 1 backup, if a user sets a different payment method as a backup, the existing backup will no longer be marked as such.
     */
   backupPaymentMethod?: boolean | null;
+  /**
+    * Use for Adyen HPP billing info.
+    */
+  externalHppType?: string | null;
+  /**
+    * Use for Online Banking billing info.
+    */
+  onlineBankingPaymentType?: string | null;
 
 }
 
@@ -3247,7 +3316,7 @@ export interface AccountUpdate {
     */
   transactionType?: string | null;
   /**
-    * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+    * Unique ID to identify a dunning campaign. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
     */
   dunningCampaignId?: string | null;
   /**
@@ -3988,7 +4057,7 @@ export interface PlanCreate {
     */
   allowAnyItemOnSubscriptions?: boolean | null;
   /**
-    * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this plan. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+    * Unique ID to identify a dunning campaign. Used to specify if a non-default dunning campaign should be assigned to this plan. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
     */
   dunningCampaignId?: string | null;
 
@@ -4148,7 +4217,7 @@ export interface Tier {
     */
   endingQuantity?: number | null;
   /**
-    * Decimal usage percentage.
+    * This field is deprecated. Do not used it anymore for percentage tiers add ons. Use the percentage_tiers object instead.
     */
   usagePercentage?: string | null;
   /**
@@ -4256,7 +4325,7 @@ export interface PlanUpdate {
     */
   allowAnyItemOnSubscriptions?: boolean | null;
   /**
-    * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this plan. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+    * Unique ID to identify a dunning campaign. Used to specify if a non-default dunning campaign should be assigned to this plan. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
     */
   dunningCampaignId?: string | null;
 
@@ -4546,7 +4615,7 @@ export interface SubscriptionAddOnTier {
     */
   unitAmountDecimal?: string | null;
   /**
-    * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places represented as a string. A value between 0.0 and 100.0. Optionally, override tiers' default usage percentage. Required if add-on's `add_on_type` is `usage` and `usage_type` is `percentage`. Must be omitted otherwise.
+    * This field is deprecated. Do not used it anymore for percentage tiers subscription add ons. Use the percentage_tiers object instead.
     */
   usagePercentage?: string | null;
 
@@ -4923,7 +4992,7 @@ export interface AccountPurchase {
     */
   transactionType?: string | null;
   /**
-    * Unique ID to identify a dunning campaign. Available when the Dunning Campaigns feature is enabled. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+    * Unique ID to identify a dunning campaign. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
     */
   dunningCampaignId?: string | null;
   /**
@@ -6629,7 +6698,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_invoice_template_accounts
    *
    * 
-   * @param {string} invoiceTemplateId - Invoice template ID.
+   * @param {string} invoiceTemplateId - Invoice template ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
@@ -8702,6 +8771,50 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    */
   previewPurchase(body: PurchaseCreate): Promise<InvoiceCollection>;
   /**
+   * Create a pending purchase
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_pending_purchase
+   *
+   * @example
+   * try {
+   *   const purchaseReq = {
+   *     currency: 'EUR',
+   *     account: {
+   *       code: accountCode,
+   *       email: 'example@recurly.com',
+   *       billingInfo: {
+   *         firstName: 'Benjamin',
+   *         lastName: 'Du Monde',
+   *         onlineBankingPaymentType: 'ideal'
+   *       },
+   *     },
+   *     lineItems: [
+   *       {
+   *         currency: 'EUR',
+   *         unitAmount: 1000,
+   *         type: 'charge'
+   *       }
+   *     ]
+   *   };
+   *   const invoiceCollection = await client.createPendingPurchase(purchaseReq)
+   *   console.log('Created ChargeInvoice with UUID: ', invoiceCollection.chargeInvoice.uuid)
+   * } catch (err) {
+   *   if (err instanceof recurly.errors.ValidationError) {
+   *     // If the request was not valid, you may want to tell your user
+   *     // why. You can find the invalid params and reasons in err.params
+   *     console.log('Failed validation', err.params)
+   *   } else {
+   *     // If we don't know what to do with the err, we should
+   *     // probably re-raise and let our web framework and logger handle it
+   *     console.log('Unknown Error: ', err)
+   *   }
+   * }
+   * 
+   * @param {PurchaseCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {PurchaseCreate}
+   * @return {Promise<InvoiceCollection>} Returns the pending invoice
+   */
+  createPendingPurchase(body: PurchaseCreate): Promise<InvoiceCollection>;
+  /**
    * List the dates that have an available export to download.
    *
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_export_dates
@@ -8777,6 +8890,31 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * @return {Promise<DunningCampaignsBulkUpdateResponse>} A list of updated plans.
    */
   putDunningCampaignBulkUpdate(body: DunningCampaignsBulkUpdate): Promise<DunningCampaignsBulkUpdateResponse>;
+  /**
+   * Show the invoice templates for a site
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_invoice_templates
+   *
+   * 
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
+   * @param {string} options.params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   *   order. In descending order updated records will move behind the cursor and could
+   *   prevent some records from being returned.
+   *   
+   * @return {Pager<InvoiceTemplate>} A list of the the invoice templates on a site.
+   */
+  listInvoiceTemplates(options?: object): Pager<InvoiceTemplate>;
+  /**
+   * Show the settings for an invoice template
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_invoice_template
+   *
+   * 
+   * @param {string} invoiceTemplateId - Invoice template ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @return {Promise<InvoiceTemplate>} Settings for an invoice template.
+   */
+  getInvoiceTemplate(invoiceTemplateId: string): Promise<InvoiceTemplate>;
 
 }
 
