@@ -1969,11 +1969,11 @@ export declare class SubscriptionAddOn {
    */
   tierType?: string | null;
   /**
-   * If tiers are provided in the request, all existing tiers on the Subscription Add-on will be removed and replaced by the tiers in the request. 
+   * If tiers are provided in the request, all existing tiers on the Subscription Add-on will be removed and replaced by the tiers in the request. If add_on.tier_type is tiered or volume and add_on.usage_type is percentage use percentage_tiers instead. 
    */
   tiers?: SubscriptionAddOnTier[] | null;
   /**
-   * If percentage tiers are provided in the request, all existing percentage tiers on the Subscription Add-on will be removed and replaced by the percentage tiers in the request. 
+   * If percentage tiers are provided in the request, all existing percentage tiers on the Subscription Add-on will be removed and replaced by the percentage tiers in the request. Use only if add_on.tier_type is tiered or volume and add_on.usage_type is percentage. 
    */
   percentageTiers?: SubscriptionAddOnPercentageTier[] | null;
   /**
@@ -2021,9 +2021,9 @@ export declare class AddOnMini {
    */
   usageType?: string | null;
   /**
-   * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0.
+   * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0, represented as a string.
    */
-  usagePercentage?: number | null;
+  usagePercentage?: string | null;
   /**
    * System-generated unique identifier for an measured unit associated with the add-on.
    */
@@ -2049,17 +2049,13 @@ export declare class SubscriptionAddOnTier {
    */
   endingQuantity?: number | null;
   /**
-   * Allows up to 2 decimal places. Optionally, override the tiers' default unit amount. If add-on's `add_on_type` is `usage` and `usage_type` is `percentage`, cannot be provided.
+   * Allows up to 2 decimal places. Optionally, override the tiers' default unit amount.
    */
   unitAmount?: number | null;
   /**
-   * Allows up to 9 decimal places.  Optionally, override tiers' default unit amount. If `unit_amount_decimal` is provided, `unit_amount` cannot be provided. If add-on's `add_on_type` is `usage` and `usage_type` is `percentage`, cannot be provided. 
+   * Allows up to 9 decimal places.  Optionally, override tiers' default unit amount. If `unit_amount_decimal` is provided, `unit_amount` cannot be provided. 
    */
   unitAmountDecimal?: string | null;
-  /**
-   * This field is deprecated. Do not used it anymore for percentage tiers subscription add ons. Use the percentage_tiers object instead.
-   */
-  usagePercentage?: string | null;
 
 }
 
@@ -2518,9 +2514,9 @@ export declare class AddOn {
    */
   usageType?: string | null;
   /**
-   * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0.
+   * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0, represented as a string.
    */
-  usagePercentage?: number | null;
+  usagePercentage?: string | null;
   /**
    * System-generated unique identifier for an measured unit associated with the add-on.
    */
@@ -2618,13 +2614,9 @@ export declare class AddOnPricing {
 
 export declare class Tier {
   /**
-   * Ending quantity for the tier.  This represents a unit amount for unit-priced add ons, but for percentage type usage add ons, represents the site default currency in its minimum divisible unit.
+   * Ending quantity for the tier.  This represents a unit amount for unit-priced add ons.
    */
   endingQuantity?: number | null;
-  /**
-   * This field is deprecated. Do not used it anymore for percentage tiers add ons. Use the percentage_tiers object instead.
-   */
-  usagePercentage?: string | null;
   /**
    * Tier pricing
    */
@@ -2735,9 +2727,13 @@ export declare class Usage {
    */
   tierType?: string | null;
   /**
-   * The tiers and prices of the subscription based on the usage_timestamp. If tier_type = flat, tiers = null
+   * The tiers and prices of the subscription based on the usage_timestamp. If tier_type = flat, tiers = []
    */
   tiers?: SubscriptionAddOnTier[] | null;
+  /**
+   * The percentage tiers of the subscription based on the usage_timestamp. If tier_type = flat, percentage_tiers = []
+   */
+  percentageTiers?: SubscriptionAddOnPercentageTier[] | null;
   /**
    * The ID of the measured unit associated with the add-on the usage record is for.
    */
@@ -4105,7 +4101,7 @@ export interface PlanHostedPages {
 
 export interface AddOnCreate {
   /**
-    * Unique code to identify an item. Available when the `Credit Invoices` feature are enabled. If `item_id` and `item_code` are both present, `item_id` will be used.
+    * Unique code to identify an item. Available when the `Credit Invoices` feature is enabled. If `item_id` and `item_code` are both present, `item_id` will be used.
     */
   itemCode?: string | null;
   /**
@@ -4129,9 +4125,9 @@ export interface AddOnCreate {
     */
   usageType?: string | null;
   /**
-    * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0. Required if `add_on_type` is usage, `tier_type` is `flat` and `usage_type` is percentage. Must be omitted otherwise.
+    * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places represented as a string. A value between 0.0 and 100.0. Required if `add_on_type` is usage, `tier_type` is `flat` and `usage_type` is percentage. Must be omitted otherwise.
     */
-  usagePercentage?: number | null;
+  usagePercentage?: string | null;
   /**
     * System-generated unique identifier for a measured unit to be associated with the add-on. Either `measured_unit_id` or `measured_unit_name` are required when `add_on_type` is `usage`. If `measured_unit_id` and `measured_unit_name` are both present, `measured_unit_id` will be used.
     */
@@ -4185,9 +4181,13 @@ export interface AddOnCreate {
     */
   tierType?: string | null;
   /**
-    * If the tier_type is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount` for the desired `currencies`, or alternatively, `usage_percentage` for usage percentage type usage add ons. There must be one tier with an `ending_quantity` of 999999999 which is the default if not provided. 
+    * If the tier_type is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount` for the desired `currencies`. There must be one tier with an `ending_quantity` of 999999999 which is the default if not provided. 
     */
   tiers?: Tier[] | null;
+  /**
+    * Array of objects which must have at least one set of tiers per currency and the currency code. The tier_type must be `volume` or `tiered`, if not, it must be absent. There must be one tier without ending_amount value. 
+    */
+  percentageTiers?: PercentageTiersByCurrency[] | null;
 
 }
 
@@ -4213,13 +4213,9 @@ export interface AddOnPricing {
 
 export interface Tier {
   /**
-    * Ending quantity for the tier.  This represents a unit amount for unit-priced add ons, but for percentage type usage add ons, represents the site default currency in its minimum divisible unit.
+    * Ending quantity for the tier.  This represents a unit amount for unit-priced add ons.
     */
   endingQuantity?: number | null;
-  /**
-    * This field is deprecated. Do not used it anymore for percentage tiers add ons. Use the percentage_tiers object instead.
-    */
-  usagePercentage?: string | null;
   /**
     * Tier pricing
     */
@@ -4240,6 +4236,30 @@ export interface TierPricing {
     * Allows up to 9 decimal places. Only supported when `add_on_type` = `usage`. If `unit_amount_decimal` is provided, `unit_amount` cannot be provided. 
     */
   unitAmountDecimal?: string | null;
+
+}
+
+export interface PercentageTiersByCurrency {
+  /**
+    * 3-letter ISO 4217 currency code.
+    */
+  currency?: string | null;
+  /**
+    * Tiers
+    */
+  tiers?: PercentageTier[] | null;
+
+}
+
+export interface PercentageTier {
+  /**
+    * Ending amount for the tier. Allows up to 2 decimal places. The last tier ending_amount is null.
+    */
+  endingAmount?: number | null;
+  /**
+    * Decimal usage percentage.
+    */
+  usagePercentage?: string | null;
 
 }
 
@@ -4345,9 +4365,9 @@ export interface AddOnUpdate {
     */
   name?: string | null;
   /**
-    * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0. Required if `add_on_type` is usage, `tier_type` is `flat` and `usage_type` is percentage. Must be omitted otherwise.
+    * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places represented as a string. A value between 0.0 and 100.0. Required if `add_on_type` is usage, `tier_type` is `flat` and `usage_type` is percentage. Must be omitted otherwise.
     */
-  usagePercentage?: number | null;
+  usagePercentage?: string | null;
   /**
     * System-generated unique identifier for a measured unit to be associated with the add-on. Either `measured_unit_id` or `measured_unit_name` are required when `add_on_type` is `usage`. If `measured_unit_id` and `measured_unit_name` are both present, `measured_unit_id` will be used.
     */
@@ -4393,9 +4413,13 @@ export interface AddOnUpdate {
     */
   currencies?: AddOnPricing[] | null;
   /**
-    * If the tier_type is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount` for the desired `currencies`, or alternatively, `usage_percentage` for usage percentage type usage add ons. There must be one tier with an `ending_quantity` of 999999999 which is the default if not provided. 
+    * If the tier_type is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount` for the desired `currencies`. There must be one tier without an `ending_quantity` value that represents the final tier. 
     */
   tiers?: Tier[] | null;
+  /**
+    * `percentage_tiers` is an array of objects, which must have the set of tiers per currency and the currency code. The tier_type must be `volume` or `tiered`, if not, it must be absent. 
+    */
+  percentageTiers?: PercentageTiersByCurrency[] | null;
 
 }
 
@@ -4587,9 +4611,13 @@ export interface SubscriptionAddOnCreate {
     */
   unitAmountDecimal?: string | null;
   /**
-    * If the plan add-on's `tier_type` is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount`. There must be one tier with an `ending_quantity` of 999999999 which is the default if not provided. See our [Guide](https://developers.recurly.com/guides/item-addon-guide.html) for an overview of how to configure quantity-based pricing models. 
+    * If the plan add-on's `tier_type` is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount`. There must be one tier without ending_quantity value. See our [Guide](https://developers.recurly.com/guides/item-addon-guide.html) for an overview of how to configure quantity-based pricing models. 
     */
   tiers?: SubscriptionAddOnTier[] | null;
+  /**
+    * If percentage tiers are provided in the request, all existing percentage tiers on the Subscription Add-on will be removed and replaced by the percentage tiers in the request. There must be one tier without ending_amount value. Use only if add_on.tier_type is tiered or volume and add_on.usage_type is percentage. 
+    */
+  percentageTiers?: SubscriptionAddOnPercentageTier[] | null;
   /**
     * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0. Required if `add_on_type` is usage and `usage_type` is percentage. Must be omitted otherwise. `usage_percentage` does not support tiers. See our [Guide](https://developers.recurly.com/guides/usage-based-billing-guide.html) for an overview of how to configure usage add-ons.
     */
@@ -4607,15 +4635,23 @@ export interface SubscriptionAddOnTier {
     */
   endingQuantity?: number | null;
   /**
-    * Allows up to 2 decimal places. Optionally, override the tiers' default unit amount. If add-on's `add_on_type` is `usage` and `usage_type` is `percentage`, cannot be provided.
+    * Allows up to 2 decimal places. Optionally, override the tiers' default unit amount.
     */
   unitAmount?: number | null;
   /**
-    * Allows up to 9 decimal places.  Optionally, override tiers' default unit amount. If `unit_amount_decimal` is provided, `unit_amount` cannot be provided. If add-on's `add_on_type` is `usage` and `usage_type` is `percentage`, cannot be provided. 
+    * Allows up to 9 decimal places.  Optionally, override tiers' default unit amount. If `unit_amount_decimal` is provided, `unit_amount` cannot be provided. 
     */
   unitAmountDecimal?: string | null;
+
+}
+
+export interface SubscriptionAddOnPercentageTier {
   /**
-    * This field is deprecated. Do not used it anymore for percentage tiers subscription add ons. Use the percentage_tiers object instead.
+    * Ending amount
+    */
+  endingAmount?: number | null;
+  /**
+    * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places represented as a string. A value between 0.0 and 100.0. 
     */
   usagePercentage?: string | null;
 
@@ -4670,10 +4706,6 @@ export interface SubscriptionUpdate {
     * If present, this subscription's transactions will use the payment gateway with this code.
     */
   gatewayCode?: string | null;
-  /**
-    * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
-    */
-  taxInclusive?: boolean | null;
   /**
     * Subscription shipping details
     */
@@ -5051,13 +5083,13 @@ export interface SubscriptionPurchase {
     */
   unitAmount?: number | null;
   /**
-    * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
-    */
-  taxInclusive?: boolean | null;
-  /**
     * Optionally override the default quantity of 1.
     */
   quantity?: number | null;
+  /**
+    * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+    */
+  taxInclusive?: boolean | null;
   /**
     * Add-ons
     */
@@ -5136,14 +5168,8 @@ export declare class Client {
   /**
    * List sites
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_sites
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_sites
    *
-   * @example
-   * const sites = client.listSites({ params: { limit: 200 } })
-   * 
-   * for await (const site of sites.each()) {
-   *   console.log(site.subdomain)
-   * }
    * 
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
@@ -5172,23 +5198,8 @@ export declare class Client {
   /**
    * Fetch a site
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_site
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_site
    *
-   * @example
-   * try {
-   *   const site = await client.getSite(siteId)
-   *   console.log('Fetched site: ', site)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} siteId - Site ID or subdomain. For ID no prefix is used e.g. `e28zov4fw0v2`. For subdomain use prefix `subdomain-`, e.g. `subdomain-recurly`.
    * @return {Promise<Site>} A site.
@@ -5197,14 +5208,8 @@ export declare class Client {
   /**
    * List a site's accounts
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_accounts
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_accounts
    *
-   * @example
-   * const accounts = client.listAccounts({ params: { limit: 200 } })
-   * 
-   * for await (const account of accounts.each()) {
-   *   console.log(account.code)
-   * }
    * 
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
@@ -5243,35 +5248,8 @@ export declare class Client {
   /**
    * Create an account
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_account
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/create_account
    *
-   * @example
-   * try {
-   *   const accountCreate = {
-   *     code: accountCode,
-   *     firstName: 'Benjamin',
-   *     lastName: 'Du Monde',
-   *     address: {
-   *       street1: '900 Camp St',
-   *       city: 'New Orleans',
-   *       region: 'LA',
-   *       postalCode: '70115',
-   *       country: 'US'
-   *     }
-   *   }
-   *   const account = await client.createAccount(accountCreate)
-   *   console.log('Created Account: ', account.code)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {AccountCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {AccountCreate}
    * @return {Promise<Account>} An account.
@@ -5280,23 +5258,8 @@ export declare class Client {
   /**
    * Fetch an account
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_account
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_account
    *
-   * @example
-   * try {
-   *   const account = await client.getAccount(accountId)
-   *   console.log('Fetched account: ', account.code)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @return {Promise<Account>} An account.
@@ -5305,27 +5268,8 @@ export declare class Client {
   /**
    * Update an account
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/update_account
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/update_account
    *
-   * @example
-   * try {
-   *   const accountUpdate = {
-   *     firstName: 'Aaron',
-   *     lastName: 'Du Monde'
-   *   }
-   *   const account = await client.updateAccount(accountId, accountUpdate)
-   *   console.log('Updated account: ', account)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {AccountUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {AccountUpdate}
@@ -5335,22 +5279,8 @@ export declare class Client {
   /**
    * Deactivate an account
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/deactivate_account
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/deactivate_account
    *
-   * @example
-   * try {
-   *   const account = await client.deactivateAccount(accountId)
-   *   console.log('Deleted account: ', account.code)
-   * } catch (err) {
-   *   if (err && err.type === 'not-found') {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   }
-   *   // If we don't know what to do with the err, we should
-   *   // probably re-raise and let our web framework and logger handle it
-   *   throw err
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @return {Promise<Account>} An account.
@@ -5359,23 +5289,8 @@ export declare class Client {
   /**
    * Fetch an account's acquisition data
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_account_acquisition
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_account_acquisition
    *
-   * @example
-   * try {
-   *   const acquisition = await client.getAccountAcquisition(accountId)
-   *   console.log('Fetched account acquisition: ', acquisition.id)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @return {Promise<AccountAcquisition>} An account's acquisition data.
@@ -5384,28 +5299,8 @@ export declare class Client {
   /**
    * Update an account's acquisition data
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/update_account_acquisition
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/update_account_acquisition
    *
-   * @example
-   * try {
-   *   const acquisitionUpdate = {
-   *     campaign: "big-event-campaign",
-   *     channel: "social_media",
-   *     subchannel: "twitter"
-   *   }
-   *   const accountAcquisition = await client.updateAccountAcquisition(accountId, acquisitionUpdate)
-   *   console.log('Edited Account Acquisition: ', accountAcquisition)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {AccountAcquisitionUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {AccountAcquisitionUpdate}
@@ -5415,23 +5310,8 @@ export declare class Client {
   /**
    * Remove an account's acquisition data
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/remove_account_acquisition
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/remove_account_acquisition
    *
-   * @example
-   * try {
-   *   await client.removeAccountAcquisition(accountId)
-   *   console.log('Removed account acquisition from account: ', accountId)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @return {Promise<Empty>} Acquisition data was succesfully deleted.
@@ -5440,22 +5320,8 @@ export declare class Client {
   /**
    * Reactivate an inactive account
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/reactivate_account
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/reactivate_account
    *
-   * @example
-   * try {
-   *   const account = await client.reactivateAccount(accountId)
-   *   console.log('Reactivated account: ', account.code)
-   * } catch (err) {
-   *   if (err && err.type === 'not_found') {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   }
-   *   // If we don't know what to do with the err, we should
-   *   // probably re-raise and let our web framework and logger handle it
-   *   throw err
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @return {Promise<Account>} An account.
@@ -5464,23 +5330,8 @@ export declare class Client {
   /**
    * Fetch an account's balance and past due status
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_account_balance
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_account_balance
    *
-   * @example
-   * try {
-   *   const balance = await client.getAccountBalance(accountId)
-   *   console.log('Fetched account balance: ', balance.balances)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @return {Promise<AccountBalance>} An account's balance.
@@ -5489,23 +5340,8 @@ export declare class Client {
   /**
    * Fetch an account's billing information
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_billing_info
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_billing_info
    *
-   * @example
-   * try {
-   *   const billingInfo = await client.getBillingInfo(accountId)
-   *   console.log('Fetched Billing Info: ', billingInfo.id)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @return {Promise<BillingInfo>} An account's billing information.
@@ -5514,27 +5350,8 @@ export declare class Client {
   /**
    * Set an account's billing information
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/update_billing_info
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/update_billing_info
    *
-   * @example
-   * try {
-   *   const billingInfoUpdate = {
-   *     firstName: 'Aaron',
-   *     lastName: 'Du Monde',
-   *   }
-   *   const billingInfo = await client.updateBillingInfo(accountId, billingInfoUpdate)
-   *   console.log('Updated billing info: ', billingInfo.id)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {BillingInfoCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {BillingInfoCreate}
@@ -5544,23 +5361,8 @@ export declare class Client {
   /**
    * Remove an account's billing information
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/remove_billing_info
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/remove_billing_info
    *
-   * @example
-   * try {
-   *   client.removeBillingInfo(accountId)
-   *   console.log('Removed billing info from account: ', accountId)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @return {Promise<Empty>} Billing information deleted
@@ -5569,23 +5371,8 @@ export declare class Client {
   /**
    * Verify an account's credit card billing information
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/verify_billing_info
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/verify_billing_info
    *
-   * @example
-   * try {
-   *   const transaction = await client.verifyBillingInfo(accountId)
-   *   console.log('Fetched Transaction: ', transaction.id)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {Object} options - Optional configurations for the request
@@ -5597,7 +5384,7 @@ export declare class Client {
   /**
    * Get the list of billing information associated with an account
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_billing_infos
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_billing_infos
    *
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
@@ -5631,7 +5418,7 @@ export declare class Client {
   /**
    * Add new billing information on an account
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_billing_info
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/create_billing_info
    *
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
@@ -5642,7 +5429,7 @@ export declare class Client {
   /**
    * Fetch a billing info
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_a_billing_info
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_a_billing_info
    *
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
@@ -5653,7 +5440,7 @@ export declare class Client {
   /**
    * Update an account's billing information
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/update_a_billing_info
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/update_a_billing_info
    *
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
@@ -5665,7 +5452,7 @@ export declare class Client {
   /**
    * Remove an account's billing information
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/remove_a_billing_info
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/remove_a_billing_info
    *
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
@@ -5676,14 +5463,8 @@ export declare class Client {
   /**
    * Show the coupon redemptions for an account
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_account_coupon_redemptions
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_account_coupon_redemptions
    *
-   * @example
-   * const redemptions = client.listAccountCouponRedemptions(accountId, { params: { limit: 200 } })
-   * 
-   * for await (const redemption of redemptions.each()) {
-   *   console.log(redemption.id)
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {Object} options - Optional configurations for the request
@@ -5717,14 +5498,8 @@ export declare class Client {
   /**
    * Show the coupon redemptions that are active on an account
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_active_coupon_redemptions
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_active_coupon_redemptions
    *
-   * @example
-   * const redemptions = await client.listActiveCouponRedemptions(accountId, { params: { limit: 200 } })
-   * 
-   * for await (const redemption of redemptions.each()) {
-   *   console.log('Fetched coupon redemption: ', redemption.id)
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @return {Pager<CouponRedemption>} Active coupon redemptions on an account.
@@ -5733,7 +5508,7 @@ export declare class Client {
   /**
    * Generate an active coupon redemption on an account or subscription
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_coupon_redemption
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/create_coupon_redemption
    *
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
@@ -5744,23 +5519,8 @@ export declare class Client {
   /**
    * Delete the active coupon redemption from an account
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/remove_coupon_redemption
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/remove_coupon_redemption
    *
-   * @example
-   * try {
-   *   const redemption = await client.removeCouponRedemption(accountId)
-   *   console.log('Removed coupon redemption: ', redemption.id)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @return {Promise<CouponRedemption>} Coupon redemption deleted.
@@ -5769,14 +5529,8 @@ export declare class Client {
   /**
    * List an account's credit payments
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_account_credit_payments
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_account_credit_payments
    *
-   * @example
-   * const payments = client.listAccountCreditPayments(accountId, { params: { limit: 200 } })
-   * 
-   * for await (const payment of payments.each()) {
-   *   console.log(payment.uuid)
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {Object} options - Optional configurations for the request
@@ -5799,14 +5553,8 @@ export declare class Client {
   /**
    * List an account's invoices
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_account_invoices
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_account_invoices
    *
-   * @example
-   * const invoices = client.listAccountInvoices(accountId, { params: { limit: 200 } })
-   * 
-   * for await (const invoice of invoices.each()) {
-   *   console.log(invoice.number)
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {Object} options - Optional configurations for the request
@@ -5847,29 +5595,8 @@ export declare class Client {
   /**
    * Create an invoice for pending line items
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_invoice
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/create_invoice
    *
-   * @example
-   * try {
-   *   let invoiceCreate = {
-   *     currency: 'USD',
-   *     collectionMethod: 'automatic'
-   *   }
-   *   let invoiceCollection = await client.createInvoice(accountId, invoiceCreate)
-   *   console.log('Created Invoice')
-   *   console.log('Charge Invoice: ', invoiceCollection.chargeInvoice)
-   *   console.log('Credit Invoices: ', invoiceCollection.creditInvoices)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {InvoiceCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceCreate}
@@ -5879,29 +5606,8 @@ export declare class Client {
   /**
    * Preview new invoice for pending line items
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/preview_invoice
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/preview_invoice
    *
-   * @example
-   * try {
-   *   const collection = await client.previewInvoice(accountId, {
-   *     currency: "USD",
-   *     collectionMethod: "automatic"
-   *   })
-   *   console.log(`Previewed invoice due at ${collection.chargeInvoice.dueAt}`)
-   *   console.log(collection.chargeInvoice)
-   *   console.log(collection.creditInvoices)
-   * } catch(err) {
-   * 
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {InvoiceCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceCreate}
@@ -5911,14 +5617,8 @@ export declare class Client {
   /**
    * List an account's line items
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_account_line_items
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_account_line_items
    *
-   * @example
-   * const lineItems = client.listAccountLineItems(accountId, { params: { limit: 200 } })
-   * 
-   * for await (const lineItem of lineItems.each()) {
-   *   console.log(lineItem.id)
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {Object} options - Optional configurations for the request
@@ -5956,28 +5656,8 @@ export declare class Client {
   /**
    * Create a new line item for the account
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_line_item
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/create_line_item
    *
-   * @example
-   * try {
-   *   let lineItemReq = {
-   *     currency: 'USD',
-   *     unitAmount: 1000,
-   *     type: 'charge' // choose "credit" for a credit
-   *   }
-   *   let lineItem = await client.createLineItem(accountId, lineItemReq)
-   *   console.log('Created Line Item: ', lineItem.uuid)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {LineItemCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {LineItemCreate}
@@ -5987,14 +5667,8 @@ export declare class Client {
   /**
    * Fetch a list of an account's notes
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_account_notes
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_account_notes
    *
-   * @example
-   * const notes = client.listAccountNotes(accountId, { params: { limit: 200 } })
-   * 
-   * for await (const note of notes.each()) {
-   *   console.log(note.message)
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {Object} options - Optional configurations for the request
@@ -6017,24 +5691,8 @@ export declare class Client {
   /**
    * Fetch an account note
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_account_note
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_account_note
    *
-   * @example
-   * try {
-   *   console.log(accountId)
-   *   const note = await client.getAccountNote(accountId, accountNoteId)
-   *   console.log('Fetched account note: ', note.message)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {string} accountNoteId - Account Note ID.
@@ -6044,14 +5702,8 @@ export declare class Client {
   /**
    * Fetch a list of an account's shipping addresses
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_shipping_addresses
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_shipping_addresses
    *
-   * @example
-   * const addresses = client.listShippingAddresses(accountId, { params: { limit: 200 } })
-   * 
-   * for await (const address of addresses.each()) {
-   *   console.log(address.street1)
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {Object} options - Optional configurations for the request
@@ -6086,32 +5738,8 @@ export declare class Client {
   /**
    * Create a new shipping address for the account
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_shipping_address
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/create_shipping_address
    *
-   * @example
-   * try {
-   *   const shippingAddressCreate = {
-   *     firstName: 'Aaron',
-   *     lastName: 'Du Monde',
-   *     street1: '900 Camp St.',
-   *     city: 'New Orleans',
-   *     region: 'LA',
-   *     postalCode: '70115',
-   *     country: 'US'
-   *   }
-   *   const address = await client.createShippingAddress(accountId, shippingAddressCreate)
-   *   console.log('Created shipping address: ', address.street1)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {ShippingAddressCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {ShippingAddressCreate}
@@ -6121,23 +5749,8 @@ export declare class Client {
   /**
    * Fetch an account's shipping address
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_shipping_address
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_shipping_address
    *
-   * @example
-   * try {
-   *   const address = await client.getShippingAddress(accountId, shippingAddressId)
-   *   console.log('Fetched shipping address: ', address.street1)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {string} shippingAddressId - Shipping Address ID.
@@ -6147,27 +5760,8 @@ export declare class Client {
   /**
    * Update an account's shipping address
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/update_shipping_address
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/update_shipping_address
    *
-   * @example
-   * try {
-   *   const shadUpdate = {
-   *     firstName: "Benjamin",
-   *     lastName: "Du Monde"
-   *   }
-   *   const address = await client.updateShippingAddress(accountId, shippingAddressId, shadUpdate)
-   *   console.log('Updated shipping address: ', address.street1)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {string} shippingAddressId - Shipping Address ID.
@@ -6178,23 +5772,8 @@ export declare class Client {
   /**
    * Remove an account's shipping address
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/remove_shipping_address
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/remove_shipping_address
    *
-   * @example
-   * try {
-   *   await client.removeShippingAddress(accountId, shippingAddress.id)
-   *   console.log('Removed shipping address: ', shippingAddress.street1)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {string} shippingAddressId - Shipping Address ID.
@@ -6204,14 +5783,8 @@ export declare class Client {
   /**
    * List an account's subscriptions
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_account_subscriptions
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_account_subscriptions
    *
-   * @example
-   * const subscriptions = client.listAccountSubscriptions(accountId, { params: { limit: 200 } })
-   * 
-   * for await (const subscription of subscriptions.each()) {
-   *   console.log(subscription.uuid)
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {Object} options - Optional configurations for the request
@@ -6252,14 +5825,8 @@ export declare class Client {
   /**
    * List an account's transactions
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_account_transactions
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_account_transactions
    *
-   * @example
-   * const transactions = client.listAccountTransactions(accountId, { params: { limit: 200 } })
-   * 
-   * for await (const transaction of transactions.each()) {
-   *   console.log(transaction.uuid)
-   * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {Object} options - Optional configurations for the request
@@ -6296,7 +5863,7 @@ export declare class Client {
   /**
    * List an account's child accounts
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_child_accounts
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_child_accounts
    *
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
@@ -6337,14 +5904,8 @@ export declare class Client {
   /**
    * List a site's account acquisition data
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_account_acquisition
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_account_acquisition
    *
-   * @example
-   * const acquisitions = client.listAccountAcquisition({ params: { limit: 200 } })
-   * 
-   * for await (const acquisition of acquisitions.each()) {
-   *   console.log(acquisition.id)
-   * }
    * 
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
@@ -6378,14 +5939,8 @@ export declare class Client {
   /**
    * List a site's coupons
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_coupons
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_coupons
    *
-   * @example
-   * const coupons = client.listCoupons({ params: { limit: 200 } })
-   * 
-   * for await (const coupon of coupons.each()) {
-   *   console.log(coupon.code)
-   * }
    * 
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
@@ -6419,29 +5974,8 @@ export declare class Client {
   /**
    * Create a new coupon
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_coupon
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/create_coupon
    *
-   * @example
-   * try {
-   *   const couponCreate = {
-   *     name: "Promotional Coupon",
-   *     code: couponCode,
-   *     discount_type: "fixed",
-   *     currencies: [{"currency": "USD", "discount": 10}],
-   *   }
-   *   const coupon = await client.createCoupon(couponCreate)
-   *   console.log('Created coupon: ', coupon.id)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {CouponCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {CouponCreate}
    * @return {Promise<Coupon>} A new coupon.
@@ -6450,23 +5984,8 @@ export declare class Client {
   /**
    * Fetch a coupon
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_coupon
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_coupon
    *
-   * @example
-   * try {
-   *   const coupon = await client.getCoupon(couponId)
-   *   console.log('Fetched coupon: ', coupon.code)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
    * @return {Promise<Coupon>} A coupon.
@@ -6475,26 +5994,8 @@ export declare class Client {
   /**
    * Update an active coupon
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/update_coupon
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/update_coupon
    *
-   * @example
-   * try {
-   *   const couponUpdate = {
-   *     name: "New Coupon Name"
-   *   }
-   *   const coupon = await client.updateCoupon(couponId, couponUpdate)
-   *   console.log('Updated coupon: ', coupon)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
    * @param {CouponUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {CouponUpdate}
@@ -6504,23 +6005,8 @@ export declare class Client {
   /**
    * Expire a coupon
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/deactivate_coupon
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/deactivate_coupon
    *
-   * @example
-   * try {
-   *   const coupon = await client.deactivateCoupon(couponId)
-   *   console.log('Deactivated coupon: ', coupon.code)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
    * @return {Promise<Coupon>} The expired Coupon
@@ -6529,7 +6015,7 @@ export declare class Client {
   /**
    * Generate unique coupon codes
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/generate_unique_coupon_codes
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/generate_unique_coupon_codes
    *
    * 
    * @param {string} couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
@@ -6542,7 +6028,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Restore an inactive coupon
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/restore_coupon
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/restore_coupon
    *
    * 
    * @param {string} couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
@@ -6553,7 +6039,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * List unique coupon codes associated with a bulk coupon
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_unique_coupon_codes
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_unique_coupon_codes
    *
    * 
    * @param {string} couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
@@ -6589,14 +6075,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * List a site's credit payments
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_credit_payments
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_credit_payments
    *
-   * @example
-   * const payments = client.listCreditPayments({ params: { limit: 200 } })
-   * 
-   * for await (const payment of payments.each()) {
-   *   console.log(payment.uuid)
-   * }
    * 
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
@@ -6618,7 +6098,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Fetch a credit payment
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_credit_payment
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_credit_payment
    *
    * 
    * @param {string} creditPaymentId - Credit Payment ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
@@ -6628,14 +6108,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * List a site's custom field definitions
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_custom_field_definitions
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_custom_field_definitions
    *
-   * @example
-   * const definitions = client.listCustomFieldDefinitions({ params: { limit: 200 } })
-   * 
-   * for await (const definition of definitions.each()) {
-   *   console.log(definition.displayName)
-   * }
    * 
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
@@ -6670,23 +6144,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Fetch an custom field definition
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_custom_field_definition
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_custom_field_definition
    *
-   * @example
-   * try {
-   *   const definition = await client.getCustomFieldDefinition(definitionId)
-   *   console.log('Fetched custom field definition: ', definition.displayName)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} customFieldDefinitionId - Custom Field Definition ID
    * @return {Promise<CustomFieldDefinition>} An custom field definition.
@@ -6695,7 +6154,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * List an invoice template's associated accounts
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_invoice_template_accounts
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_invoice_template_accounts
    *
    * 
    * @param {string} invoiceTemplateId - Invoice template ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
@@ -6736,14 +6195,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * List a site's items
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_items
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_items
    *
-   * @example
-   * const items = client.listItems({ params: { limit: 200 } })
-   * 
-   * for await (const item of items.each()) {
-   *   console.log(item.code)
-   * }
    * 
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
@@ -6778,35 +6231,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Create a new item
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_item
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/create_item
    *
-   * @example
-   * try {
-   *   const itemCreate = {
-   *     code: itemCode,
-   *     name: "Item Name",
-   *     description: "Item Description",
-   *     external_sku: "a35JE-44",
-   *     accounting_code: "item-code-127",
-   *     revenue_schedule_type: "at_range_end",
-   *     custom_fields: [{
-   *       name: "custom-field-1",
-   *       value: "Custom Field 1 value"
-   *     }]
-   *   }
-   *   const item = await client.createItem(itemCreate)
-   *   console.log('Created Item: ', item.code)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {ItemCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {ItemCreate}
    * @return {Promise<Item>} A new item.
@@ -6815,23 +6241,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Fetch an item
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_item
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_item
    *
-   * @example
-   * try {
-   *   const item = await client.getItem(itemId)
-   *   console.log('Fetched item: ', item.code)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} itemId - Item ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-red`.
    * @return {Promise<Item>} An item.
@@ -6840,27 +6251,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Update an active item
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/update_item
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/update_item
    *
-   * @example
-   * try {
-   *   const itemUpdate = {
-   *     name: 'New Item Name',
-   *     description: 'New Item Description'
-   *   }
-   *   const item = await client.updateItem(itemId, itemUpdate)
-   *   console.log('Updated item: ', item)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} itemId - Item ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-red`.
    * @param {ItemUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {ItemUpdate}
@@ -6870,22 +6262,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Deactivate an item
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/deactivate_item
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/deactivate_item
    *
-   * @example
-   * try {
-   *   const item = await client.deactivateItem(itemId)
-   *   console.log('Deleted item: ', item.code)
-   * } catch (err) {
-   *   if (err && err.type === 'not-found') {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   }
-   *   // If we don't know what to do with the err, we should
-   *   // probably re-raise and let our web framework and logger handle it
-   *   throw err
-   * }
    * 
    * @param {string} itemId - Item ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-red`.
    * @return {Promise<Item>} An item.
@@ -6894,22 +6272,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Reactivate an inactive item
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/reactivate_item
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/reactivate_item
    *
-   * @example
-   * try {
-   *   const item = await client.reactivateItem(itemId)
-   *   console.log('Reactivated item: ', item.code)
-   * } catch (err) {
-   *   if (err && err.type === 'not_found') {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   }
-   *   // If we don't know what to do with the err, we should
-   *   // probably re-raise and let our web framework and logger handle it
-   *   throw err
-   * }
    * 
    * @param {string} itemId - Item ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-red`.
    * @return {Promise<Item>} An item.
@@ -6918,7 +6282,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * List a site's measured units
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_measured_unit
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_measured_unit
    *
    * 
    * @param {Object} options - Optional configurations for the request
@@ -6954,7 +6318,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Create a new measured unit
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_measured_unit
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/create_measured_unit
    *
    * 
    * @param {MeasuredUnitCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {MeasuredUnitCreate}
@@ -6964,7 +6328,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Fetch a measured unit
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_measured_unit
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_measured_unit
    *
    * 
    * @param {string} measuredUnitId - Measured unit ID or name. For ID no prefix is used e.g. `e28zov4fw0v2`. For name use prefix `name-`, e.g. `name-Storage`.
@@ -6974,7 +6338,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Update a measured unit
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/update_measured_unit
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/update_measured_unit
    *
    * 
    * @param {string} measuredUnitId - Measured unit ID or name. For ID no prefix is used e.g. `e28zov4fw0v2`. For name use prefix `name-`, e.g. `name-Storage`.
@@ -6985,7 +6349,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Remove a measured unit
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/remove_measured_unit
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/remove_measured_unit
    *
    * 
    * @param {string} measuredUnitId - Measured unit ID or name. For ID no prefix is used e.g. `e28zov4fw0v2`. For name use prefix `name-`, e.g. `name-Storage`.
@@ -6995,14 +6359,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * List a site's invoices
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_invoices
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_invoices
    *
-   * @example
-   * const invoices = client.listInvoices({ params: { limit: 200 } })
-   * 
-   * for await (const invoice of invoices.each()) {
-   *   console.log(invoice.number)
-   * }
    * 
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
@@ -7042,23 +6400,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Fetch an invoice
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_invoice
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_invoice
    *
-   * @example
-   * try {
-   *   const invoice = await client.getInvoice(invoiceId)
-   *   console.log('Fetched Invoice: ', invoice.number)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @return {Promise<Invoice>} An invoice.
@@ -7067,29 +6410,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Update an invoice
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/update_invoice
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/update_invoice
    *
-   * @example
-   * try {
-   *   const invoiceUpdate = {
-   *     customerNotes: "New notes",
-   *     termsAndConditions: "New terms and conditions"
-   *   }
-   * 
-   *   const invoice = await client.updateInvoice(invoiceId, invoiceUpdate)
-   *   console.log('Edited invoice: ', invoice.number)
-   * } catch(err) {
-   * 
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @param {InvoiceUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceUpdate}
@@ -7099,31 +6421,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Fetch an invoice as a PDF
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_invoice_pdf
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_invoice_pdf
    *
-   * @example
-   * try {
-   *   const invoice = await client.getInvoicePdf(invoiceId)
-   *   console.log('Fetched Invoice: ', invoice)
-   *   const filename = `${downloadDirectory}/nodeinvoice-${invoiceId}.pdf`
-   *   await fs.writeFile(filename, invoice.data, 'binary', (err) => {
-   *     // throws an error, you could also catch it here
-   *     if (err) throw err;
-   * 
-   *     // success case, the file was saved
-   *     console.log('Saved Invoice PDF to', filename)
-   *   })
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @return {Promise<BinaryFile>} An invoice as a PDF.
@@ -7132,23 +6431,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Collect a pending or past due, automatic invoice
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/collect_invoice
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/collect_invoice
    *
-   * @example
-   * try {
-   *   const invoice = await client.collectInvoice(invoiceId)
-   *   console.log('Collected invoice: ', invoice.number)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @param {Object} options - Optional configurations for the request
@@ -7160,23 +6444,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Mark an open invoice as failed
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/mark_invoice_failed
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/mark_invoice_failed
    *
-   * @example
-   * try {
-   *   const invoice = await client.markInvoiceFailed(invoiceId)
-   *   console.log('Failed invoice: ', invoice.number)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @return {Promise<Invoice>} The updated invoice.
@@ -7185,24 +6454,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Mark an open invoice as successful
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/mark_invoice_successful
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/mark_invoice_successful
    *
-   * @example
-   * try {
-   *   const invoice = await client.markInvoiceSuccessful(invoiceId)
-   *   console.log(`Marked invoice #${invoice.number} successful`)
-   * } catch(err) {
-   * 
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @return {Promise<Invoice>} The updated invoice.
@@ -7211,23 +6464,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Reopen a closed, manual invoice
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/reopen_invoice
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/reopen_invoice
    *
-   * @example
-   * try {
-   *   const invoice = await client.reopenInvoice(invoiceId)
-   *   console.log('Reopened invoice: ', invoice.number)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @return {Promise<Invoice>} The updated invoice.
@@ -7236,23 +6474,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Void a credit invoice.
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/void_invoice
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/void_invoice
    *
-   * @example
-   * try {
-   *   const invoice = await client.voidInvoice(invoiceId)
-   *   console.log('Voided invoice: ', invoice)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @return {Promise<Invoice>} The updated invoice.
@@ -7261,28 +6484,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Record an external payment for a manual invoices.
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/record_external_transaction
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/record_external_transaction
    *
-   * @example
-   * try {
-   *   const externalTrx = {
-   *     description: "A check collected outside of Recurly",
-   *     amount: 10.0,
-   *     payment_method: 'check'
-   *   }
-   *   const transaction = await client.recordExternalTransaction(invoiceId, externalTrx)
-   *   console.log('External Transaction: ', transaction)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @param {ExternalTransaction} body - The object representing the JSON request to send to the server. It should conform to the schema of {ExternalTransaction}
@@ -7292,14 +6495,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * List an invoice's line items
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_invoice_line_items
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_invoice_line_items
    *
-   * @example
-   * const lineItems = client.listInvoiceLineItems(invoiceId, { params: { limit: 200 } })
-   * 
-   * for await (const lineItem of lineItems.each()) {
-   *   console.log(lineItem.id)
-   * }
    * 
    * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @param {Object} options - Optional configurations for the request
@@ -7337,14 +6534,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Show the coupon redemptions applied to an invoice
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_invoice_coupon_redemptions
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_invoice_coupon_redemptions
    *
-   * @example
-   * const redemptions = client.listInvoiceCouponRedemptions(invoiceId, { params: { limit: 200 } })
-   * 
-   * for await (const redemption of redemptions.each()) {
-   *   console.log(redemption.id)
-   * }
    * 
    * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @param {Object} options - Optional configurations for the request
@@ -7377,14 +6568,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * List an invoice's related credit or charge invoices
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_related_invoices
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_related_invoices
    *
-   * @example
-   * const invoices = client.listRelatedInvoices(invoiceId, { params: { limit: 200 } })
-   * 
-   * for await (const invoice of invoices.each()) {
-   *   console.log(invoice.number)
-   * }
    * 
    * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @return {Pager<Invoice>} A list of the credit or charge invoices associated with the invoice.
@@ -7393,30 +6578,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Refund an invoice
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/refund_invoice
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/refund_invoice
    *
-   * @example
-   * try {
-   *   const invoiceRefund = {
-   *     creditCustomerNotes: "Notes on credits",
-   *     type: "amount", // could also be "line_items"
-   *     amount: 100
-   *   }
-   * 
-   *   const invoice = await client.refundInvoice(invoiceId, invoiceRefund)
-   *   console.log('Refunded invoice: ', invoice.number)
-   * } catch(err) {
-   * 
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @param {InvoiceRefund} body - The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceRefund}
@@ -7426,14 +6589,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * List a site's line items
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_line_items
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_line_items
    *
-   * @example
-   * const lineItems = client.listLineItems({ params: { limit: 200 } })
-   * 
-   * for await (const item of lineItems.each()) {
-   *   console.log(`Item ${item.id} for ${item.amount}`)
-   * }
    * 
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
@@ -7470,23 +6627,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Fetch a line item
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_line_item
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_line_item
    *
-   * @example
-   * try {
-   *   const lineItem = await client.getLineItem(lineItemId)
-   *   console.log('Fetched line item: ', lineItem.uuid)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} lineItemId - Line Item ID.
    * @return {Promise<LineItem>} A line item.
@@ -7495,23 +6637,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Delete an uninvoiced line item
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/remove_line_item
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/remove_line_item
    *
-   * @example
-   * try {
-   *   await client.removeLineItem(lineItemId)
-   *   console.log('Removed line item: ', lineItemId)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} lineItemId - Line Item ID.
    * @return {Promise<Empty>} Line item deleted.
@@ -7520,14 +6647,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * List a site's plans
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_plans
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_plans
    *
-   * @example
-   * const plans = client.listPlans({ params: { limit: 200 } })
-   * 
-   * for await (const plan of plans.each()) {
-   *   console.log(plan.code)
-   * }
    * 
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
@@ -7562,33 +6683,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Create a plan
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_plan
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/create_plan
    *
-   * @example
-   * try {
-   *   const planCreate = {
-   *     name: 'Monthly Coffee Subscription',
-   *     code: planCode,
-   *     currencies: [
-   *       {
-   *         currency: 'USD',
-   *         unitAmount: 10000
-   *       }
-   *     ]
-   *   }
-   *   const plan = await client.createPlan(planCreate)
-   *   console.log('Created Plan: ', plan.code)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {PlanCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {PlanCreate}
    * @return {Promise<Plan>} A plan.
@@ -7597,23 +6693,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Fetch a plan
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_plan
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_plan
    *
-   * @example
-   * try {
-   *   const plan = await client.getPlan(planId)
-   *   console.log('Fetched plan: ', plan.code)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
    * @return {Promise<Plan>} A plan.
@@ -7622,26 +6703,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Update a plan
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/update_plan
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/update_plan
    *
-   * @example
-   * try {
-   *   const planUpdate = {
-   *     name: 'New monthly coffee subscription'
-   *   }
-   *   const plan = await client.updatePlan(planId, planUpdate)
-   *   console.log('Updated plan: ', plan.code)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
    * @param {PlanUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {PlanUpdate}
@@ -7651,23 +6714,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Remove a plan
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/remove_plan
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/remove_plan
    *
-   * @example
-   * try {
-   *   const plan = await client.removePlan(planId)
-   *   console.log('Removed plan: ', plan.code)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
    * @return {Promise<Plan>} Plan deleted
@@ -7676,14 +6724,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * List a plan's add-ons
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_plan_add_ons
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_plan_add_ons
    *
-   * @example
-   * const addOns = client.listPlanAddOns(planId, { params: { limit: 200 } })
-   * 
-   * for await (const addOn of addOns.each()) {
-   *   console.log(addOn.code)
-   * }
    * 
    * @param {string} planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
    * @param {Object} options - Optional configurations for the request
@@ -7719,35 +6761,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Create an add-on
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_plan_add_on
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/create_plan_add_on
    *
-   * @example
-   * try {
-   *   const addOnCreate = {
-   *     code: 'coffee_grinder',
-   *     name: 'A quality grinder for your beans',
-   *     defaultQuantity: 1,
-   *     currencies: [
-   *       {
-   *         currency: 'USD',
-   *         unitAmount: 10000
-   *       }
-   *     ]
-   *   }
-   * 
-   *   const addOn = await client.createPlanAddOn(planId, addOnCreate)
-   *   console.log('Created add-on: ', addOn.code)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
    * @param {AddOnCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {AddOnCreate}
@@ -7757,23 +6772,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Fetch a plan's add-on
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_plan_add_on
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_plan_add_on
    *
-   * @example
-   * try {
-   *   const addOn = await client.getPlanAddOn(planId, addOnId)
-   *   console.log('Fetched add-on: ', addOn.code)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
    * @param {string} addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
@@ -7783,26 +6783,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Update an add-on
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/update_plan_add_on
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/update_plan_add_on
    *
-   * @example
-   * try {
-   *   const addOnUpdate = {
-   *     name: 'New AddOn Name',
-   *   }
-   *   const addOn = await client.updatePlanAddOn(planId, addOnId, addOnUpdate)
-   *   console.log('Updated add-on: ', addOn)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
    * @param {string} addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
@@ -7813,23 +6795,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Remove an add-on
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/remove_plan_add_on
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/remove_plan_add_on
    *
-   * @example
-   * try {
-   *   const addOn = await client.removePlanAddOn(planId, addOnId)
-   *   console.log('Removed plan add-on: ', addOn)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} planId - Plan ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
    * @param {string} addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
@@ -7839,14 +6806,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * List a site's add-ons
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_add_ons
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_add_ons
    *
-   * @example
-   * const addOns = client.listAddOns({ params: { limit: 200 } })
-   * 
-   * for await (const addOn of addOns.each()) {
-   *   console.log(addOn.code)
-   * }
    * 
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
@@ -7881,23 +6842,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Fetch an add-on
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_add_on
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_add_on
    *
-   * @example
-   * try {
-   *   const addOn = await client.getAddOn(addOnId)
-   *   console.log('Fetched add-on: ', addOn)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} addOnId - Add-on ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
    * @return {Promise<AddOn>} An add-on.
@@ -7906,14 +6852,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * List a site's shipping methods
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_shipping_methods
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_shipping_methods
    *
-   * @example
-   * const methods = client.listShippingMethods({ params: { limit: 200 } })
-   * 
-   * for await (const method of methods.each()) {
-   *   console.log(method.code)
-   * }
    * 
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
@@ -7947,7 +6887,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Create a new shipping method
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_shipping_method
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/create_shipping_method
    *
    * 
    * @param {ShippingMethodCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {ShippingMethodCreate}
@@ -7957,7 +6897,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Fetch a shipping method
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_shipping_method
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_shipping_method
    *
    * 
    * @param {string} shippingMethodId - Shipping Method ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-usps_2-day`.
@@ -7967,7 +6907,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Update an active Shipping Method
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/update_shipping_method
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/update_shipping_method
    *
    * 
    * @param {string} shippingMethodId - Shipping Method ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-usps_2-day`.
@@ -7978,7 +6918,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Deactivate a shipping method
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/deactivate_shipping_method
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/deactivate_shipping_method
    *
    * 
    * @param {string} shippingMethodId - Shipping Method ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-usps_2-day`.
@@ -7988,14 +6928,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * List a site's subscriptions
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_subscriptions
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_subscriptions
    *
-   * @example
-   * const subscriptions = client.listSubscriptions({ params: { limit: 200 } })
-   * 
-   * for await (const subscription of subscriptions.each()) {
-   *   console.log(subscription.uuid)
-   * }
    * 
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
@@ -8035,30 +6969,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Create a new subscription
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_subscription
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/create_subscription
    *
-   * @example
-   * try {
-   *   let subscriptionReq = {
-   *     planCode: planCode,
-   *     currency: `USD`,
-   *     account: {
-   *       code: accountCode
-   *     }
-   *   }
-   *   let sub = await client.createSubscription(subscriptionReq)
-   *   console.log('Created subscription: ', sub.uuid)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {SubscriptionCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionCreate}
    * @return {Promise<Subscription>} A subscription.
@@ -8067,23 +6979,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Fetch a subscription
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_subscription
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_subscription
    *
-   * @example
-   * try {
-   *   const subscription = await client.getSubscription(subscriptionId)
-   *   console.log('Fetched subscription: ', subscription.uuid)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @return {Promise<Subscription>} A subscription.
@@ -8092,28 +6989,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Update a subscription
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/update_subscription
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/update_subscription
    *
-   * @example
-   * try {
-   *   const update = {
-   *     termsAndConditions: "Some new terms and conditions",
-   *     customerNotes: "Some new customer notes"
-   *   }
-   *   const subscription = await client.updateSubscription(subscriptionId, update)
-   *   console.log('Modified subscription: ', subscription.uuid)
-   * } catch(err) {
-   * 
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @param {SubscriptionUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionUpdate}
@@ -8123,23 +7000,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Terminate a subscription
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/terminate_subscription
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/terminate_subscription
    *
-   * @example
-   * try {
-   *   const subscription = await client.terminateSubscription(subscriptionId)
-   *   console.log('Terminated subscription: ', subscription.uuid)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @param {Object} options - Optional configurations for the request
@@ -8161,23 +7023,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Cancel a subscription
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/cancel_subscription
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/cancel_subscription
    *
-   * @example
-   * try {
-   *   let expiredSub = await client.cancelSubscription(subscriptionId)
-   *   console.log('Canceled Subscription: ', expiredSub.uuid)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @param {Object} options - Optional configurations for the request
@@ -8189,24 +7036,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Reactivate a canceled subscription
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/reactivate_subscription
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/reactivate_subscription
    *
-   * @example
-   * try {
-   *   const subscription = await client.reactivateSubscription(subscriptionId)
-   *   console.log('Reactivated subscription: ', subscription.uuid)
-   * } catch(err) {
-   * 
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @return {Promise<Subscription>} An active subscription.
@@ -8215,26 +7046,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Pause subscription
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/pause_subscription
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/pause_subscription
    *
-   * @example
-   * try {
-   *   let pauseReq = {
-   *     remaining_pause_cycles: 2,
-   *   }
-   *   const subscription = await client.pauseSubscription(subscriptionId, pauseReq)
-   *   console.log('Paused subscription: ', subscription.id)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @param {SubscriptionPause} body - The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionPause}
@@ -8244,23 +7057,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Resume subscription
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/resume_subscription
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/resume_subscription
    *
-   * @example
-   * try {
-   *   const subscription = await client.resumeSubscription(subscriptionId)
-   *   console.log('Resumed subscription: ', subscription.id)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @return {Promise<Subscription>} A subscription.
@@ -8269,7 +7067,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Convert trial subscription
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/convert_trial
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/convert_trial
    *
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
@@ -8279,7 +7077,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Fetch a preview of a subscription's renewal invoice(s)
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_preview_renewal
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_preview_renewal
    *
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
@@ -8289,23 +7087,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Fetch a subscription's pending change
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_subscription_change
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_subscription_change
    *
-   * @example
-   * try {
-   *   const change = await client.getSubscriptionChange(subscriptionId)
-   *   console.log('Fetched subscription change: ', change.id)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @return {Promise<SubscriptionChange>} A subscription's pending change.
@@ -8314,28 +7097,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Create a new subscription change
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_subscription_change
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/create_subscription_change
    *
-   * @example
-   * try {
-   *   const subscriptionChangeCreate = {
-   *     planCode: newPlanCode,
-   *     timeframe: 'now'
-   *   }
-   * 
-   *   const change = await client.createSubscriptionChange(subscriptionId, subscriptionChangeCreate)
-   *   console.log('Created subscription change: ', change.id)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @param {SubscriptionChangeCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionChangeCreate}
@@ -8345,23 +7108,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Delete the pending subscription change
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/remove_subscription_change
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/remove_subscription_change
    *
-   * @example
-   * try {
-   *   await client.removeSubscriptionChange(subscriptionId)
-   *   console.log('Removed subscription change: ', subscriptionId)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @return {Promise<Empty>} Subscription change was deleted.
@@ -8370,7 +7118,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Preview a new subscription change
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/preview_subscription_change
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/preview_subscription_change
    *
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
@@ -8381,14 +7129,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * List a subscription's invoices
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_subscription_invoices
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_subscription_invoices
    *
-   * @example
-   * const invoices = client.listSubscriptionInvoices(subscriptionId, { params: { limit: 200 } })
-   * 
-   * for await (const invoice of invoices.each()) {
-   *   console.log(invoice.number)
-   * }
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @param {Object} options - Optional configurations for the request
@@ -8429,14 +7171,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * List a subscription's line items
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_subscription_line_items
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_subscription_line_items
    *
-   * @example
-   * const lineItems = client.listSubscriptionLineItems(subscriptionId, { params: { limit: 200 } })
-   * 
-   * for await (const lineItem of lineItems.each()) {
-   *   console.log(lineItem.id)
-   * }
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @param {Object} options - Optional configurations for the request
@@ -8474,14 +7210,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Show the coupon redemptions for a subscription
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_subscription_coupon_redemptions
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_subscription_coupon_redemptions
    *
-   * @example
-   * const redemptions = client.listSubscriptionCouponRedemptions(subscriptionId, { params: { limit: 200 } })
-   * 
-   * for await (const redemption of redemptions.each()) {
-   *   console.log(redemption.id)
-   * }
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @param {Object} options - Optional configurations for the request
@@ -8514,7 +7244,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * List a subscription add-on's usage records
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_usage
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_usage
    *
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
@@ -8552,7 +7282,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Log a usage record on this subscription add-on
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_usage
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/create_usage
    *
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
@@ -8564,7 +7294,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Get a usage record
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_usage
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_usage
    *
    * 
    * @param {string} usageId - Usage Record ID.
@@ -8574,7 +7304,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Update a usage record
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/update_usage
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/update_usage
    *
    * 
    * @param {string} usageId - Usage Record ID.
@@ -8585,7 +7315,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Delete a usage record.
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/remove_usage
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/remove_usage
    *
    * 
    * @param {string} usageId - Usage Record ID.
@@ -8595,14 +7325,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * List a site's transactions
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_transactions
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_transactions
    *
-   * @example
-   * const transactions = client.listTransactions({ params: { limit: 200 } })
-   * 
-   * for await (const transaction of transactions.each()) {
-   *   console.log(transaction.uuid)
-   * }
    * 
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
@@ -8638,23 +7362,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Fetch a transaction
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_transaction
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_transaction
    *
-   * @example
-   * try {
-   *   const transaction = await client.getTransaction(transactionId)
-   *   console.log('Fetched transaction: ', transaction.uuid)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.NotFoundError) {
-   *     // If the request was not found, you may want to alert the user or
-   *     // just return null
-   *     console.log('Resource Not Found')
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {string} transactionId - Transaction ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @return {Promise<Transaction>} A transaction.
@@ -8663,7 +7372,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Fetch a unique coupon code
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_unique_coupon_code
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_unique_coupon_code
    *
    * 
    * @param {string} uniqueCouponCodeId - Unique Coupon Code ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-abc-8dh2-def`.
@@ -8673,7 +7382,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Deactivate a unique coupon code
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/deactivate_unique_coupon_code
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/deactivate_unique_coupon_code
    *
    * 
    * @param {string} uniqueCouponCodeId - Unique Coupon Code ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-abc-8dh2-def`.
@@ -8683,7 +7392,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Restore a unique coupon code
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/reactivate_unique_coupon_code
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/reactivate_unique_coupon_code
    *
    * 
    * @param {string} uniqueCouponCodeId - Unique Coupon Code ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-abc-8dh2-def`.
@@ -8693,38 +7402,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Create a new purchase
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_purchase
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/create_purchase
    *
-   * @example
-   * try {
-   *   let purchaseReq = {
-   *     currency: 'USD',
-   *     account: {
-   *       code: accountCode,
-   *       firstName: 'Benjamin',
-   *       lastName: 'Du Monde',
-   *       billingInfo: {
-   *         tokenId: rjsTokenId
-   *       }
-   *     },
-   *     subscriptions: [
-   *       { planCode: planCode },
-   *     ]
-   *   }
-   *   let invoiceCollection = await client.createPurchase(purchaseReq)
-   *   console.log('Created Charge Invoice: ', invoiceCollection.chargeInvoice)
-   *   console.log('Created Credit Invoices: ', invoiceCollection.creditInvoices)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {PurchaseCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {PurchaseCreate}
    * @return {Promise<InvoiceCollection>} Returns the new invoices
@@ -8733,38 +7412,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Preview a new purchase
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/preview_purchase
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/preview_purchase
    *
-   * @example
-   * try {
-   *   let purchaseReq = {
-   *     currency: 'USD',
-   *     account: {
-   *       firstName: 'Benjamin',
-   *       lastName: 'Du Monde',
-   *       code: accountCode,
-   *       billingInfo: {
-   *         tokenId: rjsTokenId
-   *       }
-   *     },
-   *     subscriptions: [
-   *       { planCode: planCode },
-   *     ]
-   *   }
-   *   let invoiceCollection = await client.previewPurchase(purchaseReq)
-   *   console.log('Preview Charge Invoice: ', invoiceCollection.chargeInvoice)
-   *   console.log('Preview Credit Invoices: ', invoiceCollection.creditInvoices)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {PurchaseCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {PurchaseCreate}
    * @return {Promise<InvoiceCollection>} Returns preview of the new invoices
@@ -8773,42 +7422,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Create a pending purchase
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_pending_purchase
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/create_pending_purchase
    *
-   * @example
-   * try {
-   *   const purchaseReq = {
-   *     currency: 'EUR',
-   *     account: {
-   *       code: accountCode,
-   *       email: 'example@recurly.com',
-   *       billingInfo: {
-   *         firstName: 'Benjamin',
-   *         lastName: 'Du Monde',
-   *         onlineBankingPaymentType: 'ideal'
-   *       },
-   *     },
-   *     lineItems: [
-   *       {
-   *         currency: 'EUR',
-   *         unitAmount: 1000,
-   *         type: 'charge'
-   *       }
-   *     ]
-   *   };
-   *   const invoiceCollection = await client.createPendingPurchase(purchaseReq)
-   *   console.log('Created ChargeInvoice with UUID: ', invoiceCollection.chargeInvoice.uuid)
-   * } catch (err) {
-   *   if (err instanceof recurly.errors.ValidationError) {
-   *     // If the request was not valid, you may want to tell your user
-   *     // why. You can find the invalid params and reasons in err.params
-   *     console.log('Failed validation', err.params)
-   *   } else {
-   *     // If we don't know what to do with the err, we should
-   *     // probably re-raise and let our web framework and logger handle it
-   *     console.log('Unknown Error: ', err)
-   *   }
-   * }
    * 
    * @param {PurchaseCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {PurchaseCreate}
    * @return {Promise<InvoiceCollection>} Returns the pending invoice
@@ -8817,19 +7432,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * List the dates that have an available export to download.
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_export_dates
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_export_dates
    *
-   * @example
-   * try {
-   *   const export_dates = await client.getExportDates()
-   *   export_dates.dates.forEach(date => {
-   *     console.log(`Exports are available for: ${date}`)
-   *   })
-   * } catch (err) {
-   *   if (err instanceof recurly.ApiError) {
-   *     console.log('Unexpected error', err)
-   *   }
-   * }
    * 
    * @return {Promise<ExportDates>} Returns a list of dates.
    */
@@ -8837,19 +7441,8 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * List of the export files that are available to download.
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_export_files
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_export_files
    *
-   * @example
-   * try {
-   *   const export_files = await client.getExportFiles(export_date)
-   *   export_files.files.forEach(file => {
-   *     console.log(`Export file download URL: ${file.href}`)
-   *   })
-   * } catch (err) {
-   *   if (err instanceof recurly.ApiError) {
-   *     console.log('Unexpected error', err)
-   *   }
-   * }
    * 
    * @param {string} exportDate - Date for which to get a list of available automated export files. Date must be in YYYY-MM-DD format.
    * @return {Promise<ExportFiles>} Returns a list of export files to download.
@@ -8858,7 +7451,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Show the dunning campaigns for a site
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_dunning_campaigns
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_dunning_campaigns
    *
    * 
    * @param {Object} options - Optional configurations for the request
@@ -8873,7 +7466,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Show the settings for a dunning campaign
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_dunning_campaign
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_dunning_campaign
    *
    * 
    * @param {string} dunningCampaignId - Dunning Campaign ID, e.g. `e28zov4fw0v2`.
@@ -8883,7 +7476,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Assign a dunning campaign to multiple plans
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/put_dunning_campaign_bulk_update
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/put_dunning_campaign_bulk_update
    *
    * 
    * @param {DunningCampaignsBulkUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {DunningCampaignsBulkUpdate}
@@ -8893,7 +7486,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Show the invoice templates for a site
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_invoice_templates
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/list_invoice_templates
    *
    * 
    * @param {Object} options - Optional configurations for the request
@@ -8908,7 +7501,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
   /**
    * Show the settings for an invoice template
    *
-   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_invoice_template
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/get_invoice_template
    *
    * 
    * @param {string} invoiceTemplateId - Invoice template ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
