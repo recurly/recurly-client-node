@@ -4540,7 +4540,7 @@ export interface SubscriptionUpdate {
     */
   netTerms?: number | null;
   /**
-    * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+    * This field is deprecated. Do not use it anymore to update a subscription's tax inclusivity. Use the POST subscription change route instead.
     */
   taxInclusive?: boolean | null;
   /**
