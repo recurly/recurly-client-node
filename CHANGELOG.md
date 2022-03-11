@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.14.1](https://github.com/recurly/recurly-client-node/tree/4.14.1) (2022-03-11)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.14.0...4.14.1)
+
+
+**Merged Pull Requests**
+
+- Updating typescript definitions to include options in the Client constructor [#249](https://github.com/recurly/recurly-client-node/pull/249) ([douglasmiller](https://github.com/douglasmiller))
+
+
+
 ## [4.14.0](https://github.com/recurly/recurly-client-node/tree/4.14.0) (2022-03-03)
 
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.13.0...4.14.0)
