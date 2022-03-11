@@ -5131,7 +5131,7 @@ export interface DunningCampaignsBulkUpdate {
 
 
 export declare class Client {
-  constructor(apiKey: string);
+  constructor(apiKey: string, options?: object);
   apiVersion(): string;
   /**
    * List sites
