@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.15.0](https://github.com/recurly/recurly-client-node/tree/4.15.0) (2022-03-14)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.14.1...4.15.0)
+
+
+**Merged Pull Requests**
+
+- Generated Latest Changes for v2021-02-25 (Percentage tiers feature) [#243](https://github.com/recurly/recurly-client-node/pull/243) ([recurly-integrations](https://github.com/recurly-integrations))
+
+
+
 ## [4.14.1](https://github.com/recurly/recurly-client-node/tree/4.14.1) (2022-03-11)
 
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.14.0...4.14.1)
