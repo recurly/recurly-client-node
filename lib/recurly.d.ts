@@ -1969,11 +1969,11 @@ export declare class SubscriptionAddOn {
    */
   tierType?: string | null;
   /**
-   * If tiers are provided in the request, all existing tiers on the Subscription Add-on will be removed and replaced by the tiers in the request. If add_on.tier_type is tiered or volume and add_on.usage_type is percentage use percentage_tiers instead. 
+   * If tiers are provided in the request, all existing tiers on the Subscription Add-on will be removed and replaced by the tiers in the request. If add_on.tier_type is tiered or volume and add_on.usage_type is percentage use percentage_tiers instead.  There must be one tier without an `ending_quantity` value which represents the final tier. 
    */
   tiers?: SubscriptionAddOnTier[] | null;
   /**
-   * If percentage tiers are provided in the request, all existing percentage tiers on the Subscription Add-on will be removed and replaced by the percentage tiers in the request. Use only if add_on.tier_type is tiered or volume and add_on.usage_type is percentage 
+   * If percentage tiers are provided in the request, all existing percentage tiers on the Subscription Add-on will be removed and replaced by the percentage tiers in the request. Use only if add_on.tier_type is tiered or volume and add_on.usage_type is percentage. There must be one tier without an `ending_amount` value which represents the final tier. 
    */
   percentageTiers?: SubscriptionAddOnPercentageTier[] | null;
   /**
@@ -2045,7 +2045,7 @@ export declare class AddOnMini {
 
 export declare class SubscriptionAddOnTier {
   /**
-   * Ending quantity
+   * Ending quantity for the tier.  This represents a unit amount for unit-priced add ons. Must be left empty if it is the final tier.
    */
   endingQuantity?: number | null;
   /**
@@ -2065,11 +2065,11 @@ export declare class SubscriptionAddOnTier {
 
 export declare class SubscriptionAddOnPercentageTier {
   /**
-   * Ending amount
+   * Ending amount for the tier. Allows up to 2 decimal places. Must be left empty if it is the final tier.
    */
   endingAmount?: number | null;
   /**
-   * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places represented as a string. A value between 0.0 and 100.0. 
+   * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places represented as a string. 
    */
   usagePercentage?: string | null;
 
@@ -2618,7 +2618,7 @@ export declare class AddOnPricing {
 
 export declare class Tier {
   /**
-   * Ending quantity for the tier.  This represents a unit amount for unit-priced add ons.
+   * Ending quantity for the tier.  This represents a unit amount for unit-priced add ons. Must be left empty if it is the final tier.
    */
   endingQuantity?: number | null;
   /**
@@ -2662,11 +2662,11 @@ export declare class PercentageTiersByCurrency {
 
 export declare class PercentageTier {
   /**
-   * Ending amount for the tier. Allows up to 2 decimal places. The last tier ending_amount is null.
+   * Ending amount for the tier. Allows up to 2 decimal places. Must be left empty if it is the final tier.
    */
   endingAmount?: number | null;
   /**
-   * Decimal usage percentage.
+   * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places represented as a string. 
    */
   usagePercentage?: string | null;
 
@@ -4189,11 +4189,11 @@ export interface AddOnCreate {
     */
   tierType?: string | null;
   /**
-    * If the tier_type is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount` for the desired `currencies`. There must be one tier with an `ending_quantity` of 999999999 which is the default if not provided. 
+    * If the tier_type is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount` for the desired `currencies`. There must be one tier without an `ending_quantity` value which represents the final tier. 
     */
   tiers?: Tier[] | null;
   /**
-    * Array of objects which must have at least one set of tiers per currency and the currency code. The tier_type must be `volume` or `tiered`, if not, it must be absent. There must be one tier without ending_amount value. 
+    * Array of objects which must have at least one set of tiers per currency and the currency code. The tier_type must be `volume` or `tiered`, if not, it must be absent. There must be one tier without an `ending_amount` value which represents the final tier. 
     */
   percentageTiers?: PercentageTiersByCurrency[] | null;
 
@@ -4221,7 +4221,7 @@ export interface AddOnPricing {
 
 export interface Tier {
   /**
-    * Ending quantity for the tier.  This represents a unit amount for unit-priced add ons.
+    * Ending quantity for the tier.  This represents a unit amount for unit-priced add ons. Must be left empty if it is the final tier.
     */
   endingQuantity?: number | null;
   /**
@@ -4265,11 +4265,11 @@ export interface PercentageTiersByCurrency {
 
 export interface PercentageTier {
   /**
-    * Ending amount for the tier. Allows up to 2 decimal places. The last tier ending_amount is null.
+    * Ending amount for the tier. Allows up to 2 decimal places. Must be left empty if it is the final tier.
     */
   endingAmount?: number | null;
   /**
-    * Decimal usage percentage.
+    * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places represented as a string. 
     */
   usagePercentage?: string | null;
 
@@ -4425,11 +4425,11 @@ export interface AddOnUpdate {
     */
   currencies?: AddOnPricing[] | null;
   /**
-    * If the tier_type is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount` for the desired `currencies`. There must be one tier without an `ending_quantity` value that represents the final tier. 
+    * If the tier_type is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount` for the desired `currencies`. There must be one tier without an `ending_quantity` value which represents the final tier. 
     */
   tiers?: Tier[] | null;
   /**
-    * `percentage_tiers` is an array of objects, which must have the set of tiers per currency and the currency code. The tier_type must be `volume` or `tiered`, if not, it must be absent. 
+    * `percentage_tiers` is an array of objects, which must have the set of tiers per currency and the currency code. The tier_type must be `volume` or `tiered`, if not, it must be absent. There must be one tier without an `ending_amount` value which represents the final tier. 
     */
   percentageTiers?: PercentageTiersByCurrency[] | null;
 
@@ -4623,11 +4623,11 @@ export interface SubscriptionAddOnCreate {
     */
   unitAmountDecimal?: string | null;
   /**
-    * If the plan add-on's `tier_type` is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount`. There must be one tier without ending_quantity value. See our [Guide](https://developers.recurly.com/guides/item-addon-guide.html) for an overview of how to configure quantity-based pricing models. 
+    * If the plan add-on's `tier_type` is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount`. There must be one tier without an `ending_quantity` value which represents the final tier. See our [Guide](https://developers.recurly.com/guides/item-addon-guide.html) for an overview of how to configure quantity-based pricing models. 
     */
   tiers?: SubscriptionAddOnTier[] | null;
   /**
-    * If percentage tiers are provided in the request, all existing percentage tiers on the Subscription Add-on will be removed and replaced by the percentage tiers in the request. There must be one tier without ending_amount value. Use only if add_on.tier_type is tiered or volume and add_on.usage_type is percentage. 
+    * If percentage tiers are provided in the request, all existing percentage tiers on the Subscription Add-on will be removed and replaced by the percentage tiers in the request. There must be one tier without ending_amount value which represents the final tier. Use only if add_on.tier_type is tiered or volume and add_on.usage_type is percentage. 
     */
   percentageTiers?: SubscriptionAddOnPercentageTier[] | null;
   /**
@@ -4643,7 +4643,7 @@ export interface SubscriptionAddOnCreate {
 
 export interface SubscriptionAddOnTier {
   /**
-    * Ending quantity
+    * Ending quantity for the tier.  This represents a unit amount for unit-priced add ons. Must be left empty if it is the final tier.
     */
   endingQuantity?: number | null;
   /**
@@ -4663,11 +4663,11 @@ export interface SubscriptionAddOnTier {
 
 export interface SubscriptionAddOnPercentageTier {
   /**
-    * Ending amount
+    * Ending amount for the tier. Allows up to 2 decimal places. Must be left empty if it is the final tier.
     */
   endingAmount?: number | null;
   /**
-    * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places represented as a string. A value between 0.0 and 100.0. 
+    * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places represented as a string. 
     */
   usagePercentage?: string | null;
 
@@ -4878,9 +4878,13 @@ export interface SubscriptionAddOnUpdate {
     */
   unitAmountDecimal?: string | null;
   /**
-    * If the plan add-on's `tier_type` is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount`. There must be one tier with an `ending_quantity` of 999999999 which is the default if not provided. 
+    * If the plan add-on's `tier_type` is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount`. There must be one tier without an `ending_quantity` value which represents the final tier. 
     */
   tiers?: SubscriptionAddOnTier[] | null;
+  /**
+    * If percentage tiers are provided in the request, all existing percentage tiers on the Subscription Add-on will be removed and replaced by the percentage tiers in the request. Use only if add_on.tier_type is tiered or volume and add_on.usage_type is percentage. There must be one tier without an `ending_amount` value which represents the final tier. 
+    */
+  percentageTiers?: SubscriptionAddOnPercentageTier[] | null;
   /**
     * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0. Required if add_on_type is usage and usage_type is percentage.
     */
