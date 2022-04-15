@@ -1715,6 +1715,10 @@ export declare class Subscription {
    * Billing Info ID.
    */
   billingInfoId?: string | null;
+  /**
+   * The invoice ID of the latest invoice created for an active subscription.
+   */
+  activeInvoiceId?: string | null;
 
 }
 
