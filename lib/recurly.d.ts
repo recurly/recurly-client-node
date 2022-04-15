@@ -1753,6 +1753,10 @@ export declare class Subscription {
    * Billing Info ID.
    */
   billingInfoId?: string | null;
+  /**
+   * The invoice ID of the latest invoice created for an active subscription.
+   */
+  activeInvoiceId?: string | null;
 
 }
 
@@ -1968,6 +1972,10 @@ export declare class SubscriptionAddOn {
    * The pricing model for the add-on.  For more information, [click here](https://docs.recurly.com/docs/billing-models#section-quantity-based). See our [Guide](https://developers.recurly.com/guides/item-addon-guide.html) for an overview of how to configure quantity-based pricing models. 
    */
   tierType?: string | null;
+  /**
+   * The time at which usage totals are reset for billing purposes.
+   */
+  usageTimeframe?: string | null;
   /**
    * If tiers are provided in the request, all existing tiers on the Subscription Add-on will be removed and replaced by the tiers in the request. If add_on.tier_type is tiered or volume and add_on.usage_type is percentage use percentage_tiers instead.  There must be one tier without an `ending_quantity` value which represents the final tier. 
    */
@@ -2569,6 +2577,10 @@ export declare class AddOn {
    * The pricing model for the add-on.  For more information, [click here](https://docs.recurly.com/docs/billing-models#section-quantity-based). See our [Guide](https://developers.recurly.com/guides/item-addon-guide.html) for an overview of how to configure quantity-based pricing models. 
    */
   tierType?: string | null;
+  /**
+   * The time at which usage totals are reset for billing purposes.
+   */
+  usageTimeframe?: string | null;
   /**
    * Tiers
    */
@@ -4188,6 +4200,10 @@ export interface AddOnCreate {
     * The pricing model for the add-on.  For more information, [click here](https://docs.recurly.com/docs/billing-models#section-quantity-based). See our [Guide](https://developers.recurly.com/guides/item-addon-guide.html) for an overview of how to configure quantity-based pricing models. 
     */
   tierType?: string | null;
+  /**
+    * The time at which usage totals are reset for billing purposes. Allows for `tiered` add-ons to accumulate usage over the course of multiple billing periods. 
+    */
+  usageTimeframe?: string | null;
   /**
     * If the tier_type is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount` for the desired `currencies`. There must be one tier without an `ending_quantity` value which represents the final tier. 
     */
