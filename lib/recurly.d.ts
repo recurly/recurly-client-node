@@ -206,7 +206,7 @@ export declare class Account {
    */
   dunningCampaignId?: string | null;
   /**
-   * Unique ID to identify an invoice template. Available when the Invoice Customization feature is enabled. Used to specify if a non-default invoice template will be used to generate invoices for the account. For sites without multiple invoice templates enabled, the default template will always be used.
+   * Unique ID to identify an invoice template. Available when the site is on a Pro or Enterprise plan. Used to specify if a non-default invoice template will be used to generate invoices for the account. For sites without multiple invoice templates enabled, the default template will always be used.
    */
   invoiceTemplateId?: string | null;
   address?: Address | null;
@@ -556,6 +556,10 @@ export declare class AccountBalanceAmount {
    * Total amount the account is past due.
    */
   amount?: number | null;
+  /**
+   * Total amount for the prepayment credit invoices in a `processing` state on the account.
+   */
+  processingPrepaymentAmount?: number | null;
 
 }
 
@@ -1881,7 +1885,7 @@ export declare class SubscriptionChange {
    */
   unitAmount?: number | null;
   /**
-   * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+   * This field is deprecated. Please do not use it.
    */
   taxInclusive?: boolean | null;
   /**
@@ -2285,7 +2289,7 @@ export declare class Pricing {
    */
   unitAmount?: number | null;
   /**
-   * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+   * This field is deprecated. Please do not use it.
    */
   taxInclusive?: boolean | null;
 
@@ -2466,7 +2470,7 @@ export declare class PlanPricing {
    */
   unitAmount?: number | null;
   /**
-   * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+   * This field is deprecated. Please do not use it.
    */
   taxInclusive?: boolean | null;
 
@@ -2622,7 +2626,7 @@ export declare class AddOnPricing {
    */
   unitAmountDecimal?: string | null;
   /**
-   * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+   * This field is deprecated. Please do not use it.
    */
   taxInclusive?: boolean | null;
 
@@ -3044,7 +3048,7 @@ export interface AccountCreate {
     */
   dunningCampaignId?: string | null;
   /**
-    * Unique ID to identify an invoice template.  Available when the Invoice Customization feature is enabled.  Used to specify which invoice template, if any, should be used to generate invoices for the account.
+    * Unique ID to identify an invoice template.  Available when the site is on a Pro or Enterprise plan.  Used to specify which invoice template, if any, should be used to generate invoices for the account.
     */
   invoiceTemplateId?: string | null;
   address?: Address | null;
@@ -3245,11 +3249,11 @@ export interface BillingInfoCreate {
     */
   accountType?: string | null;
   /**
-    * Tax identifier is required if adding a billing info that is a consumer card in Brazil or in Argentina. This would be the customer's CPF (Brazil) and CUIT (Argentina). CPF and CUIT are tax identifiers for all residents who pay taxes in Brazil and Argentina respectively.
+    * Tax identifier is required if adding a billing info that is a consumer card in Brazil or in Argentina. This would be the customer's CPF/CNPJ (Brazil) and CUIT (Argentina). CPF, CNPJ and CUIT are tax identifiers for all residents who pay taxes in Brazil and Argentina respectively.
     */
   taxIdentifier?: string | null;
   /**
-    * This field and a value of `cpf` or `cuit` are required if adding a billing info that is an elo or hipercard type in Brazil or in Argentina.
+    * This field and a value of `cpf`, `cnpj` or `cuit` are required if adding a billing info that is an elo or hipercard type in Brazil or in Argentina.
     */
   taxIdentifierType?: string | null;
   /**
@@ -3336,7 +3340,7 @@ export interface AccountUpdate {
     */
   dunningCampaignId?: string | null;
   /**
-    * Unique ID to identify an invoice template.  Available when the Invoice Customization feature is enabled.  Used to specify which invoice template, if any, should be used to generate invoices for the account.
+    * Unique ID to identify an invoice template.  Available when the site is on a Pro or Enterprise plan.  Used to specify which invoice template, if any, should be used to generate invoices for the account.
     */
   invoiceTemplateId?: string | null;
   address?: Address | null;
@@ -3724,7 +3728,7 @@ export interface Pricing {
     */
   unitAmount?: number | null;
   /**
-    * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+    * This field is deprecated. Please do not use it.
     */
   taxInclusive?: boolean | null;
 
@@ -4093,7 +4097,7 @@ export interface PlanPricing {
     */
   unitAmount?: number | null;
   /**
-    * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+    * This field is deprecated. Please do not use it.
     */
   taxInclusive?: boolean | null;
 
@@ -4229,7 +4233,7 @@ export interface AddOnPricing {
     */
   unitAmountDecimal?: string | null;
   /**
-    * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+    * This field is deprecated. Please do not use it.
     */
   taxInclusive?: boolean | null;
 
@@ -4739,7 +4743,7 @@ export interface SubscriptionUpdate {
     */
   gatewayCode?: string | null;
   /**
-    * This field is deprecated. Do not use it anymore to update a subscription's tax inclusivity. Use the POST subscription change route instead.
+    * This field is deprecated. Please do not use it.
     */
   taxInclusive?: boolean | null;
   /**
@@ -4800,7 +4804,7 @@ export interface SubscriptionChangeCreate {
     */
   unitAmount?: number | null;
   /**
-    * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+    * This field is deprecated. Please do not use it.
     */
   taxInclusive?: boolean | null;
   /**
@@ -5068,7 +5072,7 @@ export interface AccountPurchase {
     */
   dunningCampaignId?: string | null;
   /**
-    * Unique ID to identify an invoice template.  Available when the Invoice Customization feature is enabled.  Used to specify which invoice template, if any, should be used to generate invoices for the account.
+    * Unique ID to identify an invoice template.  Available when the site is on a Pro or Enterprise plan.  Used to specify which invoice template, if any, should be used to generate invoices for the account.
     */
   invoiceTemplateId?: string | null;
   address?: Address | null;
@@ -8353,6 +8357,21 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_preview_renewal
    *
+   * @example
+   * try {
+   *   const invoiceCollection = await client.getPreviewRenewal(subscriptionId)
+   *   console.log('Fetched Renewal Preview with total: ', invoiceCollection.chargeInvoice.total)
+   * } catch (err) {
+   *   if (err instanceof recurly.errors.NotFoundError) {
+   *     // If the request was not found, you may want to alert the user or
+   *     // just return null
+   *     console.log('Resource Not Found')
+   *   } else {
+   *     // If we don't know what to do with the err, we should
+   *     // probably re-raise and let our web framework and logger handle it
+   *     console.log('Unknown Error: ', err)
+   *   }
+   * }
    * 
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @return {Promise<InvoiceCollection>} A preview of the subscription's renewal invoice(s).
