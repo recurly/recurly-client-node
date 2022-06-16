@@ -560,6 +560,10 @@ export declare class AccountBalanceAmount {
    * Total amount the account is past due.
    */
   amount?: number | null;
+  /**
+   * Total amount for the prepayment credit invoices in a `processing` state on the account.
+   */
+  processingPrepaymentAmount?: number | null;
 
 }
 
@@ -1843,7 +1847,7 @@ export declare class SubscriptionChange {
    */
   unitAmount?: number | null;
   /**
-   * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+   * This field is deprecated. Please do not use it.
    */
   taxInclusive?: boolean | null;
   /**
@@ -2199,7 +2203,7 @@ export declare class Pricing {
    */
   unitAmount?: number | null;
   /**
-   * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+   * This field is deprecated. Please do not use it.
    */
   taxInclusive?: boolean | null;
 
@@ -2380,7 +2384,7 @@ export declare class PlanPricing {
    */
   unitAmount?: number | null;
   /**
-   * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+   * This field is deprecated. Please do not use it.
    */
   taxInclusive?: boolean | null;
 
@@ -2524,7 +2528,7 @@ export declare class AddOnPricing {
    */
   unitAmount?: number | null;
   /**
-   * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+   * This field is deprecated. Please do not use it.
    */
   taxInclusive?: boolean | null;
 
@@ -2608,7 +2612,7 @@ export declare class SubscriptionChangePreview {
    */
   unitAmount?: number | null;
   /**
-   * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+   * This field is deprecated. Please do not use it.
    */
   taxInclusive?: boolean | null;
   /**
@@ -3621,7 +3625,7 @@ export interface Pricing {
     */
   unitAmount?: number | null;
   /**
-    * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+    * This field is deprecated. Please do not use it.
     */
   taxInclusive?: boolean | null;
 
@@ -3990,7 +3994,7 @@ export interface PlanPricing {
     */
   unitAmount?: number | null;
   /**
-    * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+    * This field is deprecated. Please do not use it.
     */
   taxInclusive?: boolean | null;
 
@@ -4114,7 +4118,7 @@ export interface AddOnPricing {
     */
   unitAmount?: number | null;
   /**
-    * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+    * This field is deprecated. Please do not use it.
     */
   taxInclusive?: boolean | null;
 
@@ -4544,7 +4548,7 @@ export interface SubscriptionUpdate {
     */
   netTerms?: number | null;
   /**
-    * This field is deprecated. Do not use it anymore to update a subscription's tax inclusivity. Use the POST subscription change route instead.
+    * This field is deprecated. Please do not use it.
     */
   taxInclusive?: boolean | null;
   /**
@@ -4605,7 +4609,7 @@ export interface SubscriptionChangeCreate {
     */
   unitAmount?: number | null;
   /**
-    * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
+    * This field is deprecated. Please do not use it.
     */
   taxInclusive?: boolean | null;
   /**
