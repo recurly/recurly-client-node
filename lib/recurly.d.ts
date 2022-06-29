@@ -1438,6 +1438,10 @@ export declare class LineItem {
    */
   unitAmount?: number | null;
   /**
+   * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to utilize this flag.
+   */
+  taxInclusive?: boolean | null;
+  /**
    * `quantity * unit_amount`
    */
   subtotal?: number | null;
@@ -1647,6 +1651,10 @@ export declare class Subscription {
    * Subscription unit price
    */
   unitAmount?: number | null;
+  /**
+   * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to utilize this flag.
+   */
+  taxInclusive?: boolean | null;
   /**
    * Subscription quantity
    */
