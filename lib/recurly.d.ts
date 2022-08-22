@@ -9106,10 +9106,11 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/put_dunning_campaign_bulk_update
    *
    * 
+   * @param {string} dunningCampaignId - Dunning Campaign ID, e.g. `e28zov4fw0v2`.
    * @param {DunningCampaignsBulkUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {DunningCampaignsBulkUpdate}
    * @return {Promise<DunningCampaignsBulkUpdateResponse>} A list of updated plans.
    */
-  putDunningCampaignBulkUpdate(body: DunningCampaignsBulkUpdate): Promise<DunningCampaignsBulkUpdateResponse>;
+  putDunningCampaignBulkUpdate(dunningCampaignId: string, body: DunningCampaignsBulkUpdate): Promise<DunningCampaignsBulkUpdateResponse>;
   /**
    * Show the invoice templates for a site
    *
