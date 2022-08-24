@@ -789,6 +789,30 @@ export declare class TransactionPaymentGateway {
 
 }
 
+export declare class ErrorMayHaveCVV {
+  /**
+   * Type
+   */
+  type?: string | null;
+  /**
+   * The security code you entered does not match. Please update the CVV and try again.
+   */
+  message?: string | null;
+
+}
+
+export declare class ErrorOverLimit {
+  /**
+   * Type
+   */
+  type?: string | null;
+  /**
+   * This credit card has too many cvv check attempts.
+   */
+  message?: string | null;
+
+}
+
 export declare class CouponRedemption {
   /**
    * Coupon Redemption ID
@@ -3429,6 +3453,14 @@ export interface BillingInfoVerify {
 
 }
 
+export interface BillingInfoVerifyCVV {
+  /**
+    * Unique security code for a credit card.
+    */
+  verificationValue?: string | null;
+
+}
+
 export interface CouponRedemptionCreate {
   /**
     * Coupon ID
@@ -5799,6 +5831,17 @@ export declare class Client {
    * @return {Promise<Transaction>} Transaction information from verify.
    */
   verifyBillingInfo(accountId: string, options?: object): Promise<Transaction>;
+  /**
+   * Verify an account's credit card billing cvv
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/verify_billing_info_cvv
+   *
+   * 
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {BillingInfoVerifyCVV} body - The object representing the JSON request to send to the server. It should conform to the schema of {BillingInfoVerifyCVV}
+   * @return {Promise<Transaction>} Transaction information from verify.
+   */
+  verifyBillingInfoCvv(accountId: string, body: BillingInfoVerifyCVV): Promise<Transaction>;
   /**
    * Get the list of billing information associated with an account
    *
