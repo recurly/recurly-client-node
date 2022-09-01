@@ -2117,7 +2117,7 @@ export declare class SubscriptionChangeBillingInfo {
 
 export declare class SubscriptionRampIntervalResponse {
   /**
-   * Represents how many billing cycles are included in a ramp interval.
+   * Represents the billing cycle where a ramp interval starts.
    */
   startingBillingCycle?: number | null;
   /**
@@ -2502,7 +2502,7 @@ export declare class Plan {
 
 export declare class PlanRampInterval {
   /**
-   * Represents the first billing cycle of a ramp.
+   * Represents the billing cycle where a ramp interval starts.
    */
   startingBillingCycle?: number | null;
   /**
@@ -3429,6 +3429,14 @@ export interface BillingInfoVerify {
 
 }
 
+export interface BillingInfoVerifyCVV {
+  /**
+    * Unique security code for a credit card.
+    */
+  verificationValue?: string | null;
+
+}
+
 export interface CouponRedemptionCreate {
   /**
     * Coupon ID
@@ -4162,7 +4170,7 @@ export interface PlanCreate {
 
 export interface PlanRampInterval {
   /**
-    * Represents the first billing cycle of a ramp.
+    * Represents the billing cycle where a ramp interval starts.
     */
   startingBillingCycle?: number | null;
   /**
@@ -4804,7 +4812,7 @@ export interface SubscriptionAddOnPercentageTier {
 
 export interface SubscriptionRampInterval {
   /**
-    * Represents how many billing cycles are included in a ramp interval.
+    * Represents the billing cycle where a ramp interval starts.
     */
   startingBillingCycle?: number | null;
   /**
@@ -5799,6 +5807,17 @@ export declare class Client {
    * @return {Promise<Transaction>} Transaction information from verify.
    */
   verifyBillingInfo(accountId: string, options?: object): Promise<Transaction>;
+  /**
+   * Verify an account's credit card billing cvv
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/verify_billing_info_cvv
+   *
+   * 
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {BillingInfoVerifyCVV} body - The object representing the JSON request to send to the server. It should conform to the schema of {BillingInfoVerifyCVV}
+   * @return {Promise<Transaction>} Transaction information from verify.
+   */
+  verifyBillingInfoCvv(accountId: string, body: BillingInfoVerifyCVV): Promise<Transaction>;
   /**
    * Get the list of billing information associated with an account
    *
