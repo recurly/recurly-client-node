@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.21.0](https://github.com/recurly/recurly-client-node/tree/4.21.0) (2022-09-07)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.20.0...4.21.0)
+
+
+**Merged Pull Requests**
+
+- Fixes bug with putDunningCampaignBulkUpdate [#268](https://github.com/recurly/recurly-client-node/pull/268) ([recurly-integrations](https://github.com/recurly-integrations))
+
+
+
 ## [4.20.0](https://github.com/recurly/recurly-client-node/tree/4.20.0) (2022-08-03)
 
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.19.0...4.20.0)
