@@ -363,6 +363,10 @@ export declare class PaymentMethod {
    * The bank name of this routing number.
    */
   routingNumberBank?: string | null;
+  /**
+   * Username of the associated payment method. Currently only associated with Venmo.
+   */
+  username?: string | null;
 
 }
 
@@ -556,6 +560,10 @@ export declare class AccountBalanceAmount {
    * Total amount the account is past due.
    */
   amount?: number | null;
+  /**
+   * Total amount for the prepayment credit invoices in a `processing` state on the account.
+   */
+  processingPrepaymentAmount?: number | null;
 
 }
 
@@ -1448,6 +1456,10 @@ export declare class LineItem {
    */
   quantity?: number | null;
   /**
+   * A floating-point alternative to Quantity. If this value is present, it will be used in place of Quantity for calculations, and Quantity will be the rounded integer value of this number. This field supports up to 9 decimal places. The Decimal Quantity feature must be enabled to utilize this field.
+   */
+  quantityDecimal?: string | null;
+  /**
    * Positive amount for a charge, negative amount for a credit.
    */
   unitAmount?: number | null;
@@ -1455,6 +1467,10 @@ export declare class LineItem {
    * Positive amount for a charge, negative amount for a credit.
    */
   unitAmountDecimal?: string | null;
+  /**
+   * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to utilize this flag.
+   */
+  taxInclusive?: boolean | null;
   /**
    * `quantity * unit_amount`
    */
@@ -1503,6 +1519,10 @@ export declare class LineItem {
    * For refund charges, the quantity being refunded. For non-refund charges, the total quantity refunded (possibly over multiple refunds).
    */
   refundedQuantity?: number | null;
+  /**
+   * A floating-point alternative to Refunded Quantity. For refund charges, the quantity being refunded. For non-refund charges, the total quantity refunded (possibly over multiple refunds). The Decimal Quantity feature must be enabled to utilize this field.
+   */
+  refundedQuantityDecimal?: string | null;
   /**
    * The amount of credit from this line item that was applied to the invoice.
    */
@@ -1646,6 +1666,10 @@ export declare class Subscription {
    */
   autoRenew?: boolean | null;
   /**
+   * The ramp intervals representing the pricing schedule for the subscription.
+   */
+  rampIntervals?: SubscriptionRampIntervalResponse[] | null;
+  /**
    * Null unless subscription is paused or will pause at the end of the current billing period.
    */
   pausedAt?: Date | null;
@@ -1665,6 +1689,10 @@ export declare class Subscription {
    * Subscription unit price
    */
   unitAmount?: number | null;
+  /**
+   * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to utilize this flag.
+   */
+  taxInclusive?: boolean | null;
   /**
    * Subscription quantity
    */
@@ -1925,7 +1953,7 @@ export declare class SubscriptionChange {
    */
   billingInfo?: SubscriptionChangeBillingInfo | null;
   /**
-   * Ramp Intervals
+   * The ramp intervals representing the pricing schedule for the subscription.
    */
   rampIntervals?: SubscriptionRampIntervalResponse[] | null;
 
@@ -2089,7 +2117,7 @@ export declare class SubscriptionChangeBillingInfo {
 
 export declare class SubscriptionRampIntervalResponse {
   /**
-   * Represents how many billing cycles are included in a ramp interval.
+   * Represents the billing cycle where a ramp interval starts.
    */
   startingBillingCycle?: number | null;
   /**
@@ -2470,7 +2498,7 @@ export declare class Plan {
 
 export declare class PlanRampInterval {
   /**
-   * Represents the first billing cycle of a ramp.
+   * Represents the billing cycle where a ramp interval starts.
    */
   startingBillingCycle?: number | null;
   /**
@@ -2763,7 +2791,7 @@ export declare class Usage {
    */
   merchantTag?: string | null;
   /**
-   * The amount of usage. Can be positive, negative, or 0. No decimals allowed, we will strip them. If the usage-based add-on is billed with a percentage, your usage will be a monetary amount you will want to format in cents. (e.g., $5.00 is "500").
+   * The amount of usage. Can be positive, negative, or 0. If the Decimal Quantity feature is enabled, this value will be rounded to nine decimal places.  Otherwise, all digits after the decimal will be stripped. If the usage-based add-on is billed with a percentage, your usage should be a monetary amount formatted in cents (e.g., $5.00 is "500").
    */
   amount?: number | null;
   /**
@@ -3273,11 +3301,11 @@ export interface BillingInfoCreate {
     */
   accountType?: string | null;
   /**
-    * Tax identifier is required if adding a billing info that is a consumer card in Brazil or in Argentina. This would be the customer's CPF (Brazil) and CUIT (Argentina). CPF and CUIT are tax identifiers for all residents who pay taxes in Brazil and Argentina respectively.
+    * Tax identifier is required if adding a billing info that is a consumer card in Brazil or in Argentina. This would be the customer's CPF/CNPJ (Brazil) and CUIT (Argentina). CPF, CNPJ and CUIT are tax identifiers for all residents who pay taxes in Brazil and Argentina respectively.
     */
   taxIdentifier?: string | null;
   /**
-    * This field and a value of `cpf` or `cuit` are required if adding a billing info that is an elo or hipercard type in Brazil or in Argentina.
+    * This field and a value of `cpf`, `cnpj` or `cuit` are required if adding a billing info that is an elo or hipercard type in Brazil or in Argentina.
     */
   taxIdentifierType?: string | null;
   /**
@@ -3289,13 +3317,14 @@ export interface BillingInfoCreate {
     */
   backupPaymentMethod?: boolean | null;
   /**
-    * Use for Adyen HPP billing info.
+    * Use for Adyen HPP billing info. This should only be used as part of a pending purchase request, when the billing info is nested inside an account object.
     */
   externalHppType?: string | null;
   /**
-    * Use for Online Banking billing info.
+    * Use for Online Banking billing info. This should only be used as part of a pending purchase request, when the billing info is nested inside an account object.
     */
   onlineBankingPaymentType?: string | null;
+  cardType?: string | null;
 
 }
 
@@ -3381,6 +3410,14 @@ export interface BillingInfoVerify {
     * An identifier for a specific payment gateway.
     */
   gatewayCode?: string | null;
+
+}
+
+export interface BillingInfoVerifyCVV {
+  /**
+    * Unique security code for a credit card.
+    */
+  verificationValue?: string | null;
 
 }
 
@@ -3985,6 +4022,10 @@ export interface LineItemRefund {
     */
   quantity?: number | null;
   /**
+    * A floating-point alternative to Quantity. If this value is present, it will be used in place of Quantity for calculations, and Quantity will be the rounded integer value of this number. This field supports up to 9 decimal places. The Decimal Quantity feature must be enabled to utilize this field.
+    */
+  quantityDecimal?: string | null;
+  /**
     * Set to `true` if the line item should be prorated; set to `false` if not. This can only be used on line items that have a start and end date. 
     */
   prorate?: boolean | null;
@@ -4113,7 +4154,7 @@ export interface PlanCreate {
 
 export interface PlanRampInterval {
   /**
-    * Represents the first billing cycle of a ramp.
+    * Represents the billing cycle where a ramp interval starts.
     */
   startingBillingCycle?: number | null;
   /**
@@ -4614,6 +4655,10 @@ export interface SubscriptionCreate {
     */
   autoRenew?: boolean | null;
   /**
+    * The new set of ramp intervals for the subscription.
+    */
+  rampIntervals?: SubscriptionRampInterval[] | null;
+  /**
     * Revenue schedule type
     */
   revenueScheduleType?: string | null;
@@ -4730,6 +4775,18 @@ export interface SubscriptionAddOnPercentageTier {
     * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places represented as a string. 
     */
   usagePercentage?: string | null;
+
+}
+
+export interface SubscriptionRampInterval {
+  /**
+    * Represents the billing cycle where a ramp interval starts.
+    */
+  startingBillingCycle?: number | null;
+  /**
+    * Represents the price for the ramp interval.
+    */
+  unitAmount?: number | null;
 
 }
 
@@ -4881,7 +4938,7 @@ export interface SubscriptionChangeCreate {
   transactionType?: string | null;
   billingInfo?: SubscriptionChangeBillingInfoCreate | null;
   /**
-    * Ramp Intervals
+    * The new set of ramp intervals for the subscription.
     */
   rampIntervals?: SubscriptionRampInterval[] | null;
 
@@ -4960,25 +5017,13 @@ export interface SubscriptionChangeBillingInfoCreate {
 
 }
 
-export interface SubscriptionRampInterval {
-  /**
-    * Represents how many billing cycles are included in a ramp interval.
-    */
-  startingBillingCycle?: number | null;
-  /**
-    * Represents the price for the ramp interval.
-    */
-  unitAmount?: number | null;
-
-}
-
 export interface UsageCreate {
   /**
     * Custom field for recording the id in your own system associated with the usage, so you can provide auditable usage displays to your customers using a GET on this endpoint.
     */
   merchantTag?: string | null;
   /**
-    * The amount of usage. Can be positive, negative, or 0. No decimals allowed, we will strip them. If the usage-based add-on is billed with a percentage, your usage will be a monetary amount you will want to format in cents. (e.g., $5.00 is "500").
+    * The amount of usage. Can be positive, negative, or 0. If the Decimal Quantity feature is enabled, this value will be rounded to nine decimal places.  Otherwise, all digits after the decimal will be stripped. If the usage-based add-on is billed with a percentage, your usage should be a monetary amount formatted in cents (e.g., $5.00 is "500").
     */
   amount?: number | null;
   /**
@@ -5223,7 +5268,7 @@ export interface SubscriptionPurchase {
     */
   revenueScheduleType?: string | null;
   /**
-    * Ramp Intervals
+    * The new set of ramp intervals for the subscription.
     */
   rampIntervals?: SubscriptionRampInterval[] | null;
 
@@ -5477,6 +5522,17 @@ export declare class Client {
    * @return {Promise<Transaction>} Transaction information from verify.
    */
   verifyBillingInfo(accountId: string, options?: object): Promise<Transaction>;
+  /**
+   * Verify an account's credit card billing cvv
+   *
+   * API docs: https://developers.recurly.com/api/v2022-01-01#operation/verify_billing_info_cvv
+   *
+   * 
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {BillingInfoVerifyCVV} body - The object representing the JSON request to send to the server. It should conform to the schema of {BillingInfoVerifyCVV}
+   * @return {Promise<Transaction>} Transaction information from verify.
+   */
+  verifyBillingInfoCvv(accountId: string, body: BillingInfoVerifyCVV): Promise<Transaction>;
   /**
    * Get the list of billing information associated with an account
    *
@@ -7575,10 +7631,11 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * API docs: https://developers.recurly.com/api/v2022-01-01#operation/put_dunning_campaign_bulk_update
    *
    * 
+   * @param {string} dunningCampaignId - Dunning Campaign ID, e.g. `e28zov4fw0v2`.
    * @param {DunningCampaignsBulkUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {DunningCampaignsBulkUpdate}
    * @return {Promise<DunningCampaignsBulkUpdateResponse>} A list of updated plans.
    */
-  putDunningCampaignBulkUpdate(body: DunningCampaignsBulkUpdate): Promise<DunningCampaignsBulkUpdateResponse>;
+  putDunningCampaignBulkUpdate(dunningCampaignId: string, body: DunningCampaignsBulkUpdate): Promise<DunningCampaignsBulkUpdateResponse>;
   /**
    * Show the invoice templates for a site
    *
