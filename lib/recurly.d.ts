@@ -1434,6 +1434,10 @@ export declare class LineItem {
    */
   quantity?: number | null;
   /**
+   * A floating-point alternative to Quantity. If this value is present, it will be used in place of Quantity for calculations, and Quantity will be the rounded integer value of this number. This field supports up to 9 decimal places. The Decimal Quantity feature must be enabled to utilize this field.
+   */
+  quantityDecimal?: string | null;
+  /**
    * Positive amount for a charge, negative amount for a credit.
    */
   unitAmount?: number | null;
@@ -1489,6 +1493,10 @@ export declare class LineItem {
    * For refund charges, the quantity being refunded. For non-refund charges, the total quantity refunded (possibly over multiple refunds).
    */
   refundedQuantity?: number | null;
+  /**
+   * A floating-point alternative to Refunded Quantity. For refund charges, the quantity being refunded. For non-refund charges, the total quantity refunded (possibly over multiple refunds). The Decimal Quantity feature must be enabled to utilize this field.
+   */
+  refundedQuantityDecimal?: string | null;
   /**
    * The amount of credit from this line item that was applied to the invoice.
    */
@@ -2047,7 +2055,7 @@ export declare class SubscriptionChangeBillingInfo {
 
 export declare class SubscriptionRampIntervalResponse {
   /**
-   * Represents how many billing cycles are included in a ramp interval.
+   * Represents the billing cycle where a ramp interval starts.
    */
   startingBillingCycle?: number | null;
   /**
@@ -2412,7 +2420,7 @@ export declare class Plan {
 
 export declare class PlanRampInterval {
   /**
-   * Represents the first billing cycle of a ramp.
+   * Represents the billing cycle where a ramp interval starts.
    */
   startingBillingCycle?: number | null;
   /**
@@ -2745,7 +2753,7 @@ export declare class Usage {
    */
   merchantTag?: string | null;
   /**
-   * The amount of usage. Can be positive, negative, or 0. No decimals allowed, we will strip them. If the usage-based add-on is billed with a percentage, your usage will be a monetary amount you will want to format in cents. (e.g., $5.00 is "500").
+   * The amount of usage. Can be positive, negative, or 0. If the Decimal Quantity feature is enabled, this value will be rounded to nine decimal places.  Otherwise, all digits after the decimal will be stripped. If the usage-based add-on is billed with a percentage, your usage should be a monetary amount formatted in cents (e.g., $5.00 is "500").
    */
   amount?: number | null;
   /**
@@ -3930,6 +3938,10 @@ export interface LineItemRefund {
     */
   quantity?: number | null;
   /**
+    * A floating-point alternative to Quantity. If this value is present, it will be used in place of Quantity for calculations, and Quantity will be the rounded integer value of this number. This field supports up to 9 decimal places. The Decimal Quantity feature must be enabled to utilize this field.
+    */
+  quantityDecimal?: string | null;
+  /**
     * Set to `true` if the line item should be prorated; set to `false` if not. This can only be used on line items that have a start and end date. 
     */
   prorate?: boolean | null;
@@ -4058,7 +4070,7 @@ export interface PlanCreate {
 
 export interface PlanRampInterval {
   /**
-    * Represents the first billing cycle of a ramp.
+    * Represents the billing cycle where a ramp interval starts.
     */
   startingBillingCycle?: number | null;
   /**
@@ -4612,7 +4624,7 @@ export interface SubscriptionAddOnTier {
 
 export interface SubscriptionRampInterval {
   /**
-    * Represents how many billing cycles are included in a ramp interval.
+    * Represents the billing cycle where a ramp interval starts.
     */
   startingBillingCycle?: number | null;
   /**
@@ -4846,7 +4858,7 @@ export interface UsageCreate {
     */
   merchantTag?: string | null;
   /**
-    * The amount of usage. Can be positive, negative, or 0. No decimals allowed, we will strip them. If the usage-based add-on is billed with a percentage, your usage will be a monetary amount you will want to format in cents. (e.g., $5.00 is "500").
+    * The amount of usage. Can be positive, negative, or 0. If the Decimal Quantity feature is enabled, this value will be rounded to nine decimal places.  Otherwise, all digits after the decimal will be stripped. If the usage-based add-on is billed with a percentage, your usage should be a monetary amount formatted in cents (e.g., $5.00 is "500").
     */
   amount?: number | null;
   /**
@@ -8753,10 +8765,11 @@ export declare class Client {
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/put_dunning_campaign_bulk_update
    *
    * 
+   * @param {string} dunningCampaignId - Dunning Campaign ID, e.g. `e28zov4fw0v2`.
    * @param {DunningCampaignsBulkUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {DunningCampaignsBulkUpdate}
    * @return {Promise<DunningCampaignsBulkUpdateResponse>} A list of updated plans.
    */
-  putDunningCampaignBulkUpdate(body: DunningCampaignsBulkUpdate): Promise<DunningCampaignsBulkUpdateResponse>;
+  putDunningCampaignBulkUpdate(dunningCampaignId: string, body: DunningCampaignsBulkUpdate): Promise<DunningCampaignsBulkUpdateResponse>;
 
 }
 
