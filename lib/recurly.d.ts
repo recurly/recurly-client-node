@@ -1247,6 +1247,14 @@ export declare class Invoice {
    * Unique ID to identify the dunning campaign used when dunning the invoice. For sites without multiple dunning campaigns enabled, this will always be the default dunning campaign.
    */
   dunningCampaignId?: string | null;
+  /**
+   * Number of times the event was sent.
+   */
+  dunningEventsSent?: number | null;
+  /**
+   * Last communication attempt.
+   */
+  finalDunningEvent?: boolean | null;
 
 }
 
@@ -1456,6 +1464,10 @@ export declare class LineItem {
    */
   quantity?: number | null;
   /**
+   * A floating-point alternative to Quantity. If this value is present, it will be used in place of Quantity for calculations, and Quantity will be the rounded integer value of this number. This field supports up to 9 decimal places. The Decimal Quantity feature must be enabled to utilize this field.
+   */
+  quantityDecimal?: string | null;
+  /**
    * Positive amount for a charge, negative amount for a credit.
    */
   unitAmount?: number | null;
@@ -1515,6 +1527,10 @@ export declare class LineItem {
    * For refund charges, the quantity being refunded. For non-refund charges, the total quantity refunded (possibly over multiple refunds).
    */
   refundedQuantity?: number | null;
+  /**
+   * A floating-point alternative to Refunded Quantity. For refund charges, the quantity being refunded. For non-refund charges, the total quantity refunded (possibly over multiple refunds). The Decimal Quantity feature must be enabled to utilize this field.
+   */
+  refundedQuantityDecimal?: string | null;
   /**
    * The amount of credit from this line item that was applied to the invoice.
    */
@@ -2807,7 +2823,7 @@ export declare class Usage {
    */
   merchantTag?: string | null;
   /**
-   * The amount of usage. Can be positive, negative, or 0. No decimals allowed, we will strip them. If the usage-based add-on is billed with a percentage, your usage will be a monetary amount you will want to format in cents. (e.g., $5.00 is "500").
+   * The amount of usage. Can be positive, negative, or 0. If the Decimal Quantity feature is enabled, this value will be rounded to nine decimal places.  Otherwise, all digits after the decimal will be stripped. If the usage-based add-on is billed with a percentage, your usage should be a monetary amount formatted in cents (e.g., $5.00 is "500").
    */
   amount?: number | null;
   /**
@@ -3333,11 +3349,11 @@ export interface BillingInfoCreate {
     */
   backupPaymentMethod?: boolean | null;
   /**
-    * Use for Adyen HPP billing info.
+    * Use for Adyen HPP billing info. This should only be used as part of a pending purchase request, when the billing info is nested inside an account object.
     */
   externalHppType?: string | null;
   /**
-    * Use for Online Banking billing info.
+    * Use for Online Banking billing info. This should only be used as part of a pending purchase request, when the billing info is nested inside an account object.
     */
   onlineBankingPaymentType?: string | null;
   cardType?: string | null;
@@ -4041,6 +4057,10 @@ export interface LineItemRefund {
     * Line item quantity to be refunded.
     */
   quantity?: number | null;
+  /**
+    * A floating-point alternative to Quantity. If this value is present, it will be used in place of Quantity for calculations, and Quantity will be the rounded integer value of this number. This field supports up to 9 decimal places. The Decimal Quantity feature must be enabled to utilize this field.
+    */
+  quantityDecimal?: string | null;
   /**
     * Set to `true` if the line item should be prorated; set to `false` if not. This can only be used on line items that have a start and end date. 
     */
@@ -5063,7 +5083,7 @@ export interface UsageCreate {
     */
   merchantTag?: string | null;
   /**
-    * The amount of usage. Can be positive, negative, or 0. No decimals allowed, we will strip them. If the usage-based add-on is billed with a percentage, your usage will be a monetary amount you will want to format in cents. (e.g., $5.00 is "500").
+    * The amount of usage. Can be positive, negative, or 0. If the Decimal Quantity feature is enabled, this value will be rounded to nine decimal places.  Otherwise, all digits after the decimal will be stripped. If the usage-based add-on is billed with a percentage, your usage should be a monetary amount formatted in cents (e.g., $5.00 is "500").
     */
   amount?: number | null;
   /**
