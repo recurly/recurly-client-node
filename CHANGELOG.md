@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.23.0](https://github.com/recurly/recurly-client-node/tree/4.23.0) (2022-10-21)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.22.0...4.23.0)
+
+
+**Merged Pull Requests**
+
+- Generated Latest Changes for v2021-02-25(Decimal Usage and Quantities and DunningEvent new fields) [#275](https://github.com/recurly/recurly-client-node/pull/275) ([recurly-integrations](https://github.com/recurly-integrations))
+
+
+
 ## [4.22.0](https://github.com/recurly/recurly-client-node/tree/4.22.0) (2022-09-08)
 
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.21.0...4.22.0)
