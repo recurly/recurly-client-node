@@ -3060,6 +3060,80 @@ export declare class InvoiceTemplate {
 
 }
 
+export declare class Entitlements {
+  /**
+   * Object Type
+   */
+  object?: string | null;
+  /**
+   * Indicates there are more results on subsequent pages.
+   */
+  hasMore?: boolean | null;
+  /**
+   * Path to subsequent page of results.
+   */
+  next?: string | null;
+  data?: Entitlement[] | null;
+
+}
+
+export declare class Entitlement {
+  /**
+   * Entitlement
+   */
+  object?: string | null;
+  customerPermission?: CustomerPermission | null;
+  /**
+   * Subscription or item that granted the customer permission.
+   */
+  grantedBy?: GrantedBy[] | null;
+  /**
+   * Time object was created.
+   */
+  createdAt?: Date | null;
+  /**
+   * Time the object was last updated
+   */
+  updatedAt?: Date | null;
+
+}
+
+export declare class CustomerPermission {
+  /**
+   * Customer permission ID.
+   */
+  id?: string | null;
+  /**
+   * Customer permission code.
+   */
+  code?: string | null;
+  /**
+   * Customer permission name.
+   */
+  name?: string | null;
+  /**
+   * Description of customer permission.
+   */
+  description?: string | null;
+  /**
+   * It will always be "customer_permission".
+   */
+  object?: string | null;
+
+}
+
+export declare class GrantedBy {
+  /**
+   * Object Type
+   */
+  object?: string | null;
+  /**
+   * The ID of the subscription or external subscription that grants the permission to the account.
+   */
+  id?: string | null;
+
+}
+
 
 
 export interface Empty {
@@ -9175,6 +9249,23 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * @return {Promise<InvoiceTemplate>} Settings for an invoice template.
    */
   getInvoiceTemplate(invoiceTemplateId: string): Promise<InvoiceTemplate>;
+  /**
+   * Show all entitlements granted to an account
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_entitlements
+   *
+   * 
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
+   * @param {string} options.params.state - Filter the entitlements based on the state of the applicable subscription.
+   *   
+   *   - When `state=active`, `state=canceled`, `state=expired`, or `state=future`, subscriptions with states that match the query and only those subscriptions will be returned.
+   *   - When no state is provided, subscriptions with active or canceled states will be returned.
+   *   
+   * @return {Pager<Entitlements>} A list of the entitlements granted to an account.
+   */
+  listEntitlements(accountId: string, options?: object): Pager<Entitlements>;
 
 }
 
