@@ -2009,9 +2009,13 @@ export declare class SubscriptionAddOn {
    */
   revenueScheduleType?: string | null;
   /**
-   * The pricing model for the add-on.  For more information, [click here](https://docs.recurly.com/docs/billing-models#section-quantity-based). See our [Guide](https://developers.recurly.com/guides/item-addon-guide.html) for an overview of how to configure quantity-based pricing models. 
+   * The pricing model for the add-on.  For more information, [click here](https://docs.recurly.com/docs/billing-models#section-quantity-based). See our [Guide](https://recurly.com/developers/guides/item-addon-guide.html) for an overview of how to configure quantity-based pricing models. 
    */
   tierType?: string | null;
+  /**
+   * The type of calculation to be employed for an add-on.  Cumulative billing will sum all usage records created in the current billing cycle.  Last-in-period billing will apply only the most recent usage record in the billing period.  If no value is specified, cumulative billing will be used.
+   */
+  usageCalculationType?: string | null;
   /**
    * The time at which usage totals are reset for billing purposes.
    */
@@ -2387,6 +2391,138 @@ export declare class MeasuredUnit {
 
 }
 
+export declare class ExternalProduct {
+  /**
+   * System-generated unique identifier for an external product ID, e.g. `e28zov4fw0v2`.
+   */
+  id?: string | null;
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * Name to identify the external product in Recurly.
+   */
+  name?: string | null;
+  /**
+   * Just the important parts.
+   */
+  plan?: PlanMini | null;
+  /**
+   * When the external product was created in Recurly.
+   */
+  createdAt?: Date | null;
+  /**
+   * When the external product was updated in Recurly.
+   */
+  updatedAt?: Date | null;
+  /**
+   * List of external product references of the external product.
+   */
+  externalProductReferences?: ExternalProductReferenceMini[] | null;
+
+}
+
+export declare class ExternalProductReferenceMini {
+  /**
+   * System-generated unique identifier for an external product ID, e.g. `e28zov4fw0v2`.
+   */
+  id?: string | null;
+  /**
+   * object
+   */
+  object?: string | null;
+  /**
+   * A code which associates the external product to a corresponding object or resource in an external platform like the Apple App Store or Google Play Store.
+   */
+  referenceCode?: string | null;
+  /**
+   * Source connection platform.
+   */
+  externalConnectionType?: string | null;
+  /**
+   * When the external product was created in Recurly.
+   */
+  createdAt?: Date | null;
+  /**
+   * When the external product was updated in Recurly.
+   */
+  updatedAt?: Date | null;
+
+}
+
+export declare class ExternalSubscription {
+  /**
+   * System-generated unique identifier for an external subscription ID, e.g. `e28zov4fw0v2`.
+   */
+  id?: string | null;
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * Account mini details
+   */
+  account?: AccountMini | null;
+  /**
+   * External Resource mini details
+   */
+  externalResource?: ExternalResourceMini | null;
+  /**
+   * External Product Reference details
+   */
+  externalProductReference?: ExternalProductReferenceMini | null;
+  /**
+   * When a new billing event occurred on the external subscription in conjunction with a recent billing period, reactivation or upgrade/downgrade.
+   */
+  lastPurchased?: Date | null;
+  /**
+   * An indication of whether or not the external subscription will auto-renew at the expiration date.
+   */
+  autoRenew?: boolean | null;
+  /**
+   * Identifier of the app that generated the external subscription.
+   */
+  appIdentifier?: string | null;
+  /**
+   * An indication of the quantity of a subscribed item's quantity.
+   */
+  quantity?: number | null;
+  /**
+   * When the external subscription was activated in the external platform.
+   */
+  activatedAt?: Date | null;
+  /**
+   * When the external subscription expires in the external platform.
+   */
+  expiresAt?: Date | null;
+  /**
+   * When the external subscription was created in Recurly.
+   */
+  createdAt?: Date | null;
+  /**
+   * When the external subscription was updated in Recurly.
+   */
+  updatedAt?: Date | null;
+
+}
+
+export declare class ExternalResourceMini {
+  /**
+   * System-generated unique identifier for an external resource ID, e.g. `e28zov4fw0v2`.
+   */
+  id?: string | null;
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * Identifier or URL reference where the resource is canonically available in the external platform.
+   */
+  externalObjectReference?: string | null;
+
+}
+
 export declare class BinaryFile {
   data?: string | null;
 
@@ -2453,6 +2589,10 @@ export declare class Plan {
    * Ramp Intervals
    */
   rampIntervals?: PlanRampInterval[] | null;
+  /**
+   * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
+   */
+  customFields?: CustomField[] | null;
   /**
    * Revenue schedule type
    */
@@ -2614,6 +2754,10 @@ export declare class AddOn {
    */
   usageType?: string | null;
   /**
+   * The type of calculation to be employed for an add-on.  Cumulative billing will sum all usage records created in the current billing cycle.  Last-in-period billing will apply only the most recent usage record in the billing period.  If no value is specified, cumulative billing will be used.
+   */
+  usageCalculationType?: string | null;
+  /**
    * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0.
    */
   usagePercentage?: number | null;
@@ -2662,7 +2806,7 @@ export declare class AddOn {
    */
   item?: ItemMini | null;
   /**
-   * The pricing model for the add-on.  For more information, [click here](https://docs.recurly.com/docs/billing-models#section-quantity-based). See our [Guide](https://developers.recurly.com/guides/item-addon-guide.html) for an overview of how to configure quantity-based pricing models. 
+   * The pricing model for the add-on.  For more information, [click here](https://docs.recurly.com/docs/billing-models#section-quantity-based). See our [Guide](https://recurly.com/developers/guides/item-addon-guide.html) for an overview of how to configure quantity-based pricing models. 
    */
   tierType?: string | null;
   /**
@@ -2831,7 +2975,7 @@ export declare class Usage {
    */
   usageType?: string | null;
   /**
-   * The pricing model for the add-on.  For more information, [click here](https://docs.recurly.com/docs/billing-models#section-quantity-based). See our [Guide](https://developers.recurly.com/guides/item-addon-guide.html) for an overview of how to configure quantity-based pricing models. 
+   * The pricing model for the add-on.  For more information, [click here](https://docs.recurly.com/docs/billing-models#section-quantity-based). See our [Guide](https://recurly.com/developers/guides/item-addon-guide.html) for an overview of how to configure quantity-based pricing models. 
    */
   tierType?: string | null;
   /**
@@ -3310,7 +3454,7 @@ export interface Address {
 
 export interface BillingInfoCreate {
   /**
-    * A token [generated by Recurly.js](https://developers.recurly.com/reference/recurly-js/#getting-a-token).
+    * A token [generated by Recurly.js](https://recurly.com/developers/reference/recurly-js/#getting-a-token).
     */
   tokenId?: string | null;
   /**
@@ -4212,6 +4356,10 @@ export interface PlanCreate {
     */
   rampIntervals?: PlanRampInterval[] | null;
   /**
+    * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
+    */
+  customFields?: CustomField[] | null;
+  /**
     * Revenue schedule type
     */
   revenueScheduleType?: string | null;
@@ -4348,9 +4496,13 @@ export interface AddOnCreate {
     */
   addOnType?: string | null;
   /**
-    * Type of usage, required if `add_on_type` is `usage`. See our [Guide](https://developers.recurly.com/guides/usage-based-billing-guide.html) for an overview of how to configure usage add-ons. 
+    * Type of usage, required if `add_on_type` is `usage`. See our [Guide](https://recurly.com/developers/guides/usage-based-billing-guide.html) for an overview of how to configure usage add-ons. 
     */
   usageType?: string | null;
+  /**
+    * The type of calculation to be employed for an add-on.  Cumulative billing will sum all usage records created in the current billing cycle.  Last-in-period billing will apply only the most recent usage record in the billing period.  If no value is specified, cumulative billing will be used.
+    */
+  usageCalculationType?: string | null;
   /**
     * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0. Required if `add_on_type` is usage, `tier_type` is `flat` and `usage_type` is percentage. Must be omitted otherwise.
     */
@@ -4404,7 +4556,7 @@ export interface AddOnCreate {
     */
   currencies?: AddOnPricing[] | null;
   /**
-    * The pricing model for the add-on.  For more information, [click here](https://docs.recurly.com/docs/billing-models#section-quantity-based). See our [Guide](https://developers.recurly.com/guides/item-addon-guide.html) for an overview of how to configure quantity-based pricing models. 
+    * The pricing model for the add-on.  For more information, [click here](https://docs.recurly.com/docs/billing-models#section-quantity-based). See our [Guide](https://recurly.com/developers/guides/item-addon-guide.html) for an overview of how to configure quantity-based pricing models. 
     */
   tierType?: string | null;
   /**
@@ -4544,6 +4696,10 @@ export interface PlanUpdate {
     */
   rampIntervals?: PlanRampInterval[] | null;
   /**
+    * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
+    */
+  customFields?: CustomField[] | null;
+  /**
     * Revenue schedule type
     */
   revenueScheduleType?: string | null;
@@ -4607,6 +4763,10 @@ export interface AddOnUpdate {
     * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0. Required if `add_on_type` is usage, `tier_type` is `flat` and `usage_type` is percentage. Must be omitted otherwise.
     */
   usagePercentage?: number | null;
+  /**
+    * The type of calculation to be employed for an add-on.  Cumulative billing will sum all usage records created in the current billing cycle.  Last-in-period billing will apply only the most recent usage record in the billing period.  If no value is specified, cumulative billing will be used.
+    */
+  usageCalculationType?: string | null;
   /**
     * System-generated unique identifier for a measured unit to be associated with the add-on. Either `measured_unit_id` or `measured_unit_name` are required when `add_on_type` is `usage`. If `measured_unit_id` and `measured_unit_name` are both present, `measured_unit_id` will be used.
     */
@@ -4854,7 +5014,7 @@ export interface SubscriptionAddOnCreate {
     */
   unitAmountDecimal?: string | null;
   /**
-    * If the plan add-on's `tier_type` is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount`. There must be one tier without an `ending_quantity` value which represents the final tier. See our [Guide](https://developers.recurly.com/guides/item-addon-guide.html) for an overview of how to configure quantity-based pricing models. 
+    * If the plan add-on's `tier_type` is `flat`, then `tiers` must be absent. The `tiers` object must include one to many tiers with `ending_quantity` and `unit_amount`. There must be one tier without an `ending_quantity` value which represents the final tier. See our [Guide](https://recurly.com/developers/guides/item-addon-guide.html) for an overview of how to configure quantity-based pricing models. 
     */
   tiers?: SubscriptionAddOnTier[] | null;
   /**
@@ -4862,7 +5022,7 @@ export interface SubscriptionAddOnCreate {
     */
   percentageTiers?: SubscriptionAddOnPercentageTier[] | null;
   /**
-    * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0. Required if `add_on_type` is usage and `usage_type` is percentage. Must be omitted otherwise. `usage_percentage` does not support tiers. See our [Guide](https://developers.recurly.com/guides/usage-based-billing-guide.html) for an overview of how to configure usage add-ons.
+    * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places. A value between 0.0 and 100.0. Required if `add_on_type` is usage and `usage_type` is percentage. Must be omitted otherwise. `usage_percentage` does not support tiers. See our [Guide](https://recurly.com/developers/guides/usage-based-billing-guide.html) for an overview of how to configure usage add-ons.
     */
   usagePercentage?: number | null;
   /**
@@ -5992,7 +6152,7 @@ export declare class Client {
    */
   removeABillingInfo(accountId: string, billingInfoId: string): Promise<Empty>;
   /**
-   * Show the coupon redemptions for an account
+   * List the coupon redemptions for an account
    *
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_account_coupon_redemptions
    *
@@ -6033,7 +6193,7 @@ export declare class Client {
    */
   listAccountCouponRedemptions(accountId: string, options?: object): Pager<CouponRedemption>;
   /**
-   * Show the coupon redemptions that are active on an account
+   * List the coupon redemptions that are active on an account
    *
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_active_coupon_redemptions
    *
@@ -6303,7 +6463,7 @@ export declare class Client {
    */
   createLineItem(accountId: string, body: LineItemCreate): Promise<LineItem>;
   /**
-   * Fetch a list of an account's notes
+   * List an account's notes
    *
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_account_notes
    *
@@ -7311,6 +7471,56 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    */
   removeMeasuredUnit(measuredUnitId: string): Promise<MeasuredUnit>;
   /**
+   * List a site's external products
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_external_products
+   *
+   * 
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
+   * @param {string} options.params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   *   order. In descending order updated records will move behind the cursor and could
+   *   prevent some records from being returned.
+   *   
+   * @return {Pager<ExternalProduct>} A list of the the external_products on a site.
+   */
+  listExternalProducts(options?: object): Pager<ExternalProduct>;
+  /**
+   * Fetch an external product
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_external_product
+   *
+   * 
+   * @param {string} externalProductId - External product id
+   * @return {Promise<ExternalProduct>} Settings for an external product.
+   */
+  getExternalProduct(externalProductId: string): Promise<ExternalProduct>;
+  /**
+   * List a site's external subscriptions
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_external_subscriptions
+   *
+   * 
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
+   * @param {string} options.params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   *   order. In descending order updated records will move behind the cursor and could
+   *   prevent some records from being returned.
+   *   
+   * @return {Pager<ExternalSubscription>} A list of the the external_subscriptions on a site.
+   */
+  listExternalSubscriptions(options?: object): Pager<ExternalSubscription>;
+  /**
+   * Fetch an external subscription
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_external_subscription
+   *
+   * 
+   * @param {string} externalSubscriptionId - External subscription id
+   * @return {Promise<ExternalSubscription>} Settings for an external subscription.
+   */
+  getExternalSubscription(externalSubscriptionId: string): Promise<ExternalSubscription>;
+  /**
    * List a site's invoices
    *
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_invoices
@@ -7653,7 +7863,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    */
   listInvoiceLineItems(invoiceId: string, options?: object): Pager<LineItem>;
   /**
-   * Show the coupon redemptions applied to an invoice
+   * List the coupon redemptions applied to an invoice
    *
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_invoice_coupon_redemptions
    *
@@ -8805,7 +9015,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    */
   listSubscriptionLineItems(subscriptionId: string, options?: object): Pager<LineItem>;
   /**
-   * Show the coupon redemptions for a subscription
+   * List the coupon redemptions for a subscription
    *
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_subscription_coupon_redemptions
    *
@@ -9189,7 +9399,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    */
   getExportFiles(exportDate: string): Promise<ExportFiles>;
   /**
-   * Show the dunning campaigns for a site
+   * List the dunning campaigns for a site
    *
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_dunning_campaigns
    *
@@ -9204,7 +9414,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    */
   listDunningCampaigns(options?: object): Pager<DunningCampaign>;
   /**
-   * Show the settings for a dunning campaign
+   * Fetch a dunning campaign
    *
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_dunning_campaign
    *
@@ -9240,7 +9450,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    */
   listInvoiceTemplates(options?: object): Pager<InvoiceTemplate>;
   /**
-   * Show the settings for an invoice template
+   * Fetch an invoice template
    *
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_invoice_template
    *
@@ -9250,7 +9460,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    */
   getInvoiceTemplate(invoiceTemplateId: string): Promise<InvoiceTemplate>;
   /**
-   * Show all entitlements granted to an account
+   * List entitlements granted to an account
    *
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_entitlements
    *
@@ -9266,6 +9476,22 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * @return {Pager<Entitlements>} A list of the entitlements granted to an account.
    */
   listEntitlements(accountId: string, options?: object): Pager<Entitlements>;
+  /**
+   * List an account's external subscriptions
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_account_external_subscriptions
+   *
+   * 
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
+   * @param {string} options.params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   *   order. In descending order updated records will move behind the cursor and could
+   *   prevent some records from being returned.
+   *   
+   * @return {Pager<ExternalSubscription>} A list of the the external_subscriptions on an account.
+   */
+  listAccountExternalSubscriptions(accountId: string, options?: object): Pager<ExternalSubscription>;
 
 }
 
