@@ -564,6 +564,10 @@ export declare class AccountBalanceAmount {
    * Total amount for the prepayment credit invoices in a `processing` state on the account.
    */
   processingPrepaymentAmount?: number | null;
+  /**
+   * Total amount of the open balances on credit invoices for the account.
+   */
+  availableCreditAmount?: number | null;
 
 }
 
@@ -7081,6 +7085,16 @@ export declare class Client {
    * @return {Promise<BinaryFile>} An invoice as a PDF.
    */
   getInvoicePdf(invoiceId: string): Promise<BinaryFile>;
+  /**
+   * Apply available credit to a pending or past due charge invoice
+   *
+   * API docs: https://developers.recurly.com/api/v2019-10-10#operation/apply_credit_balance
+   *
+   * 
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @return {Promise<Invoice>} The updated invoice.
+   */
+  applyCreditBalance(invoiceId: string): Promise<Invoice>;
   /**
    * Collect a pending or past due, automatic invoice
    *
