@@ -183,6 +183,10 @@ export declare class Account {
    */
   preferredLocale?: string | null;
   /**
+   * The [IANA time zone name](https://docs.recurly.com/docs/email-time-zones-and-time-stamps#supported-api-iana-time-zone-names) used to determine the time zone of emails sent on behalf of the merchant to the customer.
+   */
+  preferredTimeZone?: string | null;
+  /**
    * Additional email address that should receive account correspondence. These should be separated only by commas. These CC emails will receive all emails that the `email` field also receives.
    */
   ccEmails?: string | null;
@@ -1110,7 +1114,7 @@ export declare class Invoice {
    */
   subscriptionIds?: string[] | null;
   /**
-   * On refund invoices, this value will exist and show the invoice ID of the purchase invoice the refund was created from.
+   * On refund invoices, this value will exist and show the invoice ID of the purchase invoice the refund was created from. This field is only populated for sites without the [Only Bill What Changed](https://docs.recurly.com/docs/only-bill-what-changed) feature enabled. Sites with Only Bill What Changed enabled should use the [related_invoices endpoint](https://recurly.com/developers/api/v2019-10-10/index.html#operation/list_related_invoices) to see purchase invoices refunded by this invoice.
    */
   previousInvoiceId?: string | null;
   /**
@@ -2998,6 +3002,10 @@ export interface AccountCreate {
     */
   preferredLocale?: string | null;
   /**
+    * Used to determine the time zone of emails sent on behalf of the merchant to the customer. Must be a [supported IANA time zone name](https://docs.recurly.com/docs/email-time-zones-and-time-stamps#supported-api-iana-time-zone-names)
+    */
+  preferredTimeZone?: string | null;
+  /**
     * Additional email address that should receive account correspondence. These should be separated only by commas. These CC emails will receive all emails that the `email` field also receives.
     */
   ccEmails?: string | null;
@@ -3285,6 +3293,10 @@ export interface AccountUpdate {
     * Used to determine the language and locale of emails sent on behalf of the merchant to the customer. The list of locales is restricted to those the merchant has enabled on the site.
     */
   preferredLocale?: string | null;
+  /**
+    * Used to determine the time zone of emails sent on behalf of the merchant to the customer. Must be a [supported IANA time zone name](https://docs.recurly.com/docs/email-time-zones-and-time-stamps#supported-api-iana-time-zone-names)
+    */
+  preferredTimeZone?: string | null;
   /**
     * Additional email address that should receive account correspondence. These should be separated only by commas. These CC emails will receive all emails that the `email` field also receives.
     */
@@ -4976,6 +4988,10 @@ export interface AccountPurchase {
     * Used to determine the language and locale of emails sent on behalf of the merchant to the customer. The list of locales is restricted to those the merchant has enabled on the site.
     */
   preferredLocale?: string | null;
+  /**
+    * Used to determine the time zone of emails sent on behalf of the merchant to the customer. Must be a [supported IANA time zone name](https://docs.recurly.com/docs/email-time-zones-and-time-stamps#supported-api-iana-time-zone-names)
+    */
+  preferredTimeZone?: string | null;
   /**
     * Additional email address that should receive account correspondence. These should be separated only by commas. These CC emails will receive all emails that the `email` field also receives.
     */
@@ -7090,6 +7106,21 @@ export declare class Client {
    *
    * API docs: https://developers.recurly.com/api/v2019-10-10#operation/apply_credit_balance
    *
+   * @example
+   * try {
+   *   const invoice = await client.applyCreditBalance(invoiceId)
+   *   console.log('Applied credit balance to invoice: ', invoice)
+   * } catch (err) {
+   *   if (err instanceof recurly.errors.ValidationError) {
+   *     // If the request was not valid, you may want to tell your user
+   *     // why. You can find the invalid params and reasons in err.params
+   *     console.log('Failed validation', err.params)
+   *   } else {
+   *     // If we don't know what to do with the err, we should
+   *     // probably re-raise and let our web framework and logger handle it
+   *     console.log('Unknown Error: ', err)
+   *   }
+   * }
    * 
    * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
    * @return {Promise<Invoice>} The updated invoice.
