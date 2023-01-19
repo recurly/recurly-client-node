@@ -1553,6 +1553,10 @@ export declare class LineItem {
    */
   endDate?: Date | null;
   /**
+   * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
+   */
+  customFields?: CustomField[] | null;
+  /**
    * When the line item was created.
    */
   createdAt?: Date | null;
@@ -3809,6 +3813,10 @@ export interface LineItemCreate {
     */
   origin?: string | null;
   /**
+    * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
+    */
+  customFields?: CustomField[] | null;
+  /**
     * If an end date is present, this is value indicates the beginning of a billing time range. If no end date is present it indicates billing for a specific date. Defaults to the current date-time.
     */
   startDate?: Date | null;
@@ -5738,6 +5746,7 @@ export declare class Client {
    *     code: accountCode,
    *     firstName: 'Benjamin',
    *     lastName: 'Du Monde',
+   *     preferredTimeZone: 'America/Chicago',
    *     address: {
    *       street1: '900 Camp St',
    *       city: 'New Orleans',
