@@ -9,7 +9,7 @@ jobs:
     name: Node ${{ matrix.node }} tests
     strategy:
       matrix:
-        node: [8, 10, 12, 14]
+        node: [14, 16, 18]
     steps:
       - uses: actions/checkout@v3
       - name: Setup node
