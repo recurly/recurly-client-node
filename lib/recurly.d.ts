@@ -2257,7 +2257,7 @@ export declare class CustomFieldDefinition {
    */
   name?: string | null;
   /**
-   * The access control applied inside Recurly's admin UI: - `api_only` - No one will be able to view or edit this field's data via the admin UI. - `read_only` - Users with the Customers role will be able to view this field's data via the admin UI, but   editing will only be available via the API. - `write` - Users with the Customers role will be able to view and edit this field's data via the admin UI. 
+   * The access control applied inside Recurly's admin UI: - `api_only` - No one will be able to view or edit this field's data via the admin UI. - `read_only` - Users with the Customers role will be able to view this field's data via the admin UI, but   editing will only be available via the API. - `write` - Users with the Customers role will be able to view and edit this field's data via the admin UI. - `set_only` - Users with the Customers role will be able to set this field's data via the admin console. 
    */
   userAccess?: string | null;
   /**
@@ -2489,13 +2489,13 @@ export declare class ExternalSubscription {
    */
   account?: AccountMini | null;
   /**
-   * External Resource mini details
-   */
-  externalResource?: ExternalResourceMini | null;
-  /**
    * External Product Reference details
    */
   externalProductReference?: ExternalProductReferenceMini | null;
+  /**
+   * The id of the subscription in the external systems., I.e. Apple App Store or Google Play Store.
+   */
+  externalId?: string | null;
   /**
    * When a new billing event occurred on the external subscription in conjunction with a recent billing period, reactivation or upgrade/downgrade.
    */
@@ -2513,6 +2513,10 @@ export declare class ExternalSubscription {
    */
   quantity?: number | null;
   /**
+   * External subscriptions can be active, canceled, expired, or future.
+   */
+  state?: string | null;
+  /**
    * When the external subscription was activated in the external platform.
    */
   activatedAt?: Date | null;
@@ -2528,22 +2532,6 @@ export declare class ExternalSubscription {
    * When the external subscription was updated in Recurly.
    */
   updatedAt?: Date | null;
-
-}
-
-export declare class ExternalResourceMini {
-  /**
-   * System-generated unique identifier for an external resource ID, e.g. `e28zov4fw0v2`.
-   */
-  id?: string | null;
-  /**
-   * Object type
-   */
-  object?: string | null;
-  /**
-   * Identifier or URL reference where the resource is canonically available in the external platform.
-   */
-  externalObjectReference?: string | null;
 
 }
 
