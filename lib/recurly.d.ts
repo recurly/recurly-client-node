@@ -1112,6 +1112,178 @@ export declare class CreditPayment {
 
 }
 
+export declare class ExternalInvoice {
+  /**
+   * System-generated unique identifier for an external invoice ID, e.g. `e28zov4fw0v2`.
+   */
+  id?: string | null;
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * Account mini details
+   */
+  account?: AccountMini | null;
+  /**
+   * Subscription from an external resource such as Apple App Store or Google Play Store.
+   */
+  externalSubscription?: ExternalSubscription | null;
+  /**
+   * An identifier which associates the external invoice to a corresponding object in an external platform.
+   */
+  externalId?: string | null;
+  state?: string | null;
+  /**
+   * Total
+   */
+  total?: number | null;
+  /**
+   * 3-letter ISO 4217 currency code.
+   */
+  currency?: string | null;
+  lineItems?: ExternalCharge[] | null;
+  /**
+   * When the invoice was created in the external platform.
+   */
+  purchasedAt?: Date | null;
+  /**
+   * When the external invoice was created in Recurly.
+   */
+  createdAt?: Date | null;
+  /**
+   * When the external invoice was updated in Recurly.
+   */
+  updatedAt?: Date | null;
+
+}
+
+export declare class ExternalSubscription {
+  /**
+   * System-generated unique identifier for an external subscription ID, e.g. `e28zov4fw0v2`.
+   */
+  id?: string | null;
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * Account mini details
+   */
+  account?: AccountMini | null;
+  /**
+   * External Product Reference details
+   */
+  externalProductReference?: ExternalProductReferenceMini | null;
+  /**
+   * The id of the subscription in the external systems., I.e. Apple App Store or Google Play Store.
+   */
+  externalId?: string | null;
+  /**
+   * When a new billing event occurred on the external subscription in conjunction with a recent billing period, reactivation or upgrade/downgrade.
+   */
+  lastPurchased?: Date | null;
+  /**
+   * An indication of whether or not the external subscription will auto-renew at the expiration date.
+   */
+  autoRenew?: boolean | null;
+  /**
+   * Identifier of the app that generated the external subscription.
+   */
+  appIdentifier?: string | null;
+  /**
+   * An indication of the quantity of a subscribed item's quantity.
+   */
+  quantity?: number | null;
+  /**
+   * External subscriptions can be active, canceled, expired, or future.
+   */
+  state?: string | null;
+  /**
+   * When the external subscription was activated in the external platform.
+   */
+  activatedAt?: Date | null;
+  /**
+   * When the external subscription expires in the external platform.
+   */
+  expiresAt?: Date | null;
+  /**
+   * When the external subscription was created in Recurly.
+   */
+  createdAt?: Date | null;
+  /**
+   * When the external subscription was updated in Recurly.
+   */
+  updatedAt?: Date | null;
+
+}
+
+export declare class ExternalProductReferenceMini {
+  /**
+   * System-generated unique identifier for an external product ID, e.g. `e28zov4fw0v2`.
+   */
+  id?: string | null;
+  /**
+   * object
+   */
+  object?: string | null;
+  /**
+   * A code which associates the external product to a corresponding object or resource in an external platform like the Apple App Store or Google Play Store.
+   */
+  referenceCode?: string | null;
+  /**
+   * Source connection platform.
+   */
+  externalConnectionType?: string | null;
+  /**
+   * When the external product was created in Recurly.
+   */
+  createdAt?: Date | null;
+  /**
+   * When the external product was updated in Recurly.
+   */
+  updatedAt?: Date | null;
+
+}
+
+export declare class ExternalCharge {
+  /**
+   * System-generated unique identifier for an external charge ID, e.g. `e28zov4fw0v2`.
+   */
+  id?: string | null;
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * Account mini details
+   */
+  account?: AccountMini | null;
+  /**
+   * 3-letter ISO 4217 currency code.
+   */
+  currency?: string | null;
+  /**
+   * Unit Amount
+   */
+  unitAmount?: number | null;
+  quantity?: number | null;
+  description?: string | null;
+  /**
+   * External Product Reference details
+   */
+  externalProductReference?: ExternalProductReferenceMini | null;
+  /**
+   * When the external charge was created in Recurly.
+   */
+  createdAt?: Date | null;
+  /**
+   * When the external charge was updated in Recurly.
+   */
+  updatedAt?: Date | null;
+
+}
+
 export declare class Invoice {
   /**
    * Invoice ID
@@ -2444,94 +2616,6 @@ export declare class ExternalProduct {
    * List of external product references of the external product.
    */
   externalProductReferences?: ExternalProductReferenceMini[] | null;
-
-}
-
-export declare class ExternalProductReferenceMini {
-  /**
-   * System-generated unique identifier for an external product ID, e.g. `e28zov4fw0v2`.
-   */
-  id?: string | null;
-  /**
-   * object
-   */
-  object?: string | null;
-  /**
-   * A code which associates the external product to a corresponding object or resource in an external platform like the Apple App Store or Google Play Store.
-   */
-  referenceCode?: string | null;
-  /**
-   * Source connection platform.
-   */
-  externalConnectionType?: string | null;
-  /**
-   * When the external product was created in Recurly.
-   */
-  createdAt?: Date | null;
-  /**
-   * When the external product was updated in Recurly.
-   */
-  updatedAt?: Date | null;
-
-}
-
-export declare class ExternalSubscription {
-  /**
-   * System-generated unique identifier for an external subscription ID, e.g. `e28zov4fw0v2`.
-   */
-  id?: string | null;
-  /**
-   * Object type
-   */
-  object?: string | null;
-  /**
-   * Account mini details
-   */
-  account?: AccountMini | null;
-  /**
-   * External Product Reference details
-   */
-  externalProductReference?: ExternalProductReferenceMini | null;
-  /**
-   * The id of the subscription in the external systems., I.e. Apple App Store or Google Play Store.
-   */
-  externalId?: string | null;
-  /**
-   * When a new billing event occurred on the external subscription in conjunction with a recent billing period, reactivation or upgrade/downgrade.
-   */
-  lastPurchased?: Date | null;
-  /**
-   * An indication of whether or not the external subscription will auto-renew at the expiration date.
-   */
-  autoRenew?: boolean | null;
-  /**
-   * Identifier of the app that generated the external subscription.
-   */
-  appIdentifier?: string | null;
-  /**
-   * An indication of the quantity of a subscribed item's quantity.
-   */
-  quantity?: number | null;
-  /**
-   * External subscriptions can be active, canceled, expired, or future.
-   */
-  state?: string | null;
-  /**
-   * When the external subscription was activated in the external platform.
-   */
-  activatedAt?: Date | null;
-  /**
-   * When the external subscription expires in the external platform.
-   */
-  expiresAt?: Date | null;
-  /**
-   * When the external subscription was created in Recurly.
-   */
-  createdAt?: Date | null;
-  /**
-   * When the external subscription was updated in Recurly.
-   */
-  updatedAt?: Date | null;
 
 }
 
@@ -6490,6 +6574,24 @@ export declare class Client {
    */
   listAccountCreditPayments(accountId: string, options?: object): Pager<CreditPayment>;
   /**
+   * List the external invoices on an account
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_account_external_invoices
+   *
+   * 
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
+   * @param {string} options.params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   *   order. In descending order updated records will move behind the cursor and could
+   *   prevent some records from being returned.
+   *   
+   * @param {number} options.params.limit - Limit number of records 1-200.
+   * @param {string} options.params.order - Sort order.
+   * @return {Pager<ExternalInvoice>} A list of the the external_invoices on an account.
+   */
+  listAccountExternalInvoices(accountId: string, options?: object): Pager<ExternalInvoice>;
+  /**
    * List an account's invoices
    *
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_account_invoices
@@ -7735,6 +7837,24 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * @return {Promise<ExternalSubscription>} Settings for an external subscription.
    */
   getExternalSubscription(externalSubscriptionId: string): Promise<ExternalSubscription>;
+  /**
+   * List the external invoices on an external subscription
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_external_subscription_external_invoices
+   *
+   * 
+   * @param {string} externalSubscriptionId - External subscription id
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
+   * @param {string} options.params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   *   order. In descending order updated records will move behind the cursor and could
+   *   prevent some records from being returned.
+   *   
+   * @param {number} options.params.limit - Limit number of records 1-200.
+   * @param {string} options.params.order - Sort order.
+   * @return {Pager<ExternalInvoice>} A list of the the external_invoices on a site.
+   */
+  listExternalSubscriptionExternalInvoices(externalSubscriptionId: string, options?: object): Pager<ExternalInvoice>;
   /**
    * List a site's invoices
    *
@@ -9699,6 +9819,33 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * @return {Promise<InvoiceTemplate>} Settings for an invoice template.
    */
   getInvoiceTemplate(invoiceTemplateId: string): Promise<InvoiceTemplate>;
+  /**
+   * List the external invoices on a site
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_external_invoices
+   *
+   * 
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
+   * @param {string} options.params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   *   order. In descending order updated records will move behind the cursor and could
+   *   prevent some records from being returned.
+   *   
+   * @param {number} options.params.limit - Limit number of records 1-200.
+   * @param {string} options.params.order - Sort order.
+   * @return {Pager<ExternalInvoice>} A list of the the external_invoices on a site.
+   */
+  listExternalInvoices(options?: object): Pager<ExternalInvoice>;
+  /**
+   * Fetch an external invoice
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/show_external_invoice
+   *
+   * 
+   * @param {string} externalInvoiceId - External invoice ID, e.g. `e28zov4fw0v2`.
+   * @return {Promise<ExternalInvoice>} Returns the external invoice
+   */
+  showExternalInvoice(externalInvoiceId: string): Promise<ExternalInvoice>;
   /**
    * List entitlements granted to an account
    *
