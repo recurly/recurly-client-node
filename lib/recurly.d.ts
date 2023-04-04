@@ -1137,7 +1137,7 @@ export declare class ExternalInvoice {
   /**
    * Total
    */
-  total?: number | null;
+  total?: string | null;
   /**
    * 3-letter ISO 4217 currency code.
    */
@@ -1266,7 +1266,7 @@ export declare class ExternalCharge {
   /**
    * Unit Amount
    */
-  unitAmount?: number | null;
+  unitAmount?: string | null;
   quantity?: number | null;
   description?: string | null;
   /**
@@ -3694,6 +3694,10 @@ export interface BillingInfoCreate {
     * *STRONGLY RECOMMENDED*
     */
   cvv?: string | null;
+  /**
+    * 3-letter ISO 4217 currency code.
+    */
+  currency?: string | null;
   /**
     * VAT number
     */
