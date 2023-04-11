@@ -198,6 +198,10 @@ export declare class Account {
    */
   exemptionCertificate?: string | null;
   /**
+   * The external accounts belonging to this account
+   */
+  externalAccounts?: ExternalAccountResponse[] | null;
+  /**
    * The UUID of the parent account associated with this account.
    */
   parentAccountId?: string | null;
@@ -263,6 +267,31 @@ export declare class ShippingAddress {
   createdAt?: Date | null;
   /**
    * Updated at
+   */
+  updatedAt?: Date | null;
+
+}
+
+export declare class ExternalAccountResponse {
+  object?: string | null;
+  /**
+   * UUID of the external_account .
+   */
+  id?: string | null;
+  /**
+   * Represents the account code for the external account.
+   */
+  externalAccountCode?: string | null;
+  /**
+   * Represents the connection type. `AppleAppStore` or `GooglePlayStore`
+   */
+  externalConnectionType?: string | null;
+  /**
+   * Created at
+   */
+  createdAt?: Date | null;
+  /**
+   * Last updated at
    */
   updatedAt?: Date | null;
 
@@ -1109,6 +1138,26 @@ export declare class CreditPayment {
    * Voided at
    */
   voidedAt?: Date | null;
+
+}
+
+export declare class ExternalAccount {
+  /**
+   * Represents the account code for the external account.
+   */
+  externalAccountCode?: string | null;
+  /**
+   * Represents the connection type. `AppleAppStore` or `GooglePlayStore`
+   */
+  externalConnectionType?: string | null;
+  /**
+   * Created at
+   */
+  createdAt?: Date | null;
+  /**
+   * Last updated at
+   */
+  updatedAt?: Date | null;
 
 }
 
@@ -3501,6 +3550,10 @@ export interface AccountCreate {
     */
   code?: string | null;
   acquisition?: AccountAcquisitionUpdate | null;
+  /**
+    * External Accounts
+    */
+  externalAccounts?: ExternalAccount[] | null;
   shippingAddresses?: ShippingAddressCreate[] | null;
   /**
     * A secondary value for the account.
@@ -3599,6 +3652,26 @@ export interface AccountAcquisitionCost {
     * The amount of the corresponding currency used to acquire the account.
     */
   amount?: number | null;
+
+}
+
+export interface ExternalAccount {
+  /**
+    * Represents the account code for the external account.
+    */
+  externalAccountCode?: string | null;
+  /**
+    * Represents the connection type. `AppleAppStore` or `GooglePlayStore`
+    */
+  externalConnectionType?: string | null;
+  /**
+    * Created at
+    */
+  createdAt?: Date | null;
+  /**
+    * Last updated at
+    */
+  updatedAt?: Date | null;
 
 }
 
@@ -6577,6 +6650,61 @@ export declare class Client {
    * @return {Pager<CreditPayment>} A list of the account's credit payments.
    */
   listAccountCreditPayments(accountId: string, options?: object): Pager<CreditPayment>;
+  /**
+   * List external accounts for an account
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_account_external_account
+   *
+   * 
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @return {Pager<ExternalAccount>} A list of external accounts on an account.
+   */
+  listAccountExternalAccount(accountId: string, options?: object): Pager<ExternalAccount>;
+  /**
+   * Create an external account
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_account_external_account
+   *
+   * 
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {ExternalAccount} body - The object representing the JSON request to send to the server. It should conform to the schema of {ExternalAccount}
+   * @return {Promise<ExternalAccountResponse>} A representation of the created external_account.
+   */
+  createAccountExternalAccount(accountId: string, body: ExternalAccount): Promise<ExternalAccountResponse>;
+  /**
+   * Get an external account for an account
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_account_external_account
+   *
+   * 
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {string} externalAccountId - External account ID, e.g. `s28zov4fw0cb`.
+   * @return {Promise<ExternalAccountResponse>} A external account on an account.
+   */
+  getAccountExternalAccount(accountId: string, externalAccountId: string): Promise<ExternalAccountResponse>;
+  /**
+   * Update an external account
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/update_account_external_account
+   *
+   * 
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {string} externalAccountId - External account ID, e.g. `s28zov4fw0cb`.
+   * @param {ExternalAccount} body - The object representing the JSON request to send to the server. It should conform to the schema of {ExternalAccount}
+   * @return {Promise<ExternalAccountResponse>} A representation of the updated external_account.
+   */
+  updateAccountExternalAccount(accountId: string, externalAccountId: string, body: ExternalAccount): Promise<ExternalAccountResponse>;
+  /**
+   * Delete an external account for an account
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/deleteAccountExternalAccount
+   *
+   * 
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {string} externalAccountId - External account ID, e.g. `s28zov4fw0cb`.
+   * @return {Promise<ExternalAccountResponse>} Successful Delete
+   */
+  deleteaccountexternalaccount(accountId: string, externalAccountId: string): Promise<ExternalAccountResponse>;
   /**
    * List the external invoices on an account
    *
