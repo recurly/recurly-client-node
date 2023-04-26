@@ -1172,6 +1172,10 @@ export declare class Invoice {
    */
   taxInfo?: TaxInfo | null;
   /**
+   * Will be `true` when the invoice had a successful response from the tax service and `false` when the invoice was not sent to tax service due to a lack of address or enabled jurisdiction or was processed without tax due to a non-blocking error returned from the tax service.
+   */
+  usedTaxService?: boolean | null;
+  /**
    * VAT registration number for the customer on this invoice. This will come from the VAT Number field in the Billing Info or the Account Info depending on your tax settings and the invoice collection method.
    */
   vatNumber?: string | null;
@@ -2143,7 +2147,7 @@ export declare class CustomFieldDefinition {
    */
   name?: string | null;
   /**
-   * The access control applied inside Recurly's admin UI: - `api_only` - No one will be able to view or edit this field's data via the admin UI. - `read_only` - Users with the Customers role will be able to view this field's data via the admin UI, but   editing will only be available via the API. - `write` - Users with the Customers role will be able to view and edit this field's data via the admin UI. 
+   * The access control applied inside Recurly's admin UI: - `api_only` - No one will be able to view or edit this field's data via the admin UI. - `read_only` - Users with the Customers role will be able to view this field's data via the admin UI, but   editing will only be available via the API. - `write` - Users with the Customers role will be able to view and edit this field's data via the admin UI. - `set_only` - Users with the Customers role will be able to set this field's data via the admin console. 
    */
   userAccess?: string | null;
   /**
@@ -3189,6 +3193,10 @@ export interface BillingInfoCreate {
     * *STRONGLY RECOMMENDED*
     */
   cvv?: string | null;
+  /**
+    * 3-letter ISO 4217 currency code.
+    */
+  currency?: string | null;
   /**
     * VAT number
     */
