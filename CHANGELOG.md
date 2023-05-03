@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.28.0](https://github.com/recurly/recurly-client-node/tree/3.28.0) (2023-05-03)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.27.0...3.28.0)
+
+
+**Merged Pull Requests**
+
+- Generated Latest Changes for v2019-10-10 [#303](https://github.com/recurly/recurly-client-node/pull/303) ([recurly-integrations](https://github.com/recurly-integrations))
+
+
+
 ## [3.27.0](https://github.com/recurly/recurly-client-node/tree/3.27.0) (2023-04-26)
 
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.26.0...3.27.0)
