@@ -377,6 +377,10 @@ export declare class PaymentMethod {
    */
   gatewayCode?: string | null;
   /**
+   * Gateway specific attributes associated with this PaymentMethod
+   */
+  gatewayAttributes?: GatewayAttributes | null;
+  /**
    * Billing Agreement identifier. Only present for Amazon or Paypal payment methods.
    */
   billingAgreementId?: string | null;
@@ -400,6 +404,14 @@ export declare class PaymentMethod {
    * Username of the associated payment method. Currently only associated with Venmo.
    */
   username?: string | null;
+
+}
+
+export declare class GatewayAttributes {
+  /**
+   * Used by Adyen gateways. The Shopper Reference value used when the external token was created.
+   */
+  accountReference?: string | null;
 
 }
 
@@ -3776,6 +3788,10 @@ export interface BillingInfoCreate {
     */
   gatewayCode?: string | null;
   /**
+    * Additional attributes to send to the gateway.
+    */
+  gatewayAttributes?: GatewayAttributes | null;
+  /**
     * Amazon billing agreement ID
     */
   amazonBillingAgreementId?: string | null;
@@ -3848,6 +3864,14 @@ export interface BillingInfoCreate {
     */
   onlineBankingPaymentType?: string | null;
   cardType?: string | null;
+
+}
+
+export interface GatewayAttributes {
+  /**
+    * Used by Adyen gateways. The Shopper Reference value used when the external token was created. Must be used in conjunction with gateway_token and gateway_code.
+    */
+  accountReference?: string | null;
 
 }
 
