@@ -352,6 +352,10 @@ export declare class PaymentMethod {
    */
   gatewayCode?: string | null;
   /**
+   * Gateway specific attributes associated with this PaymentMethod
+   */
+  gatewayAttributes?: GatewayAttributes | null;
+  /**
    * Billing Agreement identifier. Only present for Amazon or Paypal payment methods.
    */
   billingAgreementId?: string | null;
@@ -371,6 +375,14 @@ export declare class PaymentMethod {
    * The bank name of this routing number.
    */
   routingNumberBank?: string | null;
+
+}
+
+export declare class GatewayAttributes {
+  /**
+   * Used by Adyen gateways. The Shopper Reference value used when the external token was created.
+   */
+  accountReference?: string | null;
 
 }
 
@@ -3226,6 +3238,10 @@ export interface BillingInfoCreate {
     */
   gatewayCode?: string | null;
   /**
+    * Additional attributes to send to the gateway.
+    */
+  gatewayAttributes?: GatewayAttributes | null;
+  /**
     * Amazon billing agreement ID
     */
   amazonBillingAgreementId?: string | null;
@@ -3289,6 +3305,14 @@ export interface BillingInfoCreate {
     * The `backup_payment_method` field is used to designate a billing info as a backup on the account that will be tried if the initial billing info used for an invoice is declined. All payment methods, including the billing info marked `primary_payment_method` can be set as a backup. An account can have a maximum of 1 backup, if a user sets a different payment method as a backup, the existing backup will no longer be marked as such.
     */
   backupPaymentMethod?: boolean | null;
+
+}
+
+export interface GatewayAttributes {
+  /**
+    * Used by Adyen gateways. The Shopper Reference value used when the external token was created. Must be used in conjunction with gateway_token and gateway_code.
+    */
+  accountReference?: string | null;
 
 }
 
