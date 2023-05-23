@@ -2676,6 +2676,23 @@ export declare class ExternalProduct {
 
 }
 
+export declare class ExternalProductReferenceCollection {
+  /**
+   * Will always be List.
+   */
+  object?: string | null;
+  /**
+   * Indicates there are more results on subsequent pages.
+   */
+  hasMore?: boolean | null;
+  /**
+   * Path to subsequent page of results.
+   */
+  next?: string | null;
+  data?: ExternalProductReferenceMini[] | null;
+
+}
+
 export declare class BinaryFile {
   data?: string | null;
 
@@ -4443,6 +4460,48 @@ export interface MeasuredUnitUpdate {
     * Optional internal description.
     */
   description?: string | null;
+
+}
+
+export interface ExternalProductCreate {
+  /**
+    * External product name.
+    */
+  name?: string | null;
+  /**
+    * Recurly plan UUID.
+    */
+  planId?: string | null;
+  /**
+    * List of external product references of the external product.
+    */
+  externalProductReferences?: ExternalProductReferenceBase[] | null;
+
+}
+
+export interface ExternalProductReferenceBase {
+  /**
+    * A code which associates the external product to a corresponding object or resource in an external platform like the Apple App Store or Google Play Store.
+    */
+  referenceCode?: string | null;
+  externalConnectionType?: string | null;
+
+}
+
+export interface ExternalProductUpdate {
+  /**
+    * Recurly plan UUID.
+    */
+  planId?: string | null;
+
+}
+
+export interface ExternalProductReferenceCreate {
+  /**
+    * A code which associates the external product to a corresponding object or resource in an external platform like the Apple App Store or Google Play Store.
+    */
+  referenceCode?: string | null;
+  externalConnectionType?: string | null;
 
 }
 
@@ -7959,6 +8018,16 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    */
   listExternalProducts(options?: object): Pager<ExternalProduct>;
   /**
+   * Create an external product
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_external_product
+   *
+   * 
+   * @param {ExternalProductCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {ExternalProductCreate}
+   * @return {Promise<ExternalProduct>} Returns the external product
+   */
+  createExternalProduct(body: ExternalProductCreate): Promise<ExternalProduct>;
+  /**
    * Fetch an external product
    *
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_external_product
@@ -7968,6 +8037,76 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * @return {Promise<ExternalProduct>} Settings for an external product.
    */
   getExternalProduct(externalProductId: string): Promise<ExternalProduct>;
+  /**
+   * Update an external product
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/update_external_product
+   *
+   * 
+   * @param {string} externalProductId - External product id
+   * @param {ExternalProductUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {ExternalProductUpdate}
+   * @return {Promise<ExternalProduct>} Settings for an external product.
+   */
+  updateExternalProduct(externalProductId: string, body: ExternalProductUpdate): Promise<ExternalProduct>;
+  /**
+   * Deactivate an external product
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/deactivate_external_products
+   *
+   * 
+   * @param {string} externalProductId - External product id
+   * @return {Promise<ExternalProduct>} Deactivated external product.
+   */
+  deactivateExternalProducts(externalProductId: string): Promise<ExternalProduct>;
+  /**
+   * List the external product references for an external product
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_external_product_external_product_references
+   *
+   * 
+   * @param {string} externalProductId - External product id
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
+   * @param {string} options.params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   *   order. In descending order updated records will move behind the cursor and could
+   *   prevent some records from being returned.
+   *   
+   * @return {Pager<ExternalProductReferenceCollection>} A list of the the external product references for an external product.
+   */
+  listExternalProductExternalProductReferences(externalProductId: string, options?: object): Pager<ExternalProductReferenceCollection>;
+  /**
+   * Create an external product reference on an external product
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_external_product_external_product_reference
+   *
+   * 
+   * @param {string} externalProductId - External product id
+   * @param {ExternalProductReferenceCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {ExternalProductReferenceCreate}
+   * @return {Promise<ExternalProductReferenceMini>} Details for the external product reference.
+   */
+  createExternalProductExternalProductReference(externalProductId: string, body: ExternalProductReferenceCreate): Promise<ExternalProductReferenceMini>;
+  /**
+   * Fetch an external product reference
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_external_product_external_product_reference
+   *
+   * 
+   * @param {string} externalProductId - External product id
+   * @param {string} externalProductReferenceId - External product reference ID, e.g. `d39iun2fw1v4`.
+   * @return {Promise<ExternalProductReferenceMini>} Details for an external product reference.
+   */
+  getExternalProductExternalProductReference(externalProductId: string, externalProductReferenceId: string): Promise<ExternalProductReferenceMini>;
+  /**
+   * Deactivate an external product reference
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/deactivate_external_product_external_product_reference
+   *
+   * 
+   * @param {string} externalProductId - External product id
+   * @param {string} externalProductReferenceId - External product reference ID, e.g. `d39iun2fw1v4`.
+   * @return {Promise<ExternalProductReferenceMini>} Details for an external product reference.
+   */
+  deactivateExternalProductExternalProductReference(externalProductId: string, externalProductReferenceId: string): Promise<ExternalProductReferenceMini>;
   /**
    * List a site's external subscriptions
    *
