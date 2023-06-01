@@ -171,6 +171,10 @@ export declare class Account {
    */
   email?: string | null;
   /**
+   * Unique ID to identify the business entity assigned to the account. Available when the `Multiple Business Entities` feature is enabled.
+   */
+  overrideBusinessEntityId?: string | null;
+  /**
    * Used to determine the language and locale of emails sent on behalf of the merchant to the customer.
    */
   preferredLocale?: string | null;
@@ -1484,6 +1488,10 @@ export declare class Invoice {
    * Last communication attempt.
    */
   finalDunningEvent?: boolean | null;
+  /**
+   * Unique ID to identify the business entity assigned to the invoice. Available when the `Multiple Business Entities` feature is enabled.
+   */
+  businessEntityId?: string | null;
 
 }
 
@@ -3448,6 +3456,54 @@ export declare class GrantedBy {
 
 }
 
+export declare class BusinessEntity {
+  /**
+   * Business entity ID
+   */
+  id?: string | null;
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * The entity code of the business entity.
+   */
+  code?: string | null;
+  /**
+   * This name describes your business entity and will appear on the invoice.
+   */
+  name?: string | null;
+  /**
+   * Address information for the business entity that will appear on the invoice.
+   */
+  invoiceDisplayAddress?: Address | null;
+  /**
+   * Address information for the business entity that will be used for calculating taxes.
+   */
+  taxAddress?: Address | null;
+  /**
+   * VAT number for the customer used on the invoice.
+   */
+  defaultVatNumber?: string | null;
+  /**
+   * Registration number for the customer used on the invoice.
+   */
+  defaultRegistrationNumber?: string | null;
+  /**
+   * List of countries for which the business entity will be used.
+   */
+  subscriberLocationCountries?: string[] | null;
+  /**
+   * Created at
+   */
+  createdAt?: Date | null;
+  /**
+   * Last updated at
+   */
+  updatedAt?: Date | null;
+
+}
+
 export declare class GiftCard {
   /**
    * Gift card ID
@@ -3615,6 +3671,10 @@ export interface AccountCreate {
     * The tax exemption certificate number for the account. If the merchant has an integration for the Vertex tax provider, this optional value will be sent in any tax calculation requests for the account.
     */
   exemptionCertificate?: string | null;
+  /**
+    * Unique ID to identify the business entity assigned to the account. Available when the `Multiple Business Entities` feature is enabled.
+    */
+  overrideBusinessEntityId?: string | null;
   /**
     * The account code of the parent account to be associated with this account. Passing an empty value removes any existing parent association from this account. If both `parent_account_code` and `parent_account_id` are passed, the non-blank value in `parent_account_id` will be used. Only one level of parent child relationship is allowed. You cannot assign a parent account that itself has a parent account.
     */
@@ -3940,6 +4000,10 @@ export interface AccountUpdate {
     * The tax exemption certificate number for the account. If the merchant has an integration for the Vertex tax provider, this optional value will be sent in any tax calculation requests for the account.
     */
   exemptionCertificate?: string | null;
+  /**
+    * Unique ID to identify the business entity assigned to the account. Available when the `Multiple Business Entities` feature is enabled.
+    */
+  overrideBusinessEntityId?: string | null;
   /**
     * The account code of the parent account to be associated with this account. Passing an empty value removes any existing parent association from this account. If both `parent_account_code` and `parent_account_id` are passed, the non-blank value in `parent_account_id` will be used. Only one level of parent child relationship is allowed. You cannot assign a parent account that itself has a parent account.
     */
@@ -5822,6 +5886,10 @@ export interface AccountPurchase {
     * The tax exemption certificate number for the account. If the merchant has an integration for the Vertex tax provider, this optional value will be sent in any tax calculation requests for the account.
     */
   exemptionCertificate?: string | null;
+  /**
+    * Unique ID to identify the business entity assigned to the account. Available when the `Multiple Business Entities` feature is enabled.
+    */
+  overrideBusinessEntityId?: string | null;
   /**
     * The account code of the parent account to be associated with this account. Passing an empty value removes any existing parent association from this account. If both `parent_account_code` and `parent_account_id` are passed, the non-blank value in `parent_account_id` will be used. Only one level of parent child relationship is allowed. You cannot assign a parent account that itself has a parent account.
     */
@@ -10175,6 +10243,25 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    */
   listAccountExternalSubscriptions(accountId: string, options?: object): Pager<ExternalSubscription>;
   /**
+   * Fetch a business entity
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_business_entity
+   *
+   * 
+   * @param {string} businessEntityId - Business Entity ID. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-entity1`.
+   * @return {Promise<BusinessEntity>} Business entity details
+   */
+  getBusinessEntity(businessEntityId: string): Promise<BusinessEntity>;
+  /**
+   * List business entities
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_business_entities
+   *
+   * 
+   * @return {Pager<BusinessEntity>} List of all business entities on your site.
+   */
+  listBusinessEntities(options?: object): Pager<BusinessEntity>;
+  /**
    * List gift cards
    *
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_gift_cards
@@ -10224,6 +10311,48 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * @return {Promise<GiftCard>} Redeems and returns the gift card
    */
   redeemGiftCard(redemptionCode: string, body: GiftCardRedeem): Promise<GiftCard>;
+  /**
+   * List a business entity's invoices
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_business_entity_invoices
+   *
+   * 
+   * @param {string} businessEntityId - Business Entity ID. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-entity1`.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
+   * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
+   *   
+   *   **Important notes:**
+   *   
+   *   * The `ids` parameter cannot be used with any other ordering or filtering
+   *     parameters (`limit`, `order`, `sort`, `begin_time`, `end_time`, etc)
+   *   * Invalid or unknown IDs will be ignored, so you should check that the
+   *     results correspond to your request.
+   *   * Records are returned in an arbitrary order. Since results are all
+   *     returned at once you can sort the records yourself.
+   *   
+   * @param {number} options.params.limit - Limit number of records 1-200.
+   * @param {string} options.params.order - Sort order.
+   * @param {string} options.params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   *   order. In descending order updated records will move behind the cursor and could
+   *   prevent some records from being returned.
+   *   
+   * @param {Date} options.params.beginTime - Inclusively filter by begin_time when `sort=created_at` or `sort=updated_at`.
+   *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
+   *   
+   * @param {Date} options.params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
+   *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
+   *   
+   * @param {string} options.params.type - Filter by type when:
+   *   - `type=charge`, only charge invoices will be returned.
+   *   - `type=credit`, only credit invoices will be returned.
+   *   - `type=non-legacy`, only charge and credit invoices will be returned.
+   *   - `type=legacy`, only legacy invoices will be returned.
+   *   
+   * @return {Pager<Invoice>} A list of the business entity's invoices.
+   */
+  listBusinessEntityInvoices(businessEntityId: string, options?: object): Pager<Invoice>;
 
 }
 
