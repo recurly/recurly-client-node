@@ -1233,6 +1233,10 @@ export declare class ExternalSubscription {
    */
   autoRenew?: boolean | null;
   /**
+   * An indication of whether or not the external subscription is in a grace period.
+   */
+  inGracePeriod?: boolean | null;
+  /**
    * Identifier of the app that generated the external subscription.
    */
   appIdentifier?: string | null;
@@ -1241,7 +1245,7 @@ export declare class ExternalSubscription {
    */
   quantity?: number | null;
   /**
-   * External subscriptions can be active, canceled, expired, or future.
+   * External subscriptions can be active, canceled, expired, or past_due.
    */
   state?: string | null;
   /**
@@ -1249,9 +1253,21 @@ export declare class ExternalSubscription {
    */
   activatedAt?: Date | null;
   /**
+   * When the external subscription was canceled in the external platform.
+   */
+  canceledAt?: Date | null;
+  /**
    * When the external subscription expires in the external platform.
    */
   expiresAt?: Date | null;
+  /**
+   * When the external subscription trial period started in the external platform.
+   */
+  trialStartedAt?: Date | null;
+  /**
+   * When the external subscription trial period ends in the external platform.
+   */
+  trialEndsAt?: Date | null;
   /**
    * When the external subscription was created in Recurly.
    */
