@@ -785,6 +785,10 @@ export declare class InvoiceMini {
    */
   number?: string | null;
   /**
+   * Unique ID to identify the business entity assigned to the invoice. Available when the `Multiple Business Entities` feature is enabled.
+   */
+  businessEntityId?: string | null;
+  /**
    * Invoice type
    */
   type?: string | null;
@@ -1233,6 +1237,10 @@ export declare class ExternalSubscription {
    */
   autoRenew?: boolean | null;
   /**
+   * An indication of whether or not the external subscription is in a grace period.
+   */
+  inGracePeriod?: boolean | null;
+  /**
    * Identifier of the app that generated the external subscription.
    */
   appIdentifier?: string | null;
@@ -1241,7 +1249,7 @@ export declare class ExternalSubscription {
    */
   quantity?: number | null;
   /**
-   * External subscriptions can be active, canceled, expired, or future.
+   * External subscriptions can be active, canceled, expired, or past_due.
    */
   state?: string | null;
   /**
@@ -1249,9 +1257,21 @@ export declare class ExternalSubscription {
    */
   activatedAt?: Date | null;
   /**
+   * When the external subscription was canceled in the external platform.
+   */
+  canceledAt?: Date | null;
+  /**
    * When the external subscription expires in the external platform.
    */
   expiresAt?: Date | null;
+  /**
+   * When the external subscription trial period started in the external platform.
+   */
+  trialStartedAt?: Date | null;
+  /**
+   * When the external subscription trial period ends in the external platform.
+   */
+  trialEndsAt?: Date | null;
   /**
    * When the external subscription was created in Recurly.
    */
@@ -1383,9 +1403,13 @@ export declare class Invoice {
    */
   poNumber?: string | null;
   /**
-   * Integer representing the number of days after an invoice's creation that the invoice will become past due. If an invoice's net terms are set to '0', it is due 'On Receipt' and will become past due 24 hours after it’s created. If an invoice is due net 30, it will become past due at 31 days exactly.
+   * Integer paired with `Net Terms Type` and representing the number of days past the current date (for `net` Net Terms Type) or days after the last day of the current month (for `eom` Net Terms Type) that the invoice will become past due. For any value, an additional 24 hours is added to ensure the customer has the entire last day to make payment before becoming past due.  For example:  If an invoice is due `net 0`, it is due 'On Receipt' and will become past due 24 hours after it's created. If an invoice is due `net 30`, it will become past due at 31 days exactly. If an invoice is due `eom 30`, it will become past due 31 days from the last day of the current month.  When `eom` Net Terms Type is passed, the value for `Net Terms` is restricted to `0, 15, 30, 45, 60, or 90`. For more information please visit our docs page (https://docs.recurly.com/docs/manual-payments#section-collection-terms)
    */
   netTerms?: number | null;
+  /**
+   * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month.  This field is only available when the EOM Net Terms feature is enabled. 
+   */
+  netTermsType?: string | null;
   address?: InvoiceAddress | null;
   shippingAddress?: ShippingAddress | null;
   /**
@@ -1991,9 +2015,13 @@ export declare class Subscription {
    */
   poNumber?: string | null;
   /**
-   * Integer representing the number of days after an invoice's creation that the invoice will become past due. If an invoice's net terms are set to '0', it is due 'On Receipt' and will become past due 24 hours after it’s created. If an invoice is due net 30, it will become past due at 31 days exactly.
+   * Integer paired with `Net Terms Type` and representing the number of days past the current date (for `net` Net Terms Type) or days after the last day of the current month (for `eom` Net Terms Type) that the invoice will become past due. For any value, an additional 24 hours is added to ensure the customer has the entire last day to make payment before becoming past due.  For example:  If an invoice is due `net 0`, it is due 'On Receipt' and will become past due 24 hours after it's created. If an invoice is due `net 30`, it will become past due at 31 days exactly. If an invoice is due `eom 30`, it will become past due 31 days from the last day of the current month.  When `eom` Net Terms Type is passed, the value for `Net Terms` is restricted to `0, 15, 30, 45, 60, or 90`. For more information please visit our docs page (https://docs.recurly.com/docs/manual-payments#section-collection-terms)
    */
   netTerms?: number | null;
+  /**
+   * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month.  This field is only available when the EOM Net Terms feature is enabled. 
+   */
+  netTermsType?: string | null;
   /**
    * Terms and conditions
    */
@@ -2405,6 +2433,14 @@ export declare class SubscriptionRampIntervalResponse {
    * Represents how many billing cycles are left in a ramp interval.
    */
   remainingBillingCycles?: number | null;
+  /**
+   * Date the ramp interval starts
+   */
+  startingOn?: Date | null;
+  /**
+   * Date the ramp interval ends
+   */
+  endingOn?: Date | null;
   /**
    * Represents the price for the ramp interval.
    */
@@ -4099,9 +4135,13 @@ export interface InvoiceCreate {
     */
   creditCustomerNotes?: string | null;
   /**
-    * Integer representing the number of days after an invoice's creation that the invoice will become past due. If an invoice's net terms are set to '0', it is due 'On Receipt' and will become past due 24 hours after it’s created. If an invoice is due net 30, it will become past due at 31 days exactly.
+    * Integer paired with `Net Terms Type` and representing the number of days past the current date (for `net` Net Terms Type) or days after the last day of the current month (for `eom` Net Terms Type) that the invoice will become past due. For any value, an additional 24 hours is added to ensure the customer has the entire last day to make payment before becoming past due.  For example:  If an invoice is due `net 0`, it is due 'On Receipt' and will become past due 24 hours after it's created. If an invoice is due `net 30`, it will become past due at 31 days exactly. If an invoice is due `eom 30`, it will become past due 31 days from the last day of the current month.  When `eom` Net Terms Type is passed, the value for `Net Terms` is restricted to `0, 15, 30, 45, 60, or 90`. For more information please visit our docs page (https://docs.recurly.com/docs/manual-payments#section-collection-terms)
     */
   netTerms?: number | null;
+  /**
+    * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month.  This field is only available when the EOM Net Terms feature is enabled. 
+    */
+  netTermsType?: string | null;
   /**
     * For manual invoicing, this identifies the PO number associated with the subscription.
     */
@@ -5401,9 +5441,13 @@ export interface SubscriptionCreate {
     */
   poNumber?: string | null;
   /**
-    * Integer representing the number of days after an invoice's creation that the invoice will become past due. If an invoice's net terms are set to '0', it is due 'On Receipt' and will become past due 24 hours after it’s created. If an invoice is due net 30, it will become past due at 31 days exactly.
+    * Integer paired with `Net Terms Type` and representing the number of days past the current date (for `net` Net Terms Type) or days after the last day of the current month (for `eom` Net Terms Type) that the invoice will become past due. For any value, an additional 24 hours is added to ensure the customer has the entire last day to make payment before becoming past due.  For example:  If an invoice is due `net 0`, it is due 'On Receipt' and will become past due 24 hours after it's created. If an invoice is due `net 30`, it will become past due at 31 days exactly. If an invoice is due `eom 30`, it will become past due 31 days from the last day of the current month.  When `eom` Net Terms Type is passed, the value for `Net Terms` is restricted to `0, 15, 30, 45, 60, or 90`. For more information please visit our docs page (https://docs.recurly.com/docs/manual-payments#section-collection-terms)
     */
   netTerms?: number | null;
+  /**
+    * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month.  This field is only available when the EOM Net Terms feature is enabled. 
+    */
+  netTermsType?: string | null;
   /**
     * An optional type designation for the payment gateway transaction created by this request. Supports 'moto' value, which is the acronym for mail order and telephone transactions.
     */
@@ -5562,9 +5606,13 @@ export interface SubscriptionUpdate {
     */
   poNumber?: string | null;
   /**
-    * Integer representing the number of days after an invoice's creation that the invoice will become past due. If an invoice's net terms are set to '0', it is due 'On Receipt' and will become past due 24 hours after it’s created. If an invoice is due net 30, it will become past due at 31 days exactly.
+    * Integer paired with `Net Terms Type` and representing the number of days past the current date (for `net` Net Terms Type) or days after the last day of the current month (for `eom` Net Terms Type) that the invoice will become past due. For any value, an additional 24 hours is added to ensure the customer has the entire last day to make payment before becoming past due.  For example:  If an invoice is due `net 0`, it is due 'On Receipt' and will become past due 24 hours after it's created. If an invoice is due `net 30`, it will become past due at 31 days exactly. If an invoice is due `eom 30`, it will become past due 31 days from the last day of the current month.  When `eom` Net Terms Type is passed, the value for `Net Terms` is restricted to `0, 15, 30, 45, 60, or 90`. For more information please visit our docs page (https://docs.recurly.com/docs/manual-payments#section-collection-terms)
     */
   netTerms?: number | null;
+  /**
+    * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month.  This field is only available when the EOM Net Terms feature is enabled. 
+    */
+  netTermsType?: string | null;
   /**
     * If present, this subscription's transactions will use the payment gateway with this code.
     */
@@ -5667,9 +5715,13 @@ export interface SubscriptionChangeCreate {
     */
   poNumber?: string | null;
   /**
-    * Integer representing the number of days after an invoice's creation that the invoice will become past due. If an invoice's net terms are set to '0', it is due 'On Receipt' and will become past due 24 hours after it’s created. If an invoice is due net 30, it will become past due at 31 days exactly.
+    * Integer normally paired with `Net Terms Type` and representing the number of days past the current date (for `net` Net Terms Type) or days after the last day of the current month (for `eom` Net Terms Type) that the invoice will become past due. During a subscription change, it's not necessary to provide both the `Net Terms Type` and `Net Terms` parameters.  For more information please visit our docs page (https://docs.recurly.com/docs/manual-payments#section-collection-terms)
     */
   netTerms?: number | null;
+  /**
+    * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month.  This field is only available when the EOM Net Terms feature is enabled. 
+    */
+  netTermsType?: string | null;
   /**
     * An optional type designation for the payment gateway transaction created by this request. Supports 'moto' value, which is the acronym for mail order and telephone transactions.
     */
@@ -5794,9 +5846,13 @@ export interface PurchaseCreate {
     */
   poNumber?: string | null;
   /**
-    * Integer representing the number of days after an invoice's creation that the invoice will become past due. If an invoice's net terms are set to '0', it is due 'On Receipt' and will become past due 24 hours after it’s created. If an invoice is due net 30, it will become past due at 31 days exactly.
+    * Integer paired with `Net Terms Type` and representing the number of days past the current date (for `net` Net Terms Type) or days after the last day of the current month (for `eom` Net Terms Type) that the invoice will become past due. For any value, an additional 24 hours is added to ensure the customer has the entire last day to make payment before becoming past due.  For example:  If an invoice is due `net 0`, it is due 'On Receipt' and will become past due 24 hours after it's created. If an invoice is due `net 30`, it will become past due at 31 days exactly. If an invoice is due `eom 30`, it will become past due 31 days from the last day of the current month.  When `eom` Net Terms Type is passed, the value for `Net Terms` is restricted to `0, 15, 30, 45, 60, or 90`. For more information please visit our docs page (https://docs.recurly.com/docs/manual-payments#section-collection-terms)
     */
   netTerms?: number | null;
+  /**
+    * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month.  This field is only available when the EOM Net Terms feature is enabled. 
+    */
+  netTermsType?: string | null;
   /**
     * Terms and conditions to be put on the purchase invoice.
     */
