@@ -1,10 +1,13 @@
 # Changelog
 
-## [4.39.0](https://github.com/recurly/recurly-client-node/tree/4.39.0) (2023-07-26)
+## [4.40.0](https://github.com/recurly/recurly-client-node/tree/4.40.0) (2023-07-27)
 
-[Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.38.0...4.39.0)
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.38.0...4.40.0)
 
 
+**Merged Pull Requests**
+
+- Generated Latest Changes for v2021-02-25 (Ramp Dates, Net Terms, Invoice Business Entity, External Subscriptions) [#313](https://github.com/recurly/recurly-client-node/pull/313) ([recurly-integrations](https://github.com/recurly-integrations))
 
 
 
