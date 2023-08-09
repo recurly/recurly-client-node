@@ -413,7 +413,7 @@ export declare class PaymentMethod {
 
 export declare class GatewayAttributes {
   /**
-   * Used by Adyen gateways. The Shopper Reference value used when the external token was created.
+   * Used by Adyen and Braintree gateways. For Adyen the Shopper Reference value used when the external token was created. For Braintree the PayPal PayerID is populated in the response.
    */
   accountReference?: string | null;
 
@@ -768,6 +768,10 @@ export declare class Transaction {
    * Collected at, or if not collected yet, the time the transaction was created.
    */
   collectedAt?: Date | null;
+  /**
+   * Action result params to be used in Recurly-JS to complete a payment when using asynchronous payment methods, e.g., Boleto, iDEAL and Sofort.
+   */
+  actionResult?: object | null;
 
 }
 
@@ -2082,6 +2086,10 @@ export declare class Subscription {
    * When the subscription was converted from a gift card.
    */
   convertedAt?: Date | null;
+  /**
+   * Action result params to be used in Recurly-JS to complete a payment when using asynchronous payment methods, e.g., Boleto, iDEAL and Sofort.
+   */
+  actionResult?: object | null;
 
 }
 
@@ -3982,7 +3990,7 @@ export interface BillingInfoCreate {
 
 export interface GatewayAttributes {
   /**
-    * Used by Adyen gateways. The Shopper Reference value used when the external token was created. Must be used in conjunction with gateway_token and gateway_code.
+    * Used by Adyen and Braintree gateways. For Adyen the Shopper Reference value used when the external token was created. Must be used in conjunction with gateway_token and gateway_code. For Braintree the PayPal PayerID is populated in the response.
     */
   accountReference?: string | null;
 
