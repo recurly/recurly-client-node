@@ -72,6 +72,10 @@ export declare class Address {
    * Country, 2-letter ISO 3166-1 alpha-2 code.
    */
   country?: string | null;
+  /**
+   * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+   */
+  geoCode?: string | null;
 
 }
 
@@ -218,7 +222,7 @@ export declare class Account {
    */
   dunningCampaignId?: string | null;
   /**
-   * Unique ID to identify an invoice template. Available when the site is on a Pro or Enterprise plan. Used to specify if a non-default invoice template will be used to generate invoices for the account. For sites without multiple invoice templates enabled, the default template will always be used.
+   * Unique ID to identify an invoice template. Available when the site is on a Pro or Elite plan. Used to specify if a non-default invoice template will be used to generate invoices for the account. For sites without multiple invoice templates enabled, the default template will always be used.
    */
   invoiceTemplateId?: string | null;
   address?: Address | null;
@@ -265,6 +269,10 @@ export declare class ShippingAddress {
    * Country, 2-letter ISO 3166-1 alpha-2 code.
    */
   country?: string | null;
+  /**
+   * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+   */
+  geoCode?: string | null;
   /**
    * Created at
    */
@@ -844,6 +852,10 @@ export declare class AddressWithName {
    * Country, 2-letter ISO 3166-1 alpha-2 code.
    */
   country?: string | null;
+  /**
+   * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+   */
+  geoCode?: string | null;
 
 }
 
@@ -1564,6 +1576,10 @@ export declare class InvoiceAddress {
    * Country, 2-letter ISO 3166-1 alpha-2 code.
    */
   country?: string | null;
+  /**
+   * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+   */
+  geoCode?: string | null;
   /**
    * First name
    */
@@ -3744,7 +3760,7 @@ export interface AccountCreate {
     */
   dunningCampaignId?: string | null;
   /**
-    * Unique ID to identify an invoice template.  Available when the site is on a Pro or Enterprise plan.  Used to specify which invoice template, if any, should be used to generate invoices for the account.
+    * Unique ID to identify an invoice template.  Available when the site is on a Pro or Elite plan.  Used to specify which invoice template, if any, should be used to generate invoices for the account.
     */
   invoiceTemplateId?: string | null;
   address?: Address | null;
@@ -3820,6 +3836,10 @@ export interface ShippingAddressCreate {
     */
   postalCode?: string | null;
   /**
+    * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+    */
+  geoCode?: string | null;
+  /**
     * Country, 2-letter ISO 3166-1 alpha-2 code.
     */
   country?: string | null;
@@ -3855,6 +3875,10 @@ export interface Address {
     * Country, 2-letter ISO 3166-1 alpha-2 code.
     */
   country?: string | null;
+  /**
+    * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+    */
+  geoCode?: string | null;
 
 }
 
@@ -3924,6 +3948,10 @@ export interface BillingInfoCreate {
     * PayPal billing agreement ID
     */
   paypalBillingAgreementId?: string | null;
+  /**
+    * Roku's CIB if billing through Roku
+    */
+  rokuBillingAgreementId?: string | null;
   /**
     * Fraud Session ID
     */
@@ -4073,7 +4101,7 @@ export interface AccountUpdate {
     */
   dunningCampaignId?: string | null;
   /**
-    * Unique ID to identify an invoice template.  Available when the site is on a Pro or Enterprise plan.  Used to specify which invoice template, if any, should be used to generate invoices for the account.
+    * Unique ID to identify an invoice template.  Available when the site is on a Pro or Elite plan.  Used to specify which invoice template, if any, should be used to generate invoices for the account.
     */
   invoiceTemplateId?: string | null;
   address?: Address | null;
@@ -4280,6 +4308,10 @@ export interface ShippingAddressUpdate {
     * Country, 2-letter ISO 3166-1 alpha-2 code.
     */
   country?: string | null;
+  /**
+    * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+    */
+  geoCode?: string | null;
 
 }
 
@@ -4683,6 +4715,10 @@ export interface InvoiceAddress {
     * Country, 2-letter ISO 3166-1 alpha-2 code.
     */
   country?: string | null;
+  /**
+    * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+    */
+  geoCode?: string | null;
   /**
     * First name
     */
@@ -5979,7 +6015,7 @@ export interface AccountPurchase {
     */
   dunningCampaignId?: string | null;
   /**
-    * Unique ID to identify an invoice template.  Available when the site is on a Pro or Enterprise plan.  Used to specify which invoice template, if any, should be used to generate invoices for the account.
+    * Unique ID to identify an invoice template.  Available when the site is on a Pro or Elite plan.  Used to specify which invoice template, if any, should be used to generate invoices for the account.
     */
   invoiceTemplateId?: string | null;
   address?: Address | null;
