@@ -1465,7 +1465,7 @@ export declare class Invoice {
    */
   balance?: number | null;
   /**
-   * Tax info
+   * Only for merchants using Recurly's In-The-Box taxes.
    */
   taxInfo?: TaxInfo | null;
   /**
@@ -1809,7 +1809,7 @@ export declare class LineItem {
    */
   taxCode?: string | null;
   /**
-   * Tax info
+   * Only for merchants using Recurly's In-The-Box taxes.
    */
   taxInfo?: TaxInfo | null;
   /**
@@ -2019,11 +2019,11 @@ export declare class Subscription {
    */
   subtotal?: number | null;
   /**
-   * Estimated tax
+   * Only for merchants using Recurly's In-The-Box taxes.
    */
   tax?: number | null;
   /**
-   * Tax info
+   * Only for merchants using Recurly's In-The-Box taxes.
    */
   taxInfo?: TaxInfo | null;
   /**
@@ -3441,6 +3441,70 @@ export declare class InvoiceTemplate {
   createdAt?: Date | null;
   /**
    * When the invoice template was updated in Recurly.
+   */
+  updatedAt?: Date | null;
+
+}
+
+export declare class ExternalPaymentPhase {
+  /**
+   * System-generated unique identifier for an external payment phase ID, e.g. `e28zov4fw0v2`.
+   */
+  id?: string | null;
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * Subscription from an external resource such as Apple App Store or Google Play Store.
+   */
+  externalSubscription?: ExternalSubscription | null;
+  /**
+   * Started At
+   */
+  startedAt?: Date | null;
+  /**
+   * Ends At
+   */
+  endsAt?: Date | null;
+  /**
+   * Starting Billing Period Index
+   */
+  startingBillingPeriodIndex?: number | null;
+  /**
+   * Ending Billing Period Index
+   */
+  endingBillingPeriodIndex?: number | null;
+  /**
+   * Type of discount offer given, e.g. "FREE_TRIAL"
+   */
+  offerType?: string | null;
+  /**
+   * Name of the discount offer given, e.g. "introductory"
+   */
+  offerName?: string | null;
+  /**
+   * Number of billing periods
+   */
+  periodCount?: number | null;
+  /**
+   * Billing cycle length
+   */
+  periodLength?: string | null;
+  /**
+   * Allows up to 9 decimal places
+   */
+  amount?: string | null;
+  /**
+   * 3-letter ISO 4217 currency code.
+   */
+  currency?: string | null;
+  /**
+   * When the external subscription was created in Recurly.
+   */
+  createdAt?: Date | null;
+  /**
+   * When the external subscription was updated in Recurly.
    */
   updatedAt?: Date | null;
 
@@ -5496,6 +5560,10 @@ export interface SubscriptionCreate {
     * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month.  This field is only available when the EOM Net Terms feature is enabled. 
     */
   netTermsType?: string | null;
+  /**
+    * If present, this subscription's transactions will use the payment gateway with this code.
+    */
+  gatewayCode?: string | null;
   /**
     * An optional type designation for the payment gateway transaction created by this request. Supports 'moto' value, which is the acronym for mail order and telephone transactions.
     */
@@ -10313,6 +10381,35 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * @return {Promise<ExternalInvoice>} Returns the external invoice
    */
   showExternalInvoice(externalInvoiceId: string): Promise<ExternalInvoice>;
+  /**
+   * List the external payment phases on an external subscription
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_external_subscription_external_payment_phases
+   *
+   * 
+   * @param {string} externalSubscriptionId - External subscription id
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
+   * @param {string} options.params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   *   order. In descending order updated records will move behind the cursor and could
+   *   prevent some records from being returned.
+   *   
+   * @param {number} options.params.limit - Limit number of records 1-200.
+   * @param {string} options.params.order - Sort order.
+   * @return {Pager<ExternalPaymentPhase>} A list of the the external_payment_phases on a site.
+   */
+  listExternalSubscriptionExternalPaymentPhases(externalSubscriptionId: string, options?: object): Pager<ExternalPaymentPhase>;
+  /**
+   * Fetch an external payment_phase
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_external_subscription_external_payment_phase
+   *
+   * 
+   * @param {string} externalSubscriptionId - External subscription id
+   * @param {string} externalPaymentPhaseId - External payment phase ID, e.g. `a34ypb2ef9w1`.
+   * @return {Promise<ExternalPaymentPhase>} Details for an external payment_phase.
+   */
+  getExternalSubscriptionExternalPaymentPhase(externalSubscriptionId: string, externalPaymentPhaseId: string): Promise<ExternalPaymentPhase>;
   /**
    * List entitlements granted to an account
    *
