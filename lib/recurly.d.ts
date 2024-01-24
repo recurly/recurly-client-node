@@ -520,6 +520,46 @@ export declare class TransactionError {
    * Returned when 3-D Secure authentication is required for a transaction. Pass this value to Recurly.js so it can continue the challenge flow.
    */
   threeDSecureActionTokenId?: string | null;
+  /**
+   * Fraud information
+   */
+  fraudInfo?: TransactionFraudInfo | null;
+
+}
+
+export declare class TransactionFraudInfo {
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * Kount score
+   */
+  score?: number | null;
+  /**
+   * Kount decision
+   */
+  decision?: string | null;
+  /**
+   * Kount transaction reference ID
+   */
+  reference?: string | null;
+  /**
+   * A list of fraud risk rules that were triggered for the transaction.
+   */
+  riskRulesTriggered?: FraudRiskRule[] | null;
+
+}
+
+export declare class FraudRiskRule {
+  /**
+   * The Kount rule number.
+   */
+  code?: string | null;
+  /**
+   * Description of why the rule was triggered
+   */
+  message?: string | null;
 
 }
 
@@ -871,42 +911,6 @@ export declare class TransactionPaymentGateway {
   object?: string | null;
   type?: string | null;
   name?: string | null;
-
-}
-
-export declare class TransactionFraudInfo {
-  /**
-   * Object type
-   */
-  object?: string | null;
-  /**
-   * Kount score
-   */
-  score?: number | null;
-  /**
-   * Kount decision
-   */
-  decision?: string | null;
-  /**
-   * Kount transaction reference ID
-   */
-  reference?: string | null;
-  /**
-   * A list of fraud risk rules that were triggered for the transaction.
-   */
-  riskRulesTriggered?: FraudRiskRule[] | null;
-
-}
-
-export declare class FraudRiskRule {
-  /**
-   * The Kount rule number.
-   */
-  code?: string | null;
-  /**
-   * Description of why the rule was triggered
-   */
-  message?: string | null;
 
 }
 
