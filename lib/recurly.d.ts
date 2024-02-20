@@ -7117,6 +7117,7 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
+   * @param {string} options.params.state - Invoice state.
    * @param {number} options.params.limit - Limit number of records 1-200.
    * @param {string} options.params.order - Sort order.
    * @param {string} options.params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
@@ -8460,6 +8461,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
+   * @param {string} options.params.state - Invoice state.
    * @param {number} options.params.limit - Limit number of records 1-200.
    * @param {string} options.params.order - Sort order.
    * @param {string} options.params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
@@ -9887,6 +9889,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
+   * @param {string} options.params.state - Invoice state.
    * @param {number} options.params.limit - Limit number of records 1-200.
    * @param {string} options.params.order - Sort order.
    * @param {string} options.params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
@@ -10577,6 +10580,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
+   * @param {string} options.params.state - Invoice state.
    * @param {number} options.params.limit - Limit number of records 1-200.
    * @param {string} options.params.order - Sort order.
    * @param {string} options.params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
