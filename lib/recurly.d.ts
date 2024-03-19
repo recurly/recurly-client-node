@@ -393,6 +393,10 @@ export declare class PaymentMethod {
    */
   gatewayAttributes?: GatewayAttributes | null;
   /**
+   * Represents the card network preference associated with the billing info for dual badged cards. Must be a supported card network.
+   */
+  cardNetworkPreference?: string | null;
+  /**
    * Billing Agreement identifier. Only present for Amazon or Paypal payment methods.
    */
   billingAgreementId?: string | null;
@@ -1336,6 +1340,10 @@ export declare class ExternalSubscription {
    * When the external subscription trial period ends in the external platform.
    */
   trialEndsAt?: Date | null;
+  /**
+   * An indication of whether or not the external subscription was purchased in a sandbox environment.
+   */
+  test?: boolean | null;
   /**
    * When the external subscription was created in Recurly.
    */
@@ -4125,6 +4133,10 @@ export interface BillingInfoCreate {
     */
   onlineBankingPaymentType?: string | null;
   cardType?: string | null;
+  /**
+    * Represents the card network preference associated with the billing info for dual badged cards. Must be a supported card network.
+    */
+  cardNetworkPreference?: string | null;
 
 }
 
