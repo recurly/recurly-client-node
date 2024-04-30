@@ -1479,7 +1479,7 @@ export declare class Invoice {
    */
   netTerms?: number | null;
   /**
-   * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month.  This field is only available when the EOM Net Terms feature is enabled. 
+   * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month. 
    */
   netTermsType?: string | null;
   address?: InvoiceAddress | null;
@@ -2095,7 +2095,7 @@ export declare class Subscription {
    */
   netTerms?: number | null;
   /**
-   * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month.  This field is only available when the EOM Net Terms feature is enabled. 
+   * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month. 
    */
   netTermsType?: string | null;
   /**
@@ -4299,7 +4299,7 @@ export interface InvoiceCreate {
     */
   netTerms?: number | null;
   /**
-    * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month.  This field is only available when the EOM Net Terms feature is enabled. 
+    * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month. 
     */
   netTermsType?: string | null;
   /**
@@ -5613,7 +5613,7 @@ export interface SubscriptionCreate {
     */
   netTerms?: number | null;
   /**
-    * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month.  This field is only available when the EOM Net Terms feature is enabled. 
+    * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month. 
     */
   netTermsType?: string | null;
   /**
@@ -5782,7 +5782,7 @@ export interface SubscriptionUpdate {
     */
   netTerms?: number | null;
   /**
-    * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month.  This field is only available when the EOM Net Terms feature is enabled. 
+    * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month. 
     */
   netTermsType?: string | null;
   /**
@@ -5891,7 +5891,7 @@ export interface SubscriptionChangeCreate {
     */
   netTerms?: number | null;
   /**
-    * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month.  This field is only available when the EOM Net Terms feature is enabled. 
+    * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month. 
     */
   netTermsType?: string | null;
   /**
@@ -6022,7 +6022,7 @@ export interface PurchaseCreate {
     */
   netTerms?: number | null;
   /**
-    * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month.  This field is only available when the EOM Net Terms feature is enabled. 
+    * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month. 
     */
   netTermsType?: string | null;
   /**
@@ -10311,6 +10311,36 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * @return {Promise<InvoiceCollection>} Returns the pending invoice
    */
   createPendingPurchase(body: PurchaseCreate): Promise<InvoiceCollection>;
+  /**
+   * Authorize a purchase
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_authorize_purchase
+   *
+   * 
+   * @param {PurchaseCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {PurchaseCreate}
+   * @return {Promise<InvoiceCollection>} Returns the authorize invoice
+   */
+  createAuthorizePurchase(body: PurchaseCreate): Promise<InvoiceCollection>;
+  /**
+   * Capture a purchase
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_capture_purchase
+   *
+   * 
+   * @param {string} transactionId - Transaction ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @return {Promise<InvoiceCollection>} Returns the captured invoice
+   */
+  createCapturePurchase(transactionId: string): Promise<InvoiceCollection>;
+  /**
+   * Cancel Purchase
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/cancelPurchase
+   *
+   * 
+   * @param {string} transactionId - Transaction ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @return {Promise<InvoiceCollection>} Returns the cancelled invoice
+   */
+  cancelpurchase(transactionId: string): Promise<InvoiceCollection>;
   /**
    * List the dates that have an available export to download.
    *
