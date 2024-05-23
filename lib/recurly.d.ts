@@ -231,6 +231,10 @@ export declare class Account {
    * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
    */
   customFields?: CustomField[] | null;
+  /**
+   * The Avalara AvaTax value that can be passed to identify the customer type for tax purposes. The range of values can be A - R (more info at Avalara). Value is case-sensitive.
+   */
+  entityUseCode?: string | null;
 
 }
 
@@ -3885,6 +3889,10 @@ export interface AccountCreate {
     * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
     */
   customFields?: CustomField[] | null;
+  /**
+    * The Avalara AvaTax value that can be passed to identify the customer type for tax purposes. The range of values can be A - R (more info at Avalara). Value is case-sensitive.
+    */
+  entityUseCode?: string | null;
 
 }
 
@@ -4230,6 +4238,10 @@ export interface AccountUpdate {
     * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
     */
   customFields?: CustomField[] | null;
+  /**
+    * The Avalara AvaTax value that can be passed to identify the customer type for tax purposes. The range of values can be A - R (more info at Avalara). Value is case-sensitive.
+    */
+  entityUseCode?: string | null;
 
 }
 
@@ -6164,6 +6176,10 @@ export interface AccountPurchase {
     * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
     */
   customFields?: CustomField[] | null;
+  /**
+    * The Avalara AvaTax value that can be passed to identify the customer type for tax purposes. The range of values can be A - R (more info at Avalara). Value is case-sensitive.
+    */
+  entityUseCode?: string | null;
 
 }
 
