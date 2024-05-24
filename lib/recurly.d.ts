@@ -80,6 +80,10 @@ export declare class Address {
    * Country, 2-letter ISO 3166-1 alpha-2 code.
    */
   country?: string | null;
+  /**
+   * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+   */
+  geoCode?: string | null;
 
 }
 
@@ -223,6 +227,10 @@ export declare class Account {
    * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
    */
   customFields?: CustomField[] | null;
+  /**
+   * The Avalara AvaTax value that can be passed to identify the customer type for tax purposes. The range of values can be A - R (more info at Avalara). Value is case-sensitive.
+   */
+  entityUseCode?: string | null;
 
 }
 
@@ -261,6 +269,10 @@ export declare class ShippingAddress {
    * Country, 2-letter ISO 3166-1 alpha-2 code.
    */
   country?: string | null;
+  /**
+   * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+   */
+  geoCode?: string | null;
   /**
    * Created at
    */
@@ -356,6 +368,10 @@ export declare class PaymentMethod {
    */
   gatewayAttributes?: GatewayAttributes | null;
   /**
+   * Represents the card network preference associated with the billing info for dual badged cards. Must be a supported card network.
+   */
+  cardNetworkPreference?: string | null;
+  /**
    * Billing Agreement identifier. Only present for Amazon or Paypal payment methods.
    */
   billingAgreementId?: string | null;
@@ -380,7 +396,7 @@ export declare class PaymentMethod {
 
 export declare class GatewayAttributes {
   /**
-   * Used by Adyen gateways. The Shopper Reference value used when the external token was created.
+   * Used by Adyen and Braintree gateways. For Adyen the Shopper Reference value used when the external token was created. For Braintree the PayPal PayerID is populated in the response.
    */
   accountReference?: string | null;
 
@@ -1280,6 +1296,10 @@ export declare class InvoiceAddress {
    * Country, 2-letter ISO 3166-1 alpha-2 code.
    */
   country?: string | null;
+  /**
+   * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+   */
+  geoCode?: string | null;
 
 }
 
@@ -2102,6 +2122,14 @@ export declare class SubscriptionRampIntervalResponse {
    * Represents how many billing cycles are left in a ramp interval.
    */
   remainingBillingCycles?: number | null;
+  /**
+   * Date the ramp interval starts
+   */
+  startingOn?: Date | null;
+  /**
+   * Date the ramp interval ends
+   */
+  endingOn?: Date | null;
   /**
    * Represents the price for the ramp interval.
    */
@@ -3082,6 +3110,10 @@ export interface AccountCreate {
     * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
     */
   customFields?: CustomField[] | null;
+  /**
+    * The Avalara AvaTax value that can be passed to identify the customer type for tax purposes. The range of values can be A - R (more info at Avalara). Value is case-sensitive.
+    */
+  entityUseCode?: string | null;
 
 }
 
@@ -3140,6 +3172,10 @@ export interface ShippingAddressCreate {
     * Country, 2-letter ISO 3166-1 alpha-2 code.
     */
   country?: string | null;
+  /**
+    * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+    */
+  geoCode?: string | null;
 
 }
 
@@ -3180,6 +3216,10 @@ export interface Address {
     * Country, 2-letter ISO 3166-1 alpha-2 code.
     */
   country?: string | null;
+  /**
+    * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+    */
+  geoCode?: string | null;
 
 }
 
@@ -3242,6 +3282,10 @@ export interface BillingInfoCreate {
     */
   gatewayAttributes?: GatewayAttributes | null;
   /**
+    * Represents the card network preference associated with the billing info for dual badged cards. Must be a supported card network.
+    */
+  cardNetworkPreference?: string | null;
+  /**
     * Amazon billing agreement ID
     */
   amazonBillingAgreementId?: string | null;
@@ -3249,6 +3293,10 @@ export interface BillingInfoCreate {
     * PayPal billing agreement ID
     */
   paypalBillingAgreementId?: string | null;
+  /**
+    * Roku's CIB if billing through Roku
+    */
+  rokuBillingAgreementId?: string | null;
   /**
     * Fraud Session ID
     */
@@ -3310,7 +3358,7 @@ export interface BillingInfoCreate {
 
 export interface GatewayAttributes {
   /**
-    * Used by Adyen gateways. The Shopper Reference value used when the external token was created. Must be used in conjunction with gateway_token and gateway_code.
+    * Used by Adyen and Braintree gateways. For Adyen The Shopper Reference value used when the external token was created. Must be used in conjunction with gateway_token and gateway_code. For Braintree the PayPal PayerID is populated in the response.
     */
   accountReference?: string | null;
 
@@ -3390,6 +3438,10 @@ export interface AccountUpdate {
     * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
     */
   customFields?: CustomField[] | null;
+  /**
+    * The Avalara AvaTax value that can be passed to identify the customer type for tax purposes. The range of values can be A - R (more info at Avalara). Value is case-sensitive.
+    */
+  entityUseCode?: string | null;
 
 }
 
@@ -3564,6 +3616,10 @@ export interface ShippingAddressUpdate {
     * Country, 2-letter ISO 3166-1 alpha-2 code.
     */
   country?: string | null;
+  /**
+    * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+    */
+  geoCode?: string | null;
 
 }
 
@@ -3933,6 +3989,10 @@ export interface InvoiceAddress {
     * Country, 2-letter ISO 3166-1 alpha-2 code.
     */
   country?: string | null;
+  /**
+    * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+    */
+  geoCode?: string | null;
 
 }
 
@@ -5089,6 +5149,10 @@ export interface AccountPurchase {
     * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
     */
   customFields?: CustomField[] | null;
+  /**
+    * The Avalara AvaTax value that can be passed to identify the customer type for tax purposes. The range of values can be A - R (more info at Avalara). Value is case-sensitive.
+    */
+  entityUseCode?: string | null;
 
 }
 
@@ -5908,6 +5972,7 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
+   * @param {string} options.state - Invoice state.
    * @param {number} options.limit - Limit number of records 1-200.
    * @param {string} options.order - Sort order.
    * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
@@ -7043,6 +7108,7 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
+   * @param {string} options.state - Invoice state.
    * @param {number} options.limit - Limit number of records 1-200.
    * @param {string} options.order - Sort order.
    * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
@@ -8443,6 +8509,7 @@ export declare class Client {
    *   * Records are returned in an arbitrary order. Since results are all
    *     returned at once you can sort the records yourself.
    *   
+   * @param {string} options.state - Invoice state.
    * @param {number} options.limit - Limit number of records 1-200.
    * @param {string} options.order - Sort order.
    * @param {string} options.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
