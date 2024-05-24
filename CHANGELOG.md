@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.30.0](https://github.com/recurly/recurly-client-node/tree/3.30.0) (2024-05-24)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.29.0...3.30.0)
+
+
+**Merged Pull Requests**
+
+- Generated Latest Changes for v2019-10-10 [#331](https://github.com/recurly/recurly-client-node/pull/331) ([recurly-integrations](https://github.com/recurly-integrations))
+
+
+
 ## [3.29.0](https://github.com/recurly/recurly-client-node/tree/3.29.0) (2023-05-23)
 
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/3.28.0...3.29.0)
@@ -541,7 +552,7 @@
 - Add section for err handling [#35](https://github.com/recurly/recurly-client-node/pull/35) ([bhelx](https://github.com/bhelx))
 - Implement bump script [#34](https://github.com/recurly/recurly-client-node/pull/34) ([bhelx](https://github.com/bhelx))
 - Remove the site-id constraint from Client [#33](https://github.com/recurly/recurly-client-node/pull/33) ([bhelx](https://github.com/bhelx))
-- Update some typos in the readme [#31](https://github.com/recurly/recurly-client-node/pull/31) ([rafdizzle86](https://github.com/rafdizzle86))
+- Update some typos in the readme [#31](https://github.com/recurly/recurly-client-node/pull/31) ([rafiyagi](https://github.com/rafiyagi))
 - Document use of webhooks [#28](https://github.com/recurly/recurly-client-node/pull/28) ([bhelx](https://github.com/bhelx))
 - Latest v2018-08-09 updates [#27](https://github.com/recurly/recurly-client-node/pull/27) ([bhelx](https://github.com/bhelx))
 - Expose Request and Response metadata [#26](https://github.com/recurly/recurly-client-node/pull/26) ([bhelx](https://github.com/bhelx))
