@@ -1321,7 +1321,7 @@ export declare class ExternalSubscription {
    */
   quantity?: number | null;
   /**
-   * External subscriptions can be active, canceled, expired, or past_due.
+   * External subscriptions can be active, canceled, expired, past_due, voided, revoked, or paused.
    */
   state?: string | null;
   /**
@@ -4807,6 +4807,10 @@ export interface InvoiceUpdate {
     */
   netTerms?: number | null;
   address?: InvoiceAddress | null;
+  /**
+    * An alphanumeric code shown per gateway on your site's payment gateways page. Set this code to ensure that a given invoice targets a given gateway.
+    */
+  gatewayCode?: string | null;
 
 }
 
