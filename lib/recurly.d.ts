@@ -1297,6 +1297,10 @@ export declare class ExternalSubscription {
    */
   externalProductReference?: ExternalProductReferenceMini | null;
   /**
+   * The phases of the external subscription payment lifecycle.
+   */
+  externalPaymentPhases?: ExternalPaymentPhase[] | null;
+  /**
    * The id of the subscription in the external systems., I.e. Apple App Store or Google Play Store.
    */
   externalId?: string | null;
@@ -1349,6 +1353,10 @@ export declare class ExternalSubscription {
    */
   test?: boolean | null;
   /**
+   * An indication of whether or not the external subscription was created by a historical data import.
+   */
+  imported?: boolean | null;
+  /**
    * When the external subscription was created in Recurly.
    */
   createdAt?: Date | null;
@@ -1382,6 +1390,66 @@ export declare class ExternalProductReferenceMini {
   createdAt?: Date | null;
   /**
    * When the external product was updated in Recurly.
+   */
+  updatedAt?: Date | null;
+
+}
+
+export declare class ExternalPaymentPhase {
+  /**
+   * System-generated unique identifier for an external payment phase ID, e.g. `e28zov4fw0v2`.
+   */
+  id?: string | null;
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * Started At
+   */
+  startedAt?: Date | null;
+  /**
+   * Ends At
+   */
+  endsAt?: Date | null;
+  /**
+   * Starting Billing Period Index
+   */
+  startingBillingPeriodIndex?: number | null;
+  /**
+   * Ending Billing Period Index
+   */
+  endingBillingPeriodIndex?: number | null;
+  /**
+   * Type of discount offer given, e.g. "FREE_TRIAL"
+   */
+  offerType?: string | null;
+  /**
+   * Name of the discount offer given, e.g. "introductory"
+   */
+  offerName?: string | null;
+  /**
+   * Number of billing periods
+   */
+  periodCount?: number | null;
+  /**
+   * Billing cycle length
+   */
+  periodLength?: string | null;
+  /**
+   * Allows up to 9 decimal places
+   */
+  amount?: string | null;
+  /**
+   * 3-letter ISO 4217 currency code.
+   */
+  currency?: string | null;
+  /**
+   * When the external subscription was created in Recurly.
+   */
+  createdAt?: Date | null;
+  /**
+   * When the external subscription was updated in Recurly.
    */
   updatedAt?: Date | null;
 
@@ -1841,6 +1909,18 @@ export declare class LineItem {
    */
   discount?: number | null;
   /**
+   * Unique code to identify the ledger account. Each code must start with a letter or number. The following special characters are allowed: `-_.,:` 
+   */
+  liabilityGlAccountCode?: string | null;
+  /**
+   * Unique code to identify the ledger account. Each code must start with a letter or number. The following special characters are allowed: `-_.,:` 
+   */
+  revenueGlAccountCode?: string | null;
+  /**
+   * The ID of a performance obligation. Performance obligations are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  performanceObligationId?: string | null;
+  /**
    * The tax amount for the line item.
    */
   tax?: number | null;
@@ -1868,6 +1948,14 @@ export declare class LineItem {
    * Only for merchants using Recurly's In-The-Box taxes.
    */
   taxInfo?: TaxInfo | null;
+  /**
+   * The source of the address that will be used as the origin in determining taxes. Available only when the site is on an Elite plan. A value of "origin" refers to the "Business entity tax address". A value of "destination" refers to the "Customer tax address".
+   */
+  originTaxAddressSource?: string | null;
+  /**
+   * The source of the address that will be used as the destinaion in determining taxes. Available only when the site is on an Elite plan. A value of "destination" refers to the "Customer tax address". A value of "origin" refers to the "Business entity tax address".
+   */
+  destinationTaxAddressSource?: string | null;
   /**
    * When a line item has been prorated, this is the rate of the proration. Proration rates were made available for line items created after March 30, 2017. For line items created prior to that date, the proration rate will be `null`, even if the line item was prorated.
    */
@@ -2640,6 +2728,55 @@ export declare class CustomFieldDefinition {
 
 }
 
+export declare class GeneralLedgerAccount {
+  /**
+   * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  id?: string | null;
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * Unique code to identify the ledger account. Each code must start with a letter or number. The following special characters are allowed: `-_.,:` 
+   */
+  code?: string | null;
+  /**
+   * Optional description.
+   */
+  description?: string | null;
+  accountType?: string | null;
+  /**
+   * Created at
+   */
+  createdAt?: Date | null;
+  /**
+   * Last updated at
+   */
+  updatedAt?: Date | null;
+
+}
+
+export declare class PerformanceObligation {
+  /**
+   * The ID of a performance obligation. Performance obligations are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  id?: string | null;
+  /**
+   * Performance Obligation Name
+   */
+  name?: string | null;
+  /**
+   * Created At
+   */
+  createdAt?: Date | null;
+  /**
+   * Last updated at
+   */
+  updatedAt?: Date | null;
+
+}
+
 export declare class Item {
   /**
    * Item ID
@@ -2677,6 +2814,18 @@ export declare class Item {
    * Revenue schedule type
    */
   revenueScheduleType?: string | null;
+  /**
+   * The ID of a performance obligation. Performance obligations are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  performanceObligationId?: string | null;
+  /**
+   * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  liabilityGlAccountId?: string | null;
+  /**
+   * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  revenueGlAccountId?: string | null;
   /**
    * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the item is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
    */
@@ -3064,6 +3213,18 @@ export declare class AddOn {
    */
   measuredUnitId?: string | null;
   /**
+   * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  liabilityGlAccountId?: string | null;
+  /**
+   * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  revenueGlAccountId?: string | null;
+  /**
+   * The ID of a performance obligation. Performance obligations are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  performanceObligationId?: string | null;
+  /**
    * Accounting code for invoice line items for this add-on. If no value is provided, it defaults to add-on's code.
    */
   accountingCode?: string | null;
@@ -3239,6 +3400,18 @@ export declare class ShippingMethod {
    * Used by Avalara, Vertex, and Recurly’s built-in tax feature. The tax code values are specific to each tax system. If you are using Recurly’s built-in taxes the values are:  - `FR` – Common Carrier FOB Destination - `FR022000` – Common Carrier FOB Origin - `FR020400` – Non Common Carrier FOB Destination - `FR020500` – Non Common Carrier FOB Origin - `FR010100` – Delivery by Company Vehicle Before Passage of Title - `FR010200` – Delivery by Company Vehicle After Passage of Title - `NT` – Non-Taxable 
    */
   taxCode?: string | null;
+  /**
+   * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  liabilityGlAccountId?: string | null;
+  /**
+   * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  revenueGlAccountId?: string | null;
+  /**
+   * The ID of a performance obligation. Performance obligations are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  performanceObligationId?: string | null;
   /**
    * Created at
    */
@@ -3502,70 +3675,6 @@ export declare class InvoiceTemplate {
 
 }
 
-export declare class ExternalPaymentPhase {
-  /**
-   * System-generated unique identifier for an external payment phase ID, e.g. `e28zov4fw0v2`.
-   */
-  id?: string | null;
-  /**
-   * Object type
-   */
-  object?: string | null;
-  /**
-   * Subscription from an external resource such as Apple App Store or Google Play Store.
-   */
-  externalSubscription?: ExternalSubscription | null;
-  /**
-   * Started At
-   */
-  startedAt?: Date | null;
-  /**
-   * Ends At
-   */
-  endsAt?: Date | null;
-  /**
-   * Starting Billing Period Index
-   */
-  startingBillingPeriodIndex?: number | null;
-  /**
-   * Ending Billing Period Index
-   */
-  endingBillingPeriodIndex?: number | null;
-  /**
-   * Type of discount offer given, e.g. "FREE_TRIAL"
-   */
-  offerType?: string | null;
-  /**
-   * Name of the discount offer given, e.g. "introductory"
-   */
-  offerName?: string | null;
-  /**
-   * Number of billing periods
-   */
-  periodCount?: number | null;
-  /**
-   * Billing cycle length
-   */
-  periodLength?: string | null;
-  /**
-   * Allows up to 9 decimal places
-   */
-  amount?: string | null;
-  /**
-   * 3-letter ISO 4217 currency code.
-   */
-  currency?: string | null;
-  /**
-   * When the external subscription was created in Recurly.
-   */
-  createdAt?: Date | null;
-  /**
-   * When the external subscription was updated in Recurly.
-   */
-  updatedAt?: Date | null;
-
-}
-
 export declare class Entitlements {
   /**
    * Object Type
@@ -3666,6 +3775,14 @@ export declare class BusinessEntity {
    */
   taxAddress?: Address | null;
   /**
+   * The source of the address that will be used as the origin in determining taxes. Available only when the site is on an Elite plan. A value of "origin" refers to the "Business entity tax address". A value of "destination" refers to the "Customer tax address".
+   */
+  originTaxAddressSource?: string | null;
+  /**
+   * The source of the address that will be used as the destinaion in determining taxes. Available only when the site is on an Elite plan. A value of "destination" refers to the "Customer tax address". A value of "origin" refers to the "Business entity tax address".
+   */
+  destinationTaxAddressSource?: string | null;
+  /**
    * VAT number for the customer used on the invoice.
    */
   defaultVatNumber?: string | null;
@@ -3677,6 +3794,14 @@ export declare class BusinessEntity {
    * List of countries for which the business entity will be used.
    */
   subscriberLocationCountries?: string[] | null;
+  /**
+   * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  defaultLiabilityGlAccountId?: string | null;
+  /**
+   * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  defaultRevenueGlAccountId?: string | null;
   /**
    * Created at
    */
@@ -3737,6 +3862,18 @@ export declare class GiftCard {
    * The delivery details for the gift card.
    */
   delivery?: GiftCardDelivery | null;
+  /**
+   * The ID of a performance obligation. Performance obligations are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  performanceObligationId?: string | null;
+  /**
+   * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  liabilityGlAccountId?: string | null;
+  /**
+   * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  revenueGlAccountId?: string | null;
   /**
    * Created at
    */
@@ -4375,6 +4512,18 @@ export interface LineItemCreate {
     */
   accountingCode?: string | null;
   /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  liabilityGlAccountId?: string | null;
+  /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  revenueGlAccountId?: string | null;
+  /**
+    * The ID of a performance obligation. Performance obligations are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  performanceObligationId?: string | null;
+  /**
     * `true` exempts tax on charges, `false` applies tax on charges. If not defined, then defaults to the Plan and Site settings. This attribute does not work for credits (negative line items). Credits are always applied post-tax. Pre-tax discounts should use the Coupons feature.
     */
   taxExempt?: boolean | null;
@@ -4410,6 +4559,14 @@ export interface LineItemCreate {
     * If this date is provided, it indicates the end of a time range.
     */
   endDate?: Date | null;
+  /**
+    * The source of the address that will be used as the origin in determining taxes. Available only when the site is on an Elite plan. A value of "origin" refers to the "Business entity tax address". A value of "destination" refers to the "Customer tax address".
+    */
+  originTaxAddressSource?: string | null;
+  /**
+    * The source of the address that will be used as the destinaion in determining taxes. Available only when the site is on an Elite plan. A value of "destination" refers to the "Customer tax address". A value of "origin" refers to the "Business entity tax address".
+    */
+  destinationTaxAddressSource?: string | null;
 
 }
 
@@ -4591,6 +4748,31 @@ export interface CouponBulkCreate {
 
 }
 
+export interface GeneralLedgerAccountCreate {
+  /**
+    * Unique code to identify the ledger account. Each code must start with a letter or number. The following special characters are allowed: `-_.,:` 
+    */
+  code?: string | null;
+  /**
+    * Optional description.
+    */
+  description?: string | null;
+  accountType?: string | null;
+
+}
+
+export interface GeneralLedgerAccountUpdate {
+  /**
+    * Unique code to identify the ledger account. Each code must start with a letter or number. The following special characters are allowed: `-_.,:` 
+    */
+  code?: string | null;
+  /**
+    * Optional description.
+    */
+  description?: string | null;
+
+}
+
 export interface ItemCreate {
   /**
     * Unique code to identify the item.
@@ -4616,6 +4798,18 @@ export interface ItemCreate {
     * Revenue schedule type
     */
   revenueScheduleType?: string | null;
+  /**
+    * The ID of a performance obligation. Performance obligations are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  performanceObligationId?: string | null;
+  /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  liabilityGlAccountId?: string | null;
+  /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  revenueGlAccountId?: string | null;
   /**
     * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the item is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
     */
@@ -4684,6 +4878,18 @@ export interface ItemUpdate {
     * Revenue schedule type
     */
   revenueScheduleType?: string | null;
+  /**
+    * The ID of a performance obligation. Performance obligations are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  performanceObligationId?: string | null;
+  /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  liabilityGlAccountId?: string | null;
+  /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  revenueGlAccountId?: string | null;
   /**
     * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the item is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
     */
@@ -5028,6 +5234,30 @@ export interface PlanCreate {
     */
   revenueScheduleType?: string | null;
   /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  liabilityGlAccountId?: string | null;
+  /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  revenueGlAccountId?: string | null;
+  /**
+    * The ID of a performance obligation. Performance obligations are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  performanceObligationId?: string | null;
+  /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  setupFeeLiabilityGlAccountId?: string | null;
+  /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  setupFeeRevenueGlAccountId?: string | null;
+  /**
+    * The ID of a performance obligation. Performance obligations are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  setupFeePerformanceObligationId?: string | null;
+  /**
     * Setup fee revenue schedule type
     */
   setupFeeRevenueScheduleType?: string | null;
@@ -5140,7 +5370,7 @@ export interface PlanHostedPages {
 
 export interface AddOnCreate {
   /**
-    * Unique code to identify an item. Available when the `Credit Invoices` feature are enabled. If `item_id` and `item_code` are both present, `item_id` will be used.
+    * Unique code to identify an item. Available when the `Credit Invoices` feature is enabled. If `item_id` and `item_code` are both present, `item_id` will be used.
     */
   itemCode?: string | null;
   /**
@@ -5184,6 +5414,18 @@ export interface AddOnCreate {
     */
   planId?: string | null;
   /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  liabilityGlAccountId?: string | null;
+  /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  revenueGlAccountId?: string | null;
+  /**
+    * The ID of a performance obligation. Performance obligations are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  performanceObligationId?: string | null;
+  /**
     * Accounting code for invoice line items for this add-on. If no value is provided, it defaults to add-on's code. If `item_code`/`item_id` is part of the request then `accounting_code` must be absent.
     */
   accountingCode?: string | null;
@@ -5216,7 +5458,7 @@ export interface AddOnCreate {
     */
   taxCode?: string | null;
   /**
-    * * If `item_code`/`item_id` is part of the request and the item has a default currency then `currencies` is optional. If the item does not have a default currency, then `currencies` is required. If `item_code`/`item_id` is not present `currencies` is required. * If the add-on's `tier_type` is `tiered`, `volume`, or `stairstep`, then `currencies` must be absent. * Must be absent if `add_on_type` is `usage` and `usage_type` is `percentage`. 
+    * * If `item_code`/`item_id` is part of the request and the item has a default currency, then `currencies` is optional. If the item does not have a default currency, then `currencies` is required. If `item_code`/`item_id` is not present `currencies` is required. * If the add-on's `tier_type` is `tiered`, `volume`, or `stairstep`, then `currencies` must be absent. * Must be absent if `add_on_type` is `usage` and `usage_type` is `percentage`. 
     */
   currencies?: AddOnPricing[] | null;
   /**
@@ -5368,6 +5610,30 @@ export interface PlanUpdate {
     */
   revenueScheduleType?: string | null;
   /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  liabilityGlAccountId?: string | null;
+  /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  revenueGlAccountId?: string | null;
+  /**
+    * The ID of a performance obligation. Performance obligations are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  performanceObligationId?: string | null;
+  /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  setupFeeLiabilityGlAccountId?: string | null;
+  /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  setupFeeRevenueGlAccountId?: string | null;
+  /**
+    * The ID of a performance obligation. Performance obligations are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  setupFeePerformanceObligationId?: string | null;
+  /**
     * Setup fee revenue schedule type
     */
   setupFeeRevenueScheduleType?: string | null;
@@ -5444,6 +5710,18 @@ export interface AddOnUpdate {
     */
   accountingCode?: string | null;
   /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  liabilityGlAccountId?: string | null;
+  /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  revenueGlAccountId?: string | null;
+  /**
+    * The ID of a performance obligation. Performance obligations are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  performanceObligationId?: string | null;
+  /**
     * When this add-on is invoiced, the line item will use this revenue schedule. If `item_code`/`item_id` is part of the request then `revenue_schedule_type` must be absent in the request as the value will be set from the item.
     */
   revenueScheduleType?: string | null;
@@ -5480,7 +5758,7 @@ export interface AddOnUpdate {
     */
   tiers?: Tier[] | null;
   /**
-    * `percentage_tiers` is an array of objects, which must have the set of tiers per currency and the currency code. The tier_type must be `volume` or `tiered`, if not, it must be absent. There must be one tier without an `ending_amount` value which represents the final tier.  This feature is currently in development and requires approval and enablement, please contact support. 
+    * `percentage_tiers` is an array of objects, which must have the set of tiers per currency and the currency code. The tier_type must be `volume` or `tiered`, if not, it must be absent. There must be one tier without an `ending_amount` value which represents the final tier. This feature is currently in development and requires approval and enablement, please contact support. 
     */
   percentageTiers?: PercentageTiersByCurrency[] | null;
 
@@ -5503,6 +5781,18 @@ export interface ShippingMethodCreate {
     * Used by Avalara, Vertex, and Recurly’s built-in tax feature. The tax code values are specific to each tax system. If you are using Recurly’s built-in taxes the values are:  - `FR` – Common Carrier FOB Destination - `FR022000` – Common Carrier FOB Origin - `FR020400` – Non Common Carrier FOB Destination - `FR020500` – Non Common Carrier FOB Origin - `FR010100` – Delivery by Company Vehicle Before Passage of Title - `FR010200` – Delivery by Company Vehicle After Passage of Title - `NT` – Non-Taxable 
     */
   taxCode?: string | null;
+  /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  liabilityGlAccountId?: string | null;
+  /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  revenueGlAccountId?: string | null;
+  /**
+    * The ID of a performance obligation. Performance obligations are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  performanceObligationId?: string | null;
 
 }
 
@@ -5523,6 +5813,18 @@ export interface ShippingMethodUpdate {
     * Used by Avalara, Vertex, and Recurly’s built-in tax feature. The tax code values are specific to each tax system. If you are using Recurly’s built-in taxes the values are:  - `FR` – Common Carrier FOB Destination - `FR022000` – Common Carrier FOB Origin - `FR020400` – Non Common Carrier FOB Destination - `FR020500` – Non Common Carrier FOB Origin - `FR010100` – Delivery by Company Vehicle Before Passage of Title - `FR010200` – Delivery by Company Vehicle After Passage of Title - `NT` – Non-Taxable 
     */
   taxCode?: string | null;
+  /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  liabilityGlAccountId?: string | null;
+  /**
+    * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  revenueGlAccountId?: string | null;
+  /**
+    * The ID of a performance obligation. Performance obligations are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+    */
+  performanceObligationId?: string | null;
 
 }
 
@@ -8032,9 +8334,89 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * }
    * 
    * @param {string} customFieldDefinitionId - Custom Field Definition ID
-   * @return {Promise<CustomFieldDefinition>} An custom field definition.
+   * @return {Promise<CustomFieldDefinition>} A custom field definition.
    */
   getCustomFieldDefinition(customFieldDefinitionId: string): Promise<CustomFieldDefinition>;
+  /**
+   * Create a new general ledger account
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_general_ledger_account
+   *
+   * 
+   * @param {GeneralLedgerAccountCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {GeneralLedgerAccountCreate}
+   * @return {Promise<GeneralLedgerAccount>} A new general ledger account.
+   */
+  createGeneralLedgerAccount(body: GeneralLedgerAccountCreate): Promise<GeneralLedgerAccount>;
+  /**
+   * List a site's general ledger accounts
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_general_ledger_accounts
+   *
+   * 
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
+   * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
+   *   
+   *   **Important notes:**
+   *   
+   *   * The `ids` parameter cannot be used with any other ordering or filtering
+   *     parameters (`limit`, `order`, `sort`, `begin_time`, `end_time`, etc)
+   *   * Invalid or unknown IDs will be ignored, so you should check that the
+   *     results correspond to your request.
+   *   * Records are returned in an arbitrary order. Since results are all
+   *     returned at once you can sort the records yourself.
+   *   
+   * @param {number} options.params.limit - Limit number of records 1-200.
+   * @param {string} options.params.order - Sort order.
+   * @param {string} options.params.sort - Sort field. You *really* only want to sort by `updated_at` in ascending
+   *   order. In descending order updated records will move behind the cursor and could
+   *   prevent some records from being returned.
+   *   
+   * @param {string} options.params.accountType - General Ledger Account type by which to filter the response.
+   * @return {Pager<GeneralLedgerAccount>} A list of the site's general ledger accounts.
+   */
+  listGeneralLedgerAccounts(options?: object): Pager<GeneralLedgerAccount>;
+  /**
+   * Fetch a general ledger account
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_general_ledger_account
+   *
+   * 
+   * @param {string} generalLedgerAccountId - General Ledger Account ID
+   * @return {Promise<GeneralLedgerAccount>} A general ledger account.
+   */
+  getGeneralLedgerAccount(generalLedgerAccountId: string): Promise<GeneralLedgerAccount>;
+  /**
+   * Update a general ledger account
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/update_general_ledger_account
+   *
+   * 
+   * @param {string} generalLedgerAccountId - General Ledger Account ID
+   * @param {GeneralLedgerAccountUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {GeneralLedgerAccountUpdate}
+   * @return {Promise<GeneralLedgerAccount>} The updated general ledger account.
+   */
+  updateGeneralLedgerAccount(generalLedgerAccountId: string, body: GeneralLedgerAccountUpdate): Promise<GeneralLedgerAccount>;
+  /**
+   * Get a single Performance Obligation.
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_performance_obligation
+   *
+   * 
+   * @param {string} performanceObligationId - Performance Obligation id.
+   * @return {Promise<PerformanceObligation>} A single Performance Obligation.
+   */
+  getPerformanceObligation(performanceObligationId: string): Promise<PerformanceObligation>;
+  /**
+   * Get a site's Performance Obligations
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_performance_obligations
+   *
+   * 
+   * @return {Pager<PerformanceObligation>} A list of Performance Obligations.
+   */
+  getPerformanceObligations(options?: object): Pager<PerformanceObligation>;
   /**
    * List an invoice template's associated accounts
    *
@@ -8461,7 +8843,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_external_subscription
    *
    * 
-   * @param {string} externalSubscriptionId - External subscription id
+   * @param {string} externalSubscriptionId - External subscription ID or external_id. For ID no prefix is used e.g. `e28zov4fw0v2`. For external_id use prefix `external-id-`, e.g. `external-id-123456`.
    * @return {Promise<ExternalSubscription>} Settings for an external subscription.
    */
   getExternalSubscription(externalSubscriptionId: string): Promise<ExternalSubscription>;
@@ -10525,14 +10907,14 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    */
   listExternalSubscriptionExternalPaymentPhases(externalSubscriptionId: string, options?: object): Pager<ExternalPaymentPhase>;
   /**
-   * Fetch an external payment_phase
+   * Fetch an external payment phase
    *
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_external_subscription_external_payment_phase
    *
    * 
    * @param {string} externalSubscriptionId - External subscription id
    * @param {string} externalPaymentPhaseId - External payment phase ID, e.g. `a34ypb2ef9w1`.
-   * @return {Promise<ExternalPaymentPhase>} Details for an external payment_phase.
+   * @return {Promise<ExternalPaymentPhase>} Details for an external payment phase.
    */
   getExternalSubscriptionExternalPaymentPhase(externalSubscriptionId: string, externalPaymentPhaseId: string): Promise<ExternalPaymentPhase>;
   /**
