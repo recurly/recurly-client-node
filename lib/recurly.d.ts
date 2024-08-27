@@ -1305,6 +1305,10 @@ export declare class ExternalSubscription {
    */
   externalId?: string | null;
   /**
+   * Universally Unique Identifier created automatically.
+   */
+  uuid?: string | null;
+  /**
    * When a new billing event occurred on the external subscription in conjunction with a recent billing period, reactivation or upgrade/downgrade.
    */
   lastPurchased?: Date | null;
@@ -8855,7 +8859,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_external_subscription
    *
    * 
-   * @param {string} externalSubscriptionId - External subscription ID or external_id. For ID no prefix is used e.g. `e28zov4fw0v2`. For external_id use prefix `external-id-`, e.g. `external-id-123456`.
+   * @param {string} externalSubscriptionId - External subscription ID, external_id or uuid. For ID no prefix is used e.g. `e28zov4fw0v2`. For external_id use prefix `external-id-`, e.g. `external-id-123456` and for uuid use prefix `uuid-` e.g. `uuid-7293239bae62777d8c1ae044a9843633`.
    * @return {Promise<ExternalSubscription>} Settings for an external subscription.
    */
   getExternalSubscription(externalSubscriptionId: string): Promise<ExternalSubscription>;
