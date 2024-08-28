@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.55.0](https://github.com/recurly/recurly-client-node/tree/4.55.0) (2024-08-28)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.54.0...4.55.0)
+
+
+**Merged Pull Requests**
+
+- Generated Latest Changes for v2021-02-25 (add UUID to external subscriptions) [#336](https://github.com/recurly/recurly-client-node/pull/336) ([recurly-integrations](https://github.com/recurly-integrations))
+
+
+
 ## [4.54.0](https://github.com/recurly/recurly-client-node/tree/4.54.0) (2024-08-21)
 
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.53.0...4.54.0)
