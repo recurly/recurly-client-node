@@ -5962,6 +5962,10 @@ export interface SubscriptionCreate {
     * A gift card redemption code to be redeemed on the purchase invoice.
     */
   giftCardRedemptionCode?: string | null;
+  /**
+    * Optional field to be used only when needing to bypass the 60 second limit on creating subscriptions. Should only be used when creating subscriptions in bulk from the API.
+    */
+  bulk?: boolean | null;
 
 }
 
@@ -6599,6 +6603,10 @@ export interface SubscriptionPurchase {
     * The new set of ramp intervals for the subscription.
     */
   rampIntervals?: SubscriptionRampInterval[] | null;
+  /**
+    * Optional field to be used only when needing to bypass the 60 second limit on creating subscriptions. Should only be used when creating subscriptions in bulk from the API.
+    */
+  bulk?: boolean | null;
 
 }
 
