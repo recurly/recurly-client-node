@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.56.0](https://github.com/recurly/recurly-client-node/tree/4.56.0) (2024-10-30)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.55.0...4.56.0)
+
+
+**Merged Pull Requests**
+
+- Adds bulk parameter to SubscriptionCreate and SubscriptionPurchase [#337](https://github.com/recurly/recurly-client-node/pull/337) ([recurly-integrations](https://github.com/recurly-integrations))
+
+
+
 ## [4.55.0](https://github.com/recurly/recurly-client-node/tree/4.55.0) (2024-08-28)
 
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.54.0...4.55.0)
