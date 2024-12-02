@@ -3077,6 +3077,10 @@ export declare class Plan {
    */
   taxExempt?: boolean | null;
   /**
+   * Used by Vertex for tax calculations. Possible values are `sale`, `rental`, `lease`.
+   */
+  vertexTransactionType?: string | null;
+  /**
    * Pricing
    */
   currencies?: PlanPricing[] | null;
@@ -5298,6 +5302,10 @@ export interface PlanCreate {
     */
   taxExempt?: boolean | null;
   /**
+    * Used by Vertex for tax calculations. Possible values are `sale`, `rental`, `lease`.
+    */
+  vertexTransactionType?: string | null;
+  /**
     * Pricing
     */
   currencies?: PlanPricing[] | null;
@@ -5673,6 +5681,10 @@ export interface PlanUpdate {
     * `true` exempts tax on the plan, `false` applies tax on the plan.
     */
   taxExempt?: boolean | null;
+  /**
+    * Used by Vertex for tax calculations. Possible values are `sale`, `rental`, `lease`.
+    */
+  vertexTransactionType?: string | null;
   /**
     * Optional when the pricing model is 'ramp'.
     */
