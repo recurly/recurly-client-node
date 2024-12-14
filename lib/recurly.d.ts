@@ -702,9 +702,17 @@ export declare class Transaction {
    */
   account?: AccountMini | null;
   /**
+   * Must be sent for one-time transactions in order to provide context on which entity is submitting the transaction to ensure proper fraud checks are observed, such as 3DS. If the customer is in session, send `customer`. If this is a merchant initiated one-time transaction, send `merchant`.
+   */
+  indicator?: string | null;
+  /**
    * Invoice mini details
    */
   invoice?: InvoiceMini | null;
+  /**
+   * This conditional parameter is useful for merchants in specific industries who need to submit one-time Merchant Initiated transactions in specific cases. Not all gateways support these methods, but will support a generic one-time Merchant Initiated transaction. Only use this if the initiator value is "merchant". Otherwise, it will be ignored.   - Incremental: Send `incremental` with an additional purchase if the original authorization amount is not sufficient to cover the costs of your service or product. For example, if the customer adds goods or services or there are additional expenses.   - No Show: Send `no_show` if you charge customers a fee due to an agreed-upon cancellation policy in your industry.   - Resubmission: Send `resubmission` if you need to attempt collection on a declined transaction. You may also use the force collection behavior which has the same effect.   - Service Extension: Send `service_extension` if you are in a service industry and the customer has increased/extended their service in some way. For example: adding a day onto a car rental agreement.   - Split Shipment: Send `split_shipment` if you sell physical product and need to split up a shipment into multiple transactions when the customer is no longer in session.   - Top Up: Send `top_up` if you process one-time transactions based on a pre-arranged agreement with your customer where there is a pre-arranged account balance that needs maintaining. For example, if the customer has agreed to maintain an account balance of 30.00 and their current balance is 20.00, the MIT amount would be at least 10.00 to meet that 30.00 threshold. 
+   */
+  merchantReasonCode?: string | null;
   /**
    * Invoice mini details
    */
@@ -2247,6 +2255,10 @@ export declare class Subscription {
    */
   activeInvoiceId?: string | null;
   /**
+   * The ID of the business entity associated with the subscription. This will be `null` if the subscription relies on resolving the business entity during renewal.
+   */
+  businessEntityId?: string | null;
+  /**
    * Whether the subscription was started with a gift certificate.
    */
   startedWithGift?: boolean | null;
@@ -2409,6 +2421,10 @@ export declare class SubscriptionChange {
    * Invoice Collection
    */
   invoiceCollection?: InvoiceCollection | null;
+  /**
+   * Business entity details
+   */
+  businessEntity?: BusinessEntityMini | null;
   /**
    * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
    */
@@ -2589,6 +2605,26 @@ export declare class SubscriptionAddOnPercentageTier {
    * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places represented as a string. 
    */
   usagePercentage?: string | null;
+
+}
+
+export declare class BusinessEntityMini {
+  /**
+   * Business entity ID
+   */
+  id?: string | null;
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * The entity code of the business entity.
+   */
+  code?: string | null;
+  /**
+   * This name describes your business entity and will appear on the invoice.
+   */
+  name?: string | null;
 
 }
 
@@ -4079,7 +4115,7 @@ export interface ExternalAccountCreate {
     */
   externalAccountCode?: string | null;
   /**
-    * Represents the connection type. `AppleAppStore` or `GooglePlayStore`
+    * Represents the connection type. One of the connection types of your enabled App Connectors
     */
   externalConnectionType?: string | null;
 
@@ -4428,7 +4464,7 @@ export interface ExternalAccountUpdate {
     */
   externalAccountCode?: string | null;
   /**
-    * Represents the connection type. `AppleAppStore` or `GooglePlayStore`
+    * Represents the connection type. One of the connection types of your enabled App Connectors
     */
   externalConnectionType?: string | null;
 
@@ -4439,6 +4475,14 @@ export interface InvoiceCreate {
     * 3-letter ISO 4217 currency code.
     */
   currency?: string | null;
+  /**
+    * The `business_entity_id` is the value that represents a specific business entity for an end customer which will be assigned to the invoice. Available when the `Multiple Business Entities` feature is enabled. If both `business_entity_id` and `business_entity_code` are present, `business_entity_id` will be used.
+    */
+  businessEntityId?: string | null;
+  /**
+    * The `business_entity_code` is the value that represents a specific business entity for an end customer which will be assigned to the invoice. Available when the `Multiple Business Entities` feature is enabled. If both `business_entity_id` and `business_entity_code` are present, `business_entity_id` will be used.
+    */
+  businessEntityCode?: string | null;
   /**
     * An automatic invoice means a corresponding transaction is run using the account's billing information at the same time the invoice is created. Manual invoices are created without a corresponding transaction. The merchant must enter a manual payment transaction or have the customer pay the invoice with an automatic method, like credit card, PayPal, Amazon, or ACH bank payment.
     */
@@ -4978,7 +5022,14 @@ export interface ExternalProductReferenceBase {
     * A code which associates the external product to a corresponding object or resource in an external platform like the Apple App Store or Google Play Store.
     */
   referenceCode?: string | null;
-  externalConnectionType?: string | null;
+  /**
+    * Represents the connection type. One of the connection types of your enabled App Connectors
+    */
+  externalConnectionType?: ExternalProductReferenceConnectionType | null;
+
+}
+
+export interface ExternalProductReferenceConnectionType {
 
 }
 
@@ -4995,7 +5046,129 @@ export interface ExternalProductReferenceCreate {
     * A code which associates the external product to a corresponding object or resource in an external platform like the Apple App Store or Google Play Store.
     */
   referenceCode?: string | null;
-  externalConnectionType?: string | null;
+  /**
+    * Represents the connection type. One of the connection types of your enabled App Connectors
+    */
+  externalConnectionType?: ExternalProductReferenceConnectionType | null;
+
+}
+
+export interface ExternalSubscriptionCreate {
+  account?: AccountExternalSubscription | null;
+  externalProductReference?: ExternalProductReferenceCreate | null;
+  /**
+    * Id of the subscription in the external system, i.e. Apple App Store or Google Play Store.
+    */
+  externalId?: string | null;
+  /**
+    * When a new billing event occurred on the external subscription in conjunction with a recent billing period, reactivation or upgrade/downgrade.
+    */
+  lastPurchased?: Date | null;
+  /**
+    * An indication of whether or not the external subscription will auto-renew at the expiration date.
+    */
+  autoRenew?: boolean | null;
+  /**
+    * External subscriptions can be active, canceled, expired, past_due, voided, revoked, or paused.
+    */
+  state?: string | null;
+  /**
+    * Identifier of the app that generated the external subscription.
+    */
+  appIdentifier?: string | null;
+  /**
+    * An indication of the quantity of a subscribed item's quantity.
+    */
+  quantity?: number | null;
+  /**
+    * When the external subscription was activated in the external platform.
+    */
+  activatedAt?: Date | null;
+  /**
+    * When the external subscription expires in the external platform.
+    */
+  expiresAt?: Date | null;
+  /**
+    * When the external subscription trial period started in the external platform.
+    */
+  trialStartedAt?: Date | null;
+  /**
+    * When the external subscription trial period ends in the external platform.
+    */
+  trialEndsAt?: Date | null;
+  /**
+    * An indication of whether or not the external subscription was being created by a historical data import.
+    */
+  imported?: boolean | null;
+
+}
+
+export interface AccountExternalSubscription {
+  /**
+    * The account code of a new or existing account to be used when creating the external subscription.
+    */
+  accountCode?: string | null;
+
+}
+
+export interface ExternalSubscriptionUpdate {
+  externalProductReference?: ExternalProductReferenceUpdate | null;
+  /**
+    * Id of the subscription in the external system, i.e. Apple App Store or Google Play Store.
+    */
+  externalId?: string | null;
+  /**
+    * When a new billing event occurred on the external subscription in conjunction with a recent billing period, reactivation or upgrade/downgrade.
+    */
+  lastPurchased?: Date | null;
+  /**
+    * An indication of whether or not the external subscription will auto-renew at the expiration date.
+    */
+  autoRenew?: boolean | null;
+  /**
+    * External subscriptions can be active, canceled, expired, past_due, voided, revoked, or paused.
+    */
+  state?: string | null;
+  /**
+    * Identifier of the app that generated the external subscription.
+    */
+  appIdentifier?: string | null;
+  /**
+    * An indication of the quantity of a subscribed item's quantity.
+    */
+  quantity?: number | null;
+  /**
+    * When the external subscription was activated in the external platform.
+    */
+  activatedAt?: Date | null;
+  /**
+    * When the external subscription expires in the external platform.
+    */
+  expiresAt?: Date | null;
+  /**
+    * When the external subscription trial period started in the external platform.
+    */
+  trialStartedAt?: Date | null;
+  /**
+    * When the external subscription trial period ends in the external platform.
+    */
+  trialEndsAt?: Date | null;
+  /**
+    * An indication of whether or not the external subscription was being created by a historical data import.
+    */
+  imported?: boolean | null;
+
+}
+
+export interface ExternalProductReferenceUpdate {
+  /**
+    * A code which associates the external product to a corresponding object or resource in an external platform like the Apple App Store or Google Play Store.
+    */
+  referenceCode?: string | null;
+  /**
+    * Represents the connection type. One of the connection types of your enabled App Connectors
+    */
+  externalConnectionType?: ExternalProductReferenceConnectionType | null;
 
 }
 
@@ -5865,6 +6038,14 @@ export interface SubscriptionCreate {
     * You must provide either a `plan_code` or `plan_id`. If both are provided the `plan_id` will be used.
     */
   planId?: string | null;
+  /**
+    * The `business_entity_id` is the value that represents a specific business entity for an end customer. When `business_entity_id` is used to assign a business entity to the subscription, all future billing events for the subscription will bill to the specified business entity. Available when the `Multiple Business Entities` feature is enabled. If both `business_entity_id` and `business_entity_code` are present, `business_entity_id` will be used.
+    */
+  businessEntityId?: string | null;
+  /**
+    * The `business_entity_code` is the value that represents a specific business entity for an end customer. When `business_entity_code` is used to assign a business entity to the subscription, all future billing events for the subscription will bill to the specified business entity. Available when the `Multiple Business Entities` feature is enabled. If both `business_entity_id` and `business_entity_code` are present, `business_entity_id` will be used.
+    */
+  businessEntityCode?: string | null;
   account?: AccountCreate | null;
   /**
     * The `billing_info_id` is the value that represents a specific billing info for an end customer. When `billing_info_id` is used to assign billing info to the subscription, all future billing events for the subscription will bill to the specified billing info. `billing_info_id` can ONLY be used for sites utilizing the Wallet feature.
@@ -6197,6 +6378,14 @@ export interface SubscriptionChangeCreate {
     */
   planCode?: string | null;
   /**
+    * The `business_entity_id` is the value that represents a specific business entity for an end customer. When `business_entity_id` is used to assign a business entity to the subscription, all future billing events for the subscription will bill to the specified business entity. Available when the `Multiple Business Entities` feature is enabled. If both `business_entity_id` and `business_entity_code` are present, `business_entity_id` will be used. Only allowed if the `timeframe` is not `now`.
+    */
+  businessEntityId?: string | null;
+  /**
+    * The `business_entity_code` is the value that represents a specific business entity for an end customer. When `business_entity_code` is used to assign a business entity to the subscription, all future billing events for the subscription will bill to the specified business entity. Available when the `Multiple Business Entities` feature is enabled. If both `business_entity_id` and `business_entity_code` are present, `business_entity_id` will be used. Only allowed if the `timeframe` is not `now`.
+    */
+  businessEntityCode?: string | null;
+  /**
     * Optionally, sets custom pricing for the subscription, overriding the plan's default unit amount. The subscription's current currency will be used.
     */
   unitAmount?: number | null;
@@ -6376,6 +6565,14 @@ export interface PurchaseCreate {
     */
   billingInfoId?: string | null;
   /**
+    * The `business_entity_id` is the value that represents a specific business entity for an end customer. When `business_entity_id` is used to assign a business entity to the subscription, all future billing events for the subscription will bill to the specified business entity. Available when the `Multiple Business Entities` feature is enabled. If both `business_entity_id` and `business_entity_code` are present, `business_entity_id` will be used.
+    */
+  businessEntityId?: string | null;
+  /**
+    * The `business_entity_code` is the value that represents a specific business entity for an end customer. When `business_entity_code` is used to assign a business entity to the subscription, all future billing events for the subscription will bill to the specified business entity. Available when the `Multiple Business Entities` feature is enabled. If both `business_entity_id` and `business_entity_code` are present, `business_entity_id` will be used.
+    */
+  businessEntityCode?: string | null;
+  /**
     * Must be set to manual in order to preview a purchase for an Account that does not have payment information associated with the Billing Info.
     */
   collectionMethod?: string | null;
@@ -6395,6 +6592,10 @@ export interface PurchaseCreate {
     * Terms and conditions to be put on the purchase invoice.
     */
   termsAndConditions?: string | null;
+  /**
+    * (Transaction Data, Card on File) - Options for flagging transactions as Customer or Merchant Initiated Unscheduled.
+    */
+  transaction?: object | null;
   /**
     * Customer notes
     */
@@ -8859,7 +9060,17 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    */
   deactivateExternalProductExternalProductReference(externalProductId: string, externalProductReferenceId: string): Promise<ExternalProductReferenceMini>;
   /**
-   * List a site's external subscriptions
+   * Create an external subscription
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_external_subscription
+   *
+   * 
+   * @param {ExternalSubscriptionCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {ExternalSubscriptionCreate}
+   * @return {Promise<ExternalSubscription>} Returns the external subscription
+   */
+  createExternalSubscription(body: ExternalSubscriptionCreate): Promise<ExternalSubscription>;
+  /**
+   * List the external subscriptions on a site
    *
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_external_subscriptions
    *
@@ -8883,6 +9094,19 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * @return {Promise<ExternalSubscription>} Settings for an external subscription.
    */
   getExternalSubscription(externalSubscriptionId: string): Promise<ExternalSubscription>;
+  /**
+   * Update an external subscription
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/put_external_subscription
+   *
+   * 
+   * @param {string} externalSubscriptionId - External subscription id
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
+   * @param {ExternalSubscriptionUpdate} options.params.body - The object representing the JSON request to send to the server. It should conform to the schema of {ExternalSubscriptionUpdate}
+   * @return {Promise<ExternalSubscription>} Settings for an external subscription.
+   */
+  putExternalSubscription(externalSubscriptionId: string, options?: object): Promise<ExternalSubscription>;
   /**
    * List the external invoices on an external subscription
    *
