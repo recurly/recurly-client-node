@@ -343,6 +343,10 @@ export declare class BillingInfo {
    */
   backupPaymentMethod?: boolean | null;
   /**
+   * Array of Payment Gateway References, each a reference to a third-party gateway object of varying types.
+   */
+  paymentGatewayReferences?: PaymentGatewayReferences[] | null;
+  /**
    * When the billing information was created.
    */
   createdAt?: Date | null;
@@ -448,6 +452,18 @@ export declare class FraudInfo {
    * Kount rules
    */
   riskRulesTriggered?: object | null;
+
+}
+
+export declare class PaymentGatewayReferences {
+  /**
+   * Reference value used when the external token was created. If Stripe gateway is used, this value will need to be accompanied by its reference_type.
+   */
+  token?: string | null;
+  /**
+   * The type of reference token. Required if token is passed in for Stripe Gateway.
+   */
+  referenceType?: string | null;
 
 }
 
@@ -4238,9 +4254,13 @@ export interface BillingInfoCreate {
     */
   gatewayToken?: string | null;
   /**
-    * An identifier for a specific payment gateway. Must be used in conjunction with `gateway_token`.
+    * An identifier for a specific payment gateway.
     */
   gatewayCode?: string | null;
+  /**
+    * Array of Payment Gateway References, each a reference to a third-party gateway object of varying types.
+    */
+  paymentGatewayReferences?: PaymentGatewayReferences[] | null;
   /**
     * Additional attributes to send to the gateway.
     */
@@ -4326,6 +4346,18 @@ export interface BillingInfoCreate {
     * Represents the card network preference associated with the billing info for dual badged cards. Must be a supported card network.
     */
   cardNetworkPreference?: string | null;
+
+}
+
+export interface PaymentGatewayReferences {
+  /**
+    * Reference value used when the external token was created. If Stripe gateway is used, this value will need to be accompanied by its reference_type.
+    */
+  token?: string | null;
+  /**
+    * The type of reference token. Required if token is passed in for Stripe Gateway.
+    */
+  referenceType?: string | null;
 
 }
 
@@ -4794,7 +4826,7 @@ export interface CouponUpdate {
 
 export interface CouponBulkCreate {
   /**
-    * The quantity of unique coupon codes to generate
+    * The quantity of unique coupon codes to generate. A bulk coupon can have up to 100,000 unique codes (or your site's configured limit).
     */
   numberOfUniqueCodes?: number | null;
 
@@ -8465,6 +8497,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * @param {Date} options.params.endTime - Inclusively filter by end_time when `sort=created_at` or `sort=updated_at`.
    *   **Note:** this value is an ISO8601 timestamp. A partial timestamp that does not include a time zone will default to UTC.
    *   
+   * @param {string} options.params.redeemed - Filter unique coupon codes by redemption status. `true` for redeemed, `false` for not redeemed.
    * @return {Pager<UniqueCouponCode>} A list of unique coupon codes that were generated
    */
   listUniqueCouponCodes(couponId: string, options?: object): Pager<UniqueCouponCode>;
