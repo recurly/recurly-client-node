@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.59.0](https://github.com/recurly/recurly-client-node/tree/4.59.0) (2025-02-26)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.58.0...4.59.0)
+
+
+**Merged Pull Requests**
+
+- Add `funding_source` to `BillingInfo` and `Transaction` [#342](https://github.com/recurly/recurly-client-node/pull/342) ([recurly-integrations](https://github.com/recurly-integrations))
+- Generated Latest Changes for v2021-02-25 [#340](https://github.com/recurly/recurly-client-node/pull/340) ([recurly-integrations](https://github.com/recurly-integrations))
+
+
+
 ## [4.58.0](https://github.com/recurly/recurly-client-node/tree/4.58.0) (2024-12-17)
 
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.57.0...4.58.0)
