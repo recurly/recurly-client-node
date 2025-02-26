@@ -299,7 +299,7 @@ export declare class ExternalAccount {
    */
   externalAccountCode?: string | null;
   /**
-   * Represents the connection type. `AppleAppStore` or `GooglePlayStore`
+   * Represents the connection type. One of the connection types of your enabled App Connectors
    */
   externalConnectionType?: string | null;
   /**
@@ -389,9 +389,13 @@ export declare class PaymentMethod {
    */
   gatewayToken?: string | null;
   /**
-   * The 2-letter ISO 3166-1 alpha-2 country code associated with the credit card BIN, if known by Recurly. Available on the BillingInfo object only. Available when the BIN country lookup feature is enabled.
+   * The 2-letter ISO 3166-1 alpha-2 country code associated with the card's issuer, if known.
    */
   ccBinCountry?: string | null;
+  /**
+   * The funding source of the card, if known.
+   */
+  fundingSource?: string | null;
   /**
    * An identifier for a specific payment gateway.
    */
