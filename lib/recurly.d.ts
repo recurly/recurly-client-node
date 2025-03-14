@@ -1605,6 +1605,10 @@ export declare class Invoice {
    */
   tax?: number | null;
   /**
+   * Reference Only Currency Conversion
+   */
+  referenceOnlyCurrencyConversion?: ReferenceOnlyCurrencyConversion | null;
+  /**
    * The final total on this invoice. The summation of invoice charges, discounts, credits, and tax.
    */
   total?: number | null;
@@ -1744,6 +1748,22 @@ export declare class InvoiceAddress {
    * Last name
    */
   lastName?: string | null;
+
+}
+
+export declare class ReferenceOnlyCurrencyConversion {
+  /**
+   * 3-letter ISO 4217 currency code.
+   */
+  currency?: string | null;
+  /**
+   * The subtotal converted to the currency.
+   */
+  subtotalInCents?: number | null;
+  /**
+   * The tax converted to the currency.
+   */
+  taxInCents?: number | null;
 
 }
 
