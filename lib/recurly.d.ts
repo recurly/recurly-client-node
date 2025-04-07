@@ -461,11 +461,11 @@ export declare class FraudInfo {
 
 export declare class PaymentGatewayReferences {
   /**
-   * Reference value used when the external token was created. If Stripe gateway is used, this value will need to be accompanied by its reference_type.
+   * Reference value used when the external token was created. If a Stripe gateway or Ebanx gateway is used, this value will need to be accompanied by its reference_type.
    */
   token?: string | null;
   /**
-   * The type of reference token. Required if token is passed in for Stripe Gateway.
+   * The type of reference token. Required if token is passed in for Stripe Gateway or Ebanx UPI.
    */
   referenceType?: string | null;
 
@@ -4375,11 +4375,11 @@ export interface BillingInfoCreate {
 
 export interface PaymentGatewayReferences {
   /**
-    * Reference value used when the external token was created. If Stripe gateway is used, this value will need to be accompanied by its reference_type.
+    * Reference value used when the external token was created. If a Stripe gateway or Ebanx gateway is used, this value will need to be accompanied by its reference_type.
     */
   token?: string | null;
   /**
-    * The type of reference token. Required if token is passed in for Stripe Gateway.
+    * The type of reference token. Required if token is passed in for Stripe Gateway or Ebanx UPI.
     */
   referenceType?: string | null;
 
@@ -6148,7 +6148,7 @@ export interface SubscriptionCreate {
     */
   trialEndsAt?: Date | null;
   /**
-    * If set, the subscription will begin in the future on this date. The subscription will apply the setup fee and trial period, unless the plan has no trial.
+    * If set, the subscription will begin on this specified date. The subscription will apply the setup fee and trial period, unless the plan has no trial.
     */
   startsAt?: Date | null;
   /**
@@ -6845,7 +6845,7 @@ export interface SubscriptionPurchase {
     */
   trialEndsAt?: Date | null;
   /**
-    * If set, the subscription will begin in the future on this date. The subscription will apply the setup fee and trial period, unless the plan has no trial.
+    * If set, the subscription will begin on this specified date. The subscription will apply the setup fee and trial period, unless the plan has no trial.
     */
   startsAt?: Date | null;
   /**
