@@ -1530,7 +1530,7 @@ export declare class LineItem {
    */
   avalaraServiceType?: number | null;
   /**
-   * Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use `unknown`, `physical`, or `digital`.
+   * Optional field used by Avalara, Vertex, and Recurly's In-the-Box tax solution to determine taxation rules. You can pass in specific tax codes using any of these tax integrations. For Recurly's In-the-Box tax offering you can also choose to instead use simple values of `unknown`, `physical`, or `digital` tax codes.
    */
   taxCode?: string | null;
   /**
@@ -2271,7 +2271,7 @@ export declare class Item {
    */
   avalaraServiceType?: number | null;
   /**
-   * Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use `unknown`, `physical`, or `digital`.
+   * Optional field used by Avalara, Vertex, and Recurly's In-the-Box tax solution to determine taxation rules. You can pass in specific tax codes using any of these tax integrations. For Recurly's In-the-Box tax offering you can also choose to instead use simple values of `unknown`, `physical`, or `digital` tax codes.
    */
   taxCode?: string | null;
   /**
@@ -2452,7 +2452,7 @@ export declare class Plan {
    */
   avalaraServiceType?: number | null;
   /**
-   * Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use `unknown`, `physical`, or `digital`.
+   * Optional field used by Avalara, Vertex, and Recurly's In-the-Box tax solution to determine taxation rules. You can pass in specific tax codes using any of these tax integrations. For Recurly's In-the-Box tax offering you can also choose to instead use simple values of `unknown`, `physical`, or `digital` tax codes.
    */
   taxCode?: string | null;
   /**
@@ -2612,7 +2612,7 @@ export declare class AddOn {
    */
   avalaraServiceType?: number | null;
   /**
-   * Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use `unknown`, `physical`, or `digital`.
+   * Optional field used by Avalara, Vertex, and Recurly's In-the-Box tax solution to determine taxation rules. You can pass in specific tax codes using any of these tax integrations. For Recurly's In-the-Box tax offering you can also choose to instead use simple values of `unknown`, `physical`, or `digital` tax codes. If `item_code`/`item_id` is part of the request then `tax_code` must be absent.
    */
   taxCode?: string | null;
   /**
@@ -3274,7 +3274,7 @@ export interface BillingInfoCreate {
     */
   gatewayToken?: string | null;
   /**
-    * An identifier for a specific payment gateway. Must be used in conjunction with `gateway_token`.
+    * An identifier for a specific payment gateway.
     */
   gatewayCode?: string | null;
   /**
@@ -3563,7 +3563,7 @@ export interface LineItemCreate {
     */
   avalaraServiceType?: number | null;
   /**
-    * Optional field used by Avalara, Vertex, and Recurly's EU VAT tax feature to determine taxation rules. If you have your own AvaTax or Vertex account configured, use their tax codes to assign specific tax rules. If you are using Recurly's EU VAT feature, you can use values of `unknown`, `physical`, or `digital`.
+    * Optional field used by Avalara, Vertex, and Recurly's In-the-Box tax solution to determine taxation rules. You can pass in specific tax codes using any of these tax integrations. For Recurly's In-the-Box tax offering you can also choose to instead use simple values of `unknown`, `physical`, or `digital` tax codes.
     */
   taxCode?: string | null;
   /**
@@ -3801,7 +3801,7 @@ export interface ItemCreate {
     */
   avalaraServiceType?: number | null;
   /**
-    * Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use `unknown`, `physical`, or `digital`.
+    * Optional field used by Avalara, Vertex, and Recurly's In-the-Box tax solution to determine taxation rules. You can pass in specific tax codes using any of these tax integrations. For Recurly's In-the-Box tax offering you can also choose to instead use simple values of `unknown`, `physical`, or `digital` tax codes.
     */
   taxCode?: string | null;
   /**
@@ -3869,7 +3869,7 @@ export interface ItemUpdate {
     */
   avalaraServiceType?: number | null;
   /**
-    * Used by Avalara, Vertex, and Recurly’s EU VAT tax feature. The tax code values are specific to each tax system. If you are using Recurly’s EU VAT feature you can use `unknown`, `physical`, or `digital`.
+    * Optional field used by Avalara, Vertex, and Recurly's In-the-Box tax solution to determine taxation rules. You can pass in specific tax codes using any of these tax integrations. For Recurly's In-the-Box tax offering you can also choose to instead use simple values of `unknown`, `physical`, or `digital` tax codes.
     */
   taxCode?: string | null;
   /**
@@ -4174,7 +4174,7 @@ export interface PlanCreate {
     */
   avalaraServiceType?: number | null;
   /**
-    * Optional field used by Avalara, Vertex, and Recurly's EU VAT tax feature to determine taxation rules. If you have your own AvaTax or Vertex account configured, use their tax codes to assign specific tax rules. If you are using Recurly's EU VAT feature, you can use values of `unknown`, `physical`, or `digital`.
+    * Optional field used by Avalara, Vertex, and Recurly's In-the-Box tax solution to determine taxation rules. You can pass in specific tax codes using any of these tax integrations. For Recurly's In-the-Box tax offering you can also choose to instead use simple values of `unknown`, `physical`, or `digital` tax codes.
     */
   taxCode?: string | null;
   /**
@@ -4338,7 +4338,7 @@ export interface AddOnCreate {
     */
   avalaraServiceType?: number | null;
   /**
-    * Optional field used by Avalara, Vertex, and Recurly's EU VAT tax feature to determine taxation rules. If you have your own AvaTax or Vertex account configured, use their tax codes to assign specific tax rules. If you are using Recurly's EU VAT feature, you can use values of `unknown`, `physical`, or `digital`. If `item_code`/`item_id` is part of the request then `tax_code` must be absent.
+    * Optional field used by Avalara, Vertex, and Recurly's In-the-Box tax solution to determine taxation rules. You can pass in specific tax codes using any of these tax integrations. For Recurly's In-the-Box tax offering you can also choose to instead use simple values of `unknown`, `physical`, or `digital` tax codes. If `item_code`/`item_id` is part of the request then `tax_code` must be absent.
     */
   taxCode?: string | null;
   /**
@@ -4454,7 +4454,7 @@ export interface PlanUpdate {
     */
   avalaraServiceType?: number | null;
   /**
-    * Optional field used by Avalara, Vertex, and Recurly's EU VAT tax feature to determine taxation rules. If you have your own AvaTax or Vertex account configured, use their tax codes to assign specific tax rules. If you are using Recurly's EU VAT feature, you can use values of `unknown`, `physical`, or `digital`.
+    * Optional field used by Avalara, Vertex, and Recurly's In-the-Box tax solution to determine taxation rules. You can pass in specific tax codes using any of these tax integrations. For Recurly's In-the-Box tax offering you can also choose to instead use simple values of `unknown`, `physical`, or `digital` tax codes.
     */
   taxCode?: string | null;
   /**
@@ -4522,7 +4522,7 @@ export interface AddOnUpdate {
     */
   avalaraServiceType?: number | null;
   /**
-    * Optional field used by Avalara, Vertex, and Recurly's EU VAT tax feature to determine taxation rules. If you have your own AvaTax or Vertex account configured, use their tax codes to assign specific tax rules. If you are using Recurly's EU VAT feature, you can use values of `unknown`, `physical`, or `digital`. If an `Item` is associated to the `AddOn` then `tax code` must be absent.
+    * Optional field used by Avalara, Vertex, and Recurly's In-the-Box tax solution to determine taxation rules. You can pass in specific tax codes using any of these tax integrations. For Recurly's In-the-Box tax offering you can also choose to instead use simple values of `unknown`, `physical`, or `digital` tax codes. If an `Item` is associated to the `AddOn` then `tax_code` must be absent.
     */
   taxCode?: string | null;
   /**
@@ -4643,7 +4643,7 @@ export interface SubscriptionCreate {
     */
   trialEndsAt?: Date | null;
   /**
-    * If set, the subscription will begin in the future on this date. The subscription will apply the setup fee and trial period, unless the plan has no trial.
+    * If set, the subscription will begin on this specified date. The subscription will apply the setup fee and trial period, unless the plan has no trial.
     */
   startsAt?: Date | null;
   /**
@@ -4694,6 +4694,10 @@ export interface SubscriptionCreate {
     * An optional type designation for the payment gateway transaction created by this request. Supports 'moto' value, which is the acronym for mail order and telephone transactions.
     */
   transactionType?: string | null;
+  /**
+    * Optional field to be used only when needing to bypass the 60 second limit on creating subscriptions. Should only be used when creating subscriptions in bulk from the API.
+    */
+  bulk?: boolean | null;
 
 }
 
@@ -5223,7 +5227,7 @@ export interface SubscriptionPurchase {
     */
   trialEndsAt?: Date | null;
   /**
-    * If set, the subscription will begin in the future on this date. The subscription will apply the setup fee and trial period, unless the plan has no trial.
+    * If set, the subscription will begin on this specified date. The subscription will apply the setup fee and trial period, unless the plan has no trial.
     */
   startsAt?: Date | null;
   /**
@@ -5250,6 +5254,10 @@ export interface SubscriptionPurchase {
     * The new set of ramp intervals for the subscription.
     */
   rampIntervals?: SubscriptionRampInterval[] | null;
+  /**
+    * Optional field to be used only when needing to bypass the 60 second limit on creating subscriptions. Should only be used when creating subscriptions in bulk from the API.
+    */
+  bulk?: boolean | null;
 
 }
 
