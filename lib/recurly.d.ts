@@ -4370,6 +4370,10 @@ export interface BillingInfoCreate {
     * Represents the card network preference associated with the billing info for dual badged cards. Must be a supported card network.
     */
   cardNetworkPreference?: string | null;
+  /**
+    * Specifies a URL to which a consumer will be redirected upon completion of a redirect payment flow. Only redirect payment flows operating through Adyen Components will utilize this return URL.
+    */
+  returnUrl?: string | null;
 
 }
 
@@ -5225,6 +5229,86 @@ export interface ExternalProductReferenceUpdate {
     * Represents the connection type. One of the connection types of your enabled App Connectors
     */
   externalConnectionType?: ExternalProductReferenceConnectionType | null;
+
+}
+
+export interface ExternalInvoiceCreate {
+  /**
+    * An identifier which associates the external invoice to a corresponding object in an external platform.
+    */
+  externalId?: string | null;
+  state?: string | null;
+  total?: string | null;
+  /**
+    * 3-letter ISO 4217 currency code.
+    */
+  currency?: string | null;
+  /**
+    * When the invoice was created in the external platform.
+    */
+  purchasedAt?: Date | null;
+  lineItems?: ExternalChargeCreate[] | null;
+  externalPaymentPhase?: ExternalPaymentPhaseBase | null;
+  /**
+    * External payment phase ID, e.g. `a34ypb2ef9w1`.
+    */
+  externalPaymentPhaseId?: string | null;
+
+}
+
+export interface ExternalChargeCreate {
+  /**
+    * 3-letter ISO 4217 currency code.
+    */
+  currency?: string | null;
+  unitAmount?: string | null;
+  quantity?: number | null;
+  description?: string | null;
+  externalProductReference?: ExternalProductReferenceCreate | null;
+
+}
+
+export interface ExternalPaymentPhaseBase {
+  /**
+    * Started At
+    */
+  startedAt?: Date | null;
+  /**
+    * Ends At
+    */
+  endsAt?: Date | null;
+  /**
+    * Starting Billing Period Index
+    */
+  startingBillingPeriodIndex?: number | null;
+  /**
+    * Ending Billing Period Index
+    */
+  endingBillingPeriodIndex?: number | null;
+  /**
+    * Type of discount offer given, e.g. "FREE_TRIAL"
+    */
+  offerType?: string | null;
+  /**
+    * Name of the discount offer given, e.g. "introductory"
+    */
+  offerName?: string | null;
+  /**
+    * Number of billing periods
+    */
+  periodCount?: number | null;
+  /**
+    * Billing cycle length
+    */
+  periodLength?: string | null;
+  /**
+    * Allows up to 9 decimal places
+    */
+  amount?: string | null;
+  /**
+    * 3-letter ISO 4217 currency code.
+    */
+  currency?: string | null;
 
 }
 
@@ -9182,6 +9266,17 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * @return {Pager<ExternalInvoice>} A list of the the external_invoices on a site.
    */
   listExternalSubscriptionExternalInvoices(externalSubscriptionId: string, options?: object): Pager<ExternalInvoice>;
+  /**
+   * Create an external invoice
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_external_invoice
+   *
+   * 
+   * @param {string} externalSubscriptionId - External subscription id
+   * @param {ExternalInvoiceCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {ExternalInvoiceCreate}
+   * @return {Promise<ExternalInvoice>} Returns the external invoice
+   */
+  createExternalInvoice(externalSubscriptionId: string, body: ExternalInvoiceCreate): Promise<ExternalInvoice>;
   /**
    * List a site's invoices
    *
