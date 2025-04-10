@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.61.0](https://github.com/recurly/recurly-client-node/tree/4.61.0) (2025-04-10)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.60.0...4.61.0)
+
+
+**Merged Pull Requests**
+
+- Generated Latest Changes for v2021-02-25: Create External Invoices [#346](https://github.com/recurly/recurly-client-node/pull/346) ([recurly-integrations](https://github.com/recurly-integrations))
+- Generated Latest Changes for v2021-02-25 [#344](https://github.com/recurly/recurly-client-node/pull/344) ([recurly-integrations](https://github.com/recurly-integrations))
+
+
+
 ## [4.60.0](https://github.com/recurly/recurly-client-node/tree/4.60.0) (2025-03-14)
 
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.59.0...4.60.0)
