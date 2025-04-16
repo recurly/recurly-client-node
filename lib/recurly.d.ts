@@ -6232,7 +6232,7 @@ export interface SubscriptionCreate {
     */
   trialEndsAt?: Date | null;
   /**
-    * If set, the subscription will begin on this specified date. The subscription will apply the setup fee and trial period, unless the plan has no trial.
+    * If set, the subscription will begin on this specified date. The subscription will apply the setup fee and trial period, unless the plan has no trial. Omit this field if the subscription should be started immediately.
     */
   startsAt?: Date | null;
   /**
@@ -6929,7 +6929,7 @@ export interface SubscriptionPurchase {
     */
   trialEndsAt?: Date | null;
   /**
-    * If set, the subscription will begin on this specified date. The subscription will apply the setup fee and trial period, unless the plan has no trial.
+    * If set, the subscription will begin on this specified date. The subscription will apply the setup fee and trial period, unless the plan has no trial. Omit this field if the subscription should be started immediately.
     */
   startsAt?: Date | null;
   /**
