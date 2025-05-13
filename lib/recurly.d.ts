@@ -724,7 +724,7 @@ export declare class Transaction {
   /**
    * Must be sent for one-time transactions in order to provide context on which entity is submitting the transaction to ensure proper fraud checks are observed, such as 3DS. If the customer is in session, send `customer`. If this is a merchant initiated one-time transaction, send `merchant`.
    */
-  indicator?: string | null;
+  initiator?: string | null;
   /**
    * Invoice mini details
    */
