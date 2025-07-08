@@ -608,6 +608,10 @@ export declare class AccountAcquisition {
    * An arbitrary identifier for the marketing campaign that led to the acquisition of this account.
    */
   campaign?: string | null;
+  /**
+   * Date the account was first created if different than the account.created_at. ie Importing accounts.
+   */
+  acquiredAt?: Date | null;
   id?: string | null;
   /**
    * Object type
@@ -4138,6 +4142,10 @@ export interface AccountAcquisitionUpdate {
     * An arbitrary identifier for the marketing campaign that led to the acquisition of this account.
     */
   campaign?: string | null;
+  /**
+    * Date the account was first created if different than the account.created_at. ie Importing accounts.
+    */
+  acquiredAt?: Date | null;
 
 }
 
@@ -4309,6 +4317,10 @@ export interface BillingInfoCreate {
     * Fraud Session ID
     */
   fraudSessionId?: string | null;
+  /**
+    * The Adyen Risk Profile Reference ID is used to identify the risk profile for the payment method.
+    */
+  adyenRiskProfileReferenceId?: string | null;
   /**
     * An optional type designation for the payment gateway transaction created by this request. Supports 'moto' value, which is the acronym for mail order and telephone transactions.
     */
@@ -5105,7 +5117,7 @@ export interface ExternalProductReferenceBase {
   /**
     * Represents the connection type. One of the connection types of your enabled App Connectors
     */
-  externalConnectionType?: ExternalProductReferenceConnectionType | null;
+  externalConnectionType?: string | null;
 
 }
 
@@ -5129,7 +5141,7 @@ export interface ExternalProductReferenceCreate {
   /**
     * Represents the connection type. One of the connection types of your enabled App Connectors
     */
-  externalConnectionType?: ExternalProductReferenceConnectionType | null;
+  externalConnectionType?: string | null;
 
 }
 
@@ -5248,7 +5260,7 @@ export interface ExternalProductReferenceUpdate {
   /**
     * Represents the connection type. One of the connection types of your enabled App Connectors
     */
-  externalConnectionType?: ExternalProductReferenceConnectionType | null;
+  externalConnectionType?: string | null;
 
 }
 
@@ -6340,6 +6352,10 @@ export interface SubscriptionShippingCreate {
     * Assigns the subscription's shipping cost. If this is greater than zero then a `method_id` or `method_code` is required.
     */
   amount?: number | null;
+  /**
+    * The expected date of the first delivery for the subscription.
+    */
+  expectedFirstDeliveryAt?: Date | null;
 
 }
 
@@ -6996,6 +7012,10 @@ export interface SubscriptionShippingPurchase {
     * Assigns the subscription's shipping cost. If this is greater than zero then a `method_id` or `method_code` is required.
     */
   amount?: number | null;
+  /**
+    * The expected date of the first delivery for the subscription.
+    */
+  expectedFirstDeliveryAt?: Date | null;
 
 }
 
