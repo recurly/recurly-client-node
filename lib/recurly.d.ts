@@ -2231,6 +2231,10 @@ export declare class Subscription {
    */
   taxInfo?: TaxInfo | null;
   /**
+   * The price segment ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For requests, the code can also be used. Use prefix `code-`, e.g. `code-gold`.
+   */
+  priceSegmentId?: string | null;
+  /**
    * Estimated total
    */
   total?: number | null;
@@ -2958,9 +2962,6 @@ export declare class Pricing {
    * 3-letter ISO 4217 currency code.
    */
   currency?: string | null;
-  /**
-   * Unit price
-   */
   unitAmount?: number | null;
   /**
    * This field is deprecated. Please do not use it.
@@ -3077,17 +3078,29 @@ export declare class Plan {
    */
   code?: string | null;
   /**
-   * The current state of the plan.
-   */
-  state?: string | null;
-  /**
    * This name describes your plan and will appear on the Hosted Payment Page and the subscriber's invoice.
    */
   name?: string | null;
   /**
-   * Optional description, not displayed.
+   * The current state of the plan.
    */
-  description?: string | null;
+  state?: string | null;
+  /**
+   * A fixed pricing model has the same price for each billing period. A ramp pricing model defines a set of Ramp Intervals, where a subscription changes price on a specified cadence of billing periods. The price change could be an increase or decrease. 
+   */
+  pricingModel?: string | null;
+  /**
+   * Present only when `pricing_model` is `'fixed'`.
+   */
+  currencies?: PlanPricing[] | null;
+  /**
+   * Ramp Intervals
+   */
+  rampIntervals?: PlanRampInterval[] | null;
+  /**
+   * Setup Fees
+   */
+  setupFees?: PlanSetupPricing[] | null;
   /**
    * Unit for the plan's billing interval.
    */
@@ -3096,6 +3109,50 @@ export declare class Plan {
    * Length of the plan's billing interval in `interval_unit`.
    */
   intervalLength?: number | null;
+  /**
+   * Optional description, not displayed.
+   */
+  description?: string | null;
+  /**
+   * Accounting code for invoice line items for the plan. If no value is provided, it defaults to plan's code.
+   */
+  accountingCode?: string | null;
+  /**
+   * Revenue schedule type
+   */
+  revenueScheduleType?: string | null;
+  /**
+   * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  liabilityGlAccountId?: string | null;
+  /**
+   * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  revenueGlAccountId?: string | null;
+  /**
+   * The ID of a performance obligation. Performance obligations are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  performanceObligationId?: string | null;
+  /**
+   * Accounting code for invoice line items for the plan's setup fee. If no value is provided, it defaults to plan's accounting code.
+   */
+  setupFeeAccountingCode?: string | null;
+  /**
+   * Setup fee revenue schedule type
+   */
+  setupFeeRevenueScheduleType?: string | null;
+  /**
+   * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  setupFeeLiabilityGlAccountId?: string | null;
+  /**
+   * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  setupFeeRevenueGlAccountId?: string | null;
+  /**
+   * The ID of a performance obligation. Performance obligations are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
+   */
+  setupFeePerformanceObligationId?: string | null;
   /**
    * Units for the plan's trial period.
    */
@@ -3117,33 +3174,9 @@ export declare class Plan {
    */
   autoRenew?: boolean | null;
   /**
-   * A fixed pricing model has the same price for each billing period. A ramp pricing model defines a set of Ramp Intervals, where a subscription changes price on a specified cadence of billing periods. The price change could be an increase or decrease. 
-   */
-  pricingModel?: string | null;
-  /**
-   * Ramp Intervals
-   */
-  rampIntervals?: PlanRampInterval[] | null;
-  /**
    * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
    */
   customFields?: CustomField[] | null;
-  /**
-   * Revenue schedule type
-   */
-  revenueScheduleType?: string | null;
-  /**
-   * Setup fee revenue schedule type
-   */
-  setupFeeRevenueScheduleType?: string | null;
-  /**
-   * Accounting code for invoice line items for the plan. If no value is provided, it defaults to plan's code.
-   */
-  accountingCode?: string | null;
-  /**
-   * Accounting code for invoice line items for the plan's setup fee. If no value is provided, it defaults to plan's accounting code.
-   */
-  setupFeeAccountingCode?: string | null;
   /**
    * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the plan is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
    */
@@ -3164,10 +3197,6 @@ export declare class Plan {
    * Used by Vertex for tax calculations. Possible values are `sale`, `rental`, `lease`.
    */
   vertexTransactionType?: string | null;
-  /**
-   * Pricing
-   */
-  currencies?: PlanPricing[] | null;
   /**
    * Hosted pages settings
    */
@@ -3195,6 +3224,30 @@ export declare class Plan {
 
 }
 
+export declare class PlanPricing {
+  /**
+   * 3-letter ISO 4217 currency code.
+   */
+  currency?: string | null;
+  /**
+   * This field is deprecated, please use top level `setup_fees` instead. Amount of one-time setup fee automatically charged at the beginning of a subscription billing cycle. For subscription plans with a trial, the setup fee will be charged at the time of signup. Setup fees do not increase with the quantity of a subscription plan.
+   */
+  setupFee?: number | null;
+  /**
+   * This field should not be sent when the pricing model is `'ramp'`.
+   */
+  unitAmount?: number | null;
+  /**
+   * The price segment ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For requests, the code can also be used. Use prefix `code-`, e.g. `code-gold`.
+   */
+  priceSegmentId?: string | null;
+  /**
+   * This field is deprecated. Please do not use it.
+   */
+  taxInclusive?: boolean | null;
+
+}
+
 export declare class PlanRampInterval {
   /**
    * Represents the billing cycle where a ramp interval starts.
@@ -3216,10 +3269,14 @@ export declare class PlanRampPricing {
    * Represents the price for the Ramp Interval.
    */
   unitAmount?: number | null;
+  /**
+   * The price segment ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For requests, the code can also be used. Use prefix `code-`, e.g. `code-gold`.
+   */
+  priceSegmentId?: string | null;
 
 }
 
-export declare class PlanPricing {
+export declare class PlanSetupPricing {
   /**
    * 3-letter ISO 4217 currency code.
    */
@@ -3227,15 +3284,7 @@ export declare class PlanPricing {
   /**
    * Amount of one-time setup fee automatically charged at the beginning of a subscription billing cycle. For subscription plans with a trial, the setup fee will be charged at the time of signup. Setup fees do not increase with the quantity of a subscription plan.
    */
-  setupFee?: number | null;
-  /**
-   * This field should not be sent when the pricing model is 'ramp'.
-   */
   unitAmount?: number | null;
-  /**
-   * This field is deprecated. Please do not use it.
-   */
-  taxInclusive?: boolean | null;
 
 }
 
@@ -3464,6 +3513,22 @@ export declare class PercentageTier {
    * The percentage taken of the monetary amount of usage tracked. This can be up to 4 decimal places represented as a string. 
    */
   usagePercentage?: string | null;
+
+}
+
+export declare class PriceSegment {
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * The price segment ID, e.g. `e28zov4fw0v2`.
+   */
+  id?: string | null;
+  /**
+   * The price segment code, e.g. `my-price-segment`.
+   */
+  code?: string | null;
 
 }
 
@@ -4986,9 +5051,6 @@ export interface Pricing {
     * 3-letter ISO 4217 currency code.
     */
   currency?: string | null;
-  /**
-    * Unit price
-    */
   unitAmount?: number | null;
   /**
     * This field is deprecated. Please do not use it.
@@ -5118,10 +5180,6 @@ export interface ExternalProductReferenceBase {
     * Represents the connection type. One of the connection types of your enabled App Connectors
     */
   externalConnectionType?: string | null;
-
-}
-
-export interface ExternalProductReferenceConnectionType {
 
 }
 
@@ -5547,13 +5605,25 @@ export interface PlanCreate {
     */
   name?: string | null;
   /**
-    * Optional description, not displayed.
+    * A fixed pricing model has the same price for each billing period. A ramp pricing model defines a set of Ramp Intervals, where a subscription changes price on a specified cadence of billing periods. The price change could be an increase or decrease. 
     */
-  description?: string | null;
+  pricingModel?: string | null;
   /**
-    * Accounting code for invoice line items for the plan. If no value is provided, it defaults to plan's code.
+    * Required only when `pricing_model` is `'fixed'`.
     */
-  accountingCode?: string | null;
+  currencies?: PlanPricing[] | null;
+  /**
+    * Ramp Intervals
+    */
+  rampIntervals?: PlanRampInterval[] | null;
+  /**
+    * Setup Fees
+    */
+  setupFees?: PlanSetupPricingCreate[] | null;
+  /**
+    * Add Ons
+    */
+  addOns?: AddOnCreate[] | null;
   /**
     * Unit for the plan's billing interval.
     */
@@ -5563,37 +5633,13 @@ export interface PlanCreate {
     */
   intervalLength?: number | null;
   /**
-    * Units for the plan's trial period.
+    * Optional description, not displayed.
     */
-  trialUnit?: string | null;
+  description?: string | null;
   /**
-    * Length of plan's trial period in `trial_units`. `0` means `no trial`.
+    * Accounting code for invoice line items for the plan. If no value is provided, it defaults to plan's code.
     */
-  trialLength?: number | null;
-  /**
-    * Allow free trial subscriptions to be created without billing info. Should not be used if billing info is needed for initial invoice due to existing uninvoiced charges or setup fee.
-    */
-  trialRequiresBillingInfo?: boolean | null;
-  /**
-    * Automatically terminate plans after a defined number of billing cycles.
-    */
-  totalBillingCycles?: number | null;
-  /**
-    * Subscriptions will automatically inherit this value once they are active. If `auto_renew` is `true`, then a subscription will automatically renew its term at renewal. If `auto_renew` is `false`, then a subscription will expire at the end of its term. `auto_renew` can be overridden on the subscription record itself.
-    */
-  autoRenew?: boolean | null;
-  /**
-    * A fixed pricing model has the same price for each billing period. A ramp pricing model defines a set of Ramp Intervals, where a subscription changes price on a specified cadence of billing periods. The price change could be an increase or decrease. 
-    */
-  pricingModel?: string | null;
-  /**
-    * Ramp Intervals
-    */
-  rampIntervals?: PlanRampInterval[] | null;
-  /**
-    * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
-    */
-  customFields?: CustomField[] | null;
+  accountingCode?: string | null;
   /**
     * Revenue schedule type
     */
@@ -5611,6 +5657,14 @@ export interface PlanCreate {
     */
   performanceObligationId?: string | null;
   /**
+    * Accounting code for invoice line items for the plan's setup fee. If no value is provided, it defaults to plan's accounting code.
+    */
+  setupFeeAccountingCode?: string | null;
+  /**
+    * Setup fee revenue schedule type
+    */
+  setupFeeRevenueScheduleType?: string | null;
+  /**
     * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
     */
   setupFeeLiabilityGlAccountId?: string | null;
@@ -5623,13 +5677,29 @@ export interface PlanCreate {
     */
   setupFeePerformanceObligationId?: string | null;
   /**
-    * Setup fee revenue schedule type
+    * Units for the plan's trial period.
     */
-  setupFeeRevenueScheduleType?: string | null;
+  trialUnit?: string | null;
   /**
-    * Accounting code for invoice line items for the plan's setup fee. If no value is provided, it defaults to plan's accounting code.
+    * Length of plan's trial period in `trial_units`. `0` means `no trial`.
     */
-  setupFeeAccountingCode?: string | null;
+  trialLength?: number | null;
+  /**
+    * Allow free trial subscriptions to be created without billing info. Should not be used if billing info is needed for initial invoice due to existing uninvoiced charges or setup fee.
+    */
+  trialRequiresBillingInfo?: boolean | null;
+  /**
+    * Automatically terminate subscriptions after a defined number of billing cycles. Number of billing cycles before the plan automatically stops renewing, defaults to `null` for continuous, automatic renewal.
+    */
+  totalBillingCycles?: number | null;
+  /**
+    * Subscriptions will automatically inherit this value once they are active. If `auto_renew` is `true`, then a subscription will automatically renew its term at renewal. If `auto_renew` is `false`, then a subscription will expire at the end of its term. `auto_renew` can be overridden on the subscription record itself.
+    */
+  autoRenew?: boolean | null;
+  /**
+    * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
+    */
+  customFields?: CustomField[] | null;
   /**
     * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the plan is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
     */
@@ -5651,17 +5721,9 @@ export interface PlanCreate {
     */
   vertexTransactionType?: string | null;
   /**
-    * Pricing
-    */
-  currencies?: PlanPricing[] | null;
-  /**
     * Hosted pages settings
     */
   hostedPages?: PlanHostedPages | null;
-  /**
-    * Add Ons
-    */
-  addOns?: AddOnCreate[] | null;
   /**
     * Used to determine whether items can be assigned as add-ons to individual subscriptions. If `true`, items can be assigned as add-ons to individual subscription add-ons. If `false`, only plan add-ons can be used. 
     */
@@ -5670,6 +5732,30 @@ export interface PlanCreate {
     * Unique ID to identify a dunning campaign. Used to specify if a non-default dunning campaign should be assigned to this plan. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
     */
   dunningCampaignId?: string | null;
+
+}
+
+export interface PlanPricing {
+  /**
+    * 3-letter ISO 4217 currency code.
+    */
+  currency?: string | null;
+  /**
+    * This field is deprecated, please use top level `setup_fees` instead. Amount of one-time setup fee automatically charged at the beginning of a subscription billing cycle. For subscription plans with a trial, the setup fee will be charged at the time of signup. Setup fees do not increase with the quantity of a subscription plan.
+    */
+  setupFee?: number | null;
+  /**
+    * This field should not be sent when the pricing model is `'ramp'`.
+    */
+  unitAmount?: number | null;
+  /**
+    * The price segment ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For requests, the code can also be used. Use prefix `code-`, e.g. `code-gold`.
+    */
+  priceSegmentId?: string | null;
+  /**
+    * This field is deprecated. Please do not use it.
+    */
+  taxInclusive?: boolean | null;
 
 }
 
@@ -5694,10 +5780,14 @@ export interface PlanRampPricing {
     * Represents the price for the Ramp Interval.
     */
   unitAmount?: number | null;
+  /**
+    * The price segment ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For requests, the code can also be used. Use prefix `code-`, e.g. `code-gold`.
+    */
+  priceSegmentId?: string | null;
 
 }
 
-export interface PlanPricing {
+export interface PlanSetupPricingCreate {
   /**
     * 3-letter ISO 4217 currency code.
     */
@@ -5705,35 +5795,7 @@ export interface PlanPricing {
   /**
     * Amount of one-time setup fee automatically charged at the beginning of a subscription billing cycle. For subscription plans with a trial, the setup fee will be charged at the time of signup. Setup fees do not increase with the quantity of a subscription plan.
     */
-  setupFee?: number | null;
-  /**
-    * This field should not be sent when the pricing model is 'ramp'.
-    */
   unitAmount?: number | null;
-  /**
-    * This field is deprecated. Please do not use it.
-    */
-  taxInclusive?: boolean | null;
-
-}
-
-export interface PlanHostedPages {
-  /**
-    * URL to redirect to after signup on the hosted payment pages.
-    */
-  successUrl?: string | null;
-  /**
-    * URL to redirect to on canceled signup on the hosted payment pages.
-    */
-  cancelUrl?: string | null;
-  /**
-    * If `true`, the customer will be sent directly to your `success_url` after a successful signup, bypassing Recurly's hosted confirmation page.
-    */
-  bypassConfirmation?: boolean | null;
-  /**
-    * Determines if the quantity field is displayed on the hosted pages for the plan.
-    */
-  displayQuantity?: boolean | null;
 
 }
 
@@ -5925,9 +5987,29 @@ export interface PercentageTier {
 
 }
 
+export interface PlanHostedPages {
+  /**
+    * URL to redirect to after signup on the hosted payment pages.
+    */
+  successUrl?: string | null;
+  /**
+    * URL to redirect to on canceled signup on the hosted payment pages.
+    */
+  cancelUrl?: string | null;
+  /**
+    * If `true`, the customer will be sent directly to your `success_url` after a successful signup, bypassing Recurly's hosted confirmation page.
+    */
+  bypassConfirmation?: boolean | null;
+  /**
+    * Determines if the quantity field is displayed on the hosted pages for the plan.
+    */
+  displayQuantity?: boolean | null;
+
+}
+
 export interface PlanUpdate {
   /**
-    * Plan ID
+    * This field has no effect on the request/response.
     */
   id?: string | null;
   /**
@@ -5939,6 +6021,18 @@ export interface PlanUpdate {
     */
   name?: string | null;
   /**
+    * Required only when `pricing_model` is `'fixed'`.
+    */
+  currencies?: PlanPricing[] | null;
+  /**
+    * Ramp Intervals
+    */
+  rampIntervals?: PlanRampInterval[] | null;
+  /**
+    * Setup Fees
+    */
+  setupFees?: PlanSetupPricingCreate[] | null;
+  /**
     * Optional description, not displayed.
     */
   description?: string | null;
@@ -5946,34 +6040,6 @@ export interface PlanUpdate {
     * Accounting code for invoice line items for the plan. If no value is provided, it defaults to plan's code.
     */
   accountingCode?: string | null;
-  /**
-    * Units for the plan's trial period.
-    */
-  trialUnit?: string | null;
-  /**
-    * Length of plan's trial period in `trial_units`. `0` means `no trial`.
-    */
-  trialLength?: number | null;
-  /**
-    * Allow free trial subscriptions to be created without billing info. Should not be used if billing info is needed for initial invoice due to existing uninvoiced charges or setup fee.
-    */
-  trialRequiresBillingInfo?: boolean | null;
-  /**
-    * Automatically terminate plans after a defined number of billing cycles.
-    */
-  totalBillingCycles?: number | null;
-  /**
-    * Subscriptions will automatically inherit this value once they are active. If `auto_renew` is `true`, then a subscription will automatically renew its term at renewal. If `auto_renew` is `false`, then a subscription will expire at the end of its term. `auto_renew` can be overridden on the subscription record itself.
-    */
-  autoRenew?: boolean | null;
-  /**
-    * Ramp Intervals
-    */
-  rampIntervals?: PlanRampInterval[] | null;
-  /**
-    * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
-    */
-  customFields?: CustomField[] | null;
   /**
     * Revenue schedule type
     */
@@ -5991,6 +6057,14 @@ export interface PlanUpdate {
     */
   performanceObligationId?: string | null;
   /**
+    * Accounting code for invoice line items for the plan's setup fee. If no value is provided, it defaults to plan's accounting code.
+    */
+  setupFeeAccountingCode?: string | null;
+  /**
+    * Setup fee revenue schedule type
+    */
+  setupFeeRevenueScheduleType?: string | null;
+  /**
     * The ID of a general ledger account. General ledger accounts are only accessible as a part of the Recurly RevRec Standard and Recurly RevRec Advanced features. 
     */
   setupFeeLiabilityGlAccountId?: string | null;
@@ -6003,13 +6077,29 @@ export interface PlanUpdate {
     */
   setupFeePerformanceObligationId?: string | null;
   /**
-    * Setup fee revenue schedule type
+    * Units for the plan's trial period.
     */
-  setupFeeRevenueScheduleType?: string | null;
+  trialUnit?: string | null;
   /**
-    * Accounting code for invoice line items for the plan's setup fee. If no value is provided, it defaults to plan's accounting code.
+    * Length of plan's trial period in `trial_units`. `0` means `no trial`.
     */
-  setupFeeAccountingCode?: string | null;
+  trialLength?: number | null;
+  /**
+    * Allow free trial subscriptions to be created without billing info. Should not be used if billing info is needed for initial invoice due to existing uninvoiced charges or setup fee.
+    */
+  trialRequiresBillingInfo?: boolean | null;
+  /**
+    * Automatically terminate subscriptions after a defined number of billing cycles. Number of billing cycles before the plan automatically stops renewing, defaults to `null` for continuous, automatic renewal.
+    */
+  totalBillingCycles?: number | null;
+  /**
+    * Subscriptions will automatically inherit this value once they are active. If `auto_renew` is `true`, then a subscription will automatically renew its term at renewal. If `auto_renew` is `false`, then a subscription will expire at the end of its term. `auto_renew` can be overridden on the subscription record itself.
+    */
+  autoRenew?: boolean | null;
+  /**
+    * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
+    */
+  customFields?: CustomField[] | null;
   /**
     * Used by Avalara for Communications taxes. The transaction type in combination with the service type describe how the plan is taxed. Refer to [the documentation](https://help.avalara.com/AvaTax_for_Communications/Tax_Calculation/AvaTax_for_Communications_Tax_Engine/Mapping_Resources/TM_00115_AFC_Modules_Corresponding_Transaction_Types) for more available t/s types.
     */
@@ -6030,10 +6120,6 @@ export interface PlanUpdate {
     * Used by Vertex for tax calculations. Possible values are `sale`, `rental`, `lease`.
     */
   vertexTransactionType?: string | null;
-  /**
-    * Optional when the pricing model is 'ramp'.
-    */
-  currencies?: PlanPricing[] | null;
   /**
     * Hosted pages settings
     */
@@ -6219,6 +6305,10 @@ export interface SubscriptionCreate {
     */
   businessEntityCode?: string | null;
   account?: AccountCreate | null;
+  /**
+    * The price segment ID, e.g. `e28zov4fw0v2`.
+    */
+  priceSegmentId?: string | null;
   /**
     * The `billing_info_id` is the value that represents a specific billing info for an end customer. When `billing_info_id` is used to assign billing info to the subscription, all future billing events for the subscription will bill to the specified billing info. `billing_info_id` can ONLY be used for sites utilizing the Wallet feature.
     */
@@ -6485,6 +6575,10 @@ export interface SubscriptionUpdate {
     */
   poNumber?: string | null;
   /**
+    * The price segment ID, e.g. `e28zov4fw0v2`.
+    */
+  priceSegmentId?: string | null;
+  /**
     * Integer paired with `Net Terms Type` and representing the number of days past the current date (for `net` Net Terms Type) or days after the last day of the current month (for `eom` Net Terms Type) that the invoice will become past due. For `manual` collection method, an additional 24 hours is added to ensure the customer has the entire last day to make payment before becoming past due. For example:  If an invoice is due `net 0`, it is due 'On Receipt' and will become past due 24 hours after it's created. If an invoice is due `net 30`, it will become past due at 31 days exactly. If an invoice is due `eom 30`, it will become past due 31 days from the last day of the current month.  For `automatic` collection method, the additional 24 hours is not added. For example, On-Receipt is due immediately, and `net 30` will become due exactly 30 days from invoice generation, at which point Recurly will attempt collection. When `eom` Net Terms Type is passed, the value for `Net Terms` is restricted to `0, 15, 30, 45, 60, or 90`.  For more information on how net terms work with `manual` collection visit our docs page (https://docs.recurly.com/docs/manual-payments#section-collection-terms) or visit (https://docs.recurly.com/docs/automatic-invoicing-terms#section-collection-terms) for information about net terms using `automatic` collection.
     */
   netTerms?: number | null;
@@ -6561,6 +6655,10 @@ export interface SubscriptionChangeCreate {
     * The `business_entity_code` is the value that represents a specific business entity for an end customer. When `business_entity_code` is used to assign a business entity to the subscription, all future billing events for the subscription will bill to the specified business entity. Available when the `Multiple Business Entities` feature is enabled. If both `business_entity_id` and `business_entity_code` are present, `business_entity_id` will be used. Only allowed if the `timeframe` is not `now`.
     */
   businessEntityCode?: string | null;
+  /**
+    * The price segment ID, e.g. `e28zov4fw0v2`.
+    */
+  priceSegmentId?: string | null;
   /**
     * Optionally, sets custom pricing for the subscription, overriding the plan's default unit amount. The subscription's current currency will be used.
     */
@@ -6940,6 +7038,10 @@ export interface SubscriptionPurchase {
     * Override the unit amount of the subscription plan by setting this value. If not provided, the subscription will inherit the price from the subscription plan for the provided currency.
     */
   unitAmount?: number | null;
+  /**
+    * The price segment ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For requests, the code can also be used. Use prefix `code-`, e.g. `code-gold`.
+    */
+  priceSegmentId?: string | null;
   /**
     * Determines whether or not tax is included in the unit amount. The Tax Inclusive Pricing feature (separate from the Mixed Tax Pricing feature) must be enabled to use this flag.
     */
@@ -9412,7 +9514,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   }
    * }
    * 
-   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`. For number with prefix or country code, use `number-` and `prefix`, e.g. `number-TEST-FR1001`
    * @return {Promise<Invoice>} An invoice.
    */
   getInvoice(invoiceId: string): Promise<Invoice>;
@@ -9443,7 +9545,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   }
    * }
    * 
-   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`. For number with prefix or country code, use `number-` and `prefix`, e.g. `number-TEST-FR1001`
    * @param {InvoiceUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceUpdate}
    * @return {Promise<Invoice>} An invoice.
    */
@@ -9477,7 +9579,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   }
    * }
    * 
-   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`. For number with prefix or country code, use `number-` and `prefix`, e.g. `number-TEST-FR1001`
    * @return {Promise<BinaryFile>} An invoice as a PDF.
    */
   getInvoicePdf(invoiceId: string): Promise<BinaryFile>;
@@ -9502,7 +9604,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   }
    * }
    * 
-   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`. For number with prefix or country code, use `number-` and `prefix`, e.g. `number-TEST-FR1001`
    * @return {Promise<Invoice>} The updated invoice.
    */
   applyCreditBalance(invoiceId: string): Promise<Invoice>;
@@ -9527,7 +9629,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   }
    * }
    * 
-   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`. For number with prefix or country code, use `number-` and `prefix`, e.g. `number-TEST-FR1001`
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
    * @param {InvoiceCollect} options.params.body - The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceCollect}
@@ -9555,7 +9657,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   }
    * }
    * 
-   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`. For number with prefix or country code, use `number-` and `prefix`, e.g. `number-TEST-FR1001`
    * @return {Promise<Invoice>} The updated invoice.
    */
   markInvoiceFailed(invoiceId: string): Promise<Invoice>;
@@ -9581,7 +9683,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   }
    * }
    * 
-   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`. For number with prefix or country code, use `number-` and `prefix`, e.g. `number-TEST-FR1001`
    * @return {Promise<Invoice>} The updated invoice.
    */
   markInvoiceSuccessful(invoiceId: string): Promise<Invoice>;
@@ -9606,7 +9708,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   }
    * }
    * 
-   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`. For number with prefix or country code, use `number-` and `prefix`, e.g. `number-TEST-FR1001`
    * @return {Promise<Invoice>} The updated invoice.
    */
   reopenInvoice(invoiceId: string): Promise<Invoice>;
@@ -9631,7 +9733,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   }
    * }
    * 
-   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`. For number with prefix or country code, use `number-` and `prefix`, e.g. `number-TEST-FR1001`
    * @return {Promise<Invoice>} The updated invoice.
    */
   voidInvoice(invoiceId: string): Promise<Invoice>;
@@ -9661,7 +9763,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   }
    * }
    * 
-   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`. For number with prefix or country code, use `number-` and `prefix`, e.g. `number-TEST-FR1001`
    * @param {ExternalTransaction} body - The object representing the JSON request to send to the server. It should conform to the schema of {ExternalTransaction}
    * @return {Promise<Transaction>} The recorded transaction.
    */
@@ -9678,7 +9780,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   console.log(lineItem.id)
    * }
    * 
-   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`. For number with prefix or country code, use `number-` and `prefix`, e.g. `number-TEST-FR1001`
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
@@ -9723,7 +9825,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   console.log(redemption.id)
    * }
    * 
-   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`. For number with prefix or country code, use `number-` and `prefix`, e.g. `number-TEST-FR1001`
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
    * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
@@ -9763,7 +9865,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   console.log(invoice.number)
    * }
    * 
-   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`. For number with prefix or country code, use `number-` and `prefix`, e.g. `number-TEST-FR1001`
    * @return {Pager<Invoice>} A list of the credit or charge invoices associated with the invoice.
    */
   listRelatedInvoices(invoiceId: string, options?: object): Pager<Invoice>;
@@ -9795,7 +9897,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   }
    * }
    * 
-   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`.
+   * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`. For number with prefix or country code, use `number-` and `prefix`, e.g. `number-TEST-FR1001`
    * @param {InvoiceRefund} body - The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceRefund}
    * @return {Promise<Invoice>} Returns the new credit invoice.
    */
@@ -10213,6 +10315,41 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * @return {Promise<AddOn>} Add-on deleted
    */
   removePlanAddOn(planId: string, addOnId: string): Promise<AddOn>;
+  /**
+   * List a site's price segments
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_price_segments
+   *
+   * 
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
+   * @param {string[]} options.params.ids - Filter results by their IDs. Up to 200 IDs can be passed at once using
+   *   commas as separators, e.g. `ids=h1at4d57xlmy,gyqgg0d3v9n1,jrsm5b4yefg6`.
+   *   
+   *   **Important notes:**
+   *   
+   *   * The `ids` parameter cannot be used with any other ordering or filtering
+   *     parameters (`limit`, `order`, `sort`, `begin_time`, `end_time`, etc)
+   *   * Invalid or unknown IDs will be ignored, so you should check that the
+   *     results correspond to your request.
+   *   * Records are returned in an arbitrary order. Since results are all
+   *     returned at once you can sort the records yourself.
+   *   
+   * @param {number} options.params.limit - Limit number of records 1-200.
+   * @param {string} options.params.order - Sort order.
+   * @return {Pager<PriceSegment>} A list of price segments.
+   */
+  listPriceSegments(options?: object): Pager<PriceSegment>;
+  /**
+   * Fetch a price segment
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_price_segment
+   *
+   * 
+   * @param {string} priceSegmentId - The price segment ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-gold`.
+   * @return {Promise<PriceSegment>} A price segment.
+   */
+  getPriceSegment(priceSegmentId: string): Promise<PriceSegment>;
   /**
    * List a site's add-ons
    *
