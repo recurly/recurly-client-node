@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.67.0](https://github.com/recurly/recurly-client-node/tree/4.67.0) (2025-08-13)
+
+[Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.66.0...4.67.0)
+
+
+
+
+
 ## [4.66.0](https://github.com/recurly/recurly-client-node/tree/4.66.0) (2025-08-13)
 
 [Full Changelog](https://github.com/recurly/recurly-client-node/compare/4.65.0...4.66.0)
