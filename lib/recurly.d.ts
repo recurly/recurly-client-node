@@ -235,6 +235,10 @@ export declare class Account {
    * The Avalara AvaTax value that can be passed to identify the customer type for tax purposes. The range of values can be A - R (more info at Avalara). Value is case-sensitive.
    */
   entityUseCode?: string | null;
+  /**
+   * The preferred billing date for the account. This date will be used as the billing date for when activating new subscriptions on the account.
+   */
+  billDate?: Date | null;
 
 }
 
@@ -2005,6 +2009,10 @@ export declare class LineItem {
    */
   taxCode?: string | null;
   /**
+   * The Harmonized System (HS) code is an internationally standardized system of names and numbers to classify traded products. The HS code, sometimes called Commodity Code, is used by customs authorities around the world to identify products when assessing duties and taxes. The HS code may also be referred to as the tariff code or customs code. Values should contain only digits and decimals.
+   */
+  harmonizedSystemCode?: string | null;
+  /**
    * Only for merchants using Recurly's In-The-Box taxes.
    */
   taxInfo?: TaxInfo | null;
@@ -2931,6 +2939,10 @@ export declare class Item {
    */
   taxCode?: string | null;
   /**
+   * The Harmonized System (HS) code is an internationally standardized system of names and numbers to classify traded products. The HS code, sometimes called Commodity Code, is used by customs authorities around the world to identify products when assessing duties and taxes. The HS code may also be referred to as the tariff code or customs code. Values should contain only digits and decimals.
+   */
+  harmonizedSystemCode?: string | null;
+  /**
    * `true` exempts tax on the item, `false` applies tax on the item.
    */
   taxExempt?: boolean | null;
@@ -3190,6 +3202,10 @@ export declare class Plan {
    */
   taxCode?: string | null;
   /**
+   * The Harmonized System (HS) code is an internationally standardized system of names and numbers to classify traded products. The HS code, sometimes called Commodity Code, is used by customs authorities around the world to identify products when assessing duties and taxes. The HS code may also be referred to as the tariff code or customs code. Values should contain only digits and decimals.
+   */
+  harmonizedSystemCode?: string | null;
+  /**
    * `true` exempts tax on the plan, `false` applies tax on the plan.
    */
   taxExempt?: boolean | null;
@@ -3385,6 +3401,10 @@ export declare class AddOn {
    * Optional field used by Avalara, Vertex, and Recurly's In-the-Box tax solution to determine taxation rules. You can pass in specific tax codes using any of these tax integrations. For Recurly's In-the-Box tax offering you can also choose to instead use simple values of `unknown`, `physical`, or `digital` tax codes. If `item_code`/`item_id` is part of the request then `tax_code` must be absent.
    */
   taxCode?: string | null;
+  /**
+   * The Harmonized System (HS) code is an internationally standardized system of names and numbers to classify traded products. The HS code, sometimes called Commodity Code, is used by customs authorities around the world to identify products when assessing duties and taxes. The HS code may also be referred to as the tariff code or customs code. Values should contain only digits and decimals.
+   */
+  harmonizedSystemCode?: string | null;
   /**
    * Determines if the quantity field is displayed on the hosted pages for the add-on.
    */
@@ -4187,6 +4207,10 @@ export interface AccountCreate {
     * The Avalara AvaTax value that can be passed to identify the customer type for tax purposes. The range of values can be A - R (more info at Avalara). Value is case-sensitive.
     */
   entityUseCode?: string | null;
+  /**
+    * The preferred billing date for the account. This date will be used as the billing date for when activating new subscriptions on the account.
+    */
+  billDate?: Date | null;
 
 }
 
@@ -4564,6 +4588,10 @@ export interface AccountUpdate {
     * The Avalara AvaTax value that can be passed to identify the customer type for tax purposes. The range of values can be A - R (more info at Avalara). Value is case-sensitive.
     */
   entityUseCode?: string | null;
+  /**
+    * The preferred billing date for the account. This date will be used as the billing date for when activating new subscriptions on the account.
+    */
+  billDate?: Date | null;
 
 }
 
@@ -4749,6 +4777,10 @@ export interface LineItemCreate {
     */
   taxCode?: string | null;
   /**
+    * The Harmonized System (HS) code is an internationally standardized system of names and numbers to classify traded products. The HS code, sometimes called Commodity Code, is used by customs authorities around the world to identify products when assessing duties and taxes. The HS code may also be referred to as the tariff code or customs code. Values should contain only digits and decimals. If `item_code`/`item_id` is part of the request then `harmonized_system_code` must be absent.
+    */
+  harmonizedSystemCode?: string | null;
+  /**
     * Optional field to track a product code or SKU for the line item. This can be used to later reporting on product purchases. For Vertex tax calculations, this field will be used as the Vertex `product` field. If `item_code`/`item_id` is part of the request then `product_code` must be absent.
     */
   productCode?: string | null;
@@ -4776,6 +4808,14 @@ export interface LineItemCreate {
     * The source of the address that will be used as the destinaion in determining taxes. Available only when the site is on an Elite plan. A value of "destination" refers to the "Customer tax address". A value of "origin" refers to the "Business entity tax address".
     */
   destinationTaxAddressSource?: string | null;
+
+}
+
+export interface AccountNoteCreate {
+  /**
+    * The content of the account note.
+    */
+  message?: string | null;
 
 }
 
@@ -5032,6 +5072,10 @@ export interface ItemCreate {
     */
   taxCode?: string | null;
   /**
+    * The Harmonized System (HS) code is an internationally standardized system of names and numbers to classify traded products. The HS code, sometimes called Commodity Code, is used by customs authorities around the world to identify products when assessing duties and taxes. The HS code may also be referred to as the tariff code or customs code. Values should contain only digits and decimals.
+    */
+  harmonizedSystemCode?: string | null;
+  /**
     * `true` exempts tax on the item, `false` applies tax on the item.
     */
   taxExempt?: boolean | null;
@@ -5108,6 +5152,10 @@ export interface ItemUpdate {
     * Optional field used by Avalara, Vertex, and Recurly's In-the-Box tax solution to determine taxation rules. You can pass in specific tax codes using any of these tax integrations. For Recurly's In-the-Box tax offering you can also choose to instead use simple values of `unknown`, `physical`, or `digital` tax codes.
     */
   taxCode?: string | null;
+  /**
+    * The Harmonized System (HS) code is an internationally standardized system of names and numbers to classify traded products. The HS code, sometimes called Commodity Code, is used by customs authorities around the world to identify products when assessing duties and taxes. The HS code may also be referred to as the tariff code or customs code. Values should contain only digits and decimals.
+    */
+  harmonizedSystemCode?: string | null;
   /**
     * `true` exempts tax on the item, `false` applies tax on the item.
     */
@@ -5713,6 +5761,10 @@ export interface PlanCreate {
     */
   taxCode?: string | null;
   /**
+    * The Harmonized System (HS) code is an internationally standardized system of names and numbers to classify traded products. The HS code, sometimes called Commodity Code, is used by customs authorities around the world to identify products when assessing duties and taxes. The HS code may also be referred to as the tariff code or customs code. Values should contain only digits and decimals.
+    */
+  harmonizedSystemCode?: string | null;
+  /**
     * `true` exempts tax on the plan, `false` applies tax on the plan.
     */
   taxExempt?: boolean | null;
@@ -5888,6 +5940,10 @@ export interface AddOnCreate {
     * Optional field used by Avalara, Vertex, and Recurly's In-the-Box tax solution to determine taxation rules. You can pass in specific tax codes using any of these tax integrations. For Recurly's In-the-Box tax offering you can also choose to instead use simple values of `unknown`, `physical`, or `digital` tax codes. If `item_code`/`item_id` is part of the request then `tax_code` must be absent.
     */
   taxCode?: string | null;
+  /**
+    * The Harmonized System (HS) code is an internationally standardized system of names and numbers to classify traded products. The HS code, sometimes called Commodity Code, is used by customs authorities around the world to identify products when assessing duties and taxes. The HS code may also be referred to as the tariff code or customs code. Values should contain only digits and decimals.
+    */
+  harmonizedSystemCode?: string | null;
   /**
     * * If `item_code`/`item_id` is part of the request and the item has a default currency, then `currencies` is optional. If the item does not have a default currency, then `currencies` is required. If `item_code`/`item_id` is not present `currencies` is required. * If the add-on's `tier_type` is `tiered`, `volume`, or `stairstep`, then `currencies` must be absent. * Must be absent if `add_on_type` is `usage` and `usage_type` is `percentage`. 
     */
@@ -6113,6 +6169,10 @@ export interface PlanUpdate {
     */
   taxCode?: string | null;
   /**
+    * The Harmonized System (HS) code is an internationally standardized system of names and numbers to classify traded products. The HS code, sometimes called Commodity Code, is used by customs authorities around the world to identify products when assessing duties and taxes. The HS code may also be referred to as the tariff code or customs code. Values should contain only digits and decimals.
+    */
+  harmonizedSystemCode?: string | null;
+  /**
     * `true` exempts tax on the plan, `false` applies tax on the plan.
     */
   taxExempt?: boolean | null;
@@ -6196,6 +6256,10 @@ export interface AddOnUpdate {
     * Optional field used by Avalara, Vertex, and Recurly's In-the-Box tax solution to determine taxation rules. You can pass in specific tax codes using any of these tax integrations. For Recurly's In-the-Box tax offering you can also choose to instead use simple values of `unknown`, `physical`, or `digital` tax codes. If an `Item` is associated to the `AddOn` then `tax_code` must be absent.
     */
   taxCode?: string | null;
+  /**
+    * The Harmonized System (HS) code is an internationally standardized system of names and numbers to classify traded products. The HS code, sometimes called Commodity Code, is used by customs authorities around the world to identify products when assessing duties and taxes. The HS code may also be referred to as the tariff code or customs code. Values should contain only digits and decimals.
+    */
+  harmonizedSystemCode?: string | null;
   /**
     * Determines if the quantity field is displayed on the hosted pages for the add-on.
     */
@@ -6421,6 +6485,10 @@ export interface SubscriptionCreate {
     * Optional field to be used only when needing to bypass the 60 second limit on creating subscriptions. Should only be used when creating subscriptions in bulk from the API.
     */
   bulk?: boolean | null;
+  /**
+    * Allows you to control how any resulting charges will be calculated and prorated.
+    */
+  prorationSettings?: SubscriptionCreateProrationSettings | null;
 
 }
 
@@ -6530,6 +6598,14 @@ export interface SubscriptionRampInterval {
     * Represents the price for the ramp interval.
     */
   unitAmount?: number | null;
+
+}
+
+export interface SubscriptionCreateProrationSettings {
+  /**
+    * Determines how the amount charged is determined for this change
+    */
+  charge?: string | null;
 
 }
 
@@ -6993,6 +7069,10 @@ export interface AccountPurchase {
     * The Avalara AvaTax value that can be passed to identify the customer type for tax purposes. The range of values can be A - R (more info at Avalara). Value is case-sensitive.
     */
   entityUseCode?: string | null;
+  /**
+    * The preferred billing date for the account. This date will be used as the billing date for when activating new subscriptions on the account.
+    */
+  billDate?: Date | null;
 
 }
 
@@ -7098,6 +7178,10 @@ export interface SubscriptionPurchase {
     * Optional field to be used only when needing to bypass the 60 second limit on creating subscriptions. Should only be used when creating subscriptions in bulk from the API.
     */
   bulk?: boolean | null;
+  /**
+    * Allows you to control how any resulting charges will be calculated and prorated.
+    */
+  prorationSettings?: SubscriptionCreateProrationSettings | null;
 
 }
 
@@ -8205,6 +8289,17 @@ export declare class Client {
    */
   listAccountNotes(accountId: string, options?: object): Pager<AccountNote>;
   /**
+   * Create an account note
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_account_note
+   *
+   * 
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {AccountNoteCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {AccountNoteCreate}
+   * @return {Promise<AccountNote>} An account note.
+   */
+  createAccountNote(accountId: string, body: AccountNoteCreate): Promise<AccountNote>;
+  /**
    * Fetch an account note
    *
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_account_note
@@ -8231,6 +8326,17 @@ export declare class Client {
    * @return {Promise<AccountNote>} An account note.
    */
   getAccountNote(accountId: string, accountNoteId: string): Promise<AccountNote>;
+  /**
+   * Delete an account note
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/remove_account_note
+   *
+   * 
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {string} accountNoteId - Account Note ID.
+   * @return {Promise<Empty>} Account note deleted.
+   */
+  removeAccountNote(accountId: string, accountNoteId: string): Promise<Empty>;
   /**
    * Fetch a list of an account's shipping addresses
    *
