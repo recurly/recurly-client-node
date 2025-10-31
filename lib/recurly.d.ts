@@ -872,6 +872,10 @@ export declare class Transaction {
    * Fraud information
    */
   fraudInfo?: TransactionFraudInfo | null;
+  /**
+   * Next action values are used for any required customer follow-up action. Currently, this is supported for Ebanx when using Pix Automatico.
+   */
+  nextAction?: TransactionNextAction | null;
 
 }
 
@@ -955,6 +959,18 @@ export declare class TransactionPaymentGateway {
   object?: string | null;
   type?: string | null;
   name?: string | null;
+
+}
+
+export declare class TransactionNextAction {
+  /**
+   * The type of next action required.
+   */
+  type?: string | null;
+  /**
+   * The value associated with the next action type.
+   */
+  value?: string | null;
 
 }
 
@@ -6470,7 +6486,7 @@ export interface SubscriptionCreate {
     */
   netTermsType?: string | null;
   /**
-    * If present, this subscription's transactions will use the payment gateway with this code.
+    * If present, this subscription's subsequent transactions will use the payment gateway with this code. To select a payment gateway to use when creating a Subscription, be sure to set the `account.billing_info.gateway_code` as well.
     */
   gatewayCode?: string | null;
   /**
