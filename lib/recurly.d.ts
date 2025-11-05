@@ -1809,7 +1809,7 @@ export declare class TaxInfo {
    */
   rate?: number | null;
   /**
-   * Provides additional tax details for Communications taxes when Avalara for Communications is enabled or Canadian Sales Tax when there is tax applied at both the country and province levels. This will only be populated for the Invoice response when fetching a single invoice and not for the InvoiceList or LineItemList. Only populated for a single LineItem fetch when Avalara for Communications is enabled.
+   * Provides additional tax details for Communications taxes when Avalara for Communications or Vertex Tax Breakdown is enabled or Canadian Sales Tax. Tax details will only be populated for the Invoice response when fetching a single invoice and not for the InvoiceList or LineItemList. Only populated for a single LineItem fetch when Avalara for Communications is enabled.
    */
   taxDetails?: TaxDetail[] | null;
 
@@ -1817,7 +1817,7 @@ export declare class TaxInfo {
 
 export declare class TaxDetail {
   /**
-   * Provides the tax type for the region or type of Comminications tax when Avalara for Communications is enabled. For Canadian Sales Tax, this will be GST, HST, QST or PST.
+   * Provides the tax type for the region or type of Comminications tax when Avalara for Communications or Vertex is enabled. For Canadian Sales Tax, this will be GST, HST, QST or PST.
    */
   type?: string | null;
   /**
@@ -1833,15 +1833,15 @@ export declare class TaxDetail {
    */
   tax?: number | null;
   /**
-   * Provides the name of the Communications tax applied. Present only when Avalara for Communications is enabled.
+   * Provides the name of the Communications tax applied. Present only when Avalara for Communications or Vertex is enabled.
    */
   name?: string | null;
   /**
-   * Provides the jurisdiction level for the Communications tax applied. Example values include city, state and federal. Present only when Avalara for Communications is enabled.
+   * Provides the jurisdiction level for the Communications tax applied. Example values include city, state and federal. Present only when Avalara for Communications or Vertex is enabled.
    */
   level?: string | null;
   /**
-   * Whether or not the line item is taxable. Only populated for a single LineItem fetch when Avalara for Communications is enabled.
+   * Whether or not the line item is taxable. Only populated for a single LineItem fetch when Avalara for Communications or Vertex is enabled.
    */
   billable?: boolean | null;
 
