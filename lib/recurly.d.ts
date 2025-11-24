@@ -1792,6 +1792,18 @@ export declare class ReferenceOnlyCurrencyConversion {
    * The tax converted to the currency.
    */
   taxInCents?: number | null;
+  /**
+   * The conversion rate to the currency.
+   */
+  rate?: string | null;
+  /**
+   * The source of the conversion rate.
+   */
+  source?: string | null;
+  /**
+   * The date of the conversion rate.
+   */
+  date?: string | null;
 
 }
 
@@ -2279,6 +2291,10 @@ export declare class Subscription {
    */
   netTermsType?: string | null;
   /**
+   * Controls whether credit invoices are automatically applied to new invoices. The `mode` field determines the application behavior. 
+   */
+  creditApplicationPolicy?: CreditApplicationPolicy | null;
+  /**
    * Terms and conditions
    */
   termsAndConditions?: string | null;
@@ -2733,6 +2749,14 @@ export declare class SubscriptionRampIntervalResponse {
    * Represents the price for the ramp interval.
    */
   unitAmount?: number | null;
+
+}
+
+export declare class CreditApplicationPolicy {
+  /**
+   * Determines which credit invoices are applied to invoices: - `all`: All available credit invoices are applied (default) - `none`: No credit invoices are applied automatically 
+   */
+  mode?: string | null;
 
 }
 
@@ -4705,6 +4729,10 @@ export interface InvoiceCreate {
     */
   netTermsType?: string | null;
   /**
+    * Controls whether credit invoices are automatically applied to new invoices. The `mode` field determines the application behavior. 
+    */
+  creditApplicationPolicy?: CreditApplicationPolicy | null;
+  /**
     * For manual invoicing, this identifies the PO number associated with the subscription.
     */
   poNumber?: string | null;
@@ -4716,6 +4744,14 @@ export interface InvoiceCreate {
     * VAT Reverse Charge Notes only appear if you have EU VAT enabled or are using your own Avalara AvaTax account and the customer is in the EU, has a VAT number, and is in a different country than your own. This will default to the VAT Reverse Charge Notes text specified on the Tax Settings page in your Recurly admin, unless custom notes were created with the original subscription.
     */
   vatReverseChargeNotes?: string | null;
+
+}
+
+export interface CreditApplicationPolicy {
+  /**
+    * Determines which credit invoices are applied to invoices: - `all`: All available credit invoices are applied (default) - `none`: No credit invoices are applied automatically 
+    */
+  mode?: string | null;
 
 }
 
@@ -6486,6 +6522,10 @@ export interface SubscriptionCreate {
     */
   netTermsType?: string | null;
   /**
+    * Controls whether credit invoices are automatically applied to new invoices. The `mode` field determines the application behavior. 
+    */
+  creditApplicationPolicy?: CreditApplicationPolicy | null;
+  /**
     * If present, this subscription's subsequent transactions will use the payment gateway with this code. To select a payment gateway to use when creating a Subscription, be sure to set the `account.billing_info.gateway_code` as well.
     */
   gatewayCode?: string | null;
@@ -6678,6 +6718,10 @@ export interface SubscriptionUpdate {
     * Optionally supplied string that may be either `net` or `eom` (end-of-month). When `net`, an invoice becomes past due the specified number of `Net Terms` days from the current date. When `eom` an invoice becomes past due the specified number of `Net Terms` days from the last day of the current month. 
     */
   netTermsType?: string | null;
+  /**
+    * Controls whether credit invoices are automatically applied to new invoices. The `mode` field determines the application behavior. 
+    */
+  creditApplicationPolicy?: CreditApplicationPolicy | null;
   /**
     * If present, this subscription's transactions will use the payment gateway with this code.
     */
@@ -6955,6 +6999,10 @@ export interface PurchaseCreate {
     */
   netTermsType?: string | null;
   /**
+    * Controls whether credit invoices are automatically applied to new invoices. The `mode` field determines the application behavior. 
+    */
+  creditApplicationPolicyOverride?: CreditApplicationPolicy | null;
+  /**
     * Terms and conditions to be put on the purchase invoice.
     */
   termsAndConditions?: string | null;
@@ -7190,6 +7238,10 @@ export interface SubscriptionPurchase {
     * The new set of ramp intervals for the subscription.
     */
   rampIntervals?: SubscriptionRampInterval[] | null;
+  /**
+    * Controls whether credit invoices are automatically applied to new invoices. The `mode` field determines the application behavior. 
+    */
+  creditApplicationPolicy?: CreditApplicationPolicy | null;
   /**
     * Optional field to be used only when needing to bypass the 60 second limit on creating subscriptions. Should only be used when creating subscriptions in bulk from the API.
     */
