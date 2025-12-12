@@ -2545,6 +2545,10 @@ export declare class SubscriptionChange {
    * The ramp intervals representing the pricing schedule for the subscription.
    */
   rampIntervals?: SubscriptionRampIntervalResponse[] | null;
+  /**
+   * If present, this sets the date the subscription's next billing period will start (`current_period_ends_at`). When combined with proration_settings, proration calculation should occur, only supported when timeframe is now.
+   */
+  nextBillDate?: Date | null;
 
 }
 
@@ -6868,6 +6872,10 @@ export interface SubscriptionChangeCreate {
     * Allows you to control how any resulting charges and credits will be calculated and prorated.
     */
   prorationSettings?: ProrationSettings | null;
+  /**
+    * If present, this sets the date the subscription's next billing period will start (`current_period_ends_at`). When combined with proration_settings, proration calculation should occur, only supported when timeframe is now.
+    */
+  nextBillDate?: Date | null;
 
 }
 
