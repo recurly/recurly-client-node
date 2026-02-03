@@ -984,6 +984,10 @@ export declare class CouponRedemption {
    */
   object?: string | null;
   /**
+   * The UUID is useful for matching data with the CSV exports and building URLs into Recurly's UI.
+   */
+  uuid?: string | null;
+  /**
    * The Account on which the coupon was applied.
    */
   account?: AccountMini | null;
@@ -2110,6 +2114,10 @@ export declare class InvoiceCollection {
    * Credit invoices
    */
   creditInvoices?: Invoice[] | null;
+  /**
+   * Verification transactions (used for free trial payment method validation)
+   */
+  verificationTransactions?: Transaction[] | null;
 
 }
 
@@ -2295,7 +2303,7 @@ export declare class Subscription {
    */
   netTermsType?: string | null;
   /**
-   * Controls whether credit invoices are automatically applied to new invoices. The `mode` field determines the application behavior. 
+   * Controls whether credit invoices are automatically applied to new invoices. The `mode` field determines the application behavior. When mode is `all`, the optional `allowed_origins` array can restrict which credit invoice origins are applied. 
    */
   creditApplicationPolicy?: CreditApplicationPolicy | null;
   /**
@@ -2765,6 +2773,10 @@ export declare class CreditApplicationPolicy {
    * Determines which credit invoices are applied to invoices: - `all`: All available credit invoices are applied (default) - `none`: No credit invoices are applied automatically 
    */
   mode?: string | null;
+  /**
+   * Optional array of credit invoice origin types to allow when mode is `all`. If not specified when mode is `all`, credits from all origins are applied. Only valid when mode is `all`. 
+   */
+  allowedOrigins?: string[] | null;
 
 }
 
@@ -4737,7 +4749,7 @@ export interface InvoiceCreate {
     */
   netTermsType?: string | null;
   /**
-    * Controls whether credit invoices are automatically applied to new invoices. The `mode` field determines the application behavior. 
+    * Controls whether credit invoices are automatically applied to new invoices. The `mode` field determines the application behavior. When mode is `all`, the optional `allowed_origins` array can restrict which credit invoice origins are applied. 
     */
   creditApplicationPolicy?: CreditApplicationPolicy | null;
   /**
@@ -4764,6 +4776,10 @@ export interface CreditApplicationPolicy {
     * Determines which credit invoices are applied to invoices: - `all`: All available credit invoices are applied (default) - `none`: No credit invoices are applied automatically 
     */
   mode?: string | null;
+  /**
+    * Optional array of credit invoice origin types to allow when mode is `all`. If not specified when mode is `all`, credits from all origins are applied. Only valid when mode is `all`. 
+    */
+  allowedOrigins?: string[] | null;
 
 }
 
@@ -6538,7 +6554,7 @@ export interface SubscriptionCreate {
     */
   netTermsType?: string | null;
   /**
-    * Controls whether credit invoices are automatically applied to new invoices. The `mode` field determines the application behavior. 
+    * Controls whether credit invoices are automatically applied to new invoices. The `mode` field determines the application behavior. When mode is `all`, the optional `allowed_origins` array can restrict which credit invoice origins are applied. 
     */
   creditApplicationPolicy?: CreditApplicationPolicy | null;
   /**
@@ -6735,7 +6751,7 @@ export interface SubscriptionUpdate {
     */
   netTermsType?: string | null;
   /**
-    * Controls whether credit invoices are automatically applied to new invoices. The `mode` field determines the application behavior. 
+    * Controls whether credit invoices are automatically applied to new invoices. The `mode` field determines the application behavior. When mode is `all`, the optional `allowed_origins` array can restrict which credit invoice origins are applied. 
     */
   creditApplicationPolicy?: CreditApplicationPolicy | null;
   /**
@@ -7019,7 +7035,7 @@ export interface PurchaseCreate {
     */
   netTermsType?: string | null;
   /**
-    * Controls whether credit invoices are automatically applied to new invoices. The `mode` field determines the application behavior. 
+    * Controls whether credit invoices are automatically applied to new invoices. The `mode` field determines the application behavior. When mode is `all`, the optional `allowed_origins` array can restrict which credit invoice origins are applied. 
     */
   creditApplicationPolicyOverride?: CreditApplicationPolicy | null;
   /**
@@ -7263,7 +7279,7 @@ export interface SubscriptionPurchase {
     */
   rampIntervals?: SubscriptionRampInterval[] | null;
   /**
-    * Controls whether credit invoices are automatically applied to new invoices. The `mode` field determines the application behavior. 
+    * Controls whether credit invoices are automatically applied to new invoices. The `mode` field determines the application behavior. When mode is `all`, the optional `allowed_origins` array can restrict which credit invoice origins are applied. 
     */
   creditApplicationPolicy?: CreditApplicationPolicy | null;
   /**
@@ -8062,6 +8078,28 @@ export declare class Client {
    * @return {Promise<CouponRedemption>} Coupon redemption deleted.
    */
   removeCouponRedemption(accountId: string): Promise<CouponRedemption>;
+  /**
+   * Show the coupon redemption
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_coupon_redemption
+   *
+   * 
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {string} couponRedemptionId - Coupon Redemption ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @return {Promise<CouponRedemption>} A coupon redemption.
+   */
+  getCouponRedemption(accountId: string, couponRedemptionId: string): Promise<CouponRedemption>;
+  /**
+   * Delete the coupon redemption
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/remove_coupon_redemption_by_id
+   *
+   * 
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {string} couponRedemptionId - Coupon Redemption ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @return {Promise<CouponRedemption>} Coupon redemption deleted.
+   */
+  removeCouponRedemptionById(accountId: string, couponRedemptionId: string): Promise<CouponRedemption>;
   /**
    * List an account's credit payments
    *
@@ -11243,6 +11281,28 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * @return {Pager<CouponRedemption>} A list of the the coupon redemptions on a subscription.
    */
   listSubscriptionCouponRedemptions(subscriptionId: string, options?: object): Pager<CouponRedemption>;
+  /**
+   * Show the coupon redemption for a subscription
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_subscription_coupon_redemption
+   *
+   * 
+   * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param {string} couponRedemptionId - Coupon Redemption ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @return {Promise<CouponRedemption>} The coupon redemption on a subscription.
+   */
+  getSubscriptionCouponRedemption(subscriptionId: string, couponRedemptionId: string): Promise<CouponRedemption>;
+  /**
+   * Delete the coupon redemption from a subscription
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/remove_subscription_coupon_redemption
+   *
+   * 
+   * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @param {string} couponRedemptionId - Coupon Redemption ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
+   * @return {Promise<CouponRedemption>} Coupon redemption deleted.
+   */
+  removeSubscriptionCouponRedemption(subscriptionId: string, couponRedemptionId: string): Promise<CouponRedemption>;
   /**
    * List a subscription add-on's usage records
    *
