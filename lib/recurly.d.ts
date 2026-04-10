@@ -7628,9 +7628,22 @@ export declare class Client {
    * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
+   * @param {boolean} options.params.redact - Permanently removes all personally identifiable information (PII) from this account after it has been deactivated, to fulfill a data subject's right to erasure under GDPR and similar privacy regulations (e.g. CCPA). Cannot be undone.
    * @return {Promise<Account>} An account.
    */
-  deactivateAccount(accountId: string): Promise<Account>;
+  deactivateAccount(accountId: string, options?: object): Promise<Account>;
+  /**
+   * Redact an account (GDPR Right to Erasure)
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/redact_account
+   *
+   * 
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @return {Promise<Account>} Account has been accepted for redaction and will be processed asynchronously.
+   */
+  redactAccount(accountId: string): Promise<Account>;
   /**
    * Fetch an account's acquisition data
    *
