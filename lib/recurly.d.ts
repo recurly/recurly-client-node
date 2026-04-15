@@ -2800,6 +2800,18 @@ export declare class UniqueCouponCodeParams {
 
 }
 
+export declare class UniqueCouponCodeGenerationResponse {
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * An array containing the newly generated unique coupon codes.
+   */
+  uniqueCouponCodes?: UniqueCouponCode[] | null;
+
+}
+
 export declare class UniqueCouponCode {
   /**
    * Unique Coupon Code ID
@@ -5074,6 +5086,14 @@ export interface CouponUpdate {
 }
 
 export interface CouponBulkCreate {
+  /**
+    * The quantity of unique coupon codes to generate. A bulk coupon can have up to 100,000 unique codes (or your site's configured limit).
+    */
+  numberOfUniqueCodes?: number | null;
+
+}
+
+export interface CouponBulkCreateSync {
   /**
     * The quantity of unique coupon codes to generate. A bulk coupon can have up to 100,000 unique codes (or your site's configured limit).
     */
@@ -7632,6 +7652,16 @@ export declare class Client {
    */
   deactivateAccount(accountId: string): Promise<Account>;
   /**
+   * Redact an account (GDPR Right to Erasure)
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/redact_account
+   *
+   * 
+   * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @return {Promise<Account>} Account has been accepted for redaction and will be processed asynchronously.
+   */
+  redactAccount(accountId: string): Promise<Account>;
+  /**
    * Fetch an account's acquisition data
    *
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_account_acquisition
@@ -8969,6 +8999,17 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
 
    */
   generateUniqueCouponCodes(couponId: string, body: CouponBulkCreate): Promise<UniqueCouponCodeParams>;
+  /**
+   * Generate unique coupon codes synchronously
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/generate_unique_coupon_codes_sync
+   *
+   * 
+   * @param {string} couponId - Coupon ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-10off`.
+   * @param {CouponBulkCreateSync} body - The object representing the JSON request to send to the server. It should conform to the schema of {CouponBulkCreateSync}
+   * @return {Promise<UniqueCouponCodeGenerationResponse>} The newly generated unique coupon codes.
+   */
+  generateUniqueCouponCodesSync(couponId: string, body: CouponBulkCreateSync): Promise<UniqueCouponCodeGenerationResponse>;
   /**
    * Restore an inactive coupon
    *
