@@ -73,7 +73,7 @@ export declare class Address {
    */
   country?: string | null;
   /**
-   * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+   * Code that represents a geographic entity (location or object). Only returned when Vertex or Avalara for Communications is enabled.
    */
   geoCode?: string | null;
 
@@ -278,7 +278,7 @@ export declare class ShippingAddress {
    */
   country?: string | null;
   /**
-   * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+   * Code that represents a geographic entity (location or object). Only returned when Vertex or Avalara for Communications is enabled.
    */
   geoCode?: string | null;
   /**
@@ -496,6 +496,14 @@ export declare class CustomField {
    * Any values that resemble a credit card number or security code (CVV/CVC) will be rejected.
    */
   value?: string | null;
+  /**
+   * The type of record this custom field was automatically copied from. Only present when the field was copied from another record.
+   */
+  sourceRecordType?: string | null;
+  /**
+   * The UUID of the record this custom field was automatically copied from. Only present when the field was copied from another record.
+   */
+  sourceRecordId?: string | null;
 
 }
 
@@ -945,7 +953,7 @@ export declare class AddressWithName {
    */
   country?: string | null;
   /**
-   * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+   * Code that represents a geographic entity (location or object). Only returned when Vertex or Avalara for Communications is enabled.
    */
   geoCode?: string | null;
 
@@ -1728,6 +1736,10 @@ export declare class Invoice {
    * Unique ID to identify the business entity assigned to the invoice. Available when the `Multiple Business Entities` feature is enabled.
    */
   businessEntityId?: string | null;
+  /**
+   * A list of custom fields that were on the account at the time of invoice creation and were marked to be displayed on invoices. Read-only; cannot be set directly on the invoice.
+   */
+  customFields?: CustomField[] | null;
 
 }
 
@@ -1769,7 +1781,7 @@ export declare class InvoiceAddress {
    */
   country?: string | null;
   /**
-   * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+   * Code that represents a geographic entity (location or object). Only returned when Vertex or Avalara for Communications is enabled.
    */
   geoCode?: string | null;
   /**
@@ -4354,7 +4366,7 @@ export interface ShippingAddressCreate {
     */
   postalCode?: string | null;
   /**
-    * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+    * Code that represents a geographic entity (location or object). Only returned when Vertex or Avalara for Communications is enabled.
     */
   geoCode?: string | null;
   /**
@@ -4394,7 +4406,7 @@ export interface Address {
     */
   country?: string | null;
   /**
-    * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+    * Code that represents a geographic entity (location or object). Only returned when Vertex or Avalara for Communications is enabled.
     */
   geoCode?: string | null;
 
@@ -4583,6 +4595,14 @@ export interface CustomField {
     * Any values that resemble a credit card number or security code (CVV/CVC) will be rejected.
     */
   value?: string | null;
+  /**
+    * The type of record this custom field was automatically copied from. Only present when the field was copied from another record.
+    */
+  sourceRecordType?: string | null;
+  /**
+    * The UUID of the record this custom field was automatically copied from. Only present when the field was copied from another record.
+    */
+  sourceRecordId?: string | null;
 
 }
 
@@ -4943,7 +4963,7 @@ export interface ShippingAddressUpdate {
     */
   country?: string | null;
   /**
-    * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+    * Code that represents a geographic entity (location or object). Only returned when Vertex or Avalara for Communications is enabled.
     */
   geoCode?: string | null;
 
@@ -5621,7 +5641,7 @@ export interface InvoiceAddress {
     */
   country?: string | null;
   /**
-    * Code that represents a geographic entity (location or object). Only returned for Sling Vertex Integration
+    * Code that represents a geographic entity (location or object). Only returned when Vertex or Avalara for Communications is enabled.
     */
   geoCode?: string | null;
   /**
