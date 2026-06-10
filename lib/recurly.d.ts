@@ -1008,6 +1008,7 @@ export declare class CouponRedemption {
    * Coupon Redemption state
    */
   state?: string | null;
+  remainingDuration?: CouponRedemptionRemainingDuration | null;
   /**
    * 3-letter ISO 4217 currency code.
    */
@@ -1230,13 +1231,25 @@ export declare class CouponDiscountPricing {
 
 export declare class CouponDiscountTrial {
   /**
-   * Temporal unit of the free trial
+   * Temporal unit of the free trial. When `billing_period`, `length` represents the number of billing cycles.
    */
   unit?: string | null;
   /**
    * Trial length measured in the units specified by the sibling `unit` property
    */
   length?: number | null;
+
+}
+
+export declare class CouponRedemptionRemainingDuration {
+  /**
+   * The coupon's duration type. `temporal` includes an `expires_at` timestamp. `forever` and `single_use` have no additional fields.
+   */
+  type?: string | null;
+  /**
+   * Present when `type` is `temporal`. The datetime after which this redemption will no longer apply.
+   */
+  expiresAt?: Date | null;
 
 }
 
@@ -1633,6 +1646,10 @@ export declare class Invoice {
    */
   discount?: number | null;
   /**
+   * The coupon redemptions applied to this invoice.
+   */
+  couponRedemptions?: CouponRedemptionMini[] | null;
+  /**
    * The summation of charges and credits, before discounts and taxes.
    */
   subtotal?: number | null;
@@ -1792,6 +1809,68 @@ export declare class InvoiceAddress {
    * Last name
    */
   lastName?: string | null;
+
+}
+
+export declare class CouponRedemptionMini {
+  /**
+   * Coupon Redemption ID
+   */
+  id?: string | null;
+  /**
+   * Will always be `coupon`.
+   */
+  object?: string | null;
+  coupon?: CouponMini | null;
+  /**
+   * Coupon Redemption state
+   */
+  state?: string | null;
+  remainingDuration?: CouponRedemptionRemainingDuration | null;
+  /**
+   * The amount that was discounted upon the application of the coupon, formatted with the currency.
+   */
+  discounted?: number | null;
+  /**
+   * Created at
+   */
+  createdAt?: Date | null;
+
+}
+
+export declare class CouponMini {
+  /**
+   * Coupon ID
+   */
+  id?: string | null;
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * The code the customer enters to redeem the coupon.
+   */
+  code?: string | null;
+  /**
+   * The internal name for the coupon.
+   */
+  name?: string | null;
+  /**
+   * Indicates if the coupon is redeemable, and if it is not, why.
+   */
+  state?: string | null;
+  /**
+   * Details of the discount a coupon applies. Will contain a `type` property and one of the following properties: `percent`, `fixed`, `trial`. 
+   */
+  discount?: CouponDiscount | null;
+  /**
+   * Whether the coupon is "single_code" or "bulk". Bulk coupons will require a `unique_code_template` and will generate unique codes through the `/generate` endpoint.
+   */
+  couponType?: string | null;
+  /**
+   * The date and time the coupon was expired early or reached its `max_redemptions`.
+   */
+  expiredAt?: Date | null;
 
 }
 
@@ -2013,9 +2092,13 @@ export declare class LineItem {
    */
   subtotal?: number | null;
   /**
-   * The discount applied to the line item.
+   * The sum of all discounts applied to the line item.
    */
   discount?: number | null;
+  /**
+   * The breakdown of discounts applied to the line item by coupon redemption.
+   */
+  discounts?: LineItemDiscount[] | null;
   /**
    * Unique code to identify the ledger account. Each code must start with a letter or number. The following special characters are allowed: `-_.,:` 
    */
@@ -2113,6 +2196,34 @@ export declare class LineItem {
    * When the line item was last changed.
    */
   updatedAt?: Date | null;
+
+}
+
+export declare class LineItemDiscount {
+  /**
+   * Will always be `line_item_discount`.
+   */
+  object?: string | null;
+  /**
+   * The ID of the coupon that generated this discount.
+   */
+  couponId?: string | null;
+  /**
+   * The ID of the coupon redemption that generated this discount.
+   */
+  couponRedemptionId?: string | null;
+  /**
+   * The order in which this discount was applied when multiple coupons were redeemed.
+   */
+  orderApplied?: number | null;
+  /**
+   * The amount discounted on this line item by this coupon redemption.
+   */
+  discountAmount?: number | null;
+  /**
+   * 3-letter ISO 4217 currency code.
+   */
+  currency?: string | null;
 
 }
 
@@ -2420,67 +2531,6 @@ export declare class ShippingMethodMini {
    * The name of the shipping method displayed to customers.
    */
   name?: string | null;
-
-}
-
-export declare class CouponRedemptionMini {
-  /**
-   * Coupon Redemption ID
-   */
-  id?: string | null;
-  /**
-   * Will always be `coupon`.
-   */
-  object?: string | null;
-  coupon?: CouponMini | null;
-  /**
-   * Invoice state
-   */
-  state?: string | null;
-  /**
-   * The amount that was discounted upon the application of the coupon, formatted with the currency.
-   */
-  discounted?: number | null;
-  /**
-   * Created at
-   */
-  createdAt?: Date | null;
-
-}
-
-export declare class CouponMini {
-  /**
-   * Coupon ID
-   */
-  id?: string | null;
-  /**
-   * Object type
-   */
-  object?: string | null;
-  /**
-   * The code the customer enters to redeem the coupon.
-   */
-  code?: string | null;
-  /**
-   * The internal name for the coupon.
-   */
-  name?: string | null;
-  /**
-   * Indicates if the coupon is redeemable, and if it is not, why.
-   */
-  state?: string | null;
-  /**
-   * Details of the discount a coupon applies. Will contain a `type` property and one of the following properties: `percent`, `fixed`, `trial`. 
-   */
-  discount?: CouponDiscount | null;
-  /**
-   * Whether the coupon is "single_code" or "bulk". Bulk coupons will require a `unique_code_template` and will generate unique codes through the `/generate` endpoint.
-   */
-  couponType?: string | null;
-  /**
-   * The date and time the coupon was expired early or reached its `max_redemptions`.
-   */
-  expiredAt?: Date | null;
 
 }
 
@@ -5007,7 +5057,7 @@ export interface CouponCreate {
     */
   discountPercent?: number | null;
   /**
-    * Description of the unit of time the coupon is for. Used with `free_trial_amount` to determine the duration of time the coupon is for.  Required if `discount_type` is `free_trial`.
+    * Description of the unit of time the coupon is for. Used with `free_trial_amount` to determine the duration of time the coupon is for. Required if `discount_type` is `free_trial`. Use `billing_period` to grant a free trial for a number of billing cycles.
     */
   freeTrialUnit?: string | null;
   /**
@@ -5047,7 +5097,7 @@ export interface CouponCreate {
     */
   temporalAmount?: number | null;
   /**
-    * If `duration` is "temporal" than `temporal_unit` is multiplied by `temporal_amount` to define the duration that the coupon will be applied to invoices for. Use "billing_period" to apply the coupon for a fixed number of billing cycles. Requires `redemption_resource=subscription`.
+    * If `duration` is "temporal" than `temporal_unit` is multiplied by `temporal_amount` to define the duration that the coupon will be applied to invoices for. Use "billing_period" to apply the coupon for a fixed number of billing cycles. Requires `redemption_resource=subscription`. Not compatible with `discount_type=free_trial`; use `free_trial_unit=billing_period` and `free_trial_amount` instead.
     */
   temporalUnit?: string | null;
   /**
@@ -5764,6 +5814,181 @@ export interface ExternalRefund {
     * Date the external refund payment was made. Defaults to the current date-time.
     */
   refundedAt?: Date | null;
+
+}
+
+export interface RecoveryInvoiceCreate {
+  /**
+    * 3-letter ISO 4217 currency code.
+    */
+  currency?: string | null;
+  /**
+    * Date invoice was originally due. Must be in the past.
+    */
+  dueAt?: Date | null;
+  /**
+    * This identifies the PO number associated with the subscription.
+    */
+  poNumber?: string | null;
+  /**
+    * Must be set to `true` to acknowledge that the invoice is eligible for external recovery. Requests with `false`, omitted, or non-boolean values will be rejected.
+    */
+  externalRecoveryEligible?: boolean | null;
+  account?: RecoveryAccountCreate | null;
+  /**
+    * Line items to include on the invoice. Currency is specified at the root level and must not be included in individual line items.
+    */
+  lineItems?: RecoveryLineItemCreate[] | null;
+
+}
+
+export interface RecoveryAccountCreate {
+  address?: RecoveryAddress | null;
+  /**
+    * If the premium Wallet feature is enabled, more than one payment method can be associated with an account, and one can be designated as a primary and one as a backup. Without the Wallet feature, only one payment method will be accepted.
+    */
+  billingInfos?: RecoveryBillingInfoCreate[] | null;
+  /**
+    * The unique identifier of the account. This cannot be changed once the account is created.
+    */
+  code?: string | null;
+  /**
+    * The email address used for communicating with this customer.
+    */
+  email?: string | null;
+  /**
+    * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
+    */
+  customFields?: CustomField[] | null;
+  /**
+    * Unique ID to identify a dunning campaign. Used to specify if a non-default dunning campaign should be assigned to this account. For sites without multiple dunning campaigns enabled, the default dunning campaign will always be used.
+    */
+  dunningCampaignId?: string | null;
+
+}
+
+export interface RecoveryAddress {
+  /**
+    * Phone number
+    */
+  phone?: string | null;
+  /**
+    * Street 1
+    */
+  street1?: string | null;
+  /**
+    * Street 2
+    */
+  street2?: string | null;
+  /**
+    * City
+    */
+  city?: string | null;
+  /**
+    * State or province.
+    */
+  region?: string | null;
+  /**
+    * Zip or postal code.
+    */
+  postalCode?: string | null;
+  /**
+    * Country, 2-letter ISO 3166-1 alpha-2 code.
+    */
+  country?: string | null;
+
+}
+
+export interface RecoveryBillingInfoCreate {
+  /**
+    * First name
+    */
+  firstName?: string | null;
+  /**
+    * Last name
+    */
+  lastName?: string | null;
+  /**
+    * Company name
+    */
+  company?: string | null;
+  address?: RecoveryAddress | null;
+  /**
+    * *STRONGLY RECOMMENDED* Customer's IP address when updating their billing information.
+    */
+  ipAddress?: string | null;
+  /**
+    * An identifier for a specific payment gateway.
+    */
+  gatewayCode?: string | null;
+  /**
+    * The `primary_payment_method` field is used to designate the primary billing info on the account. An account can have a maximum of 1 primary. If a user sets a different payment method as a primary, then the existing primary will no longer be marked as such.
+    */
+  primaryPaymentMethod?: boolean | null;
+  /**
+    * The `backup_payment_method` field is used to designate a billing info as a backup on the account that will be tried if the initial billing info used for an invoice is declined. All payment methods, including the billing info marked `primary_payment_method` can be set as a backup. An account can have a maximum of 1 backup, if a user sets a different payment method as a backup, the existing backup will no longer be marked as such.
+    */
+  backupPaymentMethod?: boolean | null;
+  /**
+    * Array of Payment Gateway References, each a reference to a third-party gateway object of varying types.
+    */
+  paymentGatewayReferences?: PaymentGatewayReferences[] | null;
+  /**
+    * Network transaction ID from the previous customer-in-session subscription signup or billing info storage.  - 10-15 alphanumeric characters for Mastercard - 14-15 alphanumeric for Visa - 15 digits for all other brands - 16 alphanumeric characters for Cartes Bancaires, which are processed as Visa or Mastercard 
+    */
+  networkTransactionId?: string | null;
+  /**
+    * Transactions from previous collection attempts for this payment method.
+    */
+  transactions?: RecoveryTransactionCreate[] | null;
+
+}
+
+export interface RecoveryTransactionCreate {
+  /**
+    * The error code returned by the payment gateway for the original payment collection attempt.
+    */
+  gatewayErrorCode?: string | null;
+  /**
+    * The advice code returned by the payment gateway for the original payment collection attempt. This field is only applicable for certain gateways.
+    */
+  merchantAdviceCode?: string | null;
+  /**
+    * The date the original payment collection was attempted.
+    */
+  attemptedCollectionDate?: Date | null;
+
+}
+
+export interface RecoveryLineItemCreate {
+  /**
+    * The tax amount for the line item.
+    */
+  tax?: number | null;
+  /**
+    * The custom fields will only be altered when they are included in a request. Sending an empty array will not remove any existing values. To remove a field send the name with a null or empty value.
+    */
+  customFields?: CustomField[] | null;
+  /**
+    * The Harmonized System (HS) code is an internationally standardized system of names and numbers to classify traded products. The HS code, sometimes called Commodity Code, is used by customs authorities around the world to identify products when assessing duties and taxes. The HS code may also be referred to as the tariff code or customs code. Values should contain only digits and decimals.
+    */
+  harmonizedSystemCode?: string | null;
+  /**
+    * Optional field to track a product code or SKU for the line item. This can be used to later reporting on product purchases.
+    */
+  productCode?: string | null;
+  /**
+    * This number will be multiplied by the unit amount to compute the subtotal before any discounts or taxes.
+    */
+  quantity?: number | null;
+  /**
+    * Description that appears on the invoice.
+    */
+  description?: string | null;
+  /**
+    * A positive or negative amount will result in a positive `unit_amount`.
+    */
+  unitAmount?: number | null;
 
 }
 
@@ -10203,6 +10428,16 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * @return {Promise<Invoice>} Returns the new credit invoice.
    */
   refundInvoice(invoiceId: string, body: InvoiceRefund): Promise<Invoice>;
+  /**
+   * Create an invoice for revenue recovery
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_invoice_retry
+   *
+   * 
+   * @param {RecoveryInvoiceCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {RecoveryInvoiceCreate}
+   * @return {Promise<InvoiceCollection>} Returns the new invoices.
+   */
+  createInvoiceRetry(body: RecoveryInvoiceCreate): Promise<InvoiceCollection>;
   /**
    * List a site's line items
    *
