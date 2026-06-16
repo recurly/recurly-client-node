@@ -770,6 +770,10 @@ export declare class Transaction {
    */
   currency?: string | null;
   /**
+   * The description that gets sent to the gateway.
+   */
+  description?: string | null;
+  /**
    * Total transaction amount sent to the payment gateway.
    */
   amount?: number | null;
@@ -2361,6 +2365,10 @@ export declare class Subscription {
    * Null unless subscription is paused or will pause at the end of the current billing period.
    */
   remainingPauseCycles?: number | null;
+  /**
+   * The date the subscription billing resumes following a pause. Null unless the subscription is paused or scheduled to be paused.
+   */
+  resumeAt?: Date | null;
   /**
    * 3-letter ISO 4217 currency code.
    */
