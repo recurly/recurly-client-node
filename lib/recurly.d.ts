@@ -3994,23 +3994,6 @@ export declare class InvoiceTemplate {
 
 }
 
-export declare class Entitlements {
-  /**
-   * Object Type
-   */
-  object?: string | null;
-  /**
-   * Indicates there are more results on subsequent pages.
-   */
-  hasMore?: boolean | null;
-  /**
-   * Path to subsequent page of results.
-   */
-  next?: string | null;
-  data?: Entitlement[] | null;
-
-}
-
 export declare class Entitlement {
   /**
    * Entitlement
@@ -7901,9 +7884,12 @@ export declare class Client {
    * }
    * 
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
+   * @param {Object} options - Optional configurations for the request
+   * @param {Object} options.params - The optional url parameters for this request.
+   * @param {boolean} options.params.redact - Permanently removes all personally identifiable information (PII) from this account after it has been deactivated, to fulfill a data subject's right to erasure under GDPR and similar privacy regulations (e.g. CCPA). Cannot be undone.
    * @return {Promise<Account>} An account.
    */
-  deactivateAccount(accountId: string): Promise<Account>;
+  deactivateAccount(accountId: string, options?: object): Promise<Account>;
   /**
    * Redact an account (GDPR Right to Erasure)
    *
@@ -8148,7 +8134,7 @@ export declare class Client {
    * @param {string} accountId - Account ID or code. For ID no prefix is used e.g. `e28zov4fw0v2`. For code use prefix `code-`, e.g. `code-bob`.
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
-   * @param {BillingInfoVerify} options.params.body - The object representing the JSON request to send to the server. It should conform to the schema of {BillingInfoVerify}
+   * @param {BillingInfoVerify} options.body - The object representing the JSON request to send to the server. It should conform to the schema of {BillingInfoVerify}
    * @return {Promise<Transaction>} Transaction information from verify.
    */
   verifyBillingInfo(accountId: string, options?: object): Promise<Transaction>;
@@ -8252,7 +8238,7 @@ export declare class Client {
    * @param {string} billingInfoId - Billing Info ID. Can ONLY be used for sites utilizing the Wallet feature.
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
-   * @param {BillingInfoVerify} options.params.body - The object representing the JSON request to send to the server. It should conform to the schema of {BillingInfoVerify}
+   * @param {BillingInfoVerify} options.body - The object representing the JSON request to send to the server. It should conform to the schema of {BillingInfoVerify}
    * @return {Promise<Transaction>} Transaction information from verify.
    */
   verifyBillingInfos(accountId: string, billingInfoId: string, options?: object): Promise<Transaction>;
@@ -9946,7 +9932,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * @param {string} externalSubscriptionId - External subscription id
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
-   * @param {ExternalSubscriptionUpdate} options.params.body - The object representing the JSON request to send to the server. It should conform to the schema of {ExternalSubscriptionUpdate}
+   * @param {ExternalSubscriptionUpdate} options.body - The object representing the JSON request to send to the server. It should conform to the schema of {ExternalSubscriptionUpdate}
    * @return {Promise<ExternalSubscription>} Settings for an external subscription.
    */
   putExternalSubscription(externalSubscriptionId: string, options?: object): Promise<ExternalSubscription>;
@@ -10166,7 +10152,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * @param {string} invoiceId - Invoice ID or number. For ID no prefix is used e.g. `e28zov4fw0v2`. For number use prefix `number-`, e.g. `number-1000`. For number with prefix or country code, use `number-` and `prefix`, e.g. `number-TEST-FR1001`
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
-   * @param {InvoiceCollect} options.params.body - The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceCollect}
+   * @param {InvoiceCollect} options.body - The object representing the JSON request to send to the server. It should conform to the schema of {InvoiceCollect}
    * @return {Promise<Invoice>} The updated invoice.
    */
   collectInvoice(invoiceId: string, options?: object): Promise<Invoice>;
@@ -11240,7 +11226,7 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * @param {string} subscriptionId - Subscription ID or UUID. For ID no prefix is used e.g. `e28zov4fw0v2`. For UUID use prefix `uuid-`, e.g. `uuid-123457890`.
    * @param {Object} options - Optional configurations for the request
    * @param {Object} options.params - The optional url parameters for this request.
-   * @param {SubscriptionCancel} options.params.body - The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionCancel}
+   * @param {SubscriptionCancel} options.body - The object representing the JSON request to send to the server. It should conform to the schema of {SubscriptionCancel}
    * @return {Promise<Subscription>} A canceled or failed subscription.
    */
   cancelSubscription(subscriptionId: string, options?: object): Promise<Subscription>;
@@ -12112,9 +12098,9 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    *   - When `state=active`, `state=canceled`, `state=expired`, or `state=future`, subscriptions with states that match the query and only those subscriptions will be returned.
    *   - When no state is provided, subscriptions with active or canceled states will be returned.
    *   
-   * @return {Pager<Entitlements>} A list of the entitlements granted to an account.
+   * @return {Pager<Entitlement>} A list of the entitlements granted to an account.
    */
-  listEntitlements(accountId: string, options?: object): Pager<Entitlements>;
+  listEntitlements(accountId: string, options?: object): Pager<Entitlement>;
   /**
    * List an account's external subscriptions
    *
