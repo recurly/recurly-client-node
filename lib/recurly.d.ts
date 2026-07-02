@@ -1247,13 +1247,17 @@ export declare class CouponDiscountTrial {
 
 export declare class CouponRedemptionRemainingDuration {
   /**
-   * The coupon's duration type. `temporal` includes an `expires_at` timestamp. `forever` and `single_use` have no additional fields.
+   * The coupon's duration type. `temporal` includes an `expires_at` timestamp. `billing_periods` includes a `redemptions_remaining` count of billing cycles. `forever` and `single_use` have no additional fields.
    */
   type?: string | null;
   /**
    * Present when `type` is `temporal`. The datetime after which this redemption will no longer apply.
    */
   expiresAt?: Date | null;
+  /**
+   * The number of redemption periods remaining for which this coupon will still apply.
+   */
+  redemptionsRemaining?: number | null;
 
 }
 
@@ -3612,7 +3616,7 @@ export declare class AddOnPricing {
    */
   unitAmount?: number | null;
   /**
-   * Allows up to 9 decimal places. Only supported when `add_on_type` = `usage`. If `unit_amount_decimal` is provided, `unit_amount` cannot be provided. 
+   * Allows up to 9 decimal places. If `unit_amount_decimal` is provided, `unit_amount` cannot be provided. 
    */
   unitAmountDecimal?: string | null;
   /**
@@ -3648,7 +3652,7 @@ export declare class TierPricing {
    */
   unitAmount?: number | null;
   /**
-   * Allows up to 9 decimal places. Only supported when `add_on_type` = `usage`. If `unit_amount_decimal` is provided, `unit_amount` cannot be provided. 
+   * Allows up to 9 decimal places. If `unit_amount_decimal` is provided, `unit_amount` cannot be provided. 
    */
   unitAmountDecimal?: string | null;
 
@@ -4564,7 +4568,7 @@ export interface BillingInfoCreate {
     */
   sortCode?: string | null;
   /**
-    * The payment method type for a non-credit card based billing info. `bacs`, `becs`, `pix-automatico`, `mercadopago` are the only accepted values.
+    * The payment method type for a non-credit card based billing info. `bacs`, `becs`, `pix-automatico`, `mercadopago`, `upi-autopay` are the only accepted values.
     */
   type?: string | null;
   /**
@@ -4604,6 +4608,10 @@ export interface BillingInfoCreate {
     * Specifies a URL to which a consumer will be redirected upon completion of a redirect payment flow. Only redirect payment flows operating through Adyen Components will utilize this return URL.
     */
   returnUrl?: string | null;
+  /**
+    * UPI Autopay authentication method. Specifies how the customer authorizes the enrollment mandate. Defaults to 'vpa' if omitted.
+    */
+  authenticationMethod?: string | null;
 
 }
 
@@ -6317,7 +6325,7 @@ export interface AddOnPricing {
     */
   unitAmount?: number | null;
   /**
-    * Allows up to 9 decimal places. Only supported when `add_on_type` = `usage`. If `unit_amount_decimal` is provided, `unit_amount` cannot be provided. 
+    * Allows up to 9 decimal places. If `unit_amount_decimal` is provided, `unit_amount` cannot be provided. 
     */
   unitAmountDecimal?: string | null;
   /**
@@ -6353,7 +6361,7 @@ export interface TierPricing {
     */
   unitAmount?: number | null;
   /**
-    * Allows up to 9 decimal places. Only supported when `add_on_type` = `usage`. If `unit_amount_decimal` is provided, `unit_amount` cannot be provided. 
+    * Allows up to 9 decimal places. If `unit_amount_decimal` is provided, `unit_amount` cannot be provided. 
     */
   unitAmountDecimal?: string | null;
 
@@ -6879,7 +6887,7 @@ export interface SubscriptionAddOnCreate {
     */
   unitAmount?: number | null;
   /**
-    * Allows up to 9 decimal places.  Optionally, override the add-on's default unit amount. If the plan add-on's `tier_type` is `tiered`, `volume`, or `stairstep`, then `unit_amount_decimal` cannot be provided. Only supported when the plan add-on's `add_on_type` = `usage`. If `unit_amount_decimal` is provided, `unit_amount` cannot be provided. 
+    * Allows up to 9 decimal places.  Optionally, override the add-on's default unit amount. If the plan add-on's `tier_type` is `tiered`, `volume`, or `stairstep`, then `unit_amount_decimal` cannot be provided. If `unit_amount_decimal` is provided, `unit_amount` cannot be provided. 
     */
   unitAmountDecimal?: string | null;
   /**
@@ -7194,7 +7202,7 @@ export interface SubscriptionAddOnUpdate {
     */
   unitAmount?: number | null;
   /**
-    * Allows up to 9 decimal places. Optionally, override the add-on's default unit amount. If the plan add-on's `tier_type` is `tiered`, `volume`, or `stairstep`, then `unit_amount_decimal` cannot be provided. Only supported when the plan add-on's `add_on_type` = `usage`. If `unit_amount_decimal` is provided, `unit_amount` cannot be provided. 
+    * Allows up to 9 decimal places. Optionally, override the add-on's default unit amount. If the plan add-on's `tier_type` is `tiered`, `volume`, or `stairstep`, then `unit_amount_decimal` cannot be provided. If `unit_amount_decimal` is provided, `unit_amount` cannot be provided. 
     */
   unitAmountDecimal?: string | null;
   /**
