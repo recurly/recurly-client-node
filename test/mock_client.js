@@ -1,7 +1,7 @@
 const sinon = require('sinon')
 const BaseClient = require('../lib/recurly/BaseClient')
 const Pager = require('../lib/recurly/Pager')
-const { Request, Response } = require('../lib/recurly/Http')
+const { HttpResponse } = require('../lib/recurly/HttpAdapter')
 
 class MockClient extends BaseClient {
   constructor (apiKey, options = {}) {
@@ -44,26 +44,23 @@ class MockClient extends BaseClient {
   }
 
   mock (strategy) {
-    this._sandbox.stub(this, '_requestAdapter').callsFake((options, requestBody) => {
-      const req = new Request(options.method, options.path, requestBody)
-      const resp = new Response()
-      resp.request = req
-      resp.contentType = 'application/json'
-      return strategy(resp, options)
-    })
+    this._sandbox.stub(this._httpAdapter, 'execute').callsFake(strategy)
   }
 
   restore () {
     this._sandbox.restore()
   }
 
-  calledWith (options, body) {
-    return this._requestAdapter.calledWithMatch(options, body)
+  calledWith (method, urlMatcher, headers, body) {
+    const h = headers !== undefined ? headers : sinon.match.any
+    const b = body !== undefined ? body : sinon.match.any
+    return this._httpAdapter.execute.calledWithMatch(method, urlMatcher, h, b)
   }
 
   callCount () {
-    return this._requestAdapter.callCount
+    return this._httpAdapter.execute.callCount
   }
 }
 
-module.exports = MockClient
+module.exports.MockClient = MockClient
+module.exports.HttpResponse = HttpResponse
