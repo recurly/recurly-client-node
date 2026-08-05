@@ -5,38 +5,46 @@ const sinon = require('sinon')
 const { MyResource } = require('../mock_resources')
 const assert = require('assert').strict
 const recurly = require('../../lib/recurly')
-const MockClient = require('../mock_client')
+const { MockClient } = require('../mock_client')
+const { jsonResponse, emptyResponse } = require('../http_test_helpers')
 
 const client = new MockClient('myapikey')
 
 describe('BaseClient', () => {
   afterEach(() => {
-    // completely restore all fakes
     client.restore()
   })
 
   describe('#constructor', () => {
     it('Should set the internal state and headers', () => {
-      assert.equal(client._getRequestOptions('GET', '/resources', {}).headers['Authorization'], 'Basic bXlhcGlrZXk6')
+      const headers = client._buildHeaders({})
+      assert.equal(headers['Authorization'], 'Basic bXlhcGlrZXk6')
       const userAgentRegex = /^Recurly\/\d+(\.\d+){0,2}; node v\d+(\.\d+){0,2}.*$/
-      assert.ok(userAgentRegex.test(client._getRequestOptions('GET', '/resources', {}).headers['User-Agent']))
-      assert.equal(client._getRequestOptions('GET', '/resources', {}).headers['Accept'], 'application/vnd.recurly.v2022-01-01')
+      assert.ok(userAgentRegex.test(headers['User-Agent']))
+      assert.equal(headers['Accept'], 'application/vnd.recurly.v2022-01-01')
     })
 
     it('should set host to EU DataCenter', () => {
-      const clientEU = new MockClient('myapikey', { 'region': 'eu' })
-      assert.equal(clientEU._httpOptions.host, 'v3.eu.recurly.com')
+      const clientEU = new MockClient('myapikey', { region: 'eu' })
+      assert.equal(clientEU._apiHost, 'v3.eu.recurly.com')
     })
 
     it('should set host to US DataCenter', () => {
-      assert.equal(client._httpOptions.host, 'v3.recurly.com')
+      assert.equal(client._apiHost, 'v3.recurly.com')
     })
 
     it('should validate that region is an invalid value', () => {
-      assert.throws(() => {
-        const invalidClient = new MockClient('myapikey', { 'region': 'none' })
-        assert.equal(invalidClient._httpOptions.host, '')
-      }, recurly.ApiError)
+      assert.throws(() => new MockClient('myapikey', { region: 'none' }), recurly.ApiError)
+    })
+
+    it('should accept a custom httpAdapter', () => {
+      const adapter = new recurly.HttpAdapter()
+      const customClient = new MockClient('myapikey', { httpAdapter: adapter })
+      assert.equal(customClient._httpAdapter, adapter)
+    })
+
+    it('should throw when httpAdapter is not an HttpAdapter instance', () => {
+      assert.throws(() => new MockClient('myapikey', { httpAdapter: {} }), TypeError)
     })
   })
 
@@ -74,10 +82,8 @@ describe('BaseClient', () => {
 
   describe('#_makeRequest', () => {
     beforeEach(() => {
-      client.mock((resp, options) => {
-        resp.status = 200
-        resp.body = JSON.stringify({ id: 'myid', object: 'my_resource' })
-        return Promise.resolve(resp)
+      client.mock((method, url, headers, body) => {
+        return jsonResponse(200, { id: 'myid', object: 'my_resource' })
       })
     })
 
@@ -112,46 +118,31 @@ describe('BaseClient', () => {
 
   describe('with mocked request adapter', () => {
     beforeEach(() => {
-      client.mock((resp, options) => {
-        if (options.path === '/resources/myid') {
-          resp.status = 200
-          resp.body = JSON.stringify({ id: 'myid', object: 'my_resource' })
-        } else if (options.path === '/resources' && options.method === 'POST') {
-          resp.status = 422
-          resp.body = JSON.stringify({ error: { type: 'transaction' } })
+      client.mock((method, url, headers, body) => {
+        if (url.includes('/resources/myid')) {
+          return jsonResponse(200, { id: 'myid', object: 'my_resource' })
+        } else if (url.includes('/resources') && method === 'POST') {
+          return jsonResponse(422, { error: { type: 'transaction' } })
         } else {
-          resp.status = 404
-          resp.body = JSON.stringify({ error: { type: 'not_found' } })
+          return jsonResponse(404, { error: { type: 'not_found' } })
         }
-        return Promise.resolve(resp)
       })
     })
 
     describe('#getResource', () => {
       it('Should return a resource given a valid id', () => {
-        const resp = client.getResource('myid')
-        return resp
+        return client.getResource('myid')
           .then(resource => {
             assert(resource instanceof MyResource)
-
-            let options = sinon.match({
-              method: 'GET',
-              path: '/resources/myid'
-            })
-            assert(client.calledWith(options, null))
+            assert(client.calledWith('GET', sinon.match('/resources/myid')))
           })
       })
+
       it('Should throw a NotFoundError given an invalid id', () => {
-        const resp = client.getResource('idontexist')
-        return resp
+        return client.getResource('idontexist')
           .catch(err => {
             assert(err instanceof recurly.errors.NotFoundError)
-
-            let options = sinon.match({
-              method: 'GET',
-              path: '/resources/idontexist'
-            })
-            assert(client.calledWith(options, null))
+            assert(client.calledWith('GET', sinon.match('/resources/idontexist')))
           })
       })
     })
@@ -159,136 +150,91 @@ describe('BaseClient', () => {
     describe('#createResource', () => {
       describe('When details are invalid', () => {
         it('Should throw a TransactionError', () => {
-          const resp = client.createResource({ myString: 'test' })
-          return resp
+          return client.createResource({ myString: 'test' })
             .catch(err => {
               assert(err instanceof recurly.errors.TransactionError)
-
-              let options = sinon.match({
-                method: 'POST',
-                path: '/resources'
-              })
-
-              assert(client.calledWith(options, { myString: 'test' }))
+              assert(client.calledWith('POST', sinon.match('/resources')))
             })
         })
       })
     })
   })
 
+  describe('adapter contract behavior', () => {
+    it('Should propagate transport-level errors from the adapter', () => {
+      client.mock(() => Promise.reject(new Error('ECONNREFUSED')))
+      return client.getResource('myid')
+        .then(() => { assert.fail('Expected rejection') })
+        .catch(err => {
+          assert.equal(err.message, 'ECONNREFUSED')
+        })
+    })
+
+    it('Should not include transport headers in what is passed to the adapter', () => {
+      let capturedHeaders
+      client.mock((method, url, headers, body) => {
+        capturedHeaders = headers
+        return jsonResponse(200, { id: 'myid', object: 'my_resource' })
+      })
+      return client.getResource('myid').then(() => {
+        assert.equal(capturedHeaders['Accept-Encoding'], undefined)
+        assert.equal(capturedHeaders['Content-Length'], undefined)
+      })
+    })
+  })
+
   describe('with a response without a body', () => {
     it('Should throw a BadRequestError on 400', () => {
-      client.mock((resp, options) => {
-        resp.status = 400
-        resp.body = null
-        return Promise.resolve(resp)
-      })
-      return client
-        .listResources()
-        .count()
+      client.mock(() => emptyResponse(400))
+      return client.listResources().count()
         .catch(err => {
           assert(err instanceof recurly.errors.BadRequestError)
-
-          let options = sinon.match({
-            method: 'HEAD',
-            path: '/resources'
-          })
-          assert(client.calledWith(options, null))
+          assert(client.calledWith('HEAD', sinon.match('/resources')))
         })
     })
+
     it('Should throw a UnauthorizedError on 401', () => {
-      client.mock((resp, options) => {
-        resp.status = 401
-        resp.body = null
-        return Promise.resolve(resp)
-      })
-      return client
-        .listResources()
-        .count()
+      client.mock(() => emptyResponse(401))
+      return client.listResources().count()
         .catch(err => {
           assert(err instanceof recurly.errors.UnauthorizedError)
-
-          let options = sinon.match({
-            method: 'HEAD',
-            path: '/resources'
-          })
-          assert(client.calledWith(options, null))
+          assert(client.calledWith('HEAD', sinon.match('/resources')))
         })
     })
+
     it('Should throw a NotFoundError on 404', () => {
-      client.mock((resp, options) => {
-        resp.status = 404
-        resp.body = null
-        return Promise.resolve(resp)
-      })
-      return client
-        .listResources()
-        .count()
+      client.mock(() => emptyResponse(404))
+      return client.listResources().count()
         .catch(err => {
           assert(err instanceof recurly.errors.NotFoundError)
-
-          let options = sinon.match({
-            method: 'HEAD',
-            path: '/resources'
-          })
-          assert(client.calledWith(options, null))
+          assert(client.calledWith('HEAD', sinon.match('/resources')))
         })
     })
+
     it('Should throw a UnprocessableEntityError on 422', () => {
-      client.mock((resp, options) => {
-        resp.status = 422
-        resp.body = null
-        return Promise.resolve(resp)
-      })
-      return client
-        .listResources()
-        .count()
+      client.mock(() => emptyResponse(422))
+      return client.listResources().count()
         .catch(err => {
           assert(err instanceof recurly.errors.UnprocessableEntityError)
-
-          let options = sinon.match({
-            method: 'HEAD',
-            path: '/resources'
-          })
-          assert(client.calledWith(options, null))
+          assert(client.calledWith('HEAD', sinon.match('/resources')))
         })
     })
+
     it('Should throw a InternalServerError on 500', () => {
-      client.mock((resp, options) => {
-        resp.status = 500
-        resp.body = null
-        return Promise.resolve(resp)
-      })
-      return client
-        .listResources()
-        .count()
+      client.mock(() => emptyResponse(500))
+      return client.listResources().count()
         .catch(err => {
           assert(err instanceof recurly.errors.InternalServerError)
-
-          let options = sinon.match({
-            method: 'HEAD',
-            path: '/resources'
-          })
-          assert(client.calledWith(options, null))
+          assert(client.calledWith('HEAD', sinon.match('/resources')))
         })
     })
+
     it('Should throw a generic ApiError on an unhandled status', () => {
-      client.mock((resp, options) => {
-        resp.status = 426
-        resp.body = null
-        return Promise.resolve(resp)
-      })
-      return client
-        .listResources()
-        .count()
+      client.mock(() => emptyResponse(426))
+      return client.listResources().count()
         .catch(err => {
           assert(err instanceof recurly.ApiError)
-
-          let options = sinon.match({
-            method: 'HEAD',
-            path: '/resources'
-          })
-          assert(client.calledWith(options, null))
+          assert(client.calledWith('HEAD', sinon.match('/resources')))
         })
     })
   })

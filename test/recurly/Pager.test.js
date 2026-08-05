@@ -3,7 +3,8 @@
 require('../test_helper')
 const { MyResource } = require('../mock_resources')
 const assert = require('assert').strict
-const MockClient = require('../mock_client')
+const { MockClient } = require('../mock_client')
+const { HttpResponse, jsonResponse } = require('../http_test_helpers')
 const Pager = require('../../lib/recurly/Pager')
 
 const client = new MockClient('myapikey')
@@ -19,16 +20,14 @@ describe('Pager', () => {
   })
 
   afterEach(() => {
-    // completely restore all fakes
     client.restore()
   })
 
   describe('#first', () => {
     beforeEach(() => {
-      client.mock((resp, options) => {
-        if (options.method === 'GET' && options.path === '/resources?limit=1') {
-          resp.status = 200
-          resp.body = JSON.stringify({
+      client.mock((method, url, headers, body) => {
+        if (method === 'GET' && url.includes('/resources?limit=1')) {
+          return jsonResponse(200, {
             object: 'list',
             has_more: false,
             next: null,
@@ -38,11 +37,8 @@ describe('Pager', () => {
               { id: '3', object: 'my_resource' }
             ]
           })
-        } else {
-          resp.status = 404
-          resp.body = { error: { type: 'not_found' } }
         }
-        return Promise.resolve(resp)
+        return jsonResponse(404, { error: { type: 'not_found' } })
       })
     })
 
@@ -57,15 +53,11 @@ describe('Pager', () => {
 
   describe('#count', () => {
     beforeEach(() => {
-      client.mock((resp, options) => {
-        if (options.method === 'HEAD' && options.path === '/resources?sort=updated_at') {
-          resp.status = 200
-          resp.recordCount = 9000
-        } else {
-          resp.status = 404
-          resp.body = JSON.stringify({ error: { type: 'not_found' } })
+      client.mock((method, url, headers, body) => {
+        if (method === 'HEAD' && url.includes('/resources?sort=updated_at')) {
+          return Promise.resolve(new HttpResponse(200, { 'recurly-total-records': '9000' }, null))
         }
-        return Promise.resolve(resp)
+        return jsonResponse(404, { error: { type: 'not_found' } })
       })
     })
 
@@ -79,10 +71,19 @@ describe('Pager', () => {
 
   describe('with multiple pages', () => {
     beforeEach(() => {
-      client.mock((resp, options) => {
-        if (options.path === '/resources?state=active&limit=3') {
-          resp.status = 200
-          resp.body = JSON.stringify({
+      client.mock((method, url, headers, body) => {
+        if (url.includes('/resources?state=active&limit=3&cursor=1234567890')) {
+          return jsonResponse(200, {
+            object: 'list',
+            has_more: false,
+            next: '',
+            data: [
+              { id: 3, object: 'my_resource' },
+              { id: 4, object: 'my_resource' }
+            ]
+          })
+        } else if (url.includes('/resources?state=active&limit=3')) {
+          return jsonResponse(200, {
             object: 'list',
             has_more: true,
             next: '/resources?state=active&limit=3&cursor=1234567890',
@@ -92,24 +93,11 @@ describe('Pager', () => {
               { id: 2, object: 'my_resource' }
             ]
           })
-        } else if (options.path === '/resources?state=active&limit=3&cursor=1234567890') {
-          resp.status = 200
-          resp.body = JSON.stringify({
-            object: 'list',
-            has_more: false,
-            next: '',
-            data: [
-              { id: 3, object: 'my_resource' },
-              { id: 4, object: 'my_resource' }
-            ]
-          })
-        } else {
-          resp.status = 404
-          resp.body = { error: { type: 'not_found' } }
         }
-        return Promise.resolve(resp)
+        return jsonResponse(404, { error: { type: 'not_found' } })
       })
     })
+
     describe('#each', () => {
       it('Should return an asynciterable', () => {
         assert(typeof pager.each === 'function')
@@ -129,6 +117,7 @@ describe('Pager', () => {
         })()
       })
     })
+
     describe('#eachPage', () => {
       it('Should return an asynciterable', () => {
         assert(typeof pager.eachPage === 'function')
