@@ -369,11 +369,11 @@ export declare class PaymentMethod {
    */
   cardType?: string | null;
   /**
-   * Credit card number's first six digits.
+   * Credit card number's first six digits.  For a tokenized wallet payment (`apple_pay`, `google_pay`, or `google_pay_device_pan`), this is the DPAN's (the wallet/device token's own number) first six digits, not the underlying card's (FPAN). 
    */
   firstSix?: string | null;
   /**
-   * Credit card number's last four digits. Will refer to bank account if payment method is ACH.
+   * Credit card number's last four digits. Will refer to bank account if payment method is ACH.  For a tokenized wallet payment (`apple_pay`, `google_pay`, or `google_pay_device_pan`), this is the DPAN's last four digits, not the underlying card's (FPAN). 
    */
   lastFour?: string | null;
   /**
@@ -800,6 +800,10 @@ export declare class Transaction {
   collectionMethod?: string | null;
   paymentMethod?: PaymentMethod | null;
   /**
+   * Array of Payment Gateway References captured at transaction time, each a reference to a third-party gateway object of varying types.
+   */
+  paymentGatewayReferences?: PaymentGatewayReferences[] | null;
+  /**
    * IP address provided when the billing information was collected:  - When the customer enters billing information into the Recurly.js or Hosted Payment Pages, Recurly records the IP address. - When the merchant enters billing information using the API, the merchant may provide an IP address. - When the merchant enters billing information using the UI, no IP address is recorded. 
    */
   ipAddressV4?: string | null;
@@ -1138,9 +1142,17 @@ export declare class Coupon {
    */
   invoiceDescription?: string | null;
   /**
-   * The date and time the coupon will expire and can no longer be redeemed. Time is always 11:59:59, the end-of-day Pacific time.
+   * The date and time the coupon will expire and can no longer be redeemed. Time is always 11:59:59, the end-of-day Pacific time. Null for bulk coupons configured with a relative redeem-by interval (see redeem_by_interval_unit and redeem_by_interval_amount).
    */
   redeemBy?: Date | null;
+  /**
+   * For a bulk coupon with a relative redeem-by, the unit of the interval after which each generated unique code expires. Null unless the coupon uses a relative redeem-by.
+   */
+  redeemByIntervalUnit?: string | null;
+  /**
+   * For a bulk coupon with a relative redeem-by, the number of redeem_by_interval_unit intervals after a code's generation that it remains redeemable. Null unless the coupon uses a relative redeem-by.
+   */
+  redeemByIntervalAmount?: number | null;
   /**
    * Created at
    */
@@ -2927,6 +2939,10 @@ export declare class UniqueCouponCode {
    * The date and time the coupon was expired early or reached its `max_redemptions`.
    */
   expiredAt?: Date | null;
+  /**
+   * Absolute expiry computed and stored at code-generation time. Set only for Window (relative redeem-by) coupons. Null for Anytime coupons and Specific Date coupons — those resolve expiry from the parent coupon's redeem_by at redemption time, not at code-generation time.
+   */
+  redeemByDate?: Date | null;
 
 }
 
@@ -4849,6 +4865,10 @@ export interface InvoiceCreate {
     * Used by Vertex for tax calculations. Possible values are sale, rental, lease.
     */
   vertexTransactionType?: string | null;
+  /**
+    * Optionally overrides the suffix component of the composed transaction descriptor. If omitted, the suffix is derived from the subscription's plan name or the invoice description, with a Trial prefix on Visa trial conversions. Subject to gateway availability and payment method support.
+    */
+  transactionDescriptorSuffix?: string | null;
 
 }
 
@@ -5040,9 +5060,17 @@ export interface CouponCreate {
     */
   invoiceDescription?: string | null;
   /**
-    * The date and time the coupon will expire and can no longer be redeemed. Time is always 11:59:59, the end-of-day Pacific time.
+    * The date and time the coupon will expire and can no longer be redeemed. Time is always 11:59:59, the end-of-day Pacific time. Mutually exclusive with redeem_by_interval_unit/redeem_by_interval_amount.
     */
   redeemByDate?: string | null;
+  /**
+    * Unit of the relative redemption window. Must be paired with redeem_by_interval_amount. Mutually exclusive with redeem_by_date. Bulk coupons only.
+    */
+  redeemByIntervalUnit?: string | null;
+  /**
+    * Quantity of redeem_by_interval_unit. Must be paired with redeem_by_interval_unit.
+    */
+  redeemByIntervalAmount?: number | null;
   /**
     * The code the customer enters to redeem the coupon.
     */
@@ -5148,9 +5176,17 @@ export interface CouponUpdate {
     */
   invoiceDescription?: string | null;
   /**
-    * The date and time the coupon will expire and can no longer be redeemed. Time is always 11:59:59, the end-of-day Pacific time.
+    * The date and time the coupon will expire and can no longer be redeemed. Time is always 11:59:59, the end-of-day Pacific time. Mutually exclusive with redeem_by_interval_unit/redeem_by_interval_amount.
     */
   redeemByDate?: string | null;
+  /**
+    * Unit of the relative redemption window. Must be paired with redeem_by_interval_amount. Mutually exclusive with redeem_by_date. Bulk coupons only.
+    */
+  redeemByIntervalUnit?: string | null;
+  /**
+    * Quantity of redeem_by_interval_unit. Must be paired with redeem_by_interval_unit.
+    */
+  redeemByIntervalAmount?: number | null;
 
 }
 
@@ -5838,6 +5874,10 @@ export interface RecoveryInvoiceCreate {
     * Line items to include on the invoice. Currency is specified at the root level and must not be included in individual line items.
     */
   lineItems?: RecoveryLineItemCreate[] | null;
+  /**
+    * Optionally overrides the suffix component of the composed transaction descriptor. If omitted, the suffix is derived from the subscription's plan name or the invoice description, with a Trial prefix on Visa trial conversions. Subject to gateway availability and payment method support.
+    */
+  transactionDescriptorSuffix?: string | null;
 
 }
 
@@ -5933,13 +5973,45 @@ export interface RecoveryBillingInfoCreate {
     */
   paymentGatewayReferences?: PaymentGatewayReferences[] | null;
   /**
+    * Merchant-supplied fallback payment method metadata. Recurly's own gateway-token lookup is authoritative and will override any of these fields it can determine itself; these fields are only used to fill gaps when that lookup is unavailable.
+    */
+  paymentMethod?: RecoveryPaymentMethodCreate | null;
+  /**
     * Network transaction ID from the previous customer-in-session subscription signup or billing info storage.  - 10-15 alphanumeric characters for Mastercard - 14-15 alphanumeric for Visa - 15 digits for all other brands - 16 alphanumeric characters for Cartes Bancaires, which are processed as Visa or Mastercard 
     */
   networkTransactionId?: string | null;
   /**
-    * Transactions from previous collection attempts for this payment method.
+    * Transactions from previous collection attempts for this payment method. Optional, unless this billing_info is the primary payment method and the account's dunning campaign skips Recurly's own retry attempts entirely -- in that case at least one entry is required.
     */
   transactions?: RecoveryTransactionCreate[] | null;
+
+}
+
+export interface RecoveryPaymentMethodCreate {
+  /**
+    * The payment method type.
+    */
+  object?: string | null;
+  /**
+    * The card brand (e.g. `Visa`, `MasterCard`). Present for `credit_card`, `apple_pay`, and `google_pay`/`google_pay_device_pan`; omitted for `paypal_billing_agreement`.
+    */
+  cardType?: string | null;
+  /**
+    * For a plain card, the card's own first six digits (BIN).  For a tokenized wallet payment (`apple_pay`, `google_pay`, or `google_pay_device_pan`), this is the DPAN's (the wallet/device token's own number) first six digits — **not** the underlying card's (FPAN). The FPAN is never accepted or represented; no separate wallet-specific field is provided. 
+    */
+  firstSix?: string | null;
+  /**
+    * The card's (or, for a tokenized wallet payment, the DPAN's) last four digits. See `first_six` for the DPAN-vs-FPAN distinction on wallets.
+    */
+  lastFour?: string | null;
+  /**
+    * Expiration month.
+    */
+  expMonth?: number | null;
+  /**
+    * Expiration year.
+    */
+  expYear?: number | null;
 
 }
 
@@ -6841,6 +6913,10 @@ export interface SubscriptionCreate {
     * Allows you to control how any resulting charges will be calculated and prorated.
     */
   prorationSettings?: SubscriptionCreateProrationSettings | null;
+  /**
+    * Optionally overrides the suffix component of the composed transaction descriptor. If omitted, the suffix is derived from the subscription's plan name or the invoice description, with a Trial prefix on Visa trial conversions. Subject to gateway availability and payment method support.
+    */
+  transactionDescriptorSuffix?: string | null;
 
 }
 
@@ -7034,6 +7110,10 @@ export interface SubscriptionUpdate {
     * The `billing_info_id` is the value that represents a specific billing info for an end customer. When `billing_info_id` is used to assign billing info to the subscription, all future billing events for the subscription will bill to the specified billing info. `billing_info_id` can ONLY be used for sites utilizing the Wallet feature.
     */
   billingInfoId?: string | null;
+  /**
+    * Optionally overrides the suffix component of the composed transaction descriptor. If omitted, the suffix is derived from the subscription's plan name or the invoice description, with a Trial prefix on Visa trial conversions. Subject to gateway availability and payment method support.
+    */
+  transactionDescriptorSuffix?: string | null;
 
 }
 
