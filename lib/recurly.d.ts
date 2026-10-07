@@ -3974,6 +3974,26 @@ export declare class DunningInterval {
    * Email template being used.
    */
   emailTemplate?: string | null;
+  /**
+   * The id of the custom email template assigned to this interval, from `GET /dunning_campaigns/email_templates`. `null` means the system default template for this interval. Accepted on write; round-tripped on read.
+   */
+  emailTemplateId?: string | null;
+
+}
+
+export declare class DunningCampaignEmailTemplate {
+  /**
+   * The id to assign under `intervals[].email_template_id`.
+   */
+  id?: string | null;
+  /**
+   * Template name.
+   */
+  name?: string | null;
+  /**
+   * The root template this custom template replaces, e.g. `payment_declined`, `invoice_past_due`, `post_trial_payment_declined`, `subscription_canceled_nonpayment`.
+   */
+  type?: string | null;
 
 }
 
@@ -7654,6 +7674,98 @@ export interface SubscriptionShippingPurchase {
     * The expected date of the first delivery for the subscription.
     */
   expectedFirstDeliveryAt?: Date | null;
+
+}
+
+export interface DunningCampaignCreate {
+  /**
+    * Campaign name.
+    */
+  name?: string | null;
+  /**
+    * Campaign code.
+    */
+  code?: string | null;
+  /**
+    * Campaign description.
+    */
+  description?: string | null;
+  /**
+    * Dunning Cycle settings. One entry per collection method (`automatic`, `manual`, `trial`); each type may appear at most once.
+    */
+  dunningCycles?: DunningCycleCreate[] | null;
+
+}
+
+export interface DunningCycleCreate {
+  /**
+    * The type of invoice this cycle applies to.
+    */
+  type?: string | null;
+  /**
+    * Only meaningful on the `trial` cycle, where sending `false` removes it. Other cycle types cannot be deactivated.
+    */
+  active?: boolean | null;
+  /**
+    * Whether the dunning settings will be applied to manual trials. Only applies to trial cycles.
+    */
+  appliesToManualTrial?: boolean | null;
+  /**
+    * Whether the subscription(s) should be cancelled at the end of the dunning cycle.
+    */
+  expireSubscription?: boolean | null;
+  /**
+    * Whether the invoice should be failed at the end of the dunning cycle.
+    */
+  failInvoice?: boolean | null;
+  /**
+    * Whether or not to send an extra email immediately to customers whose initial payment attempt fails with either a hard decline or invalid billing info.
+    */
+  sendImmediatelyOnHardDecline?: boolean | null;
+  /**
+    * Number of days to extend external payment recovery. Only available when the site has external payment retries enabled.
+    */
+  externalPaymentRecoveryExtensionDays?: number | null;
+  /**
+    * Dunning intervals. Required unless `active` is `false`.
+    */
+  intervals?: DunningIntervalCreate[] | null;
+
+}
+
+export interface DunningIntervalCreate {
+  /**
+    * Number of days before sending the next email.
+    */
+  days?: number | null;
+  /**
+    * The id of the custom email template to assign to this interval, from `GET /dunning_campaigns/email_templates`. `null` uses the system default template for this interval.
+    */
+  emailTemplateId?: string | null;
+
+}
+
+export interface DunningCampaignUpdate {
+  /**
+    * Campaign name.
+    */
+  name?: string | null;
+  /**
+    * Campaign code.
+    */
+  code?: string | null;
+  /**
+    * Campaign description.
+    */
+  description?: string | null;
+  /**
+    * Set to `true` to make this the default campaign for accounts or plans without an assigned dunning campaign. Cannot be set on an inactive campaign, and cannot be unset directly—assign a different campaign as the default instead.
+    */
+  defaultCampaign?: boolean | null;
+  /**
+    * Dunning Cycle settings. One entry per collection method (`automatic`, `manual`, `trial`); each type may appear at most once. Each cycle write fully replaces that cycle's current settings version.
+    */
+  dunningCycles?: DunningCycleCreate[] | null;
 
 }
 
@@ -12071,6 +12183,16 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    */
   listDunningCampaigns(options?: object): Pager<DunningCampaign>;
   /**
+   * Create a new dunning campaign
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/create_dunning_campaign
+   *
+   * 
+   * @param {DunningCampaignCreate} body - The object representing the JSON request to send to the server. It should conform to the schema of {DunningCampaignCreate}
+   * @return {Promise<DunningCampaign>} A new dunning campaign.
+   */
+  createDunningCampaign(body: DunningCampaignCreate): Promise<DunningCampaign>;
+  /**
    * Fetch a dunning campaign
    *
    * API docs: https://developers.recurly.com/api/v2021-02-25#operation/get_dunning_campaign
@@ -12080,6 +12202,36 @@ endpoint to obtain only the newly generated `UniqueCouponCodes`.
    * @return {Promise<DunningCampaign>} Settings for a dunning campaign.
    */
   getDunningCampaign(dunningCampaignId: string): Promise<DunningCampaign>;
+  /**
+   * Update a dunning campaign
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/update_dunning_campaign
+   *
+   * 
+   * @param {string} dunningCampaignId - Dunning Campaign ID, e.g. `e28zov4fw0v2`.
+   * @param {DunningCampaignUpdate} body - The object representing the JSON request to send to the server. It should conform to the schema of {DunningCampaignUpdate}
+   * @return {Promise<DunningCampaign>} The updated dunning campaign.
+   */
+  updateDunningCampaign(dunningCampaignId: string, body: DunningCampaignUpdate): Promise<DunningCampaign>;
+  /**
+   * Deactivate a dunning campaign
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/deactivate_dunning_campaign
+   *
+   * 
+   * @param {string} dunningCampaignId - Dunning Campaign ID, e.g. `e28zov4fw0v2`.
+   * @return {Promise<DunningCampaign>} The deactivated dunning campaign.
+   */
+  deactivateDunningCampaign(dunningCampaignId: string): Promise<DunningCampaign>;
+  /**
+   * List the custom email templates assignable to a dunning campaign interval
+   *
+   * API docs: https://developers.recurly.com/api/v2021-02-25#operation/list_dunning_campaign_email_templates
+   *
+   * 
+   * @return {Pager<DunningCampaignEmailTemplate>} A list of the site's assignable custom email templates.
+   */
+  listDunningCampaignEmailTemplates(options?: object): Pager<DunningCampaignEmailTemplate>;
   /**
    * Assign a dunning campaign to multiple plans
    *
