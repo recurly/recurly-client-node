@@ -1394,6 +1394,14 @@ export declare class ExternalSubscription {
    */
   externalProductReference?: ExternalProductReferenceMini | null;
   /**
+   * Just the important parts.
+   */
+  externalProduct?: ExternalProductMini | null;
+  /**
+   * Just the important parts.
+   */
+  plan?: PlanMini | null;
+  /**
    * The phases of the external subscription payment lifecycle.
    */
   externalPaymentPhases?: ExternalPaymentPhase[] | null;
@@ -1493,6 +1501,22 @@ export declare class ExternalProductReferenceMini {
    * When the external product was updated in Recurly.
    */
   updatedAt?: Date | null;
+
+}
+
+export declare class ExternalProductMini {
+  /**
+   * External product ID
+   */
+  id?: string | null;
+  /**
+   * Object type
+   */
+  object?: string | null;
+  /**
+   * The merchant-facing name of the external product.
+   */
+  name?: string | null;
 
 }
 
@@ -6898,6 +6922,10 @@ export interface SubscriptionCreate {
     */
   creditCustomerNotes?: string | null;
   /**
+    * This will default to the VAT reverse charge notes text specified on the Invoice Settings. Specify custom notes to add or override VAT reverse charge notes. Custom notes will stay with a subscription on all renewals.
+    */
+  vatReverseChargeNotes?: string | null;
+  /**
     * For manual invoicing, this identifies the PO number associated with the subscription.
     */
   poNumber?: string | null;
@@ -7094,6 +7122,10 @@ export interface SubscriptionUpdate {
     * Specify custom notes to add or override Customer Notes. Custom notes will stay with a subscription on all renewals.
     */
   customerNotes?: string | null;
+  /**
+    * Specify custom notes to add or override VAT reverse charge notes. Custom notes will stay with a subscription on all renewals.
+    */
+  vatReverseChargeNotes?: string | null;
   /**
     * For manual invoicing, this identifies the PO number associated with the subscription.
     */
@@ -7646,6 +7678,18 @@ export interface SubscriptionPurchase {
     * Controls whether credit invoices are automatically applied to new invoices. The `mode` field determines the application behavior. When mode is `all`, the optional `allowed_origins` array can restrict which credit invoice origins are applied. 
     */
   creditApplicationPolicy?: CreditApplicationPolicy | null;
+  /**
+    * Specify custom notes to add or override Terms and Conditions. Custom notes will stay with a subscription on all renewals.
+    */
+  termsAndConditions?: string | null;
+  /**
+    * Specify custom notes to add or override Customer Notes. Custom notes will stay with a subscription on all renewals.
+    */
+  customerNotes?: string | null;
+  /**
+    * Specify custom notes to add or override VAT reverse charge notes. Custom notes will stay with a subscription on all renewals.
+    */
+  vatReverseChargeNotes?: string | null;
   /**
     * Optional field to be used only when needing to bypass the 60 second limit on creating subscriptions. Should only be used when creating subscriptions in bulk from the API.
     */
