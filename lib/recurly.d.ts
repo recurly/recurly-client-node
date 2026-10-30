@@ -469,7 +469,7 @@ export declare class PaymentGatewayReferences {
    */
   token?: string | null;
   /**
-   * The type of reference token. Required if token is passed in for Stripe Gateway or Ebanx UPI.
+   * The type of reference token. The value can be omitted for gateways that only support one type of token.
    */
   referenceType?: string | null;
 
@@ -2628,6 +2628,10 @@ export declare class SubscriptionChange {
    */
   activated?: boolean | null;
   /**
+   * The price segment ID, e.g. `e28zov4fw0v2`.
+   */
+  priceSegmentId?: string | null;
+  /**
    * Revenue schedule type
    */
   revenueScheduleType?: string | null;
@@ -4572,6 +4576,10 @@ export interface BillingInfoCreate {
     */
   gatewayCode?: string | null;
   /**
+    * Identifies a backup gateway. Applies only when `gateway_code` is provided and that gateway is in failover. Providing this code overrides gateway exclusion configurations and restricts the backup to this gateway.
+    */
+  backupGatewayCode?: string | null;
+  /**
     * Array of Payment Gateway References, each a reference to a third-party gateway object of varying types.
     */
   paymentGatewayReferences?: PaymentGatewayReferences[] | null;
@@ -4672,6 +4680,10 @@ export interface BillingInfoCreate {
     * UPI Autopay authentication method. Specifies how the customer authorizes the enrollment mandate. Defaults to 'vpa' if omitted.
     */
   authenticationMethod?: string | null;
+  /**
+    * Whether to store this billing info onto its associated account. Defaults to `true`.
+    */
+  storeBillingInfo?: boolean | null;
 
 }
 
@@ -4681,7 +4693,7 @@ export interface PaymentGatewayReferences {
     */
   token?: string | null;
   /**
-    * The type of reference token. Required if token is passed in for Stripe Gateway or Ebanx UPI.
+    * The type of reference token. The value can be omitted for gateways that only support one type of token.
     */
   referenceType?: string | null;
 
