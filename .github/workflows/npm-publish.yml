@@ -1,0 +1,44 @@
+name: npm publish
+run-name: npm publish ${{ inputs.release-tag }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      release-tag:
+        description: Tag to publish, for example 4.80.0
+        required: true
+        type: string
+      dist-tag:
+        description: npm dist-tag. Use latest for the 4.x line.
+        required: true
+        default: latest
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: npm-publish
+    steps:
+      - uses: actions/checkout@v6.0.2
+        with:
+          ref: ${{ inputs.release-tag }}
+
+      - uses: actions/setup-node@v6.4.0
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+
+      - name: Guard - tag must match package.json version
+        env:
+          RELEASE_TAG: ${{ inputs.release-tag }}
+        run: |
+          pkg_version=$(node -p 'require(`./package.json`).version')
+          test $pkg_version = $RELEASE_TAG || { echo mismatch package.json=$pkg_version tag=$RELEASE_TAG; exit 1; }
+
+      - name: Publish
+        run: npm publish --tag ${{ inputs.dist-tag }}
