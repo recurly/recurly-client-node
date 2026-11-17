@@ -14,6 +14,10 @@ on:
         default: latest
         type: string
 
+concurrency:
+  group: npm-publish-${{ inputs.release-tag }}
+  cancel-in-progress: false
+
 permissions:
   contents: read
   id-token: write
@@ -37,8 +41,18 @@ jobs:
         env:
           RELEASE_TAG: ${{ inputs.release-tag }}
         run: |
-          pkg_version=$(node -p 'require(`./package.json`).version')
-          test $pkg_version = $RELEASE_TAG || { echo mismatch package.json=$pkg_version tag=$RELEASE_TAG; exit 1; }
+          pkg_version=$(node -p 'require("./package.json").version')
+          if [ -z "$RELEASE_TAG" ] || [ "$pkg_version" != "$RELEASE_TAG" ]; then
+            echo "mismatch: package.json=$pkg_version tag='$RELEASE_TAG'" >&2
+            exit 1
+          fi
 
       - name: Publish
-        run: npm publish --tag ${{ inputs.dist-tag }}
+        env:
+          DIST_TAG: ${{ inputs.dist-tag }}
+        run: |
+          case "$DIST_TAG" in
+            latest|v2019-10-10) ;;
+            *) echo "invalid dist-tag: $DIST_TAG" >&2; exit 1 ;;
+          esac
+          npm publish --tag "$DIST_TAG"
